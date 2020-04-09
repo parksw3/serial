@@ -88,8 +88,34 @@ Here, we resolve the apparent paradox.
 
 We show that the serial-interval distribution can provide a correct link between the speed 
 
+\section{Methods}
+
 \section{Backward and forward delay distributions}
 
+In order to model serial intervals, we first explain the differences between backward and forward delays.
+To do so, we divide epidemiological events as \emph{primary} and \emph{secondary} events.
+When we measure a within-individual delay, we define primary and secondary events based on their timing;
+the primary event always occurs before the secondary event.
+When we measure between-individual delays, we define primary and secondary events based on whether they occurred within an infector or an infectee, respectively;
+the primary event does not necessarily occur before the secondary event.
+
+We model time delays between a primary and a secondary event from a cohort perspective.
+A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
+a secondary cohort can be defined similarly based on the secondary events.
+For example, when we are measurign serial intervals, a primary cohort $s$ consists of all infectors who became symptomatic at time $s$.
+Then, for each primary cohort $s$, we can define the expected time distribution between primary and secondary events for primary cohort $s$.
+We refer to this distribution as the forward delay distribution and denote it as $f_s(\tau)$.
+We assume that forward delay distributions can vary across primary cohorts.
+
+Likewise, we can define a backward delay distribution $b_s(\tau)$ for a secondary cohort $s$:
+The backward delay distribution for secondary host $s$ describes the time delays between a primary and secondary host given that the secondary event occurred at time $s$.
+It follows that:
+\begin{equation}
+b_s(\tau) \propto i(s-\tau) f_{s-\tau}(\tau)
+\end{equation}
+where $i(s)$ is the size of the primary cohort $s$.
+Therefore, changes in the backward delay distribution depends on the changes in cohort size $i(s)$ (therefore incidence of infection) as well as changes in the forward delay distribution.
+This concept generalizes the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
 
 \bibliography{serial}
 
