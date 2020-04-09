@@ -2,6 +2,7 @@ library(tidyr)
 library(dplyr)
 library(ggplot2); theme_set(theme_bw())
 library(gridExtra)
+library(tikzDevice)
 source("renewal_det.R")
 
 load("sir_sim.rda")
@@ -38,18 +39,19 @@ detdata <- data.frame(
 )
 
 g1 <- ggplot(sir_sim$data) +
-  geom_line(data=detdata, aes(tvec, ci)) +
-  geom_line(aes(time, infected), col=2) +
-  scale_x_continuous("Time", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_log10("Cumulative incidence", expand=c(0, 0), limits=c(10, 49999)) +
+  geom_line(data=detdata, aes(tvec, ci, col="Deterministic"), lwd=1) +
+  geom_line(aes(time, infected, col="Stochastic"), lwd=1) +
+  scale_x_continuous("Time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Cumulative incidence", expand=c(0, 0), limits=c(10, 49999)) +
+  scale_color_manual(values=c(1, "#D55E00")) +
   ggtitle("A") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line()
+    legend.title = element_blank(),
+    legend.position = c(0.1, 0.7)
   )
 
-tcut <- 0:20*4
+tcut <- 0:40*2
 
 incdata0 <- data.frame(
   cohort=sir_sim$t_infected,
@@ -63,16 +65,15 @@ incdet <- data.frame(
 )
 
 g2 <- ggplot(incdata0) +
-  geom_line(data=incdet, aes(tvec, mf)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  geom_line(data=incdet, aes(tvec, mf), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=incdet$mf[1], lty=2) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Forward incubation period (days)", expand=c(0, 0), limits=c(0, 7)) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("B") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
@@ -88,16 +89,15 @@ gendet <- data.frame(
 )
 
 g3 <- ggplot(gendata0) +
-  geom_line(data=gendet, aes(tvec, mf)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward generation interval (days)", expand=c(0, 0), limits=c(0, 6.2), breaks=0:4*2) +
+  geom_line(data=gendet, aes(tvec, mf), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=gendet$mf[1], lty=2) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Forward generation interval (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("C") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
@@ -107,22 +107,21 @@ serdata0 <- data.frame(
 ) %>%
   summfun()
 
-serdet_naive <- data.frame(
+serdet <- data.frame(
   tvec=rr$tvec,
-  mf=-rr$mbinc+rr$mfgen+rr$mfinc
+  mf=rr$mfser
 )
 
 g4 <- ggplot(serdata0) +
-  geom_line(data=serdet_naive, aes(tvec, mf)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  geom_line(data=serdet, aes(tvec, mf), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=serdet$mf[1], lty=2) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Forward serial interval (days)", expand=c(0, 0), limits=c(0, 7)) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("D") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
@@ -138,16 +137,15 @@ incdet1 <- data.frame(
 )
 
 g5 <- ggplot(incdata1) +
-  geom_line(data=incdet1, aes(tvec, mb)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  geom_line(data=incdet1, aes(tvec, mb), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=incdet$mf[1], lty=2) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Backward incubation period (days)", expand=c(0, 0), limits=c(0, 8.6)) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("E") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
@@ -163,16 +161,15 @@ gendet1 <- data.frame(
 )
 
 g6 <- ggplot(gendata1) +
-  geom_line(data=gendet1, aes(tvec, mb)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward generation interval (days)", expand=c(0, 0), limits=c(0, 6.2), breaks=0:4*2) +
+  geom_line(data=gendet1, aes(tvec, mb), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=gendet$mf[1], lty=2) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Backward generation interval (days)", expand=c(0, 0), limits=c(0, 8.6), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("F") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
@@ -182,26 +179,28 @@ serdata1 <- data.frame(
 ) %>%
   summfun()
 
-serdet_naive1 <- data.frame(
+serdet1 <- data.frame(
   tvec=rr$tvec,
-  mf=-rr$mfinc+rr$mbgen+rr$mbinc
+  mb=rr$mbser
 )
 
 g7 <- ggplot(serdata1) +
-  geom_line(data=serdet_naive1, aes(tvec, mf)) +
-  geom_point(aes(cc, mean), shape=1, col="red") +
-  scale_x_continuous("Cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward serial interval (days)", expand=c(0, 0), limits=c(0, 8.2)) +
+  geom_line(data=serdet1, aes(tvec, mb), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_hline(yintercept=serdet$mf[1], lty=2) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Backward serial interval (days)", expand=c(0, 0), limits=c(0, 8.6)) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("G") +
   theme(
     panel.grid = element_blank(),
-    panel.border = element_blank(),
-    axis.line = element_line(),
     legend.position = "none"
   )
 
 gtot <- arrangeGrob(g1, g2, g3, g4, g5, g6, g7, layout_matrix = matrix(c(1, 1, 1, 2, 3, 4, 5, 6, 7), nrow=3, byrow=TRUE),
                     heights=c(0.8, 1, 1))
 
-ggsave("forward.pdf", gtot, width=8, height=8)
+tikz(file = "forward.tex", width = 8, height = 8, standAlone = T)
+plot(gtot)
+dev.off()
+tools::texi2dvi('forward.tex', pdf = T, clean = T)

@@ -71,16 +71,22 @@ Sang Woo Park
 
 \section{Introduction}
 
-Since the emergence of the novel coronavirus disease (COVID-19), a significant amount of research has focused on estimating its basic reproduction number $\mathcal R_0$.
-The basic reproduction number, which is defined as the average number of secondary cases caused by a primary case, allows us to predict the extent to which a disease will spread and the amount of intervention to prevent an outbreak.
+Since the emergence of the novel coronavirus disease (COVID-19), a significant amount of research has focused on estimating its reproduction number $\mathcal R$.
+The reproduction number, which is defined as the average number of secondary cases caused by a primary case, allows us to predict the extent to which a disease will spread and the amount of intervention to prevent an outbreak.
 Since the basic reproduction number cannot be measured directly, it is often inferred from the observed exponential growth rate using generation or serial intervals.
 
 Generation intervals are defined as the time between when an individual is infected and when an individual infects another person.
 Similarly, serial intervals are defined as the time between when an infector and an infectee become symptomatic.
-While 
+
+There is an apparent paradox between generation and serial intervals.
+When the epidemic is growing exponentially, the disease dynamics can be described by the ``renewal'' of incidence based on previous incidence of infection and the associated generation-interval distribution.
+This renewal formulation allows us to link the exponential growth rate of an epidemic with its reproduction number.
+Likewise, if infection leads to symptoms, we should be able to describe the renewal of symptomatic cases based on previous incidence of symptomatic cases and the associated serial-interval distribution.
+The current literature does not support this idea.
+
+Here, we resolve the apparent paradox.
 
 We show that the serial-interval distribution can provide a correct link between the speed 
-
 
 \section{Backward and forward delay distributions}
 

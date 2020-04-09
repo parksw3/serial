@@ -34,7 +34,7 @@ serialR <- function(r=0.1,
   logbackinc <- log(backinc)
   
   muloggen <- meanlog2 + sdlog2 * rho * (logbackinc - meanlog1)/sdlog1
-  sigmaloggen <- sdlog2^2 * (1 - rho^2)
+  sigmaloggen <- sqrt(sdlog2^2 * (1 - rho^2))
   
   forwardgen <- exp(rnorm(nsim, muloggen, sigmaloggen))
   forwardinc <- rlnorm(nsim, meanlog=meanlog1, sdlog=sdlog1)
@@ -62,7 +62,7 @@ serialR2 <- function(r=0.1,
   logbackinc <- log(backinc)
   
   muloggen <- meanlog2 + sdlog2 * rho * (logbackinc - meanlog1)/sdlog1
-  sigmaloggen <- sdlog2^2 * (1 - rho^2)
+  sigmaloggen <- sqrt(sdlog2^2 * (1 - rho^2))
   
   forwardgen <- exp(rnorm(nsim, muloggen, sigmaloggen))
   forwardinc <- rlnorm(nsim, meanlog=meanlog1, sdlog=sdlog1)
@@ -91,23 +91,23 @@ generationR <- function(r=0.1,
 
 rRdata <- list(
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$R),
     type="Serial interval ($\\rho=0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0)$R),
     type="Serial interval ($\\rho=0$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$R),
     type="Serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) generationR(x)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$R),
     type="Generation interval"
   )
 ) %>%
@@ -132,23 +132,23 @@ g1 <- ggplot(rRdata) +
 
 rRdata2 <- list(
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR2(x, rho=0.5)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=0.5)$R),
     type="Serial interval ($\\rho=0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR2(x, rho=0)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=0)$R),
     type="Serial interval ($\\rho=0$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR2(x, rho=-0.5)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=-0.5)$R),
     type="Serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    R=sapply(seq(0.01, 0.3, by=0.01), function(x) generationR(x)$R),
+    r=seq(0, 0.3, by=0.01),
+    R=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$R),
     type="Generation interval"
   )
 ) %>%
@@ -173,23 +173,23 @@ g2 <- ggplot(rRdata2) +
 
 rGdata <- list(
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$mean),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$mean),
     type="Serial interval ($\\rho=0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0)$mean),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0)$mean),
     type="Serial interval ($\\rho=0$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$mean),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$mean),
     type="Serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) generationR(x)$mean),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$mean),
     type="Generation interval"
   )
 ) %>%
@@ -203,7 +203,8 @@ g3 <- ggplot(rGdata) +
   geom_smooth(aes(r, mean, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Mean generation/serial interval", expand=c(0, 0)) +
+  scale_y_continuous("Mean generation/serial interval", expand=c(0, 0), limits=c(4.7, NA),
+                     breaks=c(4:7)) +
   scale_color_manual(values=cpalette) +
   ggtitle("C") +
   theme(
@@ -214,23 +215,23 @@ g3 <- ggplot(rGdata) +
 
 rkappadata <- list(
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$kappa),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$kappa),
     type="Serial interval ($\\rho=0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=0)$kappa),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0)$kappa),
     type="Serial interval ($\\rho=0$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$kappa),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$kappa),
     type="Serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
-    r=seq(0.01, 0.3, by=0.01),
-    mean=sapply(seq(0.01, 0.3, by=0.01), function(x) generationR(x)$kappa),
+    r=seq(0, 0.3, by=0.01),
+    mean=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$kappa),
     type="Generation interval"
   )
 ) %>%
