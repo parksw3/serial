@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in,left=1in, right = 1in, footskip=1in]{geometry}
+
+\usepackage{graphicx}
+%\usepackage{adjustbox}
+
+%% \newcommand{\comment}{\showcomment}
+\newcommand{\comment}{\nocomment}
+
+\newcommand{\showcomment}[3]{\textcolor{#1}{\textbf{[#2: }\textsl{#3}\textbf{]}}}
+\newcommand{\nocomment}[3]{}
+
+\newcommand{\jd}[1]{\comment{cyan}{JD}{#1}}
+\newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
+
+\newcommand{\eref}[1]{Eq.~\ref{eq:#1}}
+\newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\Fref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\sref}[1]{Sec.~\ref{#1}}
+\newcommand{\frange}[2]{Fig.~\ref{fig:#1}--\ref{fig:#2}}
+\newcommand{\tref}[1]{Table~\ref{tab:#1}}
+\newcommand{\tlab}[1]{\label{tab:#1}}
+\newcommand{\seminar}{SE\mbox{$^m$}I\mbox{$^n$}R}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+
+% \usepackage{lineno}
+% \linenumbers
+
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+
+\usepackage{natbib}
+\bibliographystyle{chicago}
+\date{\today}
+
+\usepackage{xspace}
+\newcommand*{\ie}{i.e.\@\xspace}
+
+\usepackage{color}
+
+\newcommand{\Rx}[1]{\ensuremath{{\mathcal R}_{#1}}} 
+\newcommand{\Ro}{\Rx{0}}
+\newcommand{\RR}{\ensuremath{{\mathcal R}}}
+\newcommand{\Rhat}{\ensuremath{{\hat\RR}}}
+\newcommand{\tsub}[2]{#1_{{\textrm{\tiny #2}}}}
+
+\begin{document}
+
+\begin{flushleft}{
+	\Large
+	\textbf\newline{
+		Understanding serial interval distributions: applications to the COVID-19 pandemic
+	}
+}
+Sang Woo Park
+\end{flushleft}
+
+\section*{Abstract}
+
+\pagebreak
+
+%The key distributions for understanding the spread of COVID-19 include:
+%\begin{enumerate}
+%  \item Incubation period distribution: time between infection and symptom onset \citep{backer2020incubation, %li2020early, linton2020incubation, tian2020characteristics}
+%  \item Serial interval distribution: time between symptom onset of an infector and an infectee \citep{du2020s%erial, nishiura2020serial, zhao2020estimating}
+%  \item Generation interval distribution: time between infection of an infector and an infectee \citep{ganyani%2020estimating}
+%\end{enumerate}
+
+\section{Introduction}
+
+Since the emergence of the novel coronavirus disease (COVID-19), a significant amount of research has focused on estimating its basic reproduction number $\mathcal R_0$.
+The basic reproduction number, which is defined as the average number of secondary cases caused by a primary case, allows us to predict the extent to which a disease will spread and the amount of intervention to prevent an outbreak.
+Since the basic reproduction number cannot be measured directly, it is often inferred from the observed exponential growth rate using generation or serial intervals.
+
+Generation intervals are defined as the time between when an individual is infected and when an individual infects another person.
+Similarly, serial intervals are defined as the time between when an infector and an infectee become symptomatic.
+While 
+
+We show that the serial-interval distribution can provide a correct link between the speed 
+
+
+\section{Backward and forward delay distributions}
+
+
+\bibliography{serial}
+
+\end{document}
