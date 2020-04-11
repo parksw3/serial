@@ -93,24 +93,23 @@ Current theory seems to contradict our biological intution.
 Here, we provide an answer to the decade-old paradox.
 We provide a new framework for understanding serial intervals and show that both serial- and generation-interval distributions give identical estimates of $\mathcal R$ during the exponential growth phase of an epidemic.
 
-
-
 \section{Methods}
 
 \subsection{Backward and forward delay distributions}
 
-In order to model serial intervals, we first explain the differences between backward and forward delays.
-To do so, we divide epidemiological events as \emph{primary} and \emph{secondary} events.
-When we measure a within-individual delay, we define primary and secondary events based on their timing;
-the primary event always occurs before the secondary event.
-When we measure between-individual delays, we define primary and secondary events based on whether they occurred within an infector or an infectee, respectively;
-the primary event does not necessarily occur before the secondary event.
+We first begin by describing a general framework for characterizing a distribution of time delays between \emph{any} two epidemiological events;
+these events can be defined either within an infected individual (e.g., infection and symptom onset of an individual) or between infected individuals (e.g., symptom onsets of an infector and an infectee).
+Then, we can further divide these events into \emph{primary} and \emph{secondary} events.
+When we measure an epidemiological time delay within an infected individual (e.g., time between infection and symptom onset), the primary event always occurs before the secondary event.
+When we measure an epidemiological time delay between infected individuals (e.g., serial interval), 
+the primary and secondary events are defined in terms of the direction of transmission:
+The primary event refers to the event that occurs within an infector and does not necessarily occur before the secondary event.
 
 We model time delays between a primary and a secondary event from a cohort perspective.
 A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
 a secondary cohort can be defined similarly based on the secondary events.
 For example, when we are measurign serial intervals, a primary cohort $s$ consists of all infectors who became symptomatic at time $s$.
-Then, for each primary cohort $s$, we can define the expected time distribution between primary and secondary events for primary cohort $s$.
+Then, for each primary cohort $s$, we can define the expected time distribution between primary and secondary events.
 We refer to this distribution as the forward delay distribution and denote it as $f_s(\tau)$.
 We assume that forward delay distributions can vary across primary cohorts.
 
@@ -118,36 +117,37 @@ Likewise, we can define a backward delay distribution $b_s(\tau)$ for a secondar
 The backward delay distribution for secondary host $s$ describes the time delays between a primary and secondary host given that the secondary event occurred at time $s$.
 It follows that:
 \begin{equation}
-b_s(\tau) \propto i(s-\tau) f_{s-\tau}(\tau)
+b_s(\tau) \propto C(s-\tau) f_{s-\tau}(\tau)
 \end{equation}
-where $i(s)$ is the size of the primary cohort $s$.
-Therefore, changes in the backward delay distribution depends on the changes in cohort size $i(s)$ (therefore incidence of infection) as well as changes in the forward delay distribution.
-This concept generalizes the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
+where $C(s)$ is the size of the primary cohort $s$.
+Therefore, changes in the backward delay distribution depends on the changes in cohort size $C(s)$ (therefore incidence of infection) as well as changes in the forward delay distribution.
+These ideas apply to all epidemiological delay distributions and generalize the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
 
-\subsection{Serial interval distributions}
+\subsection{Realized serial interval distributions}
 
 The serial interval is defined as the time between when an infector becomes symptomatic and when and infectee becomes symptomatic.
-We express realized serial intervals as:
+Here, we denote realized serial intervals $\tau$ as:
 \begin{equation}
-- x_0 + \sigma + x_1
+\tau = - x_0 + \sigma + x_1
 \end{equation}
 where $x_0$ and $x_1$ represent the realized time from infection to symptom onset of an infector and an infectee, respectively, and $\sigma$ represents the realized generation interval.
-Previous studies have assumed that (i) $x_0$ and $x_1$ have the same mean and (ii) therefore the serial and generation intervals have the same mean;
+Previous studies have assumed that (i) $x_0$ and $x_1$ have the same means and (ii) therefore the serial and generation intervals have the same mean;
 however, these results implicitly assume that incidence stays constant.
 
 Using the cohort-based framework provides a clear way of understanding the serial-interval distribution.
 Given that an infector became symptomatic at time $\ell$, we have to first go backward in time by asking when the infector was infected and go forward in time by asking when the infectee became symptomatic.
-Then, it is clear that $x_0$ should follow the backward incubation period distribution for secondary cohort $\ell$; 
-$\sigma$ the forward generation-interval distribution for a primary cohort $\ell - x_0$ conditional on the realized incubation period $x_0$;
-and $s_1$ forward incubation period distribution for a primary cohort $\ell - x_0 + \sigma$.
+Then, it is clear that $x_0$ follows the backward incubation period distribution for secondary cohort $\ell$; 
+$\sigma$ follows the forward generation-interval distribution for a primary cohort $\ell - x_0$ conditional on the incubation period  $x_0$ of the infector;
+and $x_1$ follows forward incubation period distribution for a primary cohort $\ell - x_0 + \sigma$.
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \begin{equation}
 f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
 \end{equation}
 where $i$ is the incidence of infection, $h$ is the joint probability distribution of the incubation period and generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods.
+Therefore, the forward serial interval distribution depends on previous changes in incidence and generally have different means from the generation interval distribution.
 
 Likewise, we can define backward serial interval distribution for a secondary cohort $\ell$.
-Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infectee was infected by the infector; 
+Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
 then, we have to go forward in time by asking when the infector became symptomatic.
 In this case, $x_1$ and $\sigma$ follow the backward incubation period and generation-interval distributions, respectively, and $x_0$ follows the forward incubation period distribution.
 Therefore, the backward serial interval distribution of a secondary cohort $\ell$ can be written as follows
@@ -157,16 +157,38 @@ b_\ell(\tau) &\propto j(\ell) f_{\ell}(\tau)\\
 &\propto \int_0^\infty i(\ell-x_0) k(x_0) f_{\ell}(\tau) \mathrm{d} x_0
 \end{aligned}
 \end{equation}
-where $j$ is the incidence of symptomatic cases.
+where $j$ represents the incidence of symptomatic cases.
 
-\subsection{Serial link between $r$ and $\mathcal R$}
+\subsection{Observed serial interval distributions}
 
-Here, we show that the forward serial-interval distribution during the exponential growth phase provides the correct link between the exponential growth rate $r$ of an epidemic.
-This link is identical to the $r$--$\mathcal R$ link based on the generation-interval distribution.
-During the exponential growth phase, we have 
+
+
+\subsection{Relating $\mathcal R$ and $r$ using generation and serial-interval distributions}
+
+Assuming that the forward generation-interval distribution remains constant during the exponential growth phase,
+we can estimate the reproduction number from the exponential growth rate $r$ via the Euler-Lotka equation:
 \begin{equation}
-f_{\tiny\textrm{exp}}(\tau) \propto \int_{0}^\infty \int_{0}^\infty \exp( -r x_0) h(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
+\frac{1}{\mathcal R} = \int_0^\infty \exp(-r\tau) g(\tau) \mathrm{d} \tau,
 \end{equation}
+where $g(\tau)$ is the forward generation-interval distribution during the exponential growth phase (and also a marginal probability distribution of $h$).
+Like the forward generation-interval distribution, 
+the forward serial-interval distribution describes the renewal process of symptomatic cases.
+Therefore, the forward serial-interval distribution $f_{\tiny\textrm{exp}}(\tau)$ during the exponential growth phase should provide the identical $r$--$\mathcal R$ link as the generation-interval distribution:
+\begin{equation}
+\frac{1}{\mathcal R} = \int_{-\infty}^\infty \exp(-r\tau) f_{\tiny\textrm{exp}}(\tau) \mathrm{d} \tau,
+\end{equation}
+where the forward serial-interval distribution during the exponential growth phase is defined as:
+\begin{equation}
+f_{\tiny\textrm{exp}}(\tau) \propto \int_{0}^\infty \int_{0}^\infty \exp( -r x_0) h(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma.
+\end{equation}
+In Appendix, we provide a mathematical proof that this relationship holds.
+
+We note that the forward serial-interval distribution depends on the exponential growth rate $r$.
+When the epidemic grows fast (high $r$), we expect the backward incubation period to be short, and therefore, the forward serial-interval distribution will generally have a longer mean than the forward generation-interval distribution.
+The Susceptible-Exposed-Infected-Recovered model, which assumes that incubation and exposed periods are equivalent, is a special case where the conditional forward generation-interval distribution cancels out with the backward generation-interval distribution exactly because (i) infected individuals can only transmit after symptom onset and (ii) the incubation period distribution is independent of the time between symptom onset to infection;
+in this case, the forward serial- and generation-interval distributions follow identical distributions.
+
+
 
 \section{Results}
 
