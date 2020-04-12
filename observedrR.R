@@ -74,7 +74,7 @@ g1 <- ggplot(R0all) +
   geom_line(aes(t, R0, col=type, lty=type)) +
   geom_hline(yintercept=rr$R0, lty=2) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", limits=c(1, 3), expand=c(0, 0)) +
+  scale_y_continuous("Reproduction number $\\mathcal R$", expand=c(0, 0)) +
   scale_color_manual(values=tail(cpalette, 2)) +
   scale_fill_manual(values=tail(cpalette, 2)) +
   theme(

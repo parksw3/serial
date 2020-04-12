@@ -252,13 +252,20 @@ therefore, the estimates of $\mathcal R$ remain unchanged.
 \label{fig:obsrR}
 \end{figure}
 
-When the epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
+When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
 \fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of $\mathcal R$.
 However, even if we can observe \emph{all} serial intervals after the epidemic has ended, we still underestimate $\mathcal R$ by a large amount because it does not account for changes in the forward serial-interval distribution.
 As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean forward serial-interval distribution during the exponential growth phase, which provides the correct linke between $r$ and $\mathcal R$.
 
 Here, we provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ retrospctively.
-Instead of taking the average 
+Once a set of serial intervals has been observed from the line list, we can group observed serial intervals by their primary cohort times.
+Then, we can compare how estimates of $\mathcal R$ change as we include more cohorts into the analysis (see `cohort-averaged' in \fref{obsrR}).
+During the exponential growth phase, the estimates of $\mathcal R$ remains consistent;
+adding more data allows us to make more precise inference about $\mathcal R$ during this period.
+However, the cohort-averaged estimates of $\mathcal R$ decreases rapidly soon after the exponential growth period.
+Confidence intervals associated with the cohort-averaged estimates of $\mathcal R$ becomes narrower and do not overlap with earlier estimates.
+This approach allows us to visualize how changes in the forward serial intervals translate to biases in estimates of $\mathcal R$.
+
 
 
 \section{Discussion}
