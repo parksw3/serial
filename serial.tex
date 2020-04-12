@@ -183,6 +183,8 @@ which satisfies the following:
 g(\tau) = \int_0^\infty h(x_0, \tau) \mathrm{d}x_0.
 \end{equation}
 
+\subsection{Linking $r$ and $\mathcal R$}
+
 During the initial phase of an epidemic, the proprotion susceptible remains constant ($S(t) = S(0)$) and incidence of infection grows exponentially: $i(t)=i_0\exp(rt)$.
 Then, we can estimate the reproduction number from the exponential growth rate $r$ via the Euler-Lotka equation:
 \begin{equation}
@@ -225,19 +227,43 @@ Qualitative patterns in the changes in the mean backward delays is robust across
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
-\textbf{Estimating of the reproduction number from the exponential growth rate.}
+\textbf{Estimates of the reproduction number from the exponential growth rate.}
 }
 \label{fig:rR}
 \end{figure}
 
-\fref{rR} compares the estimates of the reproduction number $\mathcal R$ using forward serial-interval distributions and naive serial-interval distributions that does not account for the differences between backward and forward incubation periods.
+\fref{rR} compares the estimates of the reproduction number $\mathcal R$ from the exponential growth rate $r$ using forward serial-interval distributions and naive serial-interval distributions that do not account for the differences between backward and forward incubation periods.
 When we use the forward serial-interval distributions to estimate $\mathcal R$, we obtain identical values regardless of the correlation between incubation periods and generation intervals;
 as expected, these estimates match $\mathcal R$ estimes using the intrinsic generation-interval distributions (\fref{rR}A).
-On the other hand, when naive serial-interval distributions are used, we underestimate $\mathcal R$ (\fref{rR}B); $\mathcal R$ even decreases for high $r$ because negative serial intervals are given too much weight.
+On the other hand, when naive serial-interval distributions are used, we underestimate $\mathcal R$; $\mathcal R$ even decreases for high $r$ because negative serial intervals are given too much weight (\fref{rR}B).
+While the forward serial intervals can be also negative, the proportion of negative intervals are appropriately balances because faster epidemic growth will lead to shorter backward incubation period (and therefore less negative serial intervals).
+
+Comapring the shapes of forward serial-interval distributions and the intrinsic generation-interval distribution allow us to better understand how they are able to give identical estimates of $\mathcal R$.
+Generation-interval distributions with higher means and less variability are generally expected to give higher $\mathcal R$ for a given $r$.
+Here, we find that the forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
+The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
+therefore, the estimates of $\mathcal R$ remain unchanged.
+
+\begin{figure}[!ht]
+\includegraphics[width=\textwidth]{observedrR.pdf}
+\caption{
+\textbf{Estimates of the reproduction number from the observed serial intervals.}
+}
+\label{fig:obsrR}
+\end{figure}
+
+When the epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
+\fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of $\mathcal R$.
+However, even if we can observe \emph{all} serial intervals after the epidemic has ended, we still underestimate $\mathcal R$ by a large amount because it does not account for changes in the forward serial-interval distribution.
+As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean forward serial-interval distribution during the exponential growth phase, which provides the correct linke between $r$ and $\mathcal R$.
+
+Here, we provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ retrospctively.
+Instead of taking the average 
 
 
+\section{Discussion}
 
-\section{Appendix}
+\section*{Appendix}
 
 Recall that the forward serial interval can be written as:
 \begin{equation}
