@@ -209,6 +209,26 @@ in this case, the forward serial- and generation-intervals have the same distrib
 
 \section{Results}
 
+First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution and the forward serial-interval distribution during the exponential growth phase (\fref{rR}A).
+Both distributions provide identical estimates of $\mathcal R$ regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution.
+On the other hand, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates $\mathcal R$;
+as $r$ increases, estimates of $\mathcal R$ eventually saturate and decrease because negative serial intervals are given too much weight (\fref{rR}B)
+While the forward serial intervals during the exponential growth phase can be also negative, the proportion of negative intervals are appropriately balanced because faster epidemic growth will lead to shorter backward incubation period (and therefore less negative serial intervals).
+
+\begin{figure}[!ht]
+\includegraphics[width=\textwidth]{rR.pdf}
+\caption{
+\textbf{Estimates of the reproduction number from the exponential growth rate.}
+}
+\label{fig:rR}
+\end{figure}
+
+Comapring the shapes of forward serial-interval distributions and the intrinsic generation-interval distribution allow us to better understand how they are able to give identical estimates of $\mathcal R$.
+Generation-interval distributions with higher means and less variability are generally expected to give higher $\mathcal R$ for a given $r$.
+Here, we find that the forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
+The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
+therefore, the estimates of $\mathcal R$ remain unchanged.
+
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{forward.pdf}
 \caption{
@@ -224,25 +244,6 @@ In contrast to mean forward incubation period or generation interval, the mean s
 When incidence is increasing, a symptomatic individual is more likely to have been infected more recently (shorter backward incubation period and therefore longer forward serial interval) whereas when incidence is decreasing, a symptomatic individual is more likely to have been infected later (longer backward incubation period and therefore shorter forward serial interval).
 Qualitative patterns in the changes in the mean backward delays is robust across all delay distributions because they are largely driven by changes in incidence (\fref{epi}D).
 
-\begin{figure}[!ht]
-\includegraphics[width=\textwidth]{rR.pdf}
-\caption{
-\textbf{Estimates of the reproduction number from the exponential growth rate.}
-}
-\label{fig:rR}
-\end{figure}
-
-\fref{rR} compares the estimates of the reproduction number $\mathcal R$ from the exponential growth rate $r$ using forward serial-interval distributions and naive serial-interval distributions that do not account for the differences between backward and forward incubation periods.
-When we use the forward serial-interval distributions to estimate $\mathcal R$, we obtain identical values regardless of the correlation between incubation periods and generation intervals;
-as expected, these estimates match $\mathcal R$ estimes using the intrinsic generation-interval distributions (\fref{rR}A).
-On the other hand, when naive serial-interval distributions are used, we underestimate $\mathcal R$; $\mathcal R$ even decreases for high $r$ because negative serial intervals are given too much weight (\fref{rR}B).
-While the forward serial intervals can be also negative, the proportion of negative intervals are appropriately balances because faster epidemic growth will lead to shorter backward incubation period (and therefore less negative serial intervals).
-
-Comapring the shapes of forward serial-interval distributions and the intrinsic generation-interval distribution allow us to better understand how they are able to give identical estimates of $\mathcal R$.
-Generation-interval distributions with higher means and less variability are generally expected to give higher $\mathcal R$ for a given $r$.
-Here, we find that the forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
-The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
-therefore, the estimates of $\mathcal R$ remain unchanged.
 
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{observedrR.pdf}
@@ -265,6 +266,9 @@ adding more data allows us to make more precise inference about $\mathcal R$ dur
 However, the cohort-averaged estimates of $\mathcal R$ decreases rapidly soon after the exponential growth period.
 Confidence intervals associated with the cohort-averaged estimates of $\mathcal R$ becomes narrower and do not overlap with earlier estimates.
 This approach allows us to visualize how changes in the forward serial intervals translate to biases in estimates of $\mathcal R$.
+
+Finally, we apply these ideas and reanalyze serial intervals of COVID-19 collected from mainland China, outside Hubei province, between XXX and XXX (REF).
+
 
 \section{Discussion}
 
