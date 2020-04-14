@@ -211,6 +211,29 @@ When the epidemic grows fast (high $r$), we expect the backward incubation perio
 The Susceptible-Exposed-Infected-Recovered model, which assumes that incubation and exposed periods are equivalent, is a special case where the conditional forward generation-interval distribution cancels out with the backward generation-interval distribution exactly because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset to infection is independent of the incubation period of an infector;
 in this case, the forward serial- and generation-intervals have the same distributions during the exponential growth phase.
 
+We use a simulation-based approach to compare the estimates of $\mathcal R$ based on the serial- and generation-interval distributions. 
+To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and correlation $\rho$.
+The multivariate log-normal distribution is parameterized based on pameter estimates for COVID-19.
+We construct the forward serial-interval distribution during the exponential growth period as follows:
+\begin{equation}
+S_i = -B_i + (G_i|B_i) + I_i,
+\end{equation}
+where the backward incubation period $B_i$ of an infector is simulated by drawing random log-normal samples $A_i$ with log mean $\mu_I$ and log variance $\sigma_I^2$ and resampling $A_i$, each weighted by the inverse of the exponential growth function $\exp(-rA_i)$;
+the intrinsic generation interval conditional on the incubation period of the infector $(G_i|B_i)$ is drawn from a log-normal distribution with log mean $\mu_G + \sigma_G \rho (\log(B_i) - \mu_I)/\sigma_I$ and log variance $\sigma_G^2 (1-\rho^2)$;
+the forward incubation period $I_i$ of an infectee is drawn from a log-normal distribution with log mean $\mu_I$ and log variance $\sigma_I^2$.
+We then calculate the reproduction number $\mathcal R$ using the empirical estimator:
+\begin{equation}
+\mathcal R = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r S_i)}.
+\end{equation}
+We compare this estimate with a naive estimate of $\mathcal R$ that assumes that the backward and the forward incubation periods are identically distributed:
+\begin{equation}
+\mathcal R = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r T_i)},
+\end{equation}
+where
+\begin{equation}
+T_i = -A_i + (G_i|A_i) + I_i.
+\end{equation}
+
 \section{Results}
 
 First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution and the forward serial-interval distribution during the exponential growth phase (\fref{rR}A).
