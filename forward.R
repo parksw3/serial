@@ -113,8 +113,11 @@ serdet <- data.frame(
 )
 
 g4 <- ggplot(serdata0) +
-  geom_line(data=serdet, aes(tvec, mf), lwd=1) +
-  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  # geom_point(aes(cohort, tdiff), shape=1, col="#D55E00", size=2) +
+  geom_smooth(aes(cohort, tdiff), shape=1, col="#D55E00", size=2) +
+  geom_line(data=serdet, aes(tvec, mf), lwd=1) 
+  
+  
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Forward serial interval (days)", expand=c(0, 0), limits=c(0, 7)) +

@@ -12,8 +12,8 @@ sir.full <- function(size,
                      R0=2.5,
                      meanlog=1.621,
                      sdlog=0.418,
-                     scale=5.5,
-                     shape=4.1,
+                     meanlog2=1.54,
+                     sdlog2=0.37,
                      I0,
                      seed = NULL,
                      imax,
@@ -76,7 +76,7 @@ sir.full <- function(size,
       queue_infector <- c(queue_infector, rep(j, ncontact))
     }
     
-    generation <- rweibull(ncontact, shape, scale)
+    generation <- rlnorm(ncontact, meanlog2, sdlog2)
     
     if (keep.intrinsic) intrinsic_generation[[j]] <- generation
     

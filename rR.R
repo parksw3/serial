@@ -8,22 +8,16 @@ source("cpalette.R")
 meanlog1 <- 1.621
 sdlog1 <- 0.418
 ## generation
-shape <- 4.1
-scale <- 5.5
-
-## rough moment matching...for now... doesn't matter -- it works.
-mean(rweibull(50000, shape = shape, scale=scale))
-var(rweibull(50000, shape = shape, scale=scale))
-
-mean(rlnorm(50000, meanlog = 1.55, sdlog=0.27))
-var(rlnorm(50000, meanlog = 1.55, sdlog=0.27))
+## moment matching
+mean(rlnorm(50000, meanlog = 1.54, sdlog=0.37)) ## 5 days
+sd(rlnorm(50000, meanlog = 1.54, sdlog=0.37)) ## 1.9 days
 
 serialR <- function(r=0.1,
                     rho=0.5,
                     meanlog1=1.621,
                     sdlog1=0.418,
-                    meanlog2=1.55,
-                    sdlog2=0.27,
+                    meanlog2=1.54,
+                    sdlog2=0.37,
                     nsim=100000,
                     seed=101) {
   set.seed(seed)
@@ -52,8 +46,8 @@ serialR2 <- function(r=0.1,
                     rho=0.5,
                     meanlog1=1.621,
                     sdlog1=0.418,
-                    meanlog2=1.55,
-                    sdlog2=0.27,
+                    meanlog2=1.54,
+                    sdlog2=0.37,
                     nsim=100000,
                     seed=101) {
   set.seed(seed)
@@ -77,8 +71,8 @@ serialR2 <- function(r=0.1,
 }
 
 generationR <- function(r=0.1,
-                        meanlog2=1.55,
-                        sdlog2=0.27,
+                        meanlog2=1.54,
+                        sdlog2=0.37,
                         nsim=100000) {
   gen <- rlnorm(nsim, meanlog2, sdlog2)
                           

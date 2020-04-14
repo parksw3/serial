@@ -3,7 +3,7 @@ renewal_det <- function(R0=2.5,
                         S0=40000-10,
                         dt=0.025,
                         incfun=function(x) dlnorm(x, meanlog=1.621, sdlog=0.418),
-                        genfun=function(x) dweibull(x, shape=4.1, scale=5.5),
+                        genfun=function(x) dlnorm(x, meanlog=1.54, sdlog=0.37),
                         I0=10,
                         tmax=200,
                         genmax=2000) {
