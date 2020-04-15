@@ -151,9 +151,9 @@ however, these results implicitly assume that incidence stays constant.
 Using the cohort-based framework provides a clear way of understanding the serial-interval distribution.
 Given that an infector became symptomatic at time $\ell$, we have to first go backward in time by asking when the infector was infected and go forward in time by asking when the infector infected infectee and when the infectee became symptomatic;
 this defines the forward serial interval (\fref{diagram}A).
-Then, it is clear that $x_0$ represents the backward incubation period for secondary cohort $\ell$; 
-$\sigma$ represents the forward generation interval for a primary cohort $\ell - x_0$ conditional on the incubation period $x_0$ of the infector;
-and $x_1$ represents the forward incubation period for a primary cohort $\ell - x_0 + \sigma$.
+Then, it is clear that $x_0$ represents the backward incubation period of infectors who became symptomatic at time $\ell$; 
+$\sigma$ represents the forward generation interval for individuals who came infected at time $\ell - x_0$ conditional on their incubation period $x_0$;
+and $x_1$ represents the forward incubation period for the infectees who became infected at time $\ell - x_0 + \sigma$.
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \begin{equation}
 f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
@@ -162,15 +162,14 @@ where $i$ is the incidence of infection, $h$ is the joint probability distributi
 \begin{equation}
 k(x_0) = \int_0^\infty h_\ell(x_0, \sigma) \mathrm{d}\sigma.
 \end{equation}
-Here, we assume that the forward incubation period distribution does not vary across cohorts over the course of an epidemic as it represents an intrinsic property of the natrual history of a disease.
-Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is the average secondary number of cases caused by an individual infected at time $\ell - x_0$.
-The cohort reproduction number plays a critical role in defining the forward serial interval because serial intervals can only be measured after the disease has been transmitted; 
-we revisit this point in the Results section.
+Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is defined as the average secondary number of cases caused by an individual infected at time $\ell - x_0$.
+We have to multiply the joint forward distribution $h$ by $\mathcal R_c (t) i(t)$, which represents total infectiousness of individuals infected at time $t$, rather than incidence $i(t)$, because we are interested in the backward incubation period $x_0$ and the forward generation interval $\sigma$ of infectors, rather than all infected individuals.
+We revisit this idea in the Results section.
 
 Likewise, we can define the backward serial interval distribution for a secondary cohort $\ell$ (\fref{diagram}B).
 Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
 then, we have to go forward in time by asking when the infector became symptomatic.
-In this case, $x_1$ and $\sigma$ represent the backward incubation period and generation-interval distributions, respectively, and $x_0$ represents the forward incubation period distribution.
+In this case, $x_1$ and $\sigma$ represent the backward incubation period and generation interval, respectively, and $x_0$ represents the forward incubation period.
 Therefore, the backward serial interval distribution of a secondary cohort $\ell$ can be written as follows
 \begin{equation}
 \begin{aligned}
@@ -318,9 +317,17 @@ Qualitative patterns in the changes in the mean backward delays is robust across
 \label{fig:tease}
 \end{figure}
 
-We further tease apart factors that affect the forward serial interval distribution, including the cohort reproduction number, as mentioned previously.
+We further tease apart factors that affect the forward serial interval distribution, including the cohort reproduction number $\mathcal R_c$, as mentioned earlier.
+\fref{tease}A compares the mean forward serial interval calculated from a stochastic model (orange points) with their deterministically calculated values;
+failing to account for changes in $\mathcal R_c$ overestimates the mean forward serial interval.
+A key distinction that needs to be made is that the forward serial-interval distributions depends on the backward incubation period of infectors (i.e., those who were able to successfully spread the disease to another person), rather than the incubation period of all symptomatic cases (\fref{tease}B).
+Therefore, the cohort size of infectors must be calculated as a product of the cohort reproduction number and incidence.
 
-
+Comparing the backward incubation period of infectors and all symptomatic cases provides an important, but counterintuitive, insight (\fref{tease}B).
+Given a cohort of symptomatic cases, individuals who were able to successfully spread the disease to others have longer incubation periods, on average;
+individuals with longer incubation period are infected earlier and have a higher chance of infecting others (i.e., higher $\mathcal R_c$) during the susceptible depletion phase.
+Therefore, the backward incubation period of an infector and the number of secondary cases caused by that infector are dynamically correlated (\fref{tease}C).
+This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}D).
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{observedrR.pdf}
@@ -330,9 +337,10 @@ We further tease apart factors that affect the forward serial interval distribut
 \label{fig:obsrR}
 \end{figure}
 
+Now, we turn to practical issues.
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
 \fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of $\mathcal R$.
-Notably, even if we can observe \emph{all} serial intervals after the epidemic has ended, we still underestimate $\mathcal R$ by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
+Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate $\mathcal R$ by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
 As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean forward serial-interval distribution during the exponential growth phase, which provides the correct linke between $r$ and $\mathcal R$.
 
 We provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ retrospctively.
@@ -361,6 +369,9 @@ The early cohort-averaged estimates are also consistent with earlier estimates.
 This example clearly demonstrates the danger of naively averaging the observed serial intervals and calculating the reproduction number from them.
 
 \section{Discussion}
+
+
+
 
 \section*{Appendix}
 
