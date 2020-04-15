@@ -2,7 +2,7 @@ renewal_det <- function(R0=2.5,
                         N=40000,
                         S0=40000-10,
                         dt=0.025,
-                        incfun=function(x) dlnorm(x, meanlog=1.621, sdlog=0.418),
+                        incfun=function(x) dlnorm(x, meanlog=1.62, sdlog=0.42),
                         genfun=function(x) dlnorm(x, meanlog=1.54, sdlog=0.37),
                         I0=10,
                         tmax=200,
@@ -40,27 +40,21 @@ renewal_det <- function(R0=2.5,
   mfinc <- apply(forwardinc, 2, function(x) sum(x*0:genmax*dt)/sum(x))
   mbinc <- apply(backwardinc, 2, function(x) sum(x*0:genmax*dt)/sum(x))
   
-  ## Jensen's inequality!!!!!
-  # sum(backwardinc[,x-genmax]*rev(mfgen[(x-genmax):x]))-mbinc[1]
-  
-  #tmpmat <- matrix(0:(genmax)*dt, nrow=genmax+1, ncol=genmax+1) - t(matrix(0:genmax*dt, nrow=genmax+1, ncol=genmax+1))
-  
-  # mfser0 <- sapply((genmax+1):(length(Svec)-genmax), function(x) {
-  #  sum(t(backwardinc[,x-genmax] * t(forwardgen[,x:(x-genmax)])) * tmpmat)
-  #}) +
-  #  tail(mfinc, -genmax)
-
-  # sapply((genmax+1):(length(Svec)-genmax), function(x) sum(backwardinc[,x-genmax]*rev(mfgen[(x-genmax):x])))
-    
   mfser <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc[,x-genmax]*rev(mfgen[(x-genmax):x]))),-genmax) +
     tail(mfinc, -genmax) - head(mbinc, -genmax)
-  
-  # plot(mfser, type="l")
   
   mbgentmp <- c(rep(mbgen[1], genmax), mbgen)
   
   mbser <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc[,x-genmax]*rev(mbgentmp[(x-genmax):x])))+mbinc,-genmax) -
     tail(mfinc, -genmax)
+  
+  Rc <- R0 * sapply(1:(length(Svec)-genmax), function(x) sum(gen[1:(1+genmax)]*Svec[x:(x+genmax)]/N))
+  
+  backwardinc2 <- sapply((genmax+1):(length(Svec)), function(x) Rc[x:(x-genmax)]*inc[1:(1+genmax)]*Ivec[x:(x-genmax)]/sum(Rc[x:(x-genmax)]*inc[1:(1+genmax)]*Ivec[x:(x-genmax)]))
+  mbinc2 <- apply(backwardinc2, 2, function(x) sum(x*0:genmax*dt)/sum(x))
+  
+  mfser2 <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc2[,x-genmax]*rev(mfgen[(x-genmax):x]))),-genmax) +
+    tail(mfinc, -genmax) - head(mbinc2, -genmax)
   
   list(
     tvec=head(tvec, -2*genmax),
@@ -71,8 +65,11 @@ renewal_det <- function(R0=2.5,
     mbgen=head(mbgen, -genmax),
     mfinc=tail(mfinc, -genmax),
     mbinc=head(mbinc, -genmax),
+    mbinc2=head(mbinc2, -genmax),
     mfser=mfser,
+    mfser2=mfser2,
     mbser=mbser,
+    Rc=tail(Rc, -genmax),
     gen=gen,
     R0=R0,
     r=r

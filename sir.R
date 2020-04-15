@@ -10,8 +10,8 @@ sample2 <- function(x, size) {
 
 sir.full <- function(size,
                      R0=2.5,
-                     meanlog=1.621,
-                     sdlog=0.418,
+                     meanlog=1.62,
+                     sdlog=0.42,
                      meanlog2=1.54,
                      sdlog2=0.37,
                      I0,

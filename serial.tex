@@ -52,9 +52,10 @@
 \begin{flushleft}{
 	\Large
 	\textbf\newline{
-		Unraveling the paradox between generation and serial intervals: applications to COVID-19 pandemic
+		Unraveling the paradox between generation and serial intervals
 	}
-}\\
+}
+\newline\\
 Sang Woo Park
 \end{flushleft}
 
@@ -155,13 +156,16 @@ $\sigma$ represents the forward generation interval for a primary cohort $\ell -
 and $x_1$ represents the forward incubation period for a primary cohort $\ell - x_0 + \sigma$.
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \begin{equation}
-f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
+f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
 \end{equation}
 where $i$ is the incidence of infection, $h$ is the joint probability distribution of the forward incubation period and forward generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods:
 \begin{equation}
 k(x_0) = \int_0^\infty h_\ell(x_0, \sigma) \mathrm{d}\sigma.
 \end{equation}
 Here, we assume that the forward incubation period distribution does not vary across cohorts over the course of an epidemic as it represents an intrinsic property of the natrual history of a disease.
+Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is the average secondary number of cases caused by an individual infected at time $\ell - x_0$.
+The cohort reproduction number plays a critical role in defining the forward serial interval because serial intervals can only be measured after the disease has been transmitted; 
+we revisit this point in the Results section.
 
 Likewise, we can define the backward serial interval distribution for a secondary cohort $\ell$ (\fref{diagram}B).
 Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
@@ -181,6 +185,7 @@ where $j$ represents the incidence of symptomatic cases.
 Here, use a renewal equation to model the spread of disease in a population:
 \begin{equation}
 i(t) = \mathcal R_0 S(t) \int_0^\infty i(t-\tau) g(\tau) \mathrm{d}\tau,
+\label{eq:renewal}
 \end{equation}
 where $\mathcal R_0$ is the basic reproduction number (i.e., the average number of secondary cases caused by a primary case  in a fully susceptible population), $g(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a fully susceptible population), $S(t)$ is the proportion of susceptible individuals.
 Then, the forward generation-interval for a primary cohort $\ell$ follows \citep{champredon2015intrinsic}:
@@ -194,6 +199,10 @@ h_\ell (x_0, \tau) \propto h(x_0, \tau) S(\ell + \tau),
 which satisfies the following:
 \begin{equation}
 g(\tau) = \int_0^\infty h(x_0, \tau) \mathrm{d}x_0.
+\end{equation}
+Finally, the cohort reproduction is defined as follows:
+\begin{equation}
+\mathcal R_c(t) = \mathcal R_0 \int_0^\infty g(\tau) S(t+\tau) \mathrm{d} \tau.
 \end{equation}
 
 \subsection{Linking $r$ and $\mathcal R$}
@@ -216,14 +225,35 @@ f_{\textrm{\tiny exp}}(\tau) \propto \int_{0}^\infty \int_{0}^\infty \exp( -r x_
 In Appendix, we provide a mathematical proof that this relationship holds.
 
 We note that the forward serial-interval distribution depends on the exponential growth rate $r$.
-When the epidemic grows fast (high $r$), we expect the backward incubation period to be short, and therefore, the forward serial-interval distribution will generally have a larger mean than the forward generation-interval distribution.
+When the epidemic grows fast (high $r$), we expect the backward incubation period to be short, and therefore, the forward serial-interval distribution will generally have a larger mean than the intrinsic generation-interval distribution.
 The Susceptible-Exposed-Infected-Recovered model, which assumes that incubation and exposed periods are equivalent, is a special case where the conditional forward generation-interval distribution cancels out with the backward generation-interval distribution exactly because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset to infection is independent of the incubation period of an infector;
 in this case, the forward serial- and generation-intervals have the same distributions during the exponential growth phase.
 
+\begin{table}[!th]
+\begin{center}
+\begin{tabular}{|l|l|r|}
+\hline
+Parameter & Values & Source\\
+\hline
+Mean forward incubation period & 5.5 days & \cite{lauer2020incubation} \\
+SD forward incubation period & 2.4 & \cite{lauer2020incubation} \\
+Mean intrinsic generation interval & 5 days & \cite{ferretti2020quantifying} \\
+SD intrinsic generation interval & 2 & \cite{ferretti2020quantifying} \\
+\hline
+\end{tabular}
+\end{center}
+\caption{
+\textbf{Parameter values used for simulations.}
+The intrinsic generation-interval distribution is parameterized using a log-normal distribution with log mean $\mu_G=1.54$ and log standard deviation $\sigma_G=0.37$.
+The forward incubation period distribution is parameterized using a log-normal distribution with log mean $\mu_I=1.62$ and log standard deviation $\sigma_I=0.42$.
+The joint probability distribution is modeled using a multivariate log-normal distribution with correlations $\rho=-0.5, 0, 0.5$.
+}
+\end{table}
+
 We use a simulation-based approach to compare the estimates of $\mathcal R$ based on the serial- and generation-interval distributions. 
-To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and correlation $\rho$.
-The multivariate log-normal distribution is parameterized based on pameter estimates for COVID-19.
-We construct the forward serial-interval distribution during the exponential growth period as follows:
+To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and correlation $\rho$;
+the multivariate log-normal distribution is parameterized based on pameter estimates for COVID-19 (Table 1).
+We construct forward serial intervals during the exponential growth period as follows:
 \begin{equation}
 S_i = -B_i + (G_i|B_i) + I_i,
 \end{equation}
@@ -234,7 +264,7 @@ We then calculate the reproduction number $\mathcal R$ using the empirical estim
 \begin{equation}
 \mathcal R = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r S_i)}.
 \end{equation}
-We compare this estimate with a naive estimate of $\mathcal R$ that assumes that the backward and the forward incubation periods are identically distributed:
+We compare this estimate with a naive estimate of ${\mathcal R}_{\textrm{\tiny naive}}$ that assumes that the backward and the forward incubation periods are identically distributed:
 \begin{equation}
 {\mathcal R}_{\textrm{\tiny naive}} = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r T_i)},
 \end{equation}
@@ -248,7 +278,7 @@ T_i = -A_i + (G_i|A_i) + I_i.
 First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution and the forward serial-interval distribution during the exponential growth phase (\fref{rR}A).
 Both distributions provide identical estimates of $\mathcal R$ regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution.
 On the other hand, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates $\mathcal R$;
-as $r$ increases, estimates of $\mathcal R$ eventually saturate and decrease because negative serial intervals are given too much weight (\fref{rR}B)
+as $r$ increases, ${\mathcal R}_{\textrm{\tiny naive}}$ saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
 While the forward serial intervals during the exponential growth phase can be also negative, the proportion of negative intervals are appropriately balanced because faster epidemic growth will lead to shorter backward incubation period (and therefore less negative serial intervals).
 
 \begin{figure}[!th]
@@ -260,10 +290,10 @@ While the forward serial intervals during the exponential growth phase can be al
 \end{figure}
 
 Comapring the shapes of forward serial-interval distributions and the intrinsic generation-interval distribution allow us to better understand how they are able to give identical estimates of $\mathcal R$.
-Generation-interval distributions with higher means and less variability are generally expected to give higher $\mathcal R$ for a given $r$.
-The forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
+In general, generation-interval distributions with higher means and less variability are expected to give higher $\mathcal R$ for a given $r$.
+In this case, the forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
 The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
-therefore, the estimates of $\mathcal R$ remain unchanged.
+therefore, we estimate the same $\mathcal R$ using both serial and generation intervals.
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{forward.pdf}
@@ -273,12 +303,24 @@ therefore, the estimates of $\mathcal R$ remain unchanged.
 \label{fig:epi}
 \end{figure}
 
-\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions.
+\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and the corresponding stochastic realization based on the Gillespie algorithm.
 The mean forward incubation period remains constant throughout an epidemic as expected (\fref{epi}B).
-The mean forward generation interval contracts as epidemic progresses because an infected individual is less likely to infect another person as the proportion of susceptible individuals decreases (\fref{epi}C; \cite{champredon2015intrinsic}).
+The mean forward generation interval contracts as the epidemic progresses because an infected individual is less likely to infect another person as the proportion of susceptible individuals decreases (\fref{epi}C; \cite{champredon2015intrinsic}).
 In contrast, the mean serial interval depends on previous incidence and therefore decreases over time (\fref{epi}D):
 When incidence is increasing, symptomatic individuals are more likely to have been infected more recently (shorter backward incubation period and therefore longer forward serial interval) whereas when incidence is decreasing, symptomatic individuals are more likely to have been infected later (longer backward incubation period and therefore shorter forward serial interval).
 Qualitative patterns in the changes in the mean backward delays is robust across all delay distributions because they are predominantly driven by the changes in incidence (\fref{epi}D).
+
+\begin{figure}[!th]
+\includegraphics[width=\textwidth]{forward_tease.pdf}
+\caption{
+\textbf{Effects of dynamical correlations on serial intervals.}
+}
+\label{fig:tease}
+\end{figure}
+
+We further tease apart factors that affect the forward serial interval distribution, including the cohort reproduction number, as mentioned previously.
+
+
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{observedrR.pdf}

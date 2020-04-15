@@ -5,17 +5,20 @@ library(gridExtra)
 source("cpalette.R")
 
 ## incubation!
-meanlog1 <- 1.621
-sdlog1 <- 0.418
+meanlog1 <- 1.62
+sdlog1 <- 0.42
+mean(rlnorm(50000, meanlog = 1.62, sdlog=0.42)) ## 5.5 days
+sd(rlnorm(50000, meanlog = 1.62, sdlog=0.42)) ## 2.4
+
 ## generation
 ## moment matching
 mean(rlnorm(50000, meanlog = 1.54, sdlog=0.37)) ## 5 days
-sd(rlnorm(50000, meanlog = 1.54, sdlog=0.37)) ## 1.9 days
+sd(rlnorm(50000, meanlog = 1.54, sdlog=0.37)) ##
 
 serialR <- function(r=0.1,
                     rho=0.5,
-                    meanlog1=1.621,
-                    sdlog1=0.418,
+                    meanlog1=1.62,
+                    sdlog1=0.42,
                     meanlog2=1.54,
                     sdlog2=0.37,
                     nsim=100000,
@@ -44,8 +47,8 @@ serialR <- function(r=0.1,
 
 serialR2 <- function(r=0.1,
                     rho=0.5,
-                    meanlog1=1.621,
-                    sdlog1=0.418,
+                    meanlog1=1.62,
+                    sdlog1=0.42,
                     meanlog2=1.54,
                     sdlog2=0.37,
                     nsim=100000,
@@ -156,7 +159,7 @@ g2 <- ggplot(rRdata2) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", limits=c(1, 4.5), expand=c(0, 0)) +
+  scale_y_continuous("Naive reproduction number ${\\mathcal R}_{\\textrm{\\tiny naive}}$", limits=c(1, 4.5), expand=c(0, 0)) +
   scale_color_manual(values=cpalette) +
   ggtitle("B") +
   theme(

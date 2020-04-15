@@ -27,10 +27,6 @@ summfun <- function(dd) {
 }
 
 ## model parameters
-meanlog <- 1.621
-sdlog <- 0.418
-scale <- 5.5
-shape <- 4.1
 r <- rr$r
 
 detdata <- data.frame(
@@ -109,15 +105,12 @@ serdata0 <- data.frame(
 
 serdet <- data.frame(
   tvec=rr$tvec,
-  mf=rr$mfser
+  mf=rr$mfser2
 )
 
 g4 <- ggplot(serdata0) +
-  # geom_point(aes(cohort, tdiff), shape=1, col="#D55E00", size=2) +
-  geom_smooth(aes(cohort, tdiff), shape=1, col="#D55E00", size=2) +
-  geom_line(data=serdet, aes(tvec, mf), lwd=1) 
-  
-  
+  geom_line(data=serdet, aes(tvec, mf), lwd=1) +
+  geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Forward serial interval (days)", expand=c(0, 0), limits=c(0, 7)) +
@@ -144,7 +137,8 @@ g5 <- ggplot(incdata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=incdet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward incubation period (days)", expand=c(0, 0), limits=c(0, 8.6)) +
+  scale_y_continuous("Backward incubation period (days)", expand=c(0, 0), limits=c(0, 9.6),
+                     breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("E") +
   theme(
@@ -168,7 +162,7 @@ g6 <- ggplot(gendata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward generation interval (days)", expand=c(0, 0), limits=c(0, 8.6), breaks=0:4*2) +
+  scale_y_continuous("Backward generation interval (days)", expand=c(0, 0), limits=c(0, 9.6), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("F") +
   theme(
@@ -192,7 +186,8 @@ g7 <- ggplot(serdata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward serial interval (days)", expand=c(0, 0), limits=c(0, 8.6)) +
+  scale_y_continuous("Backward serial interval (days)", expand=c(0, 0), limits=c(0, 9.6),
+                     breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("G") +
   theme(
