@@ -372,22 +372,40 @@ This example clearly demonstrates the danger of naively averaging the observed s
 
 Characterizing generation- and serial-interval distributions are critical to understanding the outset of an outbreak as they determine the time scale of disease transmission.
 Generation intervals measure the time difference between infection of a transmission pair, whereas serial intervals measure the time difference between symptom onset of a transmission pair.
-Due to their similar definitions, there differences have been inaccurately captured and misunderstood.
-Here, we provide a theoretical basis for understanding serial intervals.
+Due to their similar definitions, their differences have been inaccurately captured and misunderstood.
 
-First, we demonstrate the importance of defining a cohort for studying any epidemiological time delay distributions.
+Our study demonstrate the importance of defining a cohort for studying any epidemiological time delay distributions.
 Previous studies have shown that generation interval can be either measured forward or backward;
 we generalize their ideas and show that these ideas can be applied to all distributions.
 Changes in the backward delay distributions is particularly robust across all distributions because they depend on previous changes in cohort sizes, which, in turn, depend on incidence of infection.
-Several epidemic analyses have attempted to reconstruct symptom onset or infection dates for each case from the confirmed dates while assuming a constant delay distribution;
-these assumptions translate to assuming a constant backward delay distribution.
-Although such assumption may be able to approximately match the time scale of an epidemic, 
-our analysis reveals that it is not a safe assumption.
+Several epidemic analyses during the COVID-19 pandemic have attempted to reconstruct symptom onset or infection dates for each case from confirmed dates while assuming a constant backward delay distribution.
+Although such approaches may be able to match the time scale of an epidemic, we recommend future studies to consider deconvolution approaches instead for proper reconstruction of epidemic time series.
 
 Using cohort-based approaches, we define forward and backward serial intervals.
-The forward serial-interval distribution describes the renewal process of the symptomatic cases and therefore provides the correct link between $r$ and $\mathcal R$.
+The forward serial-interval distribution describes the renewal process of the symptomatic individuals and therefore provides the correct link between $r$ and $\mathcal R$.
 While our results support the use of serial interval distributions for calculating $\mathcal R$, 
-they also reveal gaps in our current understanding and practical approaches to characterizing serial intervals.
+they also reveal gaps in current approaches to characterizing serial intervals.
+Previous studies have often (i) recommended using up-to-date serial intervals, (ii) assumed that the serial interval distribution remains constant, and (iii) applied serial interval distributions estimated from one location to analyzing epidemics in other locations;
+however, these approaches implicitly ignore spatiotemporal variation in incidence and may therefore give systemtatically biased estimates of $\mathcal R$. 
+For example, given geographical differences in the observed exponential growth rates of the COVID-19 epidemic, the forward serial interval distributions will vary across different countries.
+Future studies should aim to characterize spatiotemporal variation in serial intervals and understanding the drivers of their differences.
+
+We also show that there are multiple serial-interval distributions that correspond to the same set of generation-interval and incubation period distributions depending on their correlations;
+not explicitly accounting for their correlations can bias the estimate of the intrinsic generation-interval distribution from the serial-interval distribution (see Appendix).
+Furthermore, previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the effect of right-censoring or differences between the backward incubation period of an infector and the forward incubation period of an infecteee.
+There is currently a need for better statistical tools for teasing apart the intrinsic generation-interval distributions from the observed serial intervals.
+
+Our study is not without limitations.
+Here, we assumed that all individuals develop symptoms and that the the entire transmission process (e.g., direction of transmission, symptom onset dates, infection dates, etc.) are observable.
+In practice, asymptomatic and presymptomatic transmission of COVID-19 makes measuring serial intervals difficult.
+For example, symotom onset dates cannot be used as a reliable proxy for the direction of transmission as infectees may develop symptoms before their infectors.
+Based on the COVID-19 paramters (Table 1), we expect roughly 3\% of infectees to develop symptoms before their infectors during the exponential growth period; 
+this probability increases as epidemic progresses because backward incubation period of an infector increases.
+Biases in the observed serial intervals will necessarily bias the estimates of $\mathcal R$.
+Furthermore, serial intervals do not take into account asymptomatic transmission; 
+not explicitly accounting for asymptomatic transmission may also  bias the estimates of $\mathcal R$.
+
+Both generation and serial intervals are under-appreciated --- often treated as auxiliary variables for estimating $\mathcal R$ --- yet important quantities in describing an outbreak.
 
 
 \pagebreak
