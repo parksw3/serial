@@ -48,10 +48,10 @@ g1 <- ggplot(serdata0) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   # geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward serial interval (days)", expand=c(0, 0), limits=c(0, 7),
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7),
                      breaks=c(0.0, 1.5, 3.0, 4.5, 6.0)) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("A") +
+  ggtitle("A. Serial interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = c(0.35, 0.15),
@@ -85,18 +85,21 @@ incdet <- data.frame(
 incdet2 <- data.frame(
   tvec=rr$tvec,
   mf=rr$mbinc2,
-  type="Infectors"
+  type="Symptomatic infectors"
 )
 
-incdet_all <- bind_rows(incdet, incdet2)
+incdet_all <- bind_rows(incdet, incdet2) %>%
+  mutate(
+    type=factor(type, levels=c("Symptomatic infectors", "All symptomatic cases"))
+  )
 
 g2 <- ggplot(incdata) +
   geom_line(data=incdet_all, aes(tvec, mf, lty=type), lwd=1) +
   geom_point(aes(cc, mean), shape=2, size=2, col="#D55E00") +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward incubation period (days)", expand=c(0, 0), limits=c(0, 9.6)) +
-  scale_linetype_manual(values=c(3, 1)) +
-  ggtitle("B") +
+  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6)) +
+  scale_linetype_manual(values=c(1, 3)) +
+  ggtitle("B. Incubation period") +
   theme(
     panel.grid = element_blank(),
     legend.position = c(0.3, 0.15),
@@ -158,9 +161,9 @@ g3 <- ggplot(cordat) +
   geom_hline(yintercept = 0, lty=2) +
   geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2) +
   geom_line(aes(cc, cor)) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward correlation", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("C") +
+  scale_x_continuous("Symptom onset time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
+  ggtitle("C. Backward correlation") +
   theme(
     panel.grid = element_blank()
   )
@@ -169,14 +172,14 @@ g4 <- ggplot(cordat2) +
   geom_hline(yintercept = 0, lty=2) +
   geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2) +
   geom_line(aes(cc, cor)) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward correlation", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("D") +
+  scale_x_continuous("Infection time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
+  ggtitle("D. Forward correlation") +
   theme(
     panel.grid = element_blank()
   )
 
 tikz(file = "forward_tease.tex", width = 8, height = 6, standAlone = T)
-grid.arrange(g1, g2, g3, g4, nrow=2)
+grid.arrange(g1, g2, g4, g3, nrow=2)
 dev.off()
 tools::texi2dvi('forward_tease.tex', pdf = T, clean = T)

@@ -160,6 +160,7 @@ and $x_1$ represents the forward incubation period for the infectees who became 
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \begin{equation}
 f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
+\label{eq:forward}
 \end{equation}
 where $i$ is the incidence of infection, $h$ is the joint probability distribution of the forward incubation period and forward generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods:
 \begin{equation}
@@ -187,7 +188,10 @@ where $j$ represents the incidence of symptomatic infectors.
 Here, use a renewal equation to model the spread of disease in a population.
 Ignoring the dynamics of births and deaths, changes in the proportion of susceptible individuals $S(t)$ and incidence of infection $i(t)$ can be written as:
 \begin{equation}
-i(t) = \mathcal R_0 S(t) \int_0^\infty i(t-\tau) g(\tau) \mathrm{d}\tau,
+\begin{aligned}
+\frac{\mathrm{d}S}{\mathrm{d}t} &= - i(t)\\
+i(t) &= \mathcal R_0 S(t) \int_0^\infty i(t-\tau) g(\tau) \mathrm{d}\tau,
+\end{aligned}
 \label{eq:renewal}
 \end{equation}
 where $\mathcal R_0$ is the basic reproduction number, and $g(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a fully susceptible population; \cite{champredon2015intrinsic}).
@@ -278,7 +282,7 @@ T_i = -A_i + (G_i|A_i) + I_i.
 
 \section{Results}
 
-First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution and the forward serial-interval distribution during the exponential growth phase (\fref{rR}A).
+First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution $g(\tau)$ and the forward serial-interval distribution during the exponential growth phase $f_{\textrm{\tiny exp}}(\tau)$ (\fref{rR}A).
 Both distributions provide identical estimates of $\mathcal R$ regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution.
 On the other hand, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates $\mathcal R$;
 as $r$ increases, ${\mathcal R}_{\textrm{\tiny naive}}$ saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
@@ -306,6 +310,13 @@ therefore, we estimate the same $\mathcal R$ using both serial and generation in
 \includegraphics[width=\textwidth]{forward.pdf}
 \caption{
 \textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
+A. Cumulative incidence over time.
+B-D. Changes in the mean forward incubation period, generation interval, and serial interval.
+E-G. Changes in the mean backward incubation period, generation interval, and serial interval.
+Black lines represent the results of a deterministic simulation.
+Orange lines and points represent the results of a stochastic simulation.
+Forward incubation periods and intrinsic generation-intervals are assumed to be independent of each other: $h(x_0, \sigma) = k(x_0) g(\sigma)$.
+See Table 1 for parameter values.
 }
 \label{fig:epi}
 \end{figure}
@@ -320,22 +331,22 @@ Qualitative patterns in the changes in the mean backward delays is robust across
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{forward_tease.pdf}
 \caption{
-\textbf{Effects of dynamical correlations on serial intervals.}
+\textbf{Effects of dynamical correlations between incubation periods and the number of secondary cases on serial intervals.}
 }
 \label{fig:tease}
 \end{figure}
 
-We further tease apart factors that affect the forward serial interval distribution, including the cohort reproduction number $\mathcal R_c$, as mentioned earlier.
-\fref{tease}A compares the mean forward serial interval calculated from a stochastic model (orange points) with their deterministically calculated values;
-failing to account for changes in $\mathcal R_c$ overestimates the mean forward serial interval.
-A key distinction that needs to be made is that the forward serial-interval distributions depends on the backward incubation period of infectors (i.e., those who were able to successfully spread the disease to another person), rather than the incubation period of all symptomatic cases (\fref{tease}B).
+We further tease apart factors that affect the forward serial interval distribution.
+\fref{tease}A compares the mean forward serial interval calculated from a stochastic model (orange points) with their deterministically calculated values (black lines);
+failing to account for changes in $\mathcal R_c$ in \eref{forward} overestimates the mean forward serial interval.
+A key distinction that needs to be made is that the forward serial-interval distributions depends on the backward incubation period of symptomatic infectors (i.e., those who were able to successfully spread the disease to another person), rather than the incubation period of all symptomatic cases (\fref{tease}B).
 Therefore, the cohort size of infectors must be calculated as a product of the cohort reproduction number and incidence.
 
 Comparing the backward incubation period of infectors and all symptomatic cases provides an important, but counterintuitive, insight (\fref{tease}B).
-Given a cohort of symptomatic cases, individuals who were able to successfully spread the disease to others have longer incubation periods, on average;
-individuals with longer incubation period are infected earlier and have a higher chance of infecting others (i.e., higher $\mathcal R_c$) during the susceptible depletion phase.
-Therefore, the backward incubation period of an infector and the number of secondary cases caused by that infector are dynamically correlated (\fref{tease}C).
-This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}D).
+Given a cohort of symptomatic cases, individuals who were able to successfully spread the disease to others have longer incubation periods, on average,
+because individuals with longer incubation period are infected earlier and have a higher chance of infecting others (i.e., higher $\mathcal R_c$) during the susceptible depletion phase.
+Therefore, the backward incubation period of a symptomatic case and the number of secondary cases caused by that individual are dynamically correlated (\fref{tease}D).
+This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}C).
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{observedrR.pdf}
