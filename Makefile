@@ -10,6 +10,10 @@ vim_session:
 
 ######################################################################
 
+serial.pdf: serial.tex
+
+######################################################################
+
 ### Makestuff
 
 Sources += Makefile
@@ -32,6 +36,7 @@ localstuff:
 -include makestuff/os.mk
 
 ## -include makestuff/wrapR.mk
+-include makestuff/texdeps.mk
 
 -include makestuff/git.mk
 -include makestuff/visual.mk
