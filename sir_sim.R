@@ -1,5 +1,19 @@
 source("sir.R")
 
-sir_sim <- sir.full(size=40000, I0=10, seed=101, keep.intrinsic = TRUE)
+nsim <- 10
 
-save("sir_sim", file="sir_sim.rda")
+simlist <- vector('list', nsim)
+
+i <- 1
+
+while (i <= nsim) {
+  print(i)
+  sir_sim <- sir.full(size=40000, I0=10, seed=i, keep.intrinsic = TRUE)
+  
+  if (nrow(sir_sim$data) > 100) {
+    simlist[[i]] <- sir_sim
+    i <- i +1
+  }
+}
+
+save("simlist", file="sir_sim.rda")

@@ -328,14 +328,15 @@ A. Cumulative incidence over time.
 B-D. Changes in the mean forward incubation period, generation interval, and serial interval.
 E-G. Changes in the mean backward incubation period, generation interval, and serial interval.
 Black lines represent the results of a deterministic simulation.
-Orange lines and points represent the results of a stochastic simulation.
+Orange lines represent the results of 10 stochastic simulations.
+Orange points are calculated by averaging across 10 stochastic simulations.
 Forward incubation periods and intrinsic generation-intervals are assumed to be independent of each other: $h(x_0, \sigma) = k(x_0) g(\sigma)$.
 See Table 1 for parameter values.
 }
 \label{fig:epi}
 \end{figure}
 
-\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and the corresponding stochastic realization based on the Gillespie algorithm.
+\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and the corresponding stochastic realizations based on the Gillespie algorithm.
 The mean forward incubation period remains constant throughout an epidemic as expected (\fref{epi}B).
 The mean forward generation interval contracts as the epidemic progresses because an infected individual is less likely to infect another person as the proportion of susceptible individuals decreases (\fref{epi}C; \cite{champredon2015intrinsic}).
 In contrast, the mean serial interval depends on previous incidence and therefore decreases over time (\fref{epi}D):

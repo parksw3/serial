@@ -34,11 +34,21 @@ detdata <- data.frame(
   ci=rr$cI
 )
 
-g1 <- ggplot(sir_sim$data) +
+sir_data <- lapply(simlist, "[[", "data") %>%
+  bind_rows(.id="sim")
+
+sir_data2 <- sir_data %>%
+  mutate(
+    time=ceiling(time*5)/5
+  ) %>%
+  group_by(sim, time) %>%
+  filter(infected==max(infected))
+
+g1 <- ggplot(sir_data2) +
+  geom_line(aes(time, infected, col="Stochastic", group=sim)) +
   geom_line(data=detdata, aes(tvec, ci, col="Deterministic"), lwd=1) +
-  geom_line(aes(time, infected, col="Stochastic"), lwd=1) +
   scale_x_continuous("Time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Cumulative incidence", expand=c(0, 0), limits=c(10, 49999)) +
+  scale_y_log10("Cumulative incidence", expand=c(0, 0), limits=c(10, 49999)) +
   scale_color_manual(values=c(1, "#D55E00")) +
   ggtitle("A") +
   theme(
@@ -48,6 +58,18 @@ g1 <- ggplot(sir_sim$data) +
   )
 
 tcut <- 0:40*2
+
+sir_sim <- lapply(simlist, function(x) {
+  data.frame(
+    t_infected=x$t_infected,
+    t_symptomatic=x$t_symptomatic,
+    infected_by=x$infected_by
+  )
+}) %>%
+  bind_rows(.id="sim") %>%
+  mutate(
+    infected_by=infected_by+(as.numeric(sim)-1)*40000
+  )
 
 incdata0 <- data.frame(
   cohort=sir_sim$t_infected,
