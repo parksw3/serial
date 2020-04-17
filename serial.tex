@@ -55,7 +55,7 @@
 		Unraveling the paradox between generation and serial intervals: applications to COVID-19 pandemic
 	}
 }
-\newline\\
+\newline
 Sang Woo Park
 \end{flushleft}
 
@@ -63,25 +63,27 @@ Sang Woo Park
 
 \pagebreak
 
-%The key distributions for understanding the spread of COVID-19 include:
-%\begin{enumerate}
-%  \item Incubation period distribution: time between infection and symptom onset \citep{backer2020incubation, %li2020early, linton2020incubation, tian2020characteristics}
-%  \item Serial interval distribution: time between symptom onset of an infector and an infectee \citep{du2020s%erial, nishiura2020serial, zhao2020estimating}
-%  \item Generation interval distribution: time between infection of an infector and an infectee \citep{ganyani%2020estimating}
-%\end{enumerate}
-
 \section{Introduction}
 
 Since the emergence of the novel coronavirus disease (COVID-19), a significant amount of research has focused on estimating its reproduction number $\mathcal R$ \citep{majumder2020early}.
 The reproduction number is defined as the average number of secondary cases caused by a primary case;
 the corresponding reproduction number in a fully susceptible population --- referred to as the basic reproduction number $\mathcal R_0$ --- allows us to predict the extent to which a disease will spread in the population and the amount of intervention to prevent an outbreak \citep{anderson1991infectious}.
-Since the reproduction number cannot be measured directly, it is often estimated from the observed exponential growth rate using generation- and serial-interval distributions.
+Since reproduction numbers cannot be measured directly, particularly during the outset of an outbreak, it is often estimated from the observed exponential growth rate using generation- and serial-interval distributions (e.g., \cite{du2020serial, jung2020real, li2020early, zhao2020preliminary}).
 
 The generation interval is defined as the time between when an individual (infector) is infected and when an individual infects another person (infectee);
+<<<<<<< HEAD
 the generation-interval distributions plays a key role in shaping the relationship between the exponential growth rate $r$ and the reproduction number $\mathcal R$.
 Similarly, the serial interval is defined as the time between when an infector and an infectee become \emph{symptomatic}.
 While serial intervals are similar to generation intervals, previous studies noted that using serial intervals can give different estimates of $\mathcal R$ and have noted that in many contexts serial intervals are expected to have larger variances than generation intervals (but the same mean).
 Even these distributions were clearly distinguished over a decade ago \citep{svensson2007note}, 
+=======
+the generation-interval distributions plays a key role in shaping the relationship between the exponential growth rate $r$ and the reproduction number $\mathcal R$ \citep{wallinga2007generation}.
+On the other hand, the serial interval is defined as the time between when an infector and an infectee become symptomatic \citep{svensson2007note}.
+While generation and serial intervals are conceptually similar,
+previously studies have often alluded to differences in their variances, despite having seemingly identical expected values \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence};
+some suggested that using serial intervals can give different estimates of $\mathcal R$ \citep{britton2019estimation}.
+Even though these distinctions were first made over a decade ago \citep{svensson2007note}, 
+>>>>>>> 7aeb8d1c6801e19b0d6643849abadaf2ca4817f6
 the need for a better conceptual and theoretical framework for understanding their differences is becoming clearer as the COVID-19 pandemic unfolds:
 Researchers continue to rely on both generation and serial intervals to estimate $\mathcal R$ for COVID-19 without making a clear distinction.
 
@@ -92,9 +94,17 @@ Likewise, we should be able to describe the renewal process of symptomatic cases
 Therefore, both generation- and serial-interval distributions should give us identical estimates of  $\mathcal R$ based the observed epidemic growth rate $r$.
 In contexts where the distributions are expected to be different, current theory has no explanation for how they might link $r$ to \Rx\ in the same way.
 
+<<<<<<< HEAD
 Here, we provide an answer to this paradox, by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial (but not generation) interval is affected by the rate of growth $r$ during the exponential-growth phase.
 We develop a new framework for understanding intervals and show that the forward serial-interval distribution gives the correct value of $\mathcal R$.
 We also show that \jd{Come back to this. Not just over time, right?} However, failing to account for changes in the observed serial-interval distributions over time can severely bias the estimate of $\mathcal R$.
+=======
+Here, we provide an answer to the decade-old paradox between generation and serial intervals.
+We present a novel framework for understanding serial intervals and show that the serial-interval distribution must be defined with reference to disease incidence;
+previous frameworks implicitly assume that incidence remains constant.
+We are show that both serial- and generation-interval distributions can give identical estimates of $\mathcal R$ based on the exponential growth phase of an epidemic if they are properly defined.
+However, failing to account for changes in the observed serial-interval distributions over time can severely bias the estimate of $\mathcal R$.
+>>>>>>> 7aeb8d1c6801e19b0d6643849abadaf2ca4817f6
 We apply our framework to serial intervals of COVID-19 and lay out several principles to consider in using information about serial intervals and other epidemiological time delays in the analysis of the ongoing pandemic.
 
 \section{Methods}
@@ -136,13 +146,21 @@ Serial intervals $\tau$ are typically written as:
 \tau = - x_0 + \sigma + x_1
 \end{equation}
 where $x_0$ and $x_1$ represent the realized time from infection to symptom onset of an infector and an infectee, respectively, and $\sigma$ represents the realized generation interval.
-Previous studies have often assumed that $x_0$ and $x_1$ have the same means and concluded that the serial and generation intervals have the same mean;
-however, these results implicitly assume that incidence stays constant.
+Previous studies have often assumed that $x_0$ and $x_1$ follow the same distributions and concluded that the serial and generation intervals have the same mean \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
+however, they implicitly assume that incidence stays constant.
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{serial_guide.pdf}
 \caption{
-\textbf{Forward and backward serial intervals.}
+\textbf{Illustration of forward and backward serial intervals.}
+A. The forward serial interval for a primary cohort $\ell$ (i.e., an infector who became symptomatic at time $\ell$).
+In this case, $x_0$ represents the backward incubation period of the infector;
+$\sigma$ represents the forward generation interval;
+and $x_1$ represents the forward incubation period of the infectee.
+B. The backward serial interval for a secondary cohort $\ell$ (i.e., an infectee who became symptomatic at time $\ell$).
+In this case, $x_0$ represents the forward incubation period of the infector;
+$\sigma$ represents the backward generation interval;
+and $x_1$ represents the backward incubation period of the infectee.
 }
 \label{fig:diagram}
 \end{figure}
@@ -156,13 +174,14 @@ and $x_1$ represents the forward incubation period for the infectees who became 
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \begin{equation}
 f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
+\label{eq:forward}
 \end{equation}
 where $i$ is the incidence of infection, $h$ is the joint probability distribution of the forward incubation period and forward generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods:
 \begin{equation}
 k(x_0) = \int_0^\infty h_\ell(x_0, \sigma) \mathrm{d}\sigma.
 \end{equation}
 Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is defined as the average secondary number of cases caused by an individual infected at time $\ell - x_0$.
-We have to multiply the joint forward distribution $h$ by $\mathcal R_c (t) i(t)$, which represents total infectiousness of individuals infected at time $t$, rather than incidence $i(t)$, because we are interested in the backward incubation period $x_0$ and the forward generation interval $\sigma$ of infectors, rather than all infected individuals.
+We have to multiply the joint forward distribution $h$ by $\mathcal R_c (t) i(t)$, which represents total infectiousness of individuals infected at time $t$, rather than incidence $i(t)$, because we are interested in the backward incubation period $x_0$ and the forward generation interval $\sigma$ of infectors (i.e., those who transmitted successfully to at least one individual), rather than all infected individuals.
 We revisit this idea in the Results section.
 
 Likewise, we can define the backward serial interval distribution for a secondary cohort $\ell$ (\fref{diagram}B).
@@ -173,19 +192,23 @@ Therefore, the backward serial interval distribution of a secondary cohort $\ell
 \begin{equation}
 \begin{aligned}
 b_\ell(\tau) &\propto j(\ell) f_{\ell}(\tau)\\
-&\propto \int_0^\infty i(\ell-x_0) k(x_0) f_{\ell}(\tau) \mathrm{d} x_0
+&\propto \int_0^\infty \mathcal R_c (\ell - x_0) i(\ell-x_0) k(x_0) f_{\ell}(\tau) \mathrm{d} x_0
 \end{aligned}
 \end{equation}
-where $j$ represents the incidence of symptomatic cases.
+where $j$ represents the incidence of symptomatic infectors.
 
 \subsection{Epidemic model}
 
-Here, use a renewal equation to model the spread of disease in a population:
+Here, use a renewal equation to model the spread of disease in a population.
+Ignoring the dynamics of births and deaths, changes in the proportion of susceptible individuals $S(t)$ and incidence of infection $i(t)$ can be written as:
 \begin{equation}
-i(t) = \mathcal R_0 S(t) \int_0^\infty i(t-\tau) g(\tau) \mathrm{d}\tau,
+\begin{aligned}
+\frac{\mathrm{d}S}{\mathrm{d}t} &= - i(t)\\
+i(t) &= \mathcal R_0 S(t) \int_0^\infty i(t-\tau) g(\tau) \mathrm{d}\tau,
+\end{aligned}
 \label{eq:renewal}
 \end{equation}
-where $\mathcal R_0$ is the basic reproduction number (i.e., the average number of secondary cases caused by a primary case  in a fully susceptible population), $g(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a fully susceptible population), $S(t)$ is the proportion of susceptible individuals.
+where $\mathcal R_0$ is the basic reproduction number, and $g(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a fully susceptible population; \cite{champredon2015intrinsic}).
 Then, the forward generation-interval for a primary cohort $\ell$ follows \citep{champredon2015intrinsic}:
 \begin{equation}
 g_\ell (\tau) \propto g(\tau) S(\ell + \tau),
@@ -262,7 +285,7 @@ We then calculate the reproduction number $\mathcal R$ using the empirical estim
 \begin{equation}
 \mathcal R = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r S_i)}.
 \end{equation}
-We compare this estimate with a naive estimate of ${\mathcal R}_{\textrm{\tiny naive}}$ that assumes that the backward and the forward incubation periods are identically distributed:
+We compare this with an estimate of $\mathcal R$ based on naive serial-interval distribution that assumes that the backward and the forward incubation periods are identically distributed \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
 \begin{equation}
 {\mathcal R}_{\textrm{\tiny naive}} = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r T_i)},
 \end{equation}
@@ -273,7 +296,7 @@ T_i = -A_i + (G_i|A_i) + I_i.
 
 \section{Results}
 
-First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution and the forward serial-interval distribution during the exponential growth phase (\fref{rR}A).
+First, we compare the estimates of the reproduction number $\mathcal R$ based on the intrinsic generation-interval distribution $g(\tau)$ and the forward serial-interval distribution during the exponential growth phase $f_{\textrm{\tiny exp}}(\tau)$ (\fref{rR}A).
 Both distributions provide identical estimates of $\mathcal R$ regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution.
 On the other hand, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates $\mathcal R$;
 as $r$ increases, ${\mathcal R}_{\textrm{\tiny naive}}$ saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
@@ -282,7 +305,11 @@ While the forward serial intervals during the exponential growth phase can be al
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
-\textbf{Estimates of the reproduction number from the exponential growth rate.}
+\textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
+A. The forward serial-interval distribution during the exponential growth phase give a correct link between the exponential growth rate $r$ and the reproduction number $\mathcal R$.
+B. The serial-interval distributions that assume that the backward incubation period of an infector and the forward incubation period of an infectee are identically distributed give an incorrect link between $r$ and $\mathcal R$.
+C. The mean forward serial interval during the exponential growth phase depends on $r$.
+D. The squared coefficient of variation of forward serial intervals during the exponential growth phase depends on $r$.
 }
 \label{fig:rR}
 \end{figure}
@@ -297,6 +324,13 @@ therefore, we estimate the same $\mathcal R$ using both serial and generation in
 \includegraphics[width=\textwidth]{forward.pdf}
 \caption{
 \textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
+A. Cumulative incidence over time.
+B-D. Changes in the mean forward incubation period, generation interval, and serial interval.
+E-G. Changes in the mean backward incubation period, generation interval, and serial interval.
+Black lines represent the results of a deterministic simulation.
+Orange lines and points represent the results of a stochastic simulation.
+Forward incubation periods and intrinsic generation-intervals are assumed to be independent of each other: $h(x_0, \sigma) = k(x_0) g(\sigma)$.
+See Table 1 for parameter values.
 }
 \label{fig:epi}
 \end{figure}
@@ -311,22 +345,26 @@ Qualitative patterns in the changes in the mean backward delays is robust across
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{forward_tease.pdf}
 \caption{
-\textbf{Effects of dynamical correlations on serial intervals.}
+\textbf{Dynamical correlations between incubation periods and the number of secondary cases.}
+A. The mean forward serial interval depends on changes in the cohort reproduction number.
+B. The mean backward incubation period of infectors is higher than the mean backward incubation period of all symptomatic cases.
+C. Correlation between the number of secondary cases and the incubation period for individuals who got infected within the same time preiod.
+D. Correlation between the number of secondary cases and the incubation period for individuals who developed symptoms within the same time preiod.
 }
 \label{fig:tease}
 \end{figure}
 
-We further tease apart factors that affect the forward serial interval distribution, including the cohort reproduction number $\mathcal R_c$, as mentioned earlier.
-\fref{tease}A compares the mean forward serial interval calculated from a stochastic model (orange points) with their deterministically calculated values;
-failing to account for changes in $\mathcal R_c$ overestimates the mean forward serial interval.
-A key distinction that needs to be made is that the forward serial-interval distributions depends on the backward incubation period of infectors (i.e., those who were able to successfully spread the disease to another person), rather than the incubation period of all symptomatic cases (\fref{tease}B).
+We further tease apart factors that affect the forward serial interval distribution.
+\fref{tease}A compares the mean forward serial interval calculated from a stochastic model (orange points) with their deterministically calculated values (black lines);
+failing to account for changes in $\mathcal R_c$ in \eref{forward} overestimates the mean forward serial interval.
+A key distinction that needs to be made is that the forward serial-interval distributions depends on the backward incubation period of symptomatic infectors (i.e., those who were able to successfully spread the disease to another person), rather than the incubation period of all symptomatic cases (\fref{tease}B).
 Therefore, the cohort size of infectors must be calculated as a product of the cohort reproduction number and incidence.
 
 Comparing the backward incubation period of infectors and all symptomatic cases provides an important, but counterintuitive, insight (\fref{tease}B).
-Given a cohort of symptomatic cases, individuals who were able to successfully spread the disease to others have longer incubation periods, on average;
-individuals with longer incubation period are infected earlier and have a higher chance of infecting others (i.e., higher $\mathcal R_c$) during the susceptible depletion phase.
-Therefore, the backward incubation period of an infector and the number of secondary cases caused by that infector are dynamically correlated (\fref{tease}C).
-This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}D).
+Given a cohort of symptomatic cases, individuals who were able to successfully spread the disease to others have longer incubation periods, on average,
+because individuals with longer incubation period are infected earlier and have a higher chance of infecting others (i.e., higher $\mathcal R_c$) during the susceptible depletion phase.
+Therefore, the backward incubation period of a symptomatic case and the number of secondary cases caused by that individual are dynamically correlated (\fref{tease}D).
+This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}C).
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{observedrR.pdf}
@@ -404,8 +442,9 @@ Biases in the observed serial intervals will necessarily bias the estimates of $
 Furthermore, serial intervals do not take into account asymptomatic transmission; 
 not explicitly accounting for asymptomatic transmission may also  bias the estimates of $\mathcal R$.
 
-Both generation and serial intervals are under-appreciated --- often treated as auxiliary variables for estimating $\mathcal R$ --- yet important quantities in describing an outbreak.
-
+Both generation and serial intervals are under-appreciated --- often treated as auxiliary variables for estimating $\mathcal R$ --- yet important quantities in characterizing an epidemic.
+Here, we provided a theoretical basis for understanding serial intervals and show that naively using the observed serial intervals may lead to biased conclusions in studying the COVID-19 pandemic.
+Concluding sentence.
 
 \pagebreak
 

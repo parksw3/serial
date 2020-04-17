@@ -65,9 +65,9 @@ g2 <- ggplot(incdata0) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=incdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward incubation period (days)", expand=c(0, 0), limits=c(0, 7)) +
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7)) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("B") +
+  ggtitle("B. Incubation period") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
@@ -89,9 +89,9 @@ g3 <- ggplot(gendata0) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward generation interval (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2) +
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("C") +
+  ggtitle("C. Generation interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
@@ -113,9 +113,9 @@ g4 <- ggplot(serdata0) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward serial interval (days)", expand=c(0, 0), limits=c(0, 7)) +
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7)) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("D") +
+  ggtitle("D. Serial interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
@@ -137,10 +137,10 @@ g5 <- ggplot(incdata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=incdet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward incubation period (days)", expand=c(0, 0), limits=c(0, 9.6),
+  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6),
                      breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("E") +
+  ggtitle("E. Incubation period") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
@@ -162,9 +162,9 @@ g6 <- ggplot(gendata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward generation interval (days)", expand=c(0, 0), limits=c(0, 9.6), breaks=0:4*2) +
+  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("F") +
+  ggtitle("F. Generation interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
@@ -186,10 +186,10 @@ g7 <- ggplot(serdata1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Backward serial interval (days)", expand=c(0, 0), limits=c(0, 9.6),
+  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6),
                      breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
-  ggtitle("G") +
+  ggtitle("G. Serial interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
