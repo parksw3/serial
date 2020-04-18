@@ -11,6 +11,18 @@ rr <- renewal_det()
 
 tcut <- 0:40*2
 
+sir_sim <- lapply(simlist, function(x) {
+  data.frame(
+    t_infected=x$t_infected,
+    t_symptomatic=x$t_symptomatic,
+    infected_by=x$infected_by
+  )
+}) %>%
+  bind_rows(.id="sim") %>%
+  mutate(
+    infected_by=infected_by+(as.numeric(sim)-1)*40000
+  )
+
 serdata0 <- data.frame(
   cohort=sir_sim$t_symptomatic[sir_sim$infected_by],
   tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by]
@@ -113,14 +125,15 @@ tmp <- data.frame(
   offspring=0
 )
 
-tmp$offspring[match(tt$Var1, tmp$N)] <- tt$Freq
+tmp$offspring[match(tt$Var1[-153138], tmp$N)] <- tt$Freq[-153138]
+tmp$offspring[tmp$N==3e5] <- tt$Freq[153138]
 
 cordat <- data.frame(
   cohort=sir_sim$t_symptomatic,
   tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
   offspring=tmp$offspring
 ) %>%
-  filter(!is.na(cohort), !is.na(tdiff), cohort > 4, cohort <= 80) %>%
+  filter(!is.na(cohort), !is.na(tdiff), cohort > 0, cohort <= 80) %>%
   mutate(
     cc=cut(cohort, tcut)
   ) %>%
@@ -141,7 +154,7 @@ cordat2 <- data.frame(
   tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
   offspring=tmp$offspring
 ) %>%
-  filter(!is.na(cohort), !is.na(tdiff), cohort > 0, cohort <= 78) %>%
+  filter(!is.na(cohort), !is.na(tdiff), cohort > 2, cohort <= 78) %>%
   mutate(
     cc=cut(cohort, tcut)
   ) %>%
@@ -159,22 +172,22 @@ cordat2 <- data.frame(
 
 g3 <- ggplot(cordat) +
   geom_hline(yintercept = 0, lty=2) +
-  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2) +
-  geom_line(aes(cc, cor)) +
+  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2, fill="#D55E00") +
+  geom_line(aes(cc, cor), col="#D55E00") +
   scale_x_continuous("Symptom onset time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("C. Backward correlation") +
+  ggtitle("D. Backward correlation") +
   theme(
     panel.grid = element_blank()
   )
 
 g4 <- ggplot(cordat2) +
   geom_hline(yintercept = 0, lty=2) +
-  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2) +
-  geom_line(aes(cc, cor)) +
+  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2, fill="#D55E00") +
+  geom_line(aes(cc, cor), col="#D55E00") +
   scale_x_continuous("Infection time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("D. Forward correlation") +
+  ggtitle("C. Forward correlation") +
   theme(
     panel.grid = element_blank()
   )
