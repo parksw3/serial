@@ -305,8 +305,9 @@ In this case, the forward serial intervals during the exponential growth phase h
 The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
 therefore, we estimate the same $\mathcal R$ using both serial and generation intervals.
 
-\begin{figure}[!th]
-\includegraphics[width=\textwidth]{forward.pdf}
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{forward.pdf}
 \caption{
 \textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
 A. Cumulative incidence over time.
@@ -318,6 +319,7 @@ cumulative incidence from the stochastic simulations in panel A are shown withou
 Forward incubation periods and intrinsic generation-intervals are assumed to be independent of each other: $h(x_0, \sigma) = k(x_0) g(\sigma)$.
 See Table 1 for parameter values.
 }
+\end{center}
 \label{fig:epi}
 \end{figure}
 
@@ -355,10 +357,13 @@ because individuals with longer incubation period are infected earlier and have 
 Therefore, the backward incubation period of a symptomatic case and the number of secondary cases caused by that individual are dynamically correlated (\fref{tease}D).
 This correlation disappears when we take the forward perspective, demonstrating the importance of perspective-dependency in studying epidemiological delay distributions (\fref{tease}C).
 
-\begin{figure}[!th]
+\begin{figure}[!ht]
 \includegraphics[width=\textwidth]{observedrR.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the observed serial intervals.}
+A. Changes in the observed and cohort-averaged mean serial interval over time.
+B. Changes in the estimate of $\mathcal R$ based on the observed and cohort-averaged mean serial interval over time.
+Each line represents an independent stochastic realization.
 }
 \label{fig:obsrR}
 \end{figure}
@@ -366,16 +371,15 @@ This correlation disappears when we take the forward perspective, demonstrating 
 Now, we turn to practical issues.
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
 \fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of $\mathcal R$.
-Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate $\mathcal R$ by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
-As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean forward serial-interval distribution during the exponential growth phase, which provides the correct linke between $r$ and $\mathcal R$.
+Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval (\fref{obsrR}A) and therefore $\mathcal R_0$ (\fref{obsrR}) by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
+As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean of the initial forward serial-interval distribution, which provides the correct linke between $r$ and $\mathcal R$.
 
-We provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ retrospctively.
-Once a set of serial intervals has been observed, we can group observed serial intervals by their primary cohort times.
-Then, we can compare how estimates of $\mathcal R$ change as we include more cohorts into the analysis (see `cohort-averaged' in \fref{obsrR}).
-During the exponential growth phase, the estimates of $\mathcal R$ are consistent with the true value;
-adding more data allows us to make more precise inference about $\mathcal R$ during this period.
-However, the cohort-averaged estimates of $\mathcal R$ decreases rapidly soon after the exponential growth period.
-Confidence intervals associated with the cohort-averaged estimates of $\mathcal R$ becomes narrower and do not overlap with earlier estimates.
+We provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ \emph{retrospctively}.
+Once serial intervals have been observed after the epidemic has been sufficiently progressed, we can group observed serial intervals by their primary cohort times.
+Then, we can compare how estimates of the mean serial interval and $\mathcal R$ change as we include more cohorts into the analysis (see `cohort-averaged' in \fref{obsrR}).
+During the exponential growth phase, the estimates of the mean serial interval and $\mathcal R$ are consistent with the target value;
+adding more data allows us to make more precise inference during this period.
+However, the cohort-averaged estimates decreases rapidly soon after the exponential growth period.
 This approach allows us to detect how changes in the forward serial intervals bias the estimates of $\mathcal R$.
 
 \begin{figure}[!th]

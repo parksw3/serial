@@ -6,8 +6,6 @@ library(tikzDevice)
 source("renewal_det.R")
 source("cpalette.R")
 
-nboot <- 200
-
 load("sir_sim.rda")
 
 rr <- renewal_det()
@@ -15,33 +13,80 @@ r <- rr$r
 
 tcut <- seq(10, 80, by=2)
 
+sir_sim <- lapply(simlist, function(x) {
+  data.frame(
+    t_infected=x$t_infected,
+    t_symptomatic=x$t_symptomatic,
+    infected_by=x$infected_by
+  )
+}) %>%
+  bind_rows(.id="sim") %>%
+  mutate(
+    infected_by=infected_by+(as.numeric(sim)-1)*40000
+  )
+
 serdata0 <- data_frame(
   cohort=sir_sim$t_symptomatic[sir_sim$infected_by],
   tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by],
-  tobs=pmax(cohort, cohort+tdiff)
+  tobs=pmax(cohort, cohort+tdiff),
+  sim=sir_sim$sim
 )
+
+ser_obs <- lapply(tcut, function(x) {
+  set.seed(101)
+  tmp <- serdata0 %>%
+    filter(tobs < x)
+  
+  tmp %>%
+    group_by(sim) %>%
+    summarize(
+      ser=mean(tdiff, na.rm=TRUE)
+    ) %>%
+    mutate(
+      t=x
+    )
+}) %>%
+  bind_rows %>%
+  mutate(
+    type="Observed"
+  )
 
 R0_obs <- lapply(tcut, function(x) {
   set.seed(101)
   tmp <- serdata0 %>%
     filter(tobs < x)
   
-  R0samp <- replicate(nboot, {
-    ss <- tmp$tdiff
-    ss <- sample(ss, replace=TRUE)
-    1/mean(exp(-r*ss), na.rm=TRUE)
-  })
-  
-  data.frame(
-    t=x,
-    R0=1/mean(exp(-r*tmp$tdiff), na.rm=TRUE),
-    lwr=quantile(R0samp, 0.025),
-    upr=quantile(R0samp, 0.975)
-  )
+  tmp %>%
+    group_by(sim) %>%
+    summarize(
+      R0=1/mean(exp(-r*tdiff), na.rm=TRUE)
+    ) %>%
+    mutate(
+      t=x
+    )
 }) %>%
   bind_rows %>%
   mutate(
     type="Observed"
+  )
+
+ser_cohort <- lapply(tcut, function(x) {
+  set.seed(101)
+  tmp <- serdata0 %>%
+    filter(cohort < x)
+  
+  tmp %>%
+    group_by(sim) %>%
+    summarize(
+      ser=mean(tdiff, na.rm=TRUE)
+    ) %>%
+    mutate(
+      t=x
+    )
+}) %>%
+  bind_rows %>%
+  mutate(
+    type="Cohort-averaged"
   )
 
 R0_cohort <- lapply(tcut, function(x) {
@@ -49,68 +94,59 @@ R0_cohort <- lapply(tcut, function(x) {
   tmp <- serdata0 %>%
     filter(cohort < x)
   
-  R0samp <- replicate(nboot, {
-    ss <- tmp$tdiff
-    ss <- sample(ss, replace=TRUE)
-    1/mean(exp(-r*ss), na.rm=TRUE)
-  })
-  
-  data.frame(
-    t=x,
-    R0=1/mean(exp(-r*tmp$tdiff), na.rm=TRUE),
-    lwr=quantile(R0samp, 0.025),
-    upr=quantile(R0samp, 0.975)
-  )
+  tmp %>%
+    group_by(sim) %>%
+    summarize(
+      R0=1/mean(exp(-r*tdiff), na.rm=TRUE)
+    ) %>%
+    mutate(
+      t=x
+    )
 }) %>%
   bind_rows  %>%
   mutate(
     type="Cohort-averaged"
   )
 
-R0all <- bind_rows(R0_obs, R0_cohort)
+ser_all <- bind_rows(ser_obs, ser_cohort) %>%
+  mutate(
+    type=factor(type, level=c("Observed", "Cohort-averaged"))
+  )
 
-g1 <- ggplot(R0all) +
-  geom_ribbon(aes(t, ymin=lwr, ymax=upr, fill=type, lty=type, col=type), alpha=0.5) +
-  geom_line(aes(t, R0, col=type, lty=type)) +
-  geom_hline(yintercept=rr$R0, lty=2) +
+g1 <- ggplot(ser_all) +
+  geom_line(aes(t, ser, col=type, group=interaction(sim, type), lty=type)) +
+  geom_hline(yintercept=rr$mfser2[1], lty=2) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", expand=c(0, 0), limits=c(1.3, 2.6)) +
+  scale_y_continuous("Mean serial interval (days)", expand=c(0, 0), limits=c(2, 7.2)) +
   scale_color_manual(values=tail(cpalette, 2)) +
   scale_fill_manual(values=tail(cpalette, 2)) +
+  ggtitle("A") +
   theme(
     panel.grid = element_blank(),
-    legend.position = c(0.85, 0.15),
+    legend.position = c(0.75, 0.2),
     legend.title = element_blank()
   )
 
-gen_obs <- lapply(tcut, function(x) {
-  set.seed(101)
-  tmp <- serdata0 %>%
-    filter(tobs < x)
-  
-  gensamp <- replicate(nboot, {
-    ss <- tmp$tdiff
-    ss <- sample(ss, replace=TRUE)
-    mean(ss, na.rm=TRUE)
-  })
-  
-  data.frame(
-    t=x,
-    est=mean(tmp$tdiff, na.rm=TRUE),
-    lwr=quantile(gensamp, 0.025),
-    upr=quantile(gensamp, 0.975)
-  )
-}) %>%
-  bind_rows %>%
+R0all <- bind_rows(R0_obs, R0_cohort) %>%
   mutate(
-    type="Observed"
+    type=factor(type, level=c("Observed", "Cohort-averaged"))
   )
 
-plot(gen_obs$est)
-lines(gen_obs$lwr)
-lines(gen_obs$upr)
+g2 <- ggplot(R0all) +
+  geom_line(aes(t, R0, col=type, group=interaction(sim, type), lty=type)) +
+  geom_hline(yintercept=rr$R0, lty=2) +
+  scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
+  scale_y_continuous("Reproduction number $\\mathcal R$", expand=c(0, 0), limits=c(1.3, 3.3)) +
+  scale_color_manual(values=tail(cpalette, 2)) +
+  scale_fill_manual(values=tail(cpalette, 2)) +
+  ggtitle("B") +
+  theme(
+    panel.grid = element_blank(),
+    legend.position = "none",
+    legend.title = element_blank()
+  )
 
-tikz(file = "observedrR.tex", width = 6, height = 4, standAlone = T)
-plot(g1)
+tikz(file = "observedrR.tex", width = 8, height = 3, standAlone = T)
+grid.arrange(g1, g2, nrow=1)
 dev.off()
 tools::texi2dvi('observedrR.tex', pdf = T, clean = T)
