@@ -168,6 +168,7 @@ f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i
 \label{eq:forward}
 \end{equation}
 where $i$ is the incidence of infection, $h$ is the joint probability distribution of the forward incubation period and forward generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods:
+\jd{So obviously I was wrong about $k$; I get it now. I feel like the way to make this clear is similar to what DC and I did. First calculate the density of \emph{events}: this is the same numerator for the forward and backward distributions, the number of intervals that start at the beginning and end at the end; it's only the denominators that differ. I'm struggling again with \Rc: what matters is the number of susceptibles when I actually infected the infectee; using \Rc\ seems like we're averaging over something we shouldn't be averaging over.}
 \begin{equation}
 k(x_0) = \int_0^\infty h_\ell(x_0, \sigma) \mathrm{d}\sigma.
 \end{equation}
@@ -175,6 +176,14 @@ Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is
 We have to multiply the joint forward distribution $h$ by $\mathcal R_c (t) i(t)$, which represents total infectiousness of individuals infected at time $t$, rather than incidence $i(t)$, because we are interested in the backward incubation period $x_0$ and the forward generation interval $\sigma$ of infectors (i.e., those who transmitted successfully to at least one individual), rather than all infected individuals.
 We revisit this idea in the Results section.
 
+\jd{An alternative approach that I'm pretty sure produces a slightly different answer. I'm going to write it in a mixed notation:}
+The number of SIs that go from $\delta_1$ to $\delta_2$ is an integral over all of the possibilities for the infection times.
+\begin{equation}
+	N(\delta_1, \delta_2) = \int \int d\alpha_1 d\alpha_2
+	i(\alpha_1) h(\delta_1-\alpha_1, \alpha_2-\alpha_1)
+	S(\alpha_2)\theta(\delta_2-\alpha_2)
+\end{equation}
+To get the forward SI, we substitute $\delta_2 = \delta_1+\tau$ and normalize. And so on.
 Likewise, we can define the backward serial interval distribution for a secondary cohort $\ell$ (\fref{diagram}B).
 Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
 then, we have to go forward in time by asking when the infector became symptomatic.
