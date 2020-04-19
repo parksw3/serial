@@ -221,7 +221,7 @@ Finally, the case reproduction for this model is defined as follows:
 
 \subsection{Linking $r$ and $\mathcal R$}
 
-During the initial phase of an epidemic, the proprotion susceptible remains constant ($S(t) = S(0)$) and incidence of infection grows exponentially: $i(t)=i_0\exp(rt)$.
+During the initial phase of an epidemic, the proportion susceptible remains constant ($S(t) = S(0)$) and incidence of infection grows exponentially: $i(t)=i_0\exp(rt)$.
 Then, we can estimate the reproduction number from the exponential growth rate $r$ via the Euler-Lotka equation:
 \begin{equation}
 \frac{1}{\mathcal R} = \int_0^\infty \exp(-r\tau) g(\tau) \mathrm{d} \tau.
@@ -266,7 +266,7 @@ The joint probability distribution is modeled using a multivariate log-normal di
 
 We use a simulation-based approach to compare the estimates of $\mathcal R$ based on the serial- and generation-interval distributions. 
 To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and correlation $\rho$;
-the multivariate log-normal distribution is parameterized based on pameter estimates for COVID-19 (Table 1).
+the multivariate log-normal distribution is parameterized based on parameter estimates for COVID-19 (Table 1).
 We construct forward serial intervals during the exponential growth period as follows:
 \begin{equation}
 S_i = -B_i + (G_i|B_i) + I_i,
@@ -306,7 +306,7 @@ D. The squared coefficient of variation of forward serial intervals during the e
 \label{fig:rR}
 \end{figure}
 
-Comapring the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different distributoins are able to give identical estimates of $\mathcal R$.
+Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different distributions are able to give identical estimates of $\mathcal R$.
 In general, generation-interval distributions with higher means and less variability are expected to give higher $\mathcal R$ for a given $r$.
 In this case, the initial forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
 The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
@@ -335,12 +335,13 @@ The mean forward incubation period remains constant throughout an epidemic as as
 The mean forward generation interval decreases slightly as the epidemic progresses because an infected individual is less likely to infect another person as the proportion of susceptible individuals decreases (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
-Earlier, we demonstrated that the forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation periods of infectors, (ii) the forward generation intervals, and (iii) the forward incubation periods of infectees.
+Earlier, we showed that the forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation periods of infectors, (ii) the forward generation intervals, and (iii) the forward incubation periods of infectees.
 Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by the changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D).
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
 
 Qualitative patterns in the changes in the mean backward delays is robust across all delay distributions because they are predominantly driven by the changes in incidence (\fref{epi}D--F).
-During the exponential growth phase, the backward delays are short: individuals are 
+When incidence increases exponentially, individuals are more likely to have been infected more recently and therefore, we are more likely to observe shorter intervals.
+Similarly, when incidence decreases, we are more likely to observe longer intervals.
 
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{observedrR.pdf}
@@ -357,9 +358,9 @@ Now, we turn to practical issues.
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
 \fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of $\mathcal R$.
 Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval (\fref{obsrR}A) and therefore $\mathcal R_0$ (\fref{obsrR}) by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
-As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean of the initial forward serial-interval distribution, which provides the correct linke between $r$ and $\mathcal R$.
+As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean of the initial forward serial-interval distribution, which provides the correct link between $r$ and $\mathcal R$.
 
-We provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ \emph{retrospctively}.
+We provide a simple, heuristic way of assessing potential biases in the estimate of $\mathcal R$ \emph{retrospectively}.
 Once serial intervals have been observed after the epidemic has been sufficiently progressed, we can group observed serial intervals by their primary cohort times.
 Then, we can compare how estimates of the mean serial interval and $\mathcal R$ change as we include more cohorts into the analysis (see `cohort-averaged' in \fref{obsrR}).
 During the exponential growth phase, the estimates of the mean serial interval and $\mathcal R$ are consistent with the target value;
@@ -401,20 +402,20 @@ The forward serial-interval distribution describes the renewal process of the sy
 While our results support the use of serial interval distributions for calculating $\mathcal R$, 
 they also reveal gaps in current approaches to characterizing serial intervals.
 Previous studies have often (i) recommended using up-to-date serial intervals, (ii) assumed that the serial interval distribution remains constant, and (iii) applied serial interval distributions estimated from one location to analyzing epidemics in other locations;
-however, these approaches implicitly ignore spatiotemporal variation in incidence and may therefore give systemtatically biased estimates of $\mathcal R$. 
+however, these approaches implicitly ignore spatiotemporal variation in incidence and may therefore give systematically biased estimates of $\mathcal R$. 
 For example, given geographical differences in the observed exponential growth rates of the COVID-19 epidemic, the forward serial interval distributions will vary across different countries.
 Future studies should aim to characterize spatiotemporal variation in serial intervals and understanding the drivers of their differences.
 
 We also show that there are multiple serial-interval distributions that correspond to the same set of generation-interval and incubation period distributions depending on their correlations;
 not explicitly accounting for their correlations can bias the estimate of the intrinsic generation-interval distribution from the serial-interval distribution (see Appendix).
-Furthermore, previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the effect of right-censoring or differences between the backward incubation period of an infector and the forward incubation period of an infecteee.
+Furthermore, previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the effect of right-censoring or differences between the backward incubation period of an infector and the forward incubation period of an infectee.
 There is currently a need for better statistical tools for teasing apart the intrinsic generation-interval distributions from the observed serial intervals.
 
 Our study is not without limitations.
 Here, we assumed that all individuals develop symptoms and that the the entire transmission process (e.g., direction of transmission, symptom onset dates, infection dates, etc.) are observable.
 In practice, asymptomatic and presymptomatic transmission of COVID-19 makes measuring serial intervals difficult.
-For example, symotom onset dates cannot be used as a reliable proxy for the direction of transmission as infectees may develop symptoms before their infectors.
-Based on the COVID-19 paramters (Table 1), we expect roughly 3\% of infectees to develop symptoms before their infectors during the exponential growth period; 
+For example, symptom onset dates cannot be used as a reliable proxy for the direction of transmission as infectees may develop symptoms before their infectors.
+Based on the COVID-19 parameters (Table 1), we expect roughly 3\% of infectees to develop symptoms before their infectors during the exponential growth period; 
 this probability increases as epidemic progresses because backward incubation period of an infector increases.
 Biases in the observed serial intervals will necessarily bias the estimates of $\mathcal R$.
 Furthermore, serial intervals do not take into account asymptomatic transmission; 
