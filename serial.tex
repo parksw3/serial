@@ -168,47 +168,27 @@ then, we have to go forward in time by asking when the infector became symptomat
 In this case, $x_1$ represents the backward incubation period of the infectee who became symptomatic at time $\delta$;
 $\sigma$ represents the backward generation interval of the infectee who became infected at time $\delta-x_1$;
 and $x_0$ represents the forward incubation period of the infector who became infected at time $\delta-x_1-\sigma$.
-This conceptual framework clearly demonstrates that the distributions of $x_0$, $\delta$, and $x_1$ depend on the perspective as well as time and therefore cannot be treated statically.
+This conceptual framework clearly demonstrates that the distributions of $x_0$, $\delta$, and $x_1$ (and therefore the distributions of serial intervals) depend on the perspective as well as time and cannot be treated statically.
 
-Then, the total number of serial intervals 
+In order to define forward and backward serial interval distributions, we begin by writing the total number of serial intervals between time $\pi$ (when the infector developed symptoms) and $\delta$ (when the infectee developed symptoms), which can be expressed as an integral over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
+\begin{equation}
+T(\pi,\delta) = \int_{-\infty}^{\pi} \int_{\alpha_1}^{\delta} \mathcal R_c (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pi-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\delta - \alpha_2) \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1,
+\end{equation}
+where $\mathcal R_c(\alpha_1)$ is the case reproduction number (i.e., the average number of secondary cases caused by a primary case infected at time $\alpha_1$, \cite{fraser2007estimating}), $i(\alpha_1)$ is incidence, $h_{\alpha_1}(\pi-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pi-\alpha_1$ and forward generation interval $\alpha_2 - \alpha_1$ of an individual infected at time $\alpha_1$ (in this case, the infector), and $k_{\alpha_2}(\delta-\alpha_2)$ describes the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\delta-\alpha_2$ of an individual infected at time $\alpha_2$ (in this case, the infectee). 
+Then, the forward serial-interval distribution is proportional to $T(\pi, \pi+\tau)$. Substituting $x=\pi-\alpha_1$ and $\sigma=\alpha_2-\alpha_1$, we have:
+\begin{equation}
+f_\pi(\tau) \propto \int_{0}^{\infty} \int_{0}^{x+\tau} \mathcal R_c (\pi-x) i(\pi-x) h_{\pi-x}(x, \sigma) k_{\pi-x+\sigma}(x-\sigma+\tau) \mathrm{d}\sigma\,\mathrm{d}x
+\end{equation}
+Likewise, the backward serial-interval distribution is proportional to $T(\delta-\tau, \delta)$. 
+This time, we substitute $x=\delta-\alpha_2$ and $\sigma=\alpha_2-\alpha_1$ to get:
+\begin{equation}
+b_\delta(\tau) \propto \int_{0}^{\infty} \int_{\max(0, \tau-x)}^{\infty} \mathcal R_c (\delta-x-\sigma) i(\delta-x-\sigma) h_{\delta-x-\sigma}(x+\sigma-\tau, \sigma) k_{\delta-x}(x) \mathrm{d}\sigma\,\mathrm{d}x.
+\end{equation}
 
-\jd{This needs more unpacking of what is conditional and why. We should spend some words talking about the fact that we expect forward internal intervals to be independent of dynamics (but not necessarily biology, I guess).}
-Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
-\jd{We should clearly state that we're always going to assume that intervals don't change intrinsically (or however we say it, the point is we're only going to think about changes that are driven by dynamics).} 
-\begin{equation}
-f_\ell(\tau) \propto \int_{0}^\infty \int_{0}^\infty \mathcal R_c (\ell - x_0) i(\ell - x_0) h_{\ell - x_0}(x_0, \sigma) k(\tau-\sigma+x_0) \mathrm{d} x_0\, \mathrm{d}\sigma
-\label{eq:forward}
-\end{equation}
-where $i$ is the incidence of infection, $h$ is the joint probability distribution of the forward incubation period and forward generation interval of a primary cohort $\ell - x_0$, and $k$ is a marginal probability distribution of $h$ describing the forward incubation periods:
-\jd{So obviously I was wrong about $k$; I get it now. I feel like the way to make this clear is similar to what DC and I did. First calculate the density of \emph{events}: this is the same numerator for the forward and backward distributions, the number of intervals that start at the beginning and end at the end; it's only the denominators that differ. I'm struggling again with \Rc: what matters is the number of susceptibles when I actually infected the infectee; using \Rc\ seems like we're averaging over something we shouldn't be averaging over.}
-\begin{equation}
-k(x_0) = \int_0^\infty h_\ell(x_0, \sigma) \mathrm{d}\sigma.
-\end{equation}
-Finally, $\mathcal R_c (\ell - x_0)$ is the cohort reproduction number, which is defined as the average secondary number of cases caused by an individual infected at time $\ell - x_0$.
-We have to multiply the joint forward distribution $h$ by $\mathcal R_c (t) i(t)$, which represents total infectiousness of individuals infected at time $t$, rather than incidence $i(t)$, because we are interested in the backward incubation period $x_0$ and the forward generation interval $\sigma$ of infectors (i.e., those who transmitted successfully to at least one individual), rather than all infected individuals.
-We revisit this idea in the Results section.
-
-\jd{An alternative approach that I'm pretty sure produces a slightly different answer. I'm going to write it in a mixed notation:}
-The number of SIs that go from $\delta_1$ to $\delta_2$ is an integral over all of the possibilities for the infection times.
-\begin{equation}
-	N(\delta_1, \delta_2) = \int \int d\alpha_1 d\alpha_2
-	i(\alpha_1) h(\delta_1-\alpha_1, \alpha_2-\alpha_1)
-	S(\alpha_2)\theta(\delta_2-\alpha_2)
-\end{equation}
-To get the forward SI, we substitute $\delta_2 = \delta_1+\tau$ and normalize. And a similar trick (from the same starting point) to get the backward SI.
-
-Likewise, we can define the backward serial interval distribution for a secondary cohort $\ell$ (\fref{diagram}B).
-Given that an infectee became symptomatic at time $\ell$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
-then, we have to go forward in time by asking when the infector became symptomatic.
-In this case, $x_1$ and $\sigma$ represent the backward incubation period and generation interval, respectively, and $x_0$ represents the forward incubation period.
-Therefore, the backward serial interval distribution of a secondary cohort $\ell$ can be written as follows
-\begin{equation}
-\begin{aligned}
-b_\ell(\tau) &\propto j(\ell) f_{\ell}(\tau)\\
-&\propto \int_0^\infty \mathcal R_c (\ell - x_0) i(\ell-x_0) k(x_0) f_{\ell}(\tau) \mathrm{d} x_0
-\end{aligned}
-\end{equation}
-where $j$ represents the incidence of symptomatic infectors.
+%Hereafter, we assume that the forward incubation period distributions does not vary across cohorts over the course of an epidemic, as they represent the natural history of a disease, and use $k$ without subscript instead:
+%\begin{equation}
+%k(x) = \int_0^\infty h_\pi(x, \sigma) \mathrm{d}\sigma.
+%\end{equation}
 
 \subsection{Epidemic model}
 
