@@ -17,13 +17,13 @@ g1 <- ggplot(arrow) +
   geom_point(aes(0.5, 0.2), size=3) +
   geom_point(aes(1.5, 0.4), size=3) +
   geom_point(aes(2.5, 0.3), size=3) +
-  annotate("text", x=1.5, y=-0.05, label="$\\ell$") +
-  annotate("text", x=0.5, y=-0.05, label="$\\ell-x_0$") +
+  annotate("text", x=1.5, y=-0.05, label="$\\pi$") +
+  annotate("text", x=0.5, y=-0.05, label="$\\pi-x_0$") +
   annotate("text", x=0.5, y=-0.1, label="Infector") +
   annotate("text", x=1.5, y=-0.1, label="Primary cohort") +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
-  annotate("text", x=2.5, y=-0.05, label="$\\ell-x_0+\\sigma$") +
-  annotate("text", x=3.5, y=-0.05, label="$\\ell-x_0+\\sigma+x_1$") +
+  annotate("text", x=2.5, y=-0.05, label="$\\pi-x_0+\\sigma$") +
+  annotate("text", x=3.5, y=-0.05, label="$\\pi-x_0+\\sigma+x_1$") +
   geom_segment(aes(x, y, xend=x1, yend=y1), arrow = arrow(length = unit(0.2, "inches")), lwd=1) +
   geom_segment(aes(0.5, 0, xend=0.5, yend=0.2), lty=2) +
   geom_segment(aes(1.5, 0, xend=1.5, yend=0.4), lty=2) +
@@ -57,10 +57,10 @@ g2 <- ggplot(arrow) +
   geom_point(aes(0.5, 0.3), size=3) +
   geom_point(aes(3.5, 0.4), size=3) +
   geom_point(aes(2.5, 0.2), size=3) +
-  annotate("text", x=3.5, y=-0.05, label="$\\ell$") +
-  annotate("text", x=2.5, y=-0.05, label="$\\ell-x_1$") +
-  annotate("text", x=0.5, y=-0.05, label="$\\ell-x_1-\\sigma$") +
-  annotate("text", x=1.5, y=-0.05, label="$\\ell-x_1-\\sigma+x_0$") +
+  annotate("text", x=3.5, y=-0.05, label="$\\delta$") +
+  annotate("text", x=2.5, y=-0.05, label="$\\delta-x_1$") +
+  annotate("text", x=0.5, y=-0.05, label="$\\delta-x_1-\\sigma$") +
+  annotate("text", x=1.5, y=-0.05, label="$\\delta-x_1-\\sigma+x_0$") +
   annotate("text", x=0.5, y=-0.1, label="Infector") +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
   annotate("text", x=3.5, y=-0.1, label="Secondary cohort") +

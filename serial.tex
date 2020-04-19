@@ -108,7 +108,7 @@ The primary event refers to the event that occurs within an infector and does no
 We model time delays between a primary and a secondary event from a cohort perspective.
 A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
 a secondary cohort is defined similarly based on the secondary events.
-For example, when we are measuring serial intervals, a primary cohort $s$ consists of all infectors who became symptomatic at time $\pi$.
+For example, when we are measuring serial intervals, a primary cohort $\pi$ consists of all infectors who became symptomatic at time $\pi$.
 Then, for each primary cohort $\pi$, we can define the expected time distribution between primary and secondary events.
 We refer to this distribution as the forward delay distribution and denote it as $f_\pi(\tau)$.
 %% The forward delay distributions can vary across primary cohorts.
@@ -131,7 +131,7 @@ These ideas apply to all epidemiological delay distributions and generalize the 
 \subsection{Realized serial interval distributions}
 
 The serial interval is defined as the time between when an infector becomes symptomatic and when and infectee becomes symptomatic.
-Serial intervals $\tau$ are typically written as:
+Serial intervals $\tau$ have been typically written in the form of:
 \begin{equation}
 \tau = - x_0 + \sigma + x_1
 \end{equation}
@@ -158,10 +158,19 @@ and $x_1$ represents the backward incubation period of the infectee.
 The cohort-based framework allows us to understand the distribution of serial intervals we expect to observe when incidence is changing.
 Given that an infector became symptomatic at time $\pi$, we first go backward in time by asking when the infector was infected, and then go forward in time by asking first when the infectee was infected and then when the infectee became symptomatic;
 this defines the forward serial interval.
-In \fref{diagram}A, we see that $x_0$ represents the backward incubation period of infectors who became symptomatic at time $\pi$; 
-$\sigma$ represents the forward generation interval for individuals who came infected at time $\pi - x_0$ conditioned on their incubation period $x_0$ (because generation intervals and incubation periods can be correlated \cite{klinkenberg2011correlation});
+In \fref{diagram}A, we see that $x_0$ represents the backward incubation period of the infector who became symptomatic at time $\pi$;
+$\sigma$ represents the forward generation interval of the infector who came infected at time $\pi - x_0$;
 and $x_1$ represents the forward incubation period for the infectees who became infected at time $\pi - x_0 + \sigma$.
 
+Likewise, we can define the backward serial interval distribution for a secondary cohort $\delta$ (\fref{diagram}B).
+Given that an infectee became symptomatic at time $\delta$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
+then, we have to go forward in time by asking when the infector became symptomatic.
+In this case, $x_1$ represents the backward incubation period of the infectee who became symptomatic at time $\delta$;
+$\sigma$ represents the backward generation interval of the infectee who became infected at time $\delta-x_1$;
+and $x_0$ represents the forward incubation period of the infector who became infected at time $\delta-x_1-\sigma$.
+This conceptual framework clearly demonstrates that the distributions of $x_0$, $\delta$, and $x_1$ depend on the perspective as well as time and therefore cannot be treated statically.
+
+Then, the total number of serial intervals 
 
 \jd{This needs more unpacking of what is conditional and why. We should spend some words talking about the fact that we expect forward internal intervals to be independent of dynamics (but not necessarily biology, I guess).}
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
