@@ -43,6 +43,7 @@
 
 \newcommand{\Rx}[1]{\ensuremath{{\mathcal R}_{#1}}} 
 \newcommand{\Ro}{\Rx{0}}
+\newcommand{\Rc}{\Rx{c}}
 \newcommand{\RR}{\ensuremath{{\mathcal R}}}
 \newcommand{\Rhat}{\ensuremath{{\hat\RR}}}
 \newcommand{\tsub}[2]{#1_{{\textrm{\tiny #2}}}}
@@ -55,8 +56,6 @@
 		Unraveling the paradox between generation and serial intervals: applications to COVID-19 pandemic
 	}
 }
-\newline
-Sang Woo Park
 \end{flushleft}
 
 \section*{Abstract}
@@ -88,8 +87,8 @@ In contexts where the distributions are expected to be different, current theory
 
 Here, we provide an answer to this paradox, by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial (but not generation) interval is affected by the rate of growth $r$ during the exponential-growth phase.
 We develop a new framework for understanding serial intervals and show that the forward serial-interval distribution gives the correct value of $\mathcal R$.
-\jd{Come back to this. Not just over time, right?}
-However, failing to account for changes in the observed serial-interval distributions over time can severely bias the estimate of $\mathcal R$.
+%\jd{Come back to this. Not just over time, right?} \swp{What do you mean? Everything is about time here... you haven't read the results section so maybe that's why?}
+However, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can bias the estimate of $\mathcal R$.
 We apply our framework to serial intervals of COVID-19 and lay out several principles to consider in using information about serial intervals and other epidemiological time delays in the analysis of the ongoing pandemic.
 
 \section{Methods}
@@ -99,8 +98,9 @@ We apply our framework to serial intervals of COVID-19 and lay out several princ
 We first begin by describing a general framework for characterizing a distribution of time delays between two epidemiological events;
 these events can be defined either within an infected individual (e.g., infection and symptom onset of an individual, the incubation period) or between infected individuals (e.g., symptom onsets of an infector and an infectee, the serial interval).
 We can further divide these events into \emph{primary} and \emph{secondary} events.
-When we measure an epidemiological time delay within an infected individual (e.g., the incubation period), the primary event \jd{is the event that always or usually} always occurs before the secondary event.
-\jd{Rethink, or else rethink ``any'' above: the ``hidden'' time (my term) is the time between onset of infectiousness and onset of symptoms; it is within, but can be positive or negative. I'm not saying we should use it here\ldots}
+When we measure an epidemiological time delay within an infected individual (e.g., the incubation period), the primary event is the event that always or usually occurs before the secondary event ---
+most epidemiological events that can be observed within an individual have clear direction (e.g., infection and onset of symptoms) but some may not (e.g., onset of infectiousness and onset of symptoms).
+% \jd{Rethink, or else rethink ``any'' above: the ``hidden'' time (my term) is the time between onset of infectiousness and onset of symptoms; it is within, but can be positive or negative. I'm not saying we should use it here\ldots}
 When we measure an epidemiological time delay between infected individuals (e.g., the serial interval), 
 the primary and secondary events are defined in terms of the direction of transmission:
 The primary event refers to the event that occurs within an infector and does not necessarily occur before the secondary event.
@@ -108,22 +108,24 @@ The primary event refers to the event that occurs within an infector and does no
 We model time delays between a primary and a secondary event from a cohort perspective.
 A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
 a secondary cohort is defined similarly based on the secondary events.
-For example, when we are measuring serial intervals, a primary cohort $s$ consists of all infectors who became symptomatic at time $\ell$.
-Then, for each primary cohort $\ell$, we can define the expected time distribution between primary and secondary events.
-We refer to this distribution as the forward delay distribution and denote it as $f_\ell(\tau)$.
+For example, when we are measuring serial intervals, a primary cohort $s$ consists of all infectors who became symptomatic at time $\pi$.
+Then, for each primary cohort $\pi$, we can define the expected time distribution between primary and secondary events.
+We refer to this distribution as the forward delay distribution and denote it as $f_\pi(\tau)$.
 %% The forward delay distributions can vary across primary cohorts.
 %% \jd already implied, and may block the flow
 
-\jd{Thinking a lot about notation. I kind of want to make it easier for people to follow the logic by giving $\ell$ and $C$ different names. Like maybe P(t) for the primary-event cohort and D(t) for the secondary-event cohort? And then $\pi$ and $\delta$ instead of $\ell$?}
-Likewise, we define the backward delay distribution $b_\ell(\tau)$ for a secondary cohort $\ell$:
-The backward delay distribution describes the time delays between a primary and secondary host given that the secondary event occurred at time $\ell$.
-It follows that:
+Likewise, we define the backward delay distribution $b_\delta(\tau)$ for a secondary cohort $\delta$:
+The backward delay distribution describes the time delays between a primary and secondary host given that the secondary event occurred at time $\delta$.
+Since both forward and backward perspectives provide valid ways of measuring time delays, we can express the total density of primary and secondary events occurring at time $\pi$ and $\delta$, respectively, using both forward and backward delay distributions:
 \begin{equation}
-b_\ell(\tau) \propto C(\ell-\tau) f_{\ell-\tau}(\tau)
+P(\pi) f_\pi(\delta-\pi) = D(\delta) b_\delta(\delta-\pi),
 \end{equation}
-\jd{Brilliant, but would be easier to follow if more symmetric. Maybe start from the idea that we can add up events in either direction. Using the proposed notation, I might start from $D(\delta) b_\delta(\delta-\pi)  = P(\pi) f_\pi(\delta-\pi)$}
-where $C(\ell)$ is the size of the primary cohort $\ell$.
-Therefore, changes in the backward delay distribution depend on the changes in cohort size $C(\ell)$ (therefore incidence of infection) as well as changes in the forward delay distribution.
+where $P$ and $D$ represent the sizes of primary and secondary cohorts, respectively.
+Substituting $\tau = \delta - \pi$, it follows that:
+\begin{equation}
+b_\delta(\tau) = \frac{P(\delta-\tau) f_{\delta-\tau}(\tau)}{D(\delta)}
+\end{equation}
+Therefore, the backward delay distribution depends on the changes in primary cohort size $P$ (therefore incidence of infection) as well as changes in the forward delay distribution.
 These ideas apply to all epidemiological delay distributions and generalize the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
 
 \subsection{Realized serial interval distributions}
@@ -134,9 +136,8 @@ Serial intervals $\tau$ are typically written as:
 \tau = - x_0 + \sigma + x_1
 \end{equation}
 where $x_0$ and $x_1$ represent the realized time from infection to symptom onset of an infector and an infectee, respectively, and $\sigma$ represents the realized generation interval.
-Previous studies have often assumed that $x_0$ and $x_1$ follow the same distributions and concluded that the serial and generation intervals have the same mean \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
-however, these models implicitly assume that incidence stays constant.
-\jd{I would drop the last clause. I still argue that this is true for intrinsic SIs, and we don't want to get into that here. You can just keep rolling forward at this point.}
+Previous studies have often assumed that $x_0$ and $x_1$ follow the same distributions and concluded that the serial and generation intervals have the same mean \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}.
+% \jd{I would drop the last clause. I still argue that this is true for intrinsic SIs, and we don't want to get into that here. You can just keep rolling forward at this point.}
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{serial_guide.pdf}
@@ -155,11 +156,13 @@ and $x_1$ represents the backward incubation period of the infectee.
 \end{figure}
 
 The cohort-based framework allows us to understand the distribution of serial intervals we expect to observe when incidence is changing.
-Given that an infector became symptomatic at time $\ell$, we first go backward in time by asking when the infector was infected, and then go forward in time by asking first when the infectee was infected and then when the infectee became symptomatic;
+Given that an infector became symptomatic at time $\pi$, we first go backward in time by asking when the infector was infected, and then go forward in time by asking first when the infectee was infected and then when the infectee became symptomatic;
 this defines the forward serial interval.
-In \fref{diagram}A, we see that $x_0$ represents the backward incubation period of infectors who became symptomatic at time $\ell$; 
-$\sigma$ represents the forward generation interval for individuals who came infected at time $\ell - x_0$ conditional on their incubation period $x_0$;
-and $x_1$ represents the forward incubation period for the infectees who became infected at time $\ell - x_0 + \sigma$.
+In \fref{diagram}A, we see that $x_0$ represents the backward incubation period of infectors who became symptomatic at time $\pi$; 
+$\sigma$ represents the forward generation interval for individuals who came infected at time $\pi - x_0$ conditioned on their incubation period $x_0$ (because generation intervals and incubation periods can be correlated \cite{klinkenberg2011correlation});
+and $x_1$ represents the forward incubation period for the infectees who became infected at time $\pi - x_0 + \sigma$.
+
+
 \jd{This needs more unpacking of what is conditional and why. We should spend some words talking about the fact that we expect forward internal intervals to be independent of dynamics (but not necessarily biology, I guess).}
 Assuming that the forward incubation distribution does not vary across cohorts, the forward serial interval distribution of a primary cohort $\ell$ can be written as follows:
 \jd{We should clearly state that we're always going to assume that intervals don't change intrinsically (or however we say it, the point is we're only going to think about changes that are driven by dynamics).} 
