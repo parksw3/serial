@@ -192,7 +192,10 @@ g4 <- ggplot(cordat2) +
     panel.grid = element_blank()
   )
 
-tikz(file = "forward_tease.tex", width = 8, height = 6, standAlone = T)
-grid.arrange(g1, g2, g4, g3, nrow=2)
+tikz(file = "forward_tease.tex", width = 8, height = 3, standAlone = T)
+grid.arrange(g2 +
+               ggtitle("A. Incubation period"),
+             g3 +
+               ggtitle("B. Backward correlation") , nrow=1)
 dev.off()
 tools::texi2dvi('forward_tease.tex', pdf = T, clean = T)

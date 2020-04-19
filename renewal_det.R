@@ -56,6 +56,8 @@ renewal_det <- function(R0=2.5,
   mfser2 <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc2[,x-genmax]*rev(mfgen[(x-genmax):x]))),-genmax) +
     tail(mfinc, -genmax) - head(mbinc2, -genmax)
   
+  
+  
   list(
     tvec=head(tvec, -2*genmax),
     cI=tail(head(cumsum(Ivec), -genmax), -genmax),
