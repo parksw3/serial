@@ -122,26 +122,28 @@ tt <- as.data.frame(table(sir_sim$infected_by))
 
 tmp <- data.frame(
   N=1:length(sir_sim$t_infected),
-  offspring=0
+  offspring=0,
+  sim=sir_sim$sim
 )
 
 tmp$offspring[match(tt$Var1[-153138], tmp$N)] <- tt$Freq[-153138]
 tmp$offspring[tmp$N==3e5] <- tt$Freq[153138]
 
 cordat <- data.frame(
-  cohort=sir_sim$t_symptomatic,
-  tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
-  offspring=tmp$offspring
+  cohort=sir_sim$t_symptomatic[sir_sim$infected_by],
+  tdiff=sir_sim$t_symptomatic[sir_sim$infected_by]-sir_sim$t_infected[sir_sim$infected_by],
+  tgen=sir_sim$t_infected-sir_sim$t_infected[sir_sim$infected_by],
+  infected_by=sir_sim$infected_by
 ) %>%
-  filter(!is.na(cohort), !is.na(tdiff), cohort > 0, cohort <= 80) %>%
+  filter(!is.na(cohort), !is.na(tdiff), cohort > 10, cohort <= 76) %>%
   mutate(
     cc=cut(cohort, tcut)
   ) %>%
   group_by(cc) %>%
   summarize(
-    cor=cor(tdiff, offspring),
-    lwr=cor.test(tdiff, offspring)[[9]][1],
-    upr=cor.test(tdiff, offspring)[[9]][2]
+    cor=cor(tdiff, tgen),
+    lwr=cor.test(tdiff, tgen)[[9]][1],
+    upr=cor.test(tdiff, tgen)[[9]][2]
   ) %>%
   ungroup %>%
   mutate(
@@ -149,16 +151,17 @@ cordat <- data.frame(
     cc=(as.numeric(gsub("\\(", "", gsub(",.*", "", cc)))+as.numeric(gsub("]", "", gsub(".*,", "", cc))))/2
   )
 
-cordat2 <- data.frame(
-  cohort=sir_sim$t_infected,
+cordat <- data.frame(
+  cohort=sir_sim$t_symptomatic,
   tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
-  offspring=tmp$offspring
+  offspring=tmp$offspring,
+  sim=sir_sim$sim
 ) %>%
-  filter(!is.na(cohort), !is.na(tdiff), cohort > 2, cohort <= 78) %>%
+  filter(!is.na(cohort), !is.na(tdiff), cohort > 10, cohort <= 76) %>%
   mutate(
     cc=cut(cohort, tcut)
   ) %>%
-  group_by(cc) %>%
+  group_by(cc, sim) %>%
   summarize(
     cor=cor(tdiff, offspring),
     lwr=cor.test(tdiff, offspring)[[9]][1],
@@ -172,22 +175,10 @@ cordat2 <- data.frame(
 
 g3 <- ggplot(cordat) +
   geom_hline(yintercept = 0, lty=2) +
-  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2, fill="#D55E00") +
-  geom_line(aes(cc, cor), col="#D55E00") +
+  geom_line(aes(cc, cor, group=sim), col="#D55E00") +
   scale_x_continuous("Symptom onset time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("D. Backward correlation") +
-  theme(
-    panel.grid = element_blank()
-  )
-
-g4 <- ggplot(cordat2) +
-  geom_hline(yintercept = 0, lty=2) +
-  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), alpha=0.2, fill="#D55E00") +
-  geom_line(aes(cc, cor), col="#D55E00") +
-  scale_x_continuous("Infection time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Correlation coefficient", expand=c(0, 0), limits=c(-1, 1)) +
-  ggtitle("C. Forward correlation") +
+  ggtitle("B. Backward correlation") +
   theme(
     panel.grid = element_blank()
   )
@@ -195,7 +186,6 @@ g4 <- ggplot(cordat2) +
 tikz(file = "forward_tease.tex", width = 8, height = 3, standAlone = T)
 grid.arrange(g2 +
                ggtitle("A. Incubation period"),
-             g3 +
-               ggtitle("B. Backward correlation") , nrow=1)
+             g3, nrow=1)
 dev.off()
 tools::texi2dvi('forward_tease.tex', pdf = T, clean = T)
