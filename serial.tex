@@ -307,7 +307,7 @@ While the forward serial intervals during the exponential growth phase can be al
 \end{figure}
 
 Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different distributions are able to give identical estimates of $\mathcal R$.
-In general, generation-interval distributions with higher means and less variability are expected to give higher $\mathcal R$ for a given $r$.
+In general, generation-interval distributions with higher means and less variability are expected to give higher $\mathcal R$ for a given $r$ \citep{wallinga2007generation, park2019practical}.
 In this case, the initial forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
 The effects of higher means (which increases $\mathcal R$) and higher variability (which decreases $\mathcal R$) cancel out exactly;
 therefore, we can estimate the same $\mathcal R$ using both serial and generation intervals.
@@ -379,7 +379,7 @@ This approach allows us to characterize potential biases in the estimates of $\m
 (A--B) forward and backward serial intervals over time.
 Points represent the means. Vertical error bars represent the observed maximum and minimum values.
 Solid lines and ribbons represent the estimated locally estimated scatterplot smoothing (LOESS) fits and associated 95\% confidence intervals.
-The dashed line represents the maximum observable delay calculated from the most recent observed symptom onset date.
+The dashed line represents the maximum observable delay for each primary cohort calculated from the most recent observed symptom onset date.
 (C) Cohort-averaged estimates of $\mathcal R$ assuming doubling period of 6 and 8 days \citep{li2020early, wu2020nowcasting}.
 Ribbons represent the associated 95\% bootstrap confidence intervals.
 }
@@ -437,10 +437,9 @@ Biases in the observed serial intervals will necessarily bias the estimates of $
 Furthermore, serial intervals do not take into account asymptomatic transmission; 
 not explicitly accounting for asymptomatic transmission may also bias the estimates of $\mathcal R$ \citep{park2020time}.
 
-Both generation and serial intervals are under-appreciated --- often treated as auxiliary variables for estimating $\mathcal R$ --- yet important quantities in characterizing an epidemic.
-Here, we provided the first theoretical basis for understanding serial intervals and showed that naively using the observed serial intervals may lead to biased conclusions.
-Our re-analysis of the serial intervals of COVID-19 from China provided further support for our analysis.
-
+Desipte these limitations, our analysis of serial intervals of COVID-19 provide further support for our theoretical framework, demonstrating temporal variation in serial intervals and their effects on the estimates of $\mathcal R$.
+To our knowledge, most, if not all, existing estimates of the serial-intervals of COVID-19 implicitly or explicitly assume that the serial-interval distributions remain constant throughout the course of an epidemic \citep{du2020serial, he2020temporal, nishiura2020serial,tindale2020transmission,zhao2020estimating,zhang2020evolving}.
+Our study provides a rationale for reassessing estimates of serial-interval distributions of the COVID-19 pandemic.
 
 \pagebreak
 
