@@ -18,15 +18,20 @@ rr <- read_xlsx("Table S5.xlsx", skip=1) %>%
   )
 
 rr_summ <- rr %>%
-  group_by(cohort, serial) %>%
+  group_by(cohort) %>%
   summarize(
-    size=length(serial)
+    mean=mean(serial),
+    lwr=max(serial),
+    upr=min(serial)
   )
 
 rr_summ2 <- rr %>%
-  group_by(cohort) %>%
+  mutate(cohort=`Seconday - symptom onset date`) %>%
+  group_by(cohort)  %>%
   summarize(
-    mean=mean(serial)
+    mean=mean(serial),
+    lwr=max(serial),
+    upr=min(serial)
   )
 
 tcut <- seq(0, 29, by=1)
@@ -79,34 +84,58 @@ serdata2 <- lapply(tcut, function(x) {
 
 serall <- bind_rows(serdata1, serdata2)
 
-g1 <- ggplot(rr_summ) +
-  geom_boxplot(aes(cohort, serial, group=cohort)) +
-  # geom_point(data=rr_summ2, aes(cohort, mean), col=cpalette[2]) +
-  # geom_line(data=rr_summ2, aes(cohort, mean), col=cpalette[2], lty=2) +
-  scale_x_continuous("Cohort time (days)", limits=c(-4, 30), expand=c(0, 0)) +
-  scale_y_continuous("Forward serial intervals (days)") +
-  ggtitle("A") +
+mm <- max(c(rr$`Seconday - symptom onset date`, rr$`Index - symptom onset date`))
+
+cdata <- data.frame(
+  x=9:30,
+  y=30-9:30
+)
+
+g1 <- ggplot(rr) +
+  geom_line(data=cdata, aes(x, y), lty=2) +
+  geom_point(data=rr_summ, aes(cohort, mean)) +
+  geom_errorbar(data=rr_summ, aes(cohort, ymin=lwr, ymax=upr), width=0) +
+  geom_smooth(aes(cohort, serial), col=1, fill=1, fullrange=TRUE, alpha=0.2) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(-3, 29)) +
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(-12, 21)) +
+  scale_size_area(max_size=4) +
+  coord_cartesian(clip="off", default=TRUE) +
+  ggtitle("A. Forward serial interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
   )
 
-g2 <- ggplot(serall) +
+g2 <- ggplot(rr) +
+  geom_point(data=rr_summ2, aes(cohort, mean)) +
+  geom_errorbar(data=rr_summ2, aes(cohort, ymin=lwr, ymax=upr), width=0) +
+  geom_smooth(aes(`Seconday - symptom onset date`, serial), col=1, fill=1, alpha=0.2) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0)) +
+  scale_y_continuous("Backward delay (days)") +
+  coord_cartesian(clip="off", default=TRUE) +
+  ggtitle("B. Backward serial interval") +
+  theme(
+    panel.grid = element_blank(),
+    legend.position = "none"
+  )
+
+g3 <- ggplot(serall) +
   geom_ribbon(aes(t, ymin=lwr, ymax=upr, fill=type, lty=type, col=type), alpha=0.5) +
   geom_hline(yintercept=1, lty=2) +
   geom_line(aes(t, R0, col=type, lty=type)) +
-  scale_x_continuous("Cohort time (days)", limits=c(-4, 30), expand=c(0, 0)) +
+  scale_x_continuous("Time (days)", limits=c(-3, 29), expand=c(0, 0)) +
   scale_y_continuous("Reproduction number $\\mathcal R$") +
   scale_color_manual(values=cpalette[5:6]) +
   scale_fill_manual(values=cpalette[5:6]) +
-  ggtitle("B") +
+  coord_cartesian(clip="off", default=TRUE) +
+  ggtitle("C. Cohort-averaged estimates") +
   theme(
     panel.grid = element_blank(),
-    legend.position = c(0.75, 0.85),
+    legend.position = c(0.68, 0.85),
     legend.title = element_blank()
   )
 
-tikz(file = "serial_analysis.tex", width = 8, height = 4, standAlone = T)
-grid.arrange(g1, g2, nrow=1)
+tikz(file = "serial_analysis.tex", width = 9, height = 3, standAlone = T)
+grid.arrange(g1, g2, g3, nrow=1)
 dev.off()
 tools::texi2dvi('serial_analysis.tex', pdf = T, clean = T)
