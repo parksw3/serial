@@ -7,14 +7,14 @@ renewal_det <- function(R0=2.5,
                         I0=10,
                         tmax=200,
                         genmax=2000) {
-  inc <- incfun(0:genmax*dt)
+  inc <- incfun(0:genmax*dt+dt)
   inc <- inc/sum(inc)
-  gen <- genfun(0:genmax*dt)
+  gen <- genfun(0:genmax*dt+dt)
   gen <- gen/sum(gen)
   tvec <- seq(0, tmax, by=dt)
   Ivec <- rep(0, dt*tmax)
   
-  r <- optim(0.19, function(x) (1/sum(exp(-x*(0:genmax*dt)) * gen)-R0)^2,
+  r <- optim(0.19, function(x) (1/sum(exp(-x*(0:genmax*dt+dt)) * gen)-R0)^2,
         lower=0.1,
         upper=0.3,
         method="Brent")[[1]]
@@ -35,10 +35,10 @@ renewal_det <- function(R0=2.5,
   forwardinc <- sapply(1:(length(Svec)-genmax), function(x) inc)
   backwardinc <- sapply((genmax+1):(length(Svec)), function(x) inc[1:(1+genmax)]*Ivec[x:(x-genmax)]/sum(inc[1:(1+genmax)]*Ivec[x:(x-genmax)]))
   
-  mfgen <- apply(forwardgen, 2, function(x) sum(x*0:genmax*dt)/sum(x))
-  mbgen <- apply(backwardgen, 2, function(x) sum(x*0:genmax*dt)/sum(x))
-  mfinc <- apply(forwardinc, 2, function(x) sum(x*0:genmax*dt)/sum(x))
-  mbinc <- apply(backwardinc, 2, function(x) sum(x*0:genmax*dt)/sum(x))
+  mfgen <- apply(forwardgen, 2, function(x) sum(x*(0:genmax*dt+dt))/sum(x))
+  mbgen <- apply(backwardgen, 2, function(x) sum(x*(0:genmax*dt+dt))/sum(x))
+  mfinc <- apply(forwardinc, 2, function(x) sum(x*(0:genmax*dt+dt))/sum(x))
+  mbinc <- apply(backwardinc, 2, function(x) sum(x*(0:genmax*dt+dt))/sum(x))
   
   mfser <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc[,x-genmax]*rev(mfgen[(x-genmax):x]))),-genmax) +
     tail(mfinc, -genmax) - head(mbinc, -genmax)
@@ -55,8 +55,6 @@ renewal_det <- function(R0=2.5,
   
   mfser2 <- head(sapply((genmax+1):(length(Svec)), function(x) sum(backwardinc2[,x-genmax]*rev(mfgen[(x-genmax):x]))),-genmax) +
     tail(mfinc, -genmax) - head(mbinc2, -genmax)
-  
-  
   
   list(
     tvec=head(tvec, -2*genmax),
