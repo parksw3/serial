@@ -384,7 +384,7 @@ Then, we can compare how estimates of the mean serial interval as well as $\math
 During the exponential growth phase, the estimates of the mean serial interval and $\mathcal R$ are consistent with the target value;
 adding more data allows us to make more precise inference during this period.
 However, the cohort-averaged estimates decreases rapidly soon after the exponential growth period.
-This approach allows us to characterize potential biases in the estimates of $\mathcal R$ cuased by changes in the forward serial-interval distributions.
+This approach allows us to characterize potential biases in the estimates of $\mathcal R$ caused by changes in the forward serial-interval distributions.
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{serial_analysis.pdf}
@@ -453,7 +453,7 @@ Biases in the observed serial intervals will necessarily bias the estimates of $
 Furthermore, serial intervals do not take into account asymptomatic transmission; 
 not explicitly accounting for asymptomatic transmission may also bias the estimates of $\mathcal R$ \citep{park2020time}.
 
-Desipte these limitations, our analysis of serial intervals of COVID-19 provide further support for our theoretical framework, demonstrating temporal variation in serial intervals and their effects on the estimates of $\mathcal R$.
+Despite these limitations, our analysis of serial intervals of COVID-19 provide further support for our theoretical framework, demonstrating temporal variation in serial intervals and their effects on the estimates of $\mathcal R$.
 To our knowledge, most, if not all, existing estimates of the serial-intervals of COVID-19 implicitly or explicitly assume that the serial-interval distributions remain constant throughout the course of an epidemic \citep{du2020serial, he2020temporal, nishiura2020serial,tindale2020transmission,zhao2020estimating,zhang2020evolving}.
 Our study provides a rationale for reassessing estimates of serial-interval distributions of the COVID-19 pandemic.
 
@@ -479,7 +479,7 @@ The continuous-time intrinsic generation-interval distribution is parameterized 
 \hat{k}(\Delta t m) = \frac{k(\Delta t m)}{\sum_{i=1}^\ell k(\Delta t m)}, \quad m=1, \dots, \ell,
 \end{equation}
 where its continuous-time analog is also based on a log-normal distribution.
-For brevity, we assume that the forward incubation periods and intrisic generation intervals are independent:
+For brevity, we assume that the forward incubation periods and intrinsic generation intervals are independent:
 \begin{equation}
 \hat{h}(\Delta t m, \Delta t n) = \hat{k}(\Delta t m)\hat{g}(\Delta t n), \quad m,n=1, \dots, \ell.
 \end{equation}
@@ -498,14 +498,14 @@ Results presented in the main text show simulations beginning from time $\Delta 
 
 \subsection{Stochastic simulation}
 
-We run stochastic simulations of the renewal equation model using an individual-based model on a fully connected network (i.e., homogeneous population) based on the Gillespie algorithm that we devloped earlier \citep{park2019inferring}.
+We run stochastic simulations of the renewal equation model using an individual-based model on a fully connected network (i.e., homogeneous population) based on the Gillespie algorithm that we developed earlier \citep{park2019inferring}.
 First, we initialize an epidemic with $I(0)$ infected individuals (nodes) in a fully connected network of size $N$. 
 For each initially infected individual, we draw number of infectious contacts from a Poisson distribution with the mean of $\mathcal R_0$ and the corresponding generation intervals for each contact from a log-normal distribution (Table 1).
 Contactees are uniformly sampled from the total population.
 All contactees are sorted into event queues based on their infection time.
 We update the current time to the infection time of the first person in the queue.
 Then, the first person in the queue makes contacts based on the Poisson offspring distribution described earlier and their contactees are added to the sorted queue.
-Whenever contactees are aded to the sorted queue, we remove all duplicated contacts (but keep the first one) as well as contacts made to individuals that have already been infected.
+Whenever contactees are added to the sorted queue, we remove all duplicated contacts (but keep the first one) as well as contacts made to individuals that have already been infected.
 Simulations continue until there are no more individuals in the queue.
 We simulate 10 epidemics with $I(0)=10$ and $N$=40,000.
 
@@ -568,7 +568,7 @@ We are left to show that
 \begin{equation}
 \int_0^{\infty} \exp(-r\tau) g(\tau) \mathrm{d}\tau = \int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\alpha_2)}}^{\infty} \exp(-r\alpha_1) h(\alpha_1, \alpha_2 + \alpha_1) \mathrm{d}\alpha_1 \mathrm{d}\tau,
 \end{equation}
-where the intrisic generation-interval distribution $g$ is also a marginal probability distribution of $f$:
+where the intrinsic generation-interval distribution $g$ is also a marginal probability distribution of $f$:
 \begin{equation}
 g(\tau) = \int_0^\infty h(\alpha_1, \tau)  \mathrm{d} \alpha_1.
 \end{equation}
