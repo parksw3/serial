@@ -76,7 +76,9 @@ serialR2 <- function(r=0.1,
 generationR <- function(r=0.1,
                         meanlog2=1.54,
                         sdlog2=0.37,
-                        nsim=100000) {
+                        nsim=100000,
+                        seed=101) {
+  set.seed(101)
   gen <- rlnorm(nsim, meanlog2, sdlog2)
                           
   list(
@@ -86,32 +88,34 @@ generationR <- function(r=0.1,
   )
 }
 
+ww <- c(1, 5, 9, 13, 17, 21, 25, 29)
+
 rRdata <- list(
   data.frame(
-    r=seq(0, 0.3, by=0.01),
-    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0.5)$R),
-    type="Serial interval ($\\rho=0.5$)"
+    r=seq(0, 0.3, by=0.01)[ww],
+    R=sapply(seq(0, 0.3, by=0.01)[ww], function(x) serialR(x, rho=0.5)$R),
+    type="Forward serial interval ($\\rho=0.5$)"
   ),
   data.frame(
-    r=seq(0, 0.3, by=0.01),
-    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=0)$R),
-    type="Serial interval ($\\rho=0$)"
+    r=seq(0, 0.3, by=0.01)[ww+1],
+    R=sapply(seq(0, 0.3, by=0.01)[ww+1], function(x) serialR(x, rho=0)$R),
+    type="Forward serial interval ($\\rho=0$)"
   ),
   data.frame(
-    r=seq(0, 0.3, by=0.01),
-    R=sapply(seq(0, 0.3, by=0.01), function(x) serialR(x, rho=-0.5)$R),
-    type="Serial interval ($\\rho=-0.5$)"
+    r=seq(0, 0.3, by=0.01)[ww+2],
+    R=sapply(seq(0, 0.3, by=0.01)[ww+2], function(x) serialR(x, rho=-0.5)$R),
+    type="Forward serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
-    r=seq(0, 0.3, by=0.01),
-    R=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$R),
-    type="Generation interval"
+    r=seq(0, 0.3, by=0.01)[head(ww,-1)+3],
+    R=sapply(seq(0, 0.3, by=0.01)[head(ww,-1)+3], function(x) generationR(x)$R),
+    type="Intrinsic generation interval"
   )
 ) %>%
   bind_rows %>%
   mutate(
-    type=factor(type, level=c("Generation interval", "Serial interval ($\\rho=0.5$)",
-                        "Serial interval ($\\rho=0$)", "Serial interval ($\\rho=-0.5$)"))
+    type=factor(type, level=c("Intrinsic generation interval", "Forward serial interval ($\\rho=0.5$)",
+                        "Forward serial interval ($\\rho=0$)", "Forward serial interval ($\\rho=-0.5$)"))
   )
 
 g1 <- ggplot(rRdata) +
@@ -123,7 +127,7 @@ g1 <- ggplot(rRdata) +
   ggtitle("A") +
   theme(
     panel.grid = element_blank(),
-    legend.position = c(0.3, 0.75),
+    legend.position = c(0.33, 0.75),
     legend.title = element_blank()
   )
 
@@ -131,40 +135,40 @@ rRdata2 <- list(
   data.frame(
     r=seq(0, 0.3, by=0.01),
     R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=0.5)$R),
-    type="Serial interval ($\\rho=0.5$)"
+    type="Intrinsic serial interval ($\\rho=0.5$)"
   ),
   data.frame(
     r=seq(0, 0.3, by=0.01),
     R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=0)$R),
-    type="Serial interval ($\\rho=0$)"
+    type="Intrinsic serial interval ($\\rho=0$)"
   ),
   data.frame(
     r=seq(0, 0.3, by=0.01),
     R=sapply(seq(0, 0.3, by=0.01), function(x) serialR2(x, rho=-0.5)$R),
-    type="Serial interval ($\\rho=-0.5$)"
+    type="Intrinsic serial interval ($\\rho=-0.5$)"
   ),
   data.frame(
     r=seq(0, 0.3, by=0.01),
     R=sapply(seq(0, 0.3, by=0.01), function(x) generationR(x)$R),
-    type="Generation interval"
+    type="Intrinsic generation interval"
   )
 ) %>%
   bind_rows %>%
   mutate(
-    type=factor(type, level=c("Generation interval", "Serial interval ($\\rho=0.5$)",
-                              "Serial interval ($\\rho=0$)", "Serial interval ($\\rho=-0.5$)"))
+    type=factor(type, level=c("Intrinsic generation interval", "Intrinsic serial interval ($\\rho=0.5$)",
+                              "Intrinsic serial interval ($\\rho=0$)", "Intrinsic serial interval ($\\rho=-0.5$)"))
   )
 
 g2 <- ggplot(rRdata2) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Naive reproduction number ${\\mathcal R}_{\\textrm{\\tiny naive}}$", limits=c(1, 4.5), expand=c(0, 0)) +
-  scale_color_manual(values=cpalette) +
+  scale_y_continuous("Reproduction number ${\\mathcal R}_{\\textrm{\\tiny intrinsic}}$", limits=c(1, 4.5), expand=c(0, 0)) +
+  scale_color_manual(values=cpalette[c(1, 4:6)]) +
   ggtitle("B") +
   theme(
     panel.grid = element_blank(),
-    legend.position = "none",
+    legend.position = c(0.33, 0.75),
     legend.title = element_blank()
   )
 
@@ -200,7 +204,7 @@ g3 <- ggplot(rGdata) +
   geom_smooth(aes(r, mean, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Mean generation/serial interval", expand=c(0, 0), limits=c(4.7, NA),
+  scale_y_continuous("Mean interval (days)", expand=c(0, 0), limits=c(4.7, NA),
                      breaks=c(4:7)) +
   scale_color_manual(values=cpalette) +
   ggtitle("C") +
@@ -242,7 +246,7 @@ g4 <- ggplot(rkappadata) +
   geom_smooth(aes(r, mean, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Squared coefficient of variation", expand=c(0, 0), limits=c(0, 0.64)) +
+  scale_y_continuous("Squared coefficient of variation", expand=c(0, 0), limits=c(0, 0.84)) +
   scale_color_manual(values=cpalette) +
   ggtitle("D") +
   theme(

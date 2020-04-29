@@ -320,7 +320,7 @@ Then, we have:
 \begin{equation}
 \begin{aligned}
 k(x) &= \int_0^\infty h(x, \tau) \dtau\\
-g(\tau) &= \int_0^\infty h(x, \tau) \dx
+\gdist(\tau) &= \int_0^\infty h(x, \tau) \dx
 \end{aligned}
 \end{equation}
 Finally, the case reproduction for this model is defined as follows:
@@ -399,8 +399,8 @@ Q_i = -Y_i + (G_i|Y_i) + X_{1,i}.
 
 \subsection{Realized serial interval distributions}
 
-The initial forward serial-interval distributions $f_0(\tau)$ and the intrinsic generation-interval distribution $g(\tau)$ give identical estimates of \RR regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution (\fref{rR}A).
-However, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates \RR;
+The initial forward serial-interval distributions $f_0(\tau)$ and the intrinsic generation-interval distribution $\gdist(\tau)$ give identical estimates of \RR regardless of the correlation $\rho$ between the forward incubation period distribution and the intrinsic generation-interval distribution (\fref{rR}A).
+However, using the intrinsic serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates \RR;
 as $r$ increases, \Rintrinsic saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
 While the forward serial intervals during the exponential growth phase can also be negative, the proportion of negative intervals are appropriately balanced because faster epidemic growth will lead to shorter backward incubation periods (and therefore a lower proportion of negative serial intervals).
 
@@ -408,8 +408,8 @@ While the forward serial intervals during the exponential growth phase can also 
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
-(A). The forward serial-interval distribution during the exponential growth phase give a correct link between the exponential growth rate $r$ and the reproduction number \RR.
-(B) The serial-interval distributions that assume that the backward incubation period of an infector and the forward incubation period of an infectee are identically distributed give an incorrect link between $r$ and \RR.
+(A). The initial forward serial-interval distribution during the exponential growth phase give a correct link between the exponential growth rate $r$ and the reproduction number \RR.
+(B) The intrinsic serial-interval distributions that assume that the backward incubation period of an infector and the forward incubation period of an infectee are identically distributed give an incorrect link between $r$ and \RR.
 (C) The mean forward serial interval during the exponential growth phase depends on $r$.
 (D) The squared coefficient of variation of forward serial intervals during the exponential growth phase depends on $r$.
 }
