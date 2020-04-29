@@ -444,23 +444,22 @@ See Table 1 for parameter values.
 
 The initial forward serial interval distribution captures the exponential growth phase of an epidemic.
 Now, we characterize how forward and backward serial intervals vary over the course of an epidemic when incubation periods and generation intervals are independent.
-\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on the Gillespie algorithm.
+\fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
 The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
 The mean forward generation interval decreases slightly as the epidemic progresses because an infected individual is less likely to infect another person as the proportion of susceptible individuals decreases (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
-The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation periods of infectors, (ii) the forward generation intervals, and (iii) the forward incubation periods of infectees.
+The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period distributions, (ii) the forward generation-interval distributions, and (iii) the forward incubation period distributions.
 Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D). 
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
-We note that the relative contributions of the three distributions depend on their shapes and correlations between incubation periods and generation intervals --- as discussed earlier, the backward incubation period has \emph{no} effect on the forward serial intervals in the SEIR model, because transmission always occurs after symptom onset.
+We note that the relative contributions of the three distributions depend on their shapes and correlations between incubation periods and generation intervals --- as discussed earlier, the backward incubation period has \emph{no} effect on the forward serial intervals in the special case of an SEIR model, because transmission always occurs after symptom onset.
 
 Qualitative patterns in the mean backward delays is robust across all delay distributions because they are predominantly driven by the changes in incidence (\fref{epi}D--F).
 When incidence increases exponentially, individuals are more likely to have been infected more recently and therefore, we are more likely to observe shorter intervals.
 When incidence decreases, we are more likely to observe longer intervals for similar but opposite reasons.
-Since changes in incidence can occur even in the absence of significant susceptible depletion (e.g., due to intervention), we expect qualitative patterns in the changes of backward delay distributions to be robust across many outbreaks.
 
 \begin{figure}[!ht]
-\includegraphics[width=\textwidth]{observedrR.pdf}
+\includegraphics[width=\textwidth]{diagram.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the observed serial intervals.}
 (A) Changes in the observed and cohort-averaged mean serial interval over time.
