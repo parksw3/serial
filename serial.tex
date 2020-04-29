@@ -64,6 +64,8 @@
 \newcommand{\gtime}{\sigma} %% generation interval
 \newcommand{\gdist}{g} %% generation-interval distribution
 
+\newcommand{\total}{{\mathcal T}} %% total number of serial intervals
+
 \begin{document}
 
 \begin{flushleft}{
@@ -189,17 +191,17 @@ We refer to this definition of serial intervals as the intrinsic serial interval
 \caption{
 \textbf{Illustration of intrinsic, forward and backward serial intervals.}
 (A) The intrinsic serial interval for a cohort of individuals infected at time $\pt$.
-In this case, $x_0$ follows the forward incubation period distribution of the cohort of infectors who became infected at time $\pt$;
-$\gtime$ follows the forward generation interval of the cohort of infectors who became infected at time $\pt$;
-and $x_1$ follows the forward incubation period of the cohort of infectees who became infected at time $\pt+\gtime$.
+In this case, $x_0$ follows the forward incubation period distribution;
+$\gtime$ follows the forward generation-interval distribution;
+and $x_1$ follows the forward incubation period distribution.
 (B) The forward serial interval for a primary cohort $\pt$ (i.e., the cohort of infectors who became symptomatic at time $\pt$).
-In this case, $x_0$ follows the backward incubation period distribution of the cohort of infectors who became symptomatic at time $\pt$;
-$\sigma$ represents the forward generation interval;
-and $x_1$ represents the forward incubation period of the infectee.
-(C) The backward serial interval for a secondary cohort $\delta$ (i.e., the cohort of infectees who became symptomatic at time $\delta$).
-In this case, $x_0$ represents the forward incubation period of the infector;
-$\sigma$ represents the backward generation interval;
-and $x_1$ represents the backward incubation period of the infectee.
+In this case, $x_0$ follows the backward incubation period distribution;
+$\gtime$ follows the forward generation-interval distribution;
+and $x_1$ follows the forward incubation period distribution.
+(C) The backward serial interval for a secondary cohort $\st$ (i.e., the cohort of infectees who became symptomatic at time $\st$).
+In this case, $x_0$ follows the forward incubation period distribution;
+$\gtime$ follows the backward generation-interval distribution;
+and $x_1$ follows the backward incubation period distribution.
 }
 \label{fig:diagram}
 \end{figure}
@@ -220,19 +222,25 @@ $\gtime$ follows the backward generation-interval distribution of the cohort of 
 and $x_0$ follows the forward incubation period distribution of the cohort of infectors who became infected at time $\st-x_1-\gtime$.
 This conceptual framework clearly demonstrates that the distributions of $x_0$, $\st$, and $x_1$ (and therefore the distributions of serial intervals) depend on the reference cohort and the corresponding cohort time.
 
-In order to define forward and backward serial interval distributions, we begin by writing the total number of serial intervals \bmb{explain more please \ldots} between time $\pi$ (when the infector developed symptoms) and $\delta$ (when the infectee developed symptoms), which can be expressed as an integral over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
+In order to define forward and backward serial interval distributions, we begin by modeling the total number of serial intervals $\total(\pt,\st)$ between time $\pt$ and $\st$ (i.e., total number of infection in which infectors develop symptom at time $\pt$ and infectees develop symptom at time $\st$).
+The number of serial intervals between time $\pt$ and $\st$ given that the infectors became infected at time $\alpha_1$ and the infectees became infected at time $\alpha_2$ is can be then expressed as a product of (i) incidence $i$ at time $\alpha_1$, (ii) their case reproduction number $\Rc(\alpha_1)$ (i.e., the average number of secondary cases caused by a primary case infected at time $\alpha_1$, \cite{fraser2007estimating}), (iii) the density of forward generation interval between $\alpha_1$ and $\alpha_2$, and (iv) the densities of forward incubation periods between $\alpha_1$ and $\pt$ (incubation periods of infectors) as well as $\alpha_2$ and $\st$ (incubation periods of infectees):
 \begin{equation}
-T(\pi,\delta) = \int_{-\infty}^{\pi} \int_{\alpha_1}^{\delta} \Rc (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pi-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\delta - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1,
+\Rc (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\st - \alpha_2),
 \end{equation}
-where $\Rc(\alpha_1)$ is the case reproduction number (i.e., the average number of secondary cases caused by a primary case infected at time $\alpha_1$, \cite{fraser2007estimating}) \bmb{is \Rc the same as ``forward \RR measured at a particular time''?}, $i(\alpha_1)$ is incidence, $h_{\alpha_1}(\pi-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pi-\alpha_1$ and forward generation interval $\alpha_2 - \alpha_1$ of an individual infected at time $\alpha_1$ (in this case, the infector), and $k_{\alpha_2}(\delta-\alpha_2)$ describes the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\delta-\alpha_2$ of an individual infected at time $\alpha_2$ (in this case, the infectee). 
-Then, the forward serial-interval distribution is proportional to $T(\pi, \pi+\tau)$. Substituting $x=\pi-\alpha_1$ and $\sigma=\alpha_2-\alpha_1$, we have:
+where $h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pt-\alpha_1$ and the forward generation interval $\alpha_2 - \alpha_1$ of a cohort of individuals infected at time $\alpha_1$ (in this case, the infectors), and $k_{\alpha_2}(\st-\alpha_2)$ is the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\st-\alpha_2$ of a cohort of individuals infected at time $\alpha_2$ (in this case, the infectee).
+Then, the total number of serial intervals can be obtained by integrating over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
 \begin{equation}
-f_\pi(\tau) \propto \int_{0}^{\infty} \int_{0}^{\max(0,x+\tau)} \Rc (\pi-x) i(\pi-x) h_{\pi-x}(x, \sigma) k_{\pi-x+\sigma}(x-\sigma+\tau) \dsigma \dx
+\total (\pt,\st) = \int_{-\infty}^{\pt} \int_{\alpha_1}^{\st} \Rc (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\st - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
 \end{equation}
-Likewise, the backward serial-interval distribution is proportional to $T(\delta-\tau, \delta)$. 
-This time, we substitute $x=\delta-\alpha_2$ and $\sigma=\alpha_2-\alpha_1$ to get:
+
+Then, the forward serial-interval distribution is proportional to $\total (\pt, \pt+\tau)$. Substituting $x=\pt-\alpha_1$ and $\gtime=\alpha_2-\alpha_1$, we have:
 \begin{equation}
-b_\delta(\tau) \propto \int_{0}^{\infty} \int_{\max(0, \tau-x)}^{\infty} \Rc (\delta-x-\sigma) i(\delta-x-\sigma) h_{\delta-x-\sigma}(x+\sigma-\tau, \sigma) k_{\delta-x}(x) \dsigma \dx.
+f_\pt(\tau) \propto \int_{0}^{\infty} \int_{0}^{\max(0,x+\tau)} \Rc (\pt-x) i(\pt-x) h_{\pt-x}(x, \gtime) k_{\pt-x+\gtime}(x-\gtime+\tau) \dsigma \dx
+\end{equation}
+Likewise, the backward serial-interval distribution is proportional to $\total (\st-\tau, \st)$. 
+This time, we substitute $x=\st-\alpha_2$ and $\gtime=\alpha_2-\alpha_1$ to get:
+\begin{equation}
+b_\st(\tau) \propto \int_{0}^{\infty} \int_{\max(0, \tau-x)}^{\infty} \Rc (\st-x-\gtime) i(\st-x-\gtime) h_{\st-x-\gtime}(x+\gtime-\tau, \gtime) k_{\st-x}(x) \dsigma \dx.
 \end{equation}
 
 \subsection{Epidemic model}
