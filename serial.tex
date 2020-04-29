@@ -166,7 +166,9 @@ most epidemiological events that can be observed within an individual have clear
 % \jd{Rethink, or else rethink ``any'' above: the ``hidden'' time (my term) is the time between onset of infectiousness and onset of symptoms; it is within, but can be positive or negative. I'm not saying we should use it here\ldots}
 When we measure an epidemiological time delay between infected individuals (e.g., the serial interval), 
 the primary and secondary events are defined in terms of the direction of transmission:
-The primary event refers to the event that occurs within an infector and does not necessarily occur before the secondary event.
+The primary event refers to the event that occurs within the infector
+and does not necessarily occur before the secondary event (which
+occurs within the infectee).
 
 We model time delays between a primary and a secondary event from a cohort perspective.
 A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
@@ -181,12 +183,29 @@ The backward delay distribution describes the time delays between a primary and 
 For example, the backward incubation period distribution at time $\st$ describes incubation periods for a \emph{cohort} of individuals who became symptomatic at time $\st$.
 Likewise, the backward serial-interval distribution at time $\st$ describes serial intervals for a \emph{cohort} of infectees who became symptomatic at time $\st$.
 
-At the individual-level, both forward and backward \emph{measurements} provide identical measures;
-in other words, we can express the total density of primary and secondary events occurring at time $\pt$ and $\st$, respectively, using both forward and backward delay \emph{distributions}:
-\begin{equation}
+\david{deleted ``At the individual-level, both forward and backward
+  \emph{measurements} provide identical measures; in other words, we
+  can express the total density of primary and secondary events
+  occurring at time $\pt$ and $\st$, respectively, using both forward
+  and backward delay \emph{distributions}:''}
+
+At the individual level, both forward and backward \emph{perspectives}
+must yield identical results (e.g., the length of the incubation
+period of a given individual is the same whether measured forward from
+the time of infection or backward from time of symptom onset).
+Consequently, we must obtain the same number if we count the number of
+individuals who became infected at time $\pt$ or the number of
+individuals who first showed symptoms at time $\st$; that is, we must
+have
+\begin{equation}\label{eq:match}
 \psize(\pt) f_\pt(\st-\pt) = \ssize(\st) b_\st(\st-\pt),
 \end{equation}
-where $\mathcal P$ and $\mathcal S$ represent the sizes of primary and secondary cohorts, respectively.
+where $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
+secondary cohorts, respectively.
+
+{\color{red}DE: IN THE MIDST OF EDITING THIS PARAGRAPH... WILL RETURN
+  TO THIS, HOPEFULLY LATER THIS EVENING...}
+
 Substituting $\tau = \st - \pt$, it follows that:
 \begin{equation}
 b_\st(\tau) = \frac{\psize(\st-\tau) f_{\st-\tau}(\tau)}{\ssize(\st)}
