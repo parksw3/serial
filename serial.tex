@@ -74,12 +74,47 @@
 		Unraveling the paradox between generation and serial intervals
 	}
 }
+\newline
+\\
+Sang Woo Park\textsuperscript{1,*}
+Kaiyuan Sun\textsuperscript{2}
+Benjamin M.\ Bolker\textsuperscript{3,4,5}
+David Champredon\textsuperscript{6}
+David J.\,D.\ Earn\textsuperscript{4,5}
+Michael Li\textsuperscript{3}
+Joshua S.\ Weitz\textsuperscript{7, 8}
+Bryan T.\ Grenfell\textsuperscript{1,2,9}
+Jonathan Dushoff\textsuperscript{3,4,5,*}
+\\
+\bigskip
+\textbf{1} Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, USA
+\\
+\textbf{2} Fogarty International Center, National Institutes of Health, Bethesda, MD, USA
+\\
+\textbf{3} Department of Biology, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{4} Department of Mathematics and Statistics, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{5} M.\,G.\,DeGroote Institute for Infectious Disease Research, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{6} Department of Pathology and Laboratory Medicine, University of Western Ontario, London, Ontario, Canada
+\\
+\textbf{7} School of Biological Sciences, Georgia Institute of Technology, Atlanta, GA, USA
+\\
+\textbf{8} School of Physics, Georgia Institute of Technology, Atlanta, GA, USA
+\\
+\textbf{9} Woodrow Wilson School of Public and International Affairs, Princeton University, Princeton, NJ, USA
+\\
+\bigskip
+
+*Corresponding author: swp2@princeton.edu
 \end{flushleft}
 
 \section*{Abstract}
 
 Generation and serial intervals are under-appreciated --- often treated as auxiliary variables for estimating the reproduction number \RR --- yet important quantities in understanding the outset of an outbreak.
-We argue that a part of the confusion can be attributed to an apparent paradox.
+Even though their differences were clearly laid out over a decade ago, 
+A part of the confusion can be attributed to an apparent paradox.
 By definition, generation and serial intervals describe the renewal process between infection and symptom onset, respectively, and therefore, one might expect them to potentially provide the same link between the epidemic growth rate $r$ and the reproduction number \RR.
 However, current theory does not explain how two different distributions can give the same link between $r$ and $\mathcal R$ --- some studies have demonstrated that generation and serial intervals give different $r$--\RR link, contradicting our biological intuition.
 We provide an answer to the paradox by showing that if serial intervals are defined as \emph{forward-looking} intervals during the exponential phase, then the correct link between $r$ and \RR emerges.
@@ -236,9 +271,9 @@ The number of serial intervals between time $\pt$ and $\st$ given that the infec
 \times 
 \underbrace{i(\alpha_1)}_{\text{incidence}} 
 \times 
-\underbrace{h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)}_{\substack{\text{joint density of} \\ \text{the forward incubation} \\ \text{period and the fowrard} \\ \text{generation interval}}}
+\underbrace{h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)}_{\substack{\text{joint density of} \\ \text{the forward incubation} \\ \text{period and the forward} \\ \text{generation interval}\\ \text{(of infectors)}}}
 \times
-\underbrace{k_{\alpha_2}(\st - \alpha_2)}_{\substack{\text{marginal density of} \\ \text{the forward incubation} \\ \text{period}}},
+\underbrace{k_{\alpha_2}(\st - \alpha_2)}_{\substack{\text{marginal density of} \\ \text{the forward incubation} \\ \text{period (of infectees)}}},
 \end{equation}
 where $h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pt-\alpha_1$ and the forward generation interval $\alpha_2 - \alpha_1$ of a cohort of individuals infected at time $\alpha_1$ (in this case, the infectors), and $k_{\alpha_2}(\st-\alpha_2)$ is the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\st-\alpha_2$ of a cohort of individuals infected at time $\alpha_2$ (in this case, the infectee).
 It is necessary to describe the forward incubation periods and the forward generation intervals using a joint probability distribution because onset of symptoms and transmission potential jointly depend on the life history of a disease;
@@ -290,7 +325,7 @@ g(\tau) &= \int_0^\infty h(x, \tau) \dx
 \end{equation}
 Finally, the case reproduction for this model is defined as follows:
 \begin{equation}
-\Rc(t) = \Ro \int_0^\infty g(\tau) S(t+\tau) \dtau.
+\Rc(t) = \Ro \int_0^\infty \gdist(\tau) S(t+\tau) \dtau.
 \end{equation}
 
 \subsection{Linking $r$ and \RR}
