@@ -20,7 +20,7 @@ g1 <- ggplot(arrow) +
   geom_point(aes(0.5, 0.1), size=3) +
   annotate("text", x=1.5, y=-0.05, label="$p+x_0$") +
   annotate("text", x=0.5, y=-0.05, label="$p$") +
-  annotate("text", x=0.5, y=-0.1, label="Infector") +
+  annotate("text", x=0.5, y=-0.1, label="Infector (reference cohort)") +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
   annotate("text", x=2.5, y=-0.05, label="$p+\\sigma$") +
   annotate("text", x=3.5, y=-0.05, label="$p+\\sigma+x_1$") +
@@ -37,8 +37,7 @@ g1 <- ggplot(arrow) +
   annotate("text", x=1, y=0.15, label="Forward incubation period") +
   annotate("text", x=1, y=0.25, label="Forward generation interval") +
   annotate("text", x=3, y=0.35, label="Forward incubation period") +
-  geom_point(aes(1.5, 0), size=4, shape=21, fill="white", stroke=2) +
-  geom_point(aes(3.5, 0), size=4, shape=21, fill="black", stroke=2) +
+  geom_point(aes(0.5, 0), size=4, shape=21, fill="white", stroke=2) +
   scale_y_continuous(limits=c(-0.15, 0.45)) +
   ggtitle("A. Intrinsic serial interval") +
   theme(
@@ -61,7 +60,7 @@ g2 <- ggplot(arrow) +
   annotate("text", x=1.5, y=-0.05, label="$p$") +
   annotate("text", x=0.5, y=-0.05, label="$p-x_0$") +
   annotate("text", x=0.5, y=-0.1, label="Infector") +
-  annotate("text", x=1.5, y=-0.1, label="Primary cohort") +
+  annotate("text", x=1.5, y=-0.1, label="Reference cohort") +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
   annotate("text", x=2.5, y=-0.05, label="$p-x_0+\\sigma$") +
   annotate("text", x=3.5, y=-0.05, label="$p-x_0+\\sigma+x_1$") +
@@ -79,7 +78,6 @@ g2 <- ggplot(arrow) +
   annotate("text", x=1, y=0.25, label="Forward generation interval") +
   annotate("text", x=3, y=0.35, label="Forward incubation period") +
   geom_point(aes(1.5, 0), size=4, shape=21, fill="white", stroke=2) +
-  geom_point(aes(3.5, 0), size=4, shape=21, fill="black", stroke=2) +
   scale_y_continuous(limits=c(-0.15, 0.45)) +
   ggtitle("B. Forward serial interval") +
   theme(
@@ -105,7 +103,7 @@ g3 <- ggplot(arrow) +
   annotate("text", x=1.5, y=-0.05, label="$s-x_1-\\sigma+x_0$") +
   annotate("text", x=0.5, y=-0.1, label="Infector") +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
-  annotate("text", x=3.5, y=-0.1, label="Secondary cohort") +
+  annotate("text", x=3.5, y=-0.1, label="Reference cohort") +
   geom_segment(aes(x, y, xend=x1, yend=y1), arrow = arrow(length = unit(0.2, "inches")), lwd=1) +
   geom_segment(aes(0.5, 0, xend=0.5, yend=0.3), lty=2) +
   geom_segment(aes(1.5, 0, xend=1.5, yend=0.4), lty=2) +
@@ -120,7 +118,6 @@ g3 <- ggplot(arrow) +
   annotate("text", x=2, y=0.25, label="Backward generation interval") +
   annotate("text", x=1, y=0.35, label="Forward incubation period") +
   geom_point(aes(3.5, 0), size=4, shape=21, fill="white", stroke=2) +
-  geom_point(aes(1.5, 0), size=4, shape=21, fill="black", stroke=2) +
   scale_y_continuous(limits=c(-0.15, 0.45)) +
   ggtitle("C. Backward serial interval") +
   theme(
