@@ -408,10 +408,10 @@ While the forward serial intervals during the exponential growth phase can also 
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
-(A). The initial forward serial-interval distribution during the exponential growth phase give a correct link between the exponential growth rate $r$ and the reproduction number \RR.
-(B) The intrinsic serial-interval distributions that assume that the backward incubation period of an infector and the forward incubation period of an infectee are identically distributed give an incorrect link between $r$ and \RR.
-(C) The mean forward serial interval during the exponential growth phase depends on $r$.
-(D) The squared coefficient of variation of forward serial intervals during the exponential growth phase depends on $r$.
+(A). The initial forward serial-interval distribution give a correct link between the exponential growth rate $r$ and the reproduction number \RR.
+(B) The intrinsic serial-interval distributions that assume that the backward incubation period of an infector and the forward incubation period of an infectee are identically distributed give an incorrect link between $r$ and \RR (and underestimates \RR compared to the intrinsic generation-interval distribution).
+(C) The mean initial forward serial interval during the exponential growth phase depends on $r$.
+(D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase depends on $r$.
 }
 \label{fig:rR}
 \end{figure}
@@ -420,7 +420,9 @@ Comparing the shapes of initial forward serial-interval distributions and the in
 In general, generation-interval distributions with higher means and less variability are expected to give higher \RR for a given $r$ \citep{wallinga2007generation, park2019practical}.
 In this case, the initial forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
 The effects of higher means (which increases \RR) and higher variability (which decreases \RR) cancel out exactly;
-therefore, we can estimate the same \RR using both serial and generation intervals.
+therefore, we can estimate the same \RR using both initial forward serial and intrinsic generation intervals.
+On the other hand, intrinsic serial intervals have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are wider (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
+therefore, we underestimate \RR when we use the intrinsic serial-interval distribution.
 
 \begin{figure}[!ht]
 \begin{center}
@@ -440,7 +442,7 @@ See Table 1 for parameter values.
 \label{fig:epi}
 \end{figure}
 
-The initial forward serial interval distribution only applies to the exponential growth phase of an epidemic.
+The initial forward serial interval distribution captures the exponential growth phase of an epidemic.
 Now, we characterize how forward and backward serial intervals vary over the course of an epidemic when incubation periods and generation intervals are independent.
 \fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on the Gillespie algorithm.
 The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
