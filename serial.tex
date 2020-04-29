@@ -48,7 +48,7 @@
 \newcommand{\Rc}{\Rx{\mathrm{c}}}
 \newcommand{\RR}{\ensuremath{{\mathcal R}}\xspace}
 \newcommand{\Rhat}{\ensuremath{{\hat\RR}}}
-\newcommand{\Rnaive}{\ensuremath{{\mathcal R}_{\textrm{\tiny naive}}}\xspace}
+\newcommand{\Rintrinsic}{\ensuremath{{\mathcal R}_{\textrm{\tiny intrinsic}}}\xspace}
 \newcommand{\tsub}[2]{#1_{{\textrm{\tiny #2}}}}
 \newcommand{\dd}[1]{\ensuremath{\, \mathrm{d}#1}}
 \newcommand{\dtau}{\dd{\tau}}
@@ -331,11 +331,11 @@ Finally, the case reproduction for this model is defined as follows:
 \subsection{Linking $r$ and \RR}
 
 During the initial phase of an epidemic, the proportion susceptible remains approximately constant ($S(t) \approx S(0)$) and incidence of infection grows exponentially: $i(t)=i_0\exp(rt)$.
-Then, we can use the Euler-Lotka equation to estimate the reproduction number from the exponential growth rate $r$ \citep{wallinga2007generation}:
+When incidence grows exponentially, the intrinsic generation-interval distribution provides the correct link between the exponential growth rate $r$ and the reproduction number \RR based on the Euler-Lotka equation \citep{wallinga2007generation}:
 \begin{equation}
 \frac{1}{\RR} = \int_0^\infty \exp(-r\tau) g(\tau) \dtau.
 \end{equation}
-Analogous to forward generation-interval distributions, 
+Analogous to the intrinsic generation-interval distribution, 
 forward serial-interval distributions describe the renewal process of symptomatic cases.
 Therefore, we expect the forward serial-interval distribution during the exponential growth phase --- which we refer to as the \emph{initial} forward serial-interval distribution $f_0$ --- to provide the identical $r$--\RR link as the intrinsic generation-interval distribution:
 \begin{equation}
@@ -377,22 +377,22 @@ To do so, we model the intrinsic generation-interval distribution and the incuba
 the multivariate log-normal distribution is parameterized based on parameter estimates for COVID-19 (Table 1).
 We construct forward serial intervals during the exponential growth period as follows:
 \begin{equation}
-S_i = -B_i + (G_i|B_i) + I_i,
+F_i = -X_{0,i} + (G_i|X_{0,i}) + X_{1,i},
 \end{equation}
-where the backward incubation period $B_i$ of an infector is simulated by drawing random log-normal samples $A_i$ with log mean $\mu_I$ and log variance $\sigma_I^2$ and resampling $A_i$, each weighted by the inverse of the exponential growth function $\exp(-rA_i)$;
-the intrinsic generation interval conditional on the incubation period of the infector $(G_i|B_i)$ is drawn from a log-normal distribution with log mean $\mu_G + \sigma_G \rho (\log(B_i) - \mu_I)/\sigma_I$ and log variance $\sigma_G^2 (1-\rho^2)$;
-the forward incubation period $I_i$ of an infectee is drawn from a log-normal distribution with log mean $\mu_I$ and log variance $\sigma_I^2$.
+where the backward incubation period $X_{0,i}$ of an infector is simulated by drawing random log-normal samples $Y_i$ with log mean $\mu_I$ and log variance $\sigma_I^2$ and resampling $Y_i$, each weighted by the inverse of the exponential growth function $\exp(-rY_i)$;
+the intrinsic generation interval conditional on the incubation period of the infector $(G_i|X_{0,i})$ is drawn from a log-normal distribution with log mean $\mu_G + \sigma_G \rho (\log(X_{0,i}) - \mu_I)/\sigma_I$ and log variance $\sigma_G^2 (1-\rho^2)$;
+the forward incubation period $X_{1,i}$ of an infectee is drawn from a log-normal distribution with log mean $\mu_I$ and log variance $\sigma_I^2$.
 We then calculate the reproduction number \RR using the empirical estimator:
 \begin{equation}
-\RR = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r S_i)}.
+\RR = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r F_i)}.
 \end{equation}
-We compare this with an estimate of \RR based on naive serial-interval distribution that assumes that the backward and the forward incubation periods are identically distributed \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
+We compare this with an estimate of \RR based on the intrinsic serial-interval distribution in which the backward and the forward incubation periods are identically distributed \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
 \begin{equation}
-  \Rnaive = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r Q_i)},
+  \Rintrinsic = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r Q_i)},
 \end{equation}
 where
 \begin{equation}
-Q_i = -A_i + (G_i|A_i) + I_i.
+Q_i = -Y_i + (G_i|Y_i) + X_{1,i}.
 \end{equation}
 
 \section{Results}
@@ -401,7 +401,7 @@ Q_i = -A_i + (G_i|A_i) + I_i.
 
 The initial forward serial-interval distributions $f_0(\tau)$ and the intrinsic generation-interval distribution $g(\tau)$ give identical estimates of \RR regardless of the correlation $\rho$ between the incubation period distribution and the intrinsic generation-interval distribution (\fref{rR}A).
 However, using naive serial-interval distributions that do not account for disease dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates \RR;
-as $r$ increases, \Rnaive saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
+as $r$ increases, \Rintrinsic saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
 While the forward serial intervals during the exponential growth phase can also be negative, the proportion of negative intervals are appropriately balanced because faster epidemic growth will lead to shorter backward incubation periods (and therefore a lower proportion of negative serial intervals).
 
 \begin{figure}[!th]
