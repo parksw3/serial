@@ -61,6 +61,9 @@
 \newcommand{\psize}{{\mathcal P}} %% primary cohort size
 \newcommand{\ssize}{{\mathcal S}} %% secondary cohort size
 
+\newcommand{\gtime}{\sigma} %% generation interval
+\newcommand{\gdist}{g} %% generation-interval distribution
+
 \begin{document}
 
 \begin{flushleft}{
@@ -150,36 +153,50 @@ where $\mathcal P$ and $\mathcal S$ represent the sizes of primary and secondary
 Substituting $\tau = \st - \pt$, it follows that:
 \begin{equation}
 b_\st(\tau) = \frac{\psize(\st-\tau) f_{\st-\tau}(\tau)}{\ssize(\st)}
+\label{eq:backward}
 \end{equation}
 Therefore, the backward delay distribution depends on the changes in primary cohort size $\tau$ time units ago from the reference time $\st$, $\psize(\st-\tau)$, as well as changes in the forward delay distribution, $f_{\st-\tau}(\tau)$.
-These ideas apply to all epidemiological delay distributions and generalize the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
 
 There are multiple mechanisms that drive the changes in forward and backward delay distributions over time ---
-we being by describing factors that affect the forward delay distributions.
-Typically, within-individual delay distributions that reflect life-history of a disease is expected to remain constant over the course of an epidemic.
+we begin by describing factors that affect the forward delay distributions.
+Typically, within-individual forward delay distributions that reflect life-history of a disease is expected to remain invariant over the course of an epidemic; 
+these distributions include incubation period distribution.
+Within-individual forward delay distributions that depend on external interventions, such as time distribution of symptom onset to hospitalization, can change over the course of an epidemic.
+Between-individual forward delay distributions, such as generation- or serial-interval distributions, depend on epidemic dynamics;
+for example, the forward generation intervals to contract during the outbreak because infected individuals are less likely to infect others later due to susceptible depletion \citep{champredon2015intrinsic}.
 
-\bmb{need to work \textbf{really hard} to clarify the mechanisms driving various differences [backward vs forward, dependence on current $S$/epidemic phase, etc.]; which are caused by changes in cohort size over time (Euler-Lotka-type effects), which are caused by censoring/conditionality of observations, etc.?}
+Changes in the backward delay distributions are affected by the changes in the forward delay distributions as it is evident from \eref{backward}.
+Backward delay distributions also depend on changes in the primary cohort size over time due to conditionality of observations: 
+The backward delay distribution is measured for a cohort of individuals whose secondary events occurred at the same time.
+When the cohort size is increasing (or decreasing) over time, we are biased to observe shorter (or longer) delays if we look backward.
+Therefore, the backward delay distributions will be generally different from the forward delay distributions even if we are measuring time delays that are intrinsic to life-history of a disease (e.g., incubation period).
+These ideas apply to all epidemiological delay distributions and generalize the work by \citep{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe the realized generation intervals from the perspective of an infector and an infectee, respectively.
 
 \subsection{Realized serial interval distributions}
 
-The serial interval is defined as the time between when an infector becomes symptomatic and when and infectee becomes symptomatic.
-Serial intervals $\tau$ have been typically written in the form:
+The serial interval is defined as the time between when an infector becomes symptomatic and when and infectee becomes symptomatic \citep{svensson2007note}.
+Previous studies have often expressed serial intervals $\tau$ in the form (\fref{diagram}A):
 \begin{equation}
-\tau = - x_0 + \sigma + x_1
+\tau = (\gtime + x_1) - x_0
 \end{equation}
-where $x_0$ and $x_1$ represent the realized time from infection to symptom onset of an infector and an infectee, respectively, and $\sigma$ represents the realized generation interval.
-Previous studies have often assumed that $x_0$ and $x_1$ follow the same distributions and concluded that the serial and generation intervals have the same mean \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}.
-% \jd{I would drop the last clause. I still argue that this is true for intrinsic SIs, and we don't want to get into that here. You can just keep rolling forward at this point.}
+where $x_0$ and $x_1$ represent the realized time from infection to symptom onset of an infector and an infectee, respectively, and $\gtime$ represents the realized generation interval.
+These studies assumed that $x_0$ and $x_1$ follow the same distributions and concluded that the serial and generation intervals have the same mean \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
+this conclusion is based on the implicit assumption that serial intervals are measured from the perspective of a cohort of infectors that share the same infection time.
+We refer to this definition of serial intervals as the intrinsic serial interval.
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{serial_guide.pdf}
 \caption{
-\textbf{Illustration of forward and backward serial intervals.}
-(A) The forward serial interval for a primary cohort $\pi$ (i.e., an infector who became symptomatic at time $\pi$).
-In this case, $x_0$ represents the backward incubation period of the infector;
+\textbf{Illustration of intrinsic, forward and backward serial intervals.}
+(A) The intrinsic serial interval for a cohort of individuals infected at time $\pt$.
+In this case, $x_0$ follows the forward incubation period distribution of the cohort of infectors who became infected at time $\pt$;
+$\gtime$ follows the forward generation interval of the cohort of infectors who became infected at time $\pt$;
+and $x_1$ follows the forward incubation period of the cohort of infectees who became infected at time $\pt+\gtime$.
+(B) The forward serial interval for a primary cohort $\pt$ (i.e., the cohort of infectors who became symptomatic at time $\pt$).
+In this case, $x_0$ follows the backward incubation period distribution of the cohort of infectors who became symptomatic at time $\pt$;
 $\sigma$ represents the forward generation interval;
 and $x_1$ represents the forward incubation period of the infectee.
-(B) The backward serial interval for a secondary cohort $\delta$ (i.e., an infectee who became symptomatic at time $\delta$).
+(C) The backward serial interval for a secondary cohort $\delta$ (i.e., the cohort of infectees who became symptomatic at time $\delta$).
 In this case, $x_0$ represents the forward incubation period of the infector;
 $\sigma$ represents the backward generation interval;
 and $x_1$ represents the backward incubation period of the infectee.
@@ -187,21 +204,21 @@ and $x_1$ represents the backward incubation period of the infectee.
 \label{fig:diagram}
 \end{figure}
 
+Since serial intervals describe the renewal process between symptomatic cases based on their symptom onset dates, we have to define serial intervals from the perspective of a cohort (of either infectors or infectees) that share the same symptom onset time.
 The cohort-based framework allows us to understand the distribution of serial intervals we expect to observe when incidence is changing.
-Given that an infector became symptomatic at time $\pi$, we first go backward in time by asking when the infector was infected, and then go forward in time by asking first when the infectee was infected and then when the infectee became symptomatic;
+Given that an infector became symptomatic at time $\pt$, we first go backward in time by asking when the infector was infected, and then go forward in time by asking first when the infectee was infected and then when the infectee became symptomatic;
 this defines the forward serial interval.
-In \fref{diagram}A, we see that $x_0$ represents the backward incubation period of the infector who became symptomatic at time $\pi$;
-$\sigma$ represents the forward generation interval of the infector who came infected at time $\pi - x_0$;
-and $x_1$ represents the forward incubation period for the infectees who became infected at time $\pi - x_0 + \sigma$.
+In \fref{diagram}B, we see that $x_0$ follows the backward incubation period distribution of the cohort of infectors who became symptomatic at time $\pt$;
+$\gtime$ follows the forward generation-interval distribution of the cohort of infector who came infected at time $\pt - x_0$;
+and $x_1$ follows the forward incubation period distribution of the cohort of infectees who became infected at time $\pt - x_0 + \gtime$.
 
-Likewise, we can define the backward serial interval distribution for a secondary cohort $\delta$ (\fref{diagram}B).
-Given that an infectee became symptomatic at time $\delta$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
+Likewise, we can define the backward serial interval distribution for a secondary cohort $\st$ (\fref{diagram}C).
+Given that an infectee became symptomatic at time $\st$, we have to first go backward in time by asking when the infectee became infected and when the infector became infected; 
 then, we have to go forward in time by asking when the infector became symptomatic.
-In this case, $x_1$ represents the backward incubation period of the infectee who became symptomatic at time $\delta$;
-$\sigma$ represents the backward generation interval of the infectee who became infected at time $\delta-x_1$;
-and $x_0$ represents the forward incubation period of the infector who became infected at time $\delta-x_1-\sigma$.
-This conceptual framework clearly demonstrates that the distributions of $x_0$, $\delta$, and $x_1$ (and therefore the distributions of serial intervals) depend on the perspective \bmb{better/more consistent word than ``perspective''?} as well as time and cannot be treated statically.
-\bmb{please explain/clarify why the backward incubation period is not the same is as the forward}
+In this case, $x_1$ follows the backward incubation period distribution of the cohort of infectees who became symptomatic at time $\st$;
+$\gtime$ follows the backward generation-interval distribution of the cohort of infectees who became infected at time $\st-x_1$;
+and $x_0$ follows the forward incubation period distribution of the cohort of infectors who became infected at time $\st-x_1-\gtime$.
+This conceptual framework clearly demonstrates that the distributions of $x_0$, $\st$, and $x_1$ (and therefore the distributions of serial intervals) depend on the reference cohort and the corresponding cohort time.
 
 In order to define forward and backward serial interval distributions, we begin by writing the total number of serial intervals \bmb{explain more please \ldots} between time $\pi$ (when the infector developed symptoms) and $\delta$ (when the infectee developed symptoms), which can be expressed as an integral over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
 \begin{equation}
