@@ -485,9 +485,10 @@ When incidence decreases, we are more likely to observe longer intervals for sim
 \caption{
 \textbf{Estimating the reproduction number from the observed serial intervals.}
 (A) Schematic representation of line list data collected during an epidemic.
-(B) Changes in the estimate of \RR based on the observed serial intervals over time.
+(B) Changes in the estimate of \Ro based on the observed serial intervals over time.
 (C) Schematic representation of line list data rearranged by symptom onset date of infectors.
-(B) Changes in the estimate of \RR based on the cohort-averaged serial intervals over time.
+(B) Changes in the estimate of \Ro based on the cohort-averaged serial intervals over time.
+Dashed lines represent \Ro.
 }
 \label{fig:obsrR}
 \end{figure}
@@ -496,19 +497,19 @@ Now, we turn to practical issues.
 Serial intervals are typically calculated from line-list data (\fref{obsrR}A).
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
 for example, if we were to measure serial intervals on Day 8 in \fref{obsrR}A, we will only be able to observe the first 6 events (ID 1--6).
-\fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of \RR in our stochastic simulations.
+\fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of the basic reproduction number \Ro in our stochastic simulations.
 Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval and therefore \Ro by a large amount because the observed serial-interval distribution converges to the intrinsic serial-interval distribution;
 we still underestimate the intrinsic value slightly due to contraction of the forward generation-interval distribution during the susceptible depletion phase (\fref{epi}C).
 
-We provide a simple, heuristic way of assessing potential biases in the estimate of the mean initial forward serial interval and therefore \RR retrospectively.
+We provide a simple, heuristic way of assessing potential biases in the estimate of the mean initial forward serial interval and therefore \Ro retrospectively.
 Once serial intervals have been observed after the epidemic has been sufficiently progressed, we can rearrange the line list and group observed serial intervals based on the symptom onset date of infectors (\fref{obsrR}C).
-Then, we can compare how estimates of the mean serial interval as well as \RR change as we incorporate more recent cohorts into the analysis;
+Then, we can compare how estimates of the mean serial interval as well as \Ro change as we incorporate more recent cohorts into the analysis;
 that is, we analyze observed serial intervals from infectors who became symptomatic before time $t$ and evaluate how the estimates change as we increase $t$
 (\fref{obsrR}D).
-During the exponential growth phase, the estimates of the mean serial interval and \RR are consistent with the target value;
+During the exponential growth phase, the estimates of the mean serial interval and \Ro are consistent with the target value;
 adding more data allows us to make more precise inference during this period.
 However, the cohort-averaged estimates decrease rapidly soon after the exponential growth period, reflecting changes in the forward serial-interval distributions.
-This approach allows us to detect dynamical changes in the forward serial-interval distributions and its effect on the estimates of \RR.
+This approach allows us to detect dynamical changes in the forward serial-interval distributions and its effect on the estimates of \Ro.
 
 \begin{figure}[!th]
 \includegraphics[width=\textwidth]{serial_analysis.pdf}
