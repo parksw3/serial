@@ -508,8 +508,8 @@ Colored ribbons represent the range of estimates of \Ro across 10 stochastic sim
 \end{figure}
 
 Now, we turn to practical issues.
-Serial intervals are typically measured from line-list data (\fref{obsrR}A).
-When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
+In order to have an unbiased estimate on \Ro, we need to use serial-interval distributions estimated based on primary cohorts (i.e., infectors who share the same symptom onset time) at the early stage of the epidemic (i.e. initial forward serial-interval distribution).
+However, when an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
 for example, if we were to measure serial intervals on Day 8 as in \fref{obsrR}A, we will only be able to observe the first 6 events (ID 1--6).
 \fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of the basic reproduction number \Ro in our stochastic simulations.
 Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval and therefore \Ro by a large amount because the observed serial-interval distribution converges to the intrinsic serial-interval distribution;
@@ -547,7 +547,7 @@ Finally, we re-analyze serial intervals of COVID-19 collected by \cite{du2020ser
 \cite{du2020serial} estimated the mean serial of 3.96 days (95\% CI 3.53–4.39 days) and \Ro of 1.32 (95\% CI 1.16–1.48).
 \fref{du}A shows that the mean forward serial interval decreases over time.
 While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and maximum \emph{observable} serial intervals), increase in the proportion of negative serial intervals are clearly indicative of the changes in the forward serial-interval distribution.
-The decrease in the mean forward serial interval is likely to be cause by increase in the mean backward serial intervals as well as increase in mitigation efforts.
+The decrease in the mean forward serial interval is likely to be cause by increase in the mean backward serial intervals as well as intervention efforts (e.g., case isolation will shorten the forward generation intervals).
 \fref{du}B shows that the mean backward serial interval increases over time, reflecting decrease in incidence over time.
 
 While the qualitative changes in the mean forward and backward serial interval are consistent with our earlier simulations (\fref{epi}), the initial mean forward serial interval (\fref{du}A) appears to be larger than what we calculate earlier based on previously estimated incubation period and generation-interval distributions (\fref{rR}C).
