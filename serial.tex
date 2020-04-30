@@ -561,9 +561,9 @@ This example clearly demonstrates the danger of using the observed serial interv
 
 \section{Discussion}
 
-Estimating generation- and serial-interval distributions is critical to characterizing the outset of an outbreak as they determine the time scale of disease transmission.
-Generation intervals are defined as the time difference between infection time of a transmission pair, whereas serial intervals are defined as the time difference between symptom onset time of a transmission pair \citep{svensson2007note}.
-By definition, they both describe how infection spreads between individiauls; 
+Characterizing generation- and serial-interval distributions is critical to understanding the outset of an outbreak as they determine the time scale of disease transmission.
+Here, we show that the initial forward serial-interval distributions --- measured during exponential growth phase of an epidemic --- provides the correct link between the exponential growth rate $r$ and the reproduction number \RR.
+
 
 Our study demonstrates the importance of defining a reference cohort for studying any epidemiological time delay distributions.
 Previous studies have shown that generation interval can be either measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
@@ -609,13 +609,13 @@ Our study provides a rationale for reassessing estimates of serial-interval dist
 We simulate the renewal equation model using a discrete-time approximation:
 \begin{equation}
 \begin{aligned}
-i(t) &= \Ro S(t-\Delta t) \sum_{m=1}^{\ell} i(t-m \Delta t) \hat{g}(m \Delta t) \\
+i(t) &= \Ro S(t-\Delta t) \sum_{m=1}^{\ell} i(t-m \Delta t) \hat{\gdist}(m \Delta t) \\
 S(t) &= S(t-\Delta t) - i(t)
 \end{aligned}
 \end{equation}
-where $\hat{g}$ is a discrete-time intrinsic generation-interval distribution that satisfies the following:
+where $\hat{\gdist}$ is a discrete-time intrinsic generation-interval distribution that satisfies the following:
 \begin{equation}
-\hat{g}(m \Delta t) = \frac{g(m \Delta t)}{\sum_{i=1}^\ell g(m \Delta t)}, \quad m=1, \dots, \ell
+\hat{\gdist}(m \Delta t) = \frac{\gdist(m \Delta t)}{\sum_{i=1}^\ell \gdist(m \Delta t)}, \quad m=1, \dots, \ell
 \end{equation}
 The continuous-time intrinsic generation-interval distribution is parameterized using a log-normal distribution (Table 1). We define the forward incubation period distribution in a similar manner:
 \begin{equation}
@@ -624,7 +624,7 @@ The continuous-time intrinsic generation-interval distribution is parameterized 
 where its continuous-time analog is also based on a log-normal distribution.
 For brevity, we assume that the forward incubation periods and intrinsic generation intervals are independent:
 \begin{equation}
-\hat{h}(m \Delta t, \Delta t n) = \hat{k}(m \Delta t)\hat{g}(\Delta t n), \quad m,n=1, \dots, \ell.
+\hat{h}(m \Delta t, \Delta t n) = \hat{k}(m \Delta t)\hat{\gdist}(\Delta t n), \quad m,n=1, \dots, \ell.
 \end{equation}
 We use $\Delta t = 0.025\,\textrm{days}$ and $\ell=2001$ for discretization steps.
 
@@ -654,17 +654,17 @@ We simulate 10 epidemics with $I(0)=10$ and $N$=40,000.
 
 \subsection{Linking $r$ and \RR using serial-interval distributions}
 
-The intrinsic generation-interval distribution $g(\tau)$ provides a link between $r$ and \RR via the Euler-Lotka equation:
+The intrinsic generation-interval distribution $\gdist(\tau)$ provides a link between $r$ and \Ro via the Euler-Lotka equation:
 \begin{equation}
-\frac{1}{\RR} = \int_0^\infty \exp(-r\tau) g(\tau) \mathrm{d} \tau.
+\frac{1}{\Ro} = \int_0^\infty \exp(-r\tau) \gdist(\tau) \dtau.
 \end{equation}
 Here, we prove that the initial forward serial-interval distribution $f_0$ also provides the same link:
 \begin{equation}
-\frac{1}{\RR} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau,
+\frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \dtau,
 \end{equation}
 where the initial forward serial-interval distribution is defined as:
 \begin{equation}
-f_{0}(\tau) \propto \int_{0}^{\infty} \int_{0}^{\max(0,x+\tau)} \exp(-rx) h(x, \sigma) k(x-\sigma+\tau) \mathrm{d}\sigma\,\mathrm{d}x.
+f_{0}(\tau) \propto \int_{0}^{\infty} \int_{0}^{\max(0,x+\tau)} \exp(-rx) h(x, \sigma) k(x-\sigma+\tau) \dsigma\dx.
 \end{equation}
 
 First, we rewrite the initial forward serial-interval distribution in the following form:
