@@ -561,24 +561,29 @@ This example clearly demonstrates the danger of using the observed serial interv
 
 \section{Discussion}
 
-Characterizing generation- and serial-interval distributions is critical to understanding the outset of an outbreak as they determine the time scale of disease transmission.
+Characterizing generation- and serial-interval distributions is critical to understanding the course of an outbreak as they determine the time scale of disease transmission.
 Here, we show that the initial forward serial-interval distributions --- measured during exponential growth phase of an epidemic --- provides the correct link between the exponential growth rate $r$ and the reproduction number \RR.
+We further illustrate that epidemiological dynamics can cause the mean backward incubation period to increase over time, which in turn decreases the mean forward serial interval.
+Failing to account for these changes can result in underestimation of \RR.
 
-
-Our study demonstrates the importance of defining a reference cohort for studying any epidemiological time delay distributions.
+Our study demonstrates the importance of defining a reference cohort for characterizing any epidemiological time distributions.
 Previous studies have shown that generation interval can be either measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
-we generalize their ideas by showing that these ideas can be applied to all distributions.
-Changes in the backward delay distributions is particularly robust across all distributions because they depend on previous changes in cohort sizes, which, in turn, depend on incidence of infection.
-Previous analyses of COVID-19 epidemics have attempted to reconstruct the time series of symptomatic cases or infected cases from the reports of confirmed cases by assuming a constant backward delay distribution (e.g., \cite{tempvar, park2020potential, shim2020transmission}).
-Although such approaches may be able to roughly match the time scale of an epidemic, we recommend using deconvolution approaches instead for proper reconstruction of epidemic time series \citep{goldstein2009reconstructing}.
+we generalize their ideas and show that they can be applied to any distributions.
+Changes in the backward delay distributions is expected to be a robust feature across any outbreaks because they are primarily driven by changes in cohort sizes, which, in turn, depend on incidence of infection.
+Recent analyses of COVID-19 epidemics have attempted to reconstruct epidemic time series of symptomatic cases or infected cases from the reports of confirmed cases by using time-independent delay distributions from infection or symptom onset to reporting (e.g., \cite{tempvar, park2020potential, shim2020transmission});
+these studies effectively assume constant backward delay distributions.
+Although such approaches may be able to roughly match the time scale of an epidemic, we recommend using deconvolution approaches \citep{goldstein2009reconstructing} or mechanstic modeling approaches for proper reconstruction of epidemic time series instead \citep{flaxman2020estimating}.
 
 Using cohort-based approaches, we define forward and backward serial intervals.
-The forward serial-interval distribution describes the renewal process of the symptomatic individuals, and therefore, its initial distribution  provides the correct link between $r$ and \RR.
+The forward serial-interval distribution describes the renewal process between symptomatic cases, and therefore, its initial distribution provides the correct link between $r$ and \RR.
 While our results support the use of serial interval distributions for calculating \RR, 
-they also reveal gaps in current approaches to characterizing serial intervals.
-Previous studies have (i) recommended using up-to-date serial intervals \citep{thompson2019improved}, (ii) assumed that the serial interval distribution remains constant throughout an epidemic \citep{wallinga2004different, cori2013new}, and (iii) applied serial interval distributions estimated from one location to analyzing epidemics in other locations \citep{tempvar};
-however, all of these approaches implicitly ignore spatiotemporal variation in incidence, which affects the serial-interval distributions, and may therefore give systematically biased estimates of \RR. 
-For example, given large geographical differences in the observed exponential growth rates of the COVID-19 epidemic \citep{tempvar}, the initial forward serial interval distributions is likely to vary across different countries.
+they also reveal gaps in current practices in incorporating serial-interval distributions into outbreak analyses.
+In particular, \cite{thompson2019improved} recently emphasized the importance of using up-to-date serial interval data for accurate estimation of time-varying reproduction numbers;
+however, our study demonstrates that early serial interval data is required to estimate \RR and using up-to-date serial interval data can, in fact, underestaimte \RR.
+Moreover, \cite{tempvar} recently analyzed case reports of COVID-19 from over 30 countries to estimate their time-varying reproduction numbers but relied on a serial-interval distribution;
+given large geographical differences in the observed exponential growth rates of the COVID-19 epidemic, the initial forward serial interval distributions is likely to vary across different countries.
+
+
 Future studies should aim to characterize spatiotemporal variation in serial intervals and understand the drivers of their differences.
 
 We also show that there are multiple serial-interval distributions that correspond to the same set of generation-interval and incubation period distributions depending on their correlations.
