@@ -175,7 +175,7 @@ g2a <- ggplot(filter(R0all, type=="Observed")) +
   annotate("text", x=78, y=rr$R0, label="Initial forward", hjust=1, vjust=-0.3, size=5) +
   annotate("text", x=78, y=serialsim$R, label="Intrinsic", hjust=1, vjust=-0.3, size=5) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", expand=c(0, 0), limits=c(0.9, 2.7),
+  scale_y_continuous("Basic reproduction number $\\mathcal R_0$", expand=c(0, 0), limits=c(0.9, 2.7),
                      breaks=c(1, 2, 3)) +
   scale_color_manual(values=tail(cpalette, 2)) +
   scale_fill_manual(values=tail(cpalette, 2)) +
@@ -193,7 +193,7 @@ g2b <- ggplot(filter(R0all, type=="Cohort-averaged")) +
   annotate("text", x=78, y=rr$R0, label="Initial forward", hjust=1, vjust=-0.3, size=5) +
   annotate("text", x=78, y=serialsim$R, label="Intrinsic", hjust=1, vjust=-0.3, size=5) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", expand=c(0, 0), limits=c(1.3, 3.3),
+  scale_y_continuous("Basic reproduction number $\\mathcal R_0$", expand=c(0, 0), limits=c(1.3, 3.3),
                      breaks=c(1, 2, 3)) +
   scale_color_manual(values=tail(cpalette, 1)) +
   scale_fill_manual(values=tail(cpalette, 1)) +
@@ -203,12 +203,12 @@ g2b <- ggplot(filter(R0all, type=="Cohort-averaged")) +
     legend.title = element_blank()
   )
 
-tikz(file = "observedrRa.tex", width = 6.6, height = 3.3, standAlone = T)
+tikz(file = "observedrRa.tex", width = 6.6, height = 3.5, standAlone = T)
 grid.arrange(g1a, g2a, nrow=1)
 dev.off()
 tools::texi2dvi('observedrRa.tex', pdf = T, clean = T)
 
-tikz(file = "observedrRb.tex", width = 6.6, height = 3.3, standAlone = T)
+tikz(file = "observedrRb.tex", width = 6.6, height = 3.5, standAlone = T)
 grid.arrange(g1b, g2b, nrow=1)
 dev.off()
 tools::texi2dvi('observedrRb.tex', pdf = T, clean = T)

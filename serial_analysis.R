@@ -21,8 +21,8 @@ rr_summ <- rr %>%
   group_by(cohort) %>%
   summarize(
     mean=mean(serial),
-    lwr=max(serial),
-    upr=min(serial)
+    lwr=quantile(serial, 0.025),
+    upr=quantile(serial, 0.975)
   )
 
 rr_summ2 <- rr %>%
@@ -30,8 +30,8 @@ rr_summ2 <- rr %>%
   group_by(cohort)  %>%
   summarize(
     mean=mean(serial),
-    lwr=max(serial),
-    upr=min(serial)
+    lwr=quantile(serial, 0.025),
+    upr=quantile(serial, 0.975)
   )
 
 tcut <- seq(0, 29, by=1)
@@ -95,8 +95,8 @@ g1 <- ggplot(rr) +
   geom_line(data=cdata, aes(x, y), lty=2) +
   geom_point(data=rr_summ, aes(cohort, mean)) +
   geom_errorbar(data=rr_summ, aes(cohort, ymin=lwr, ymax=upr), width=0) +
-  geom_smooth(aes(cohort, serial), col=1, fill=1, fullrange=TRUE, alpha=0.2) +
-  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(-3, 29)) +
+  geom_smooth(aes(cohort, serial), col=1, fill=1, fullrange=TRUE, se=FALSE) +
+  scale_x_continuous("Symptom onset day (infector)", expand=c(0, 0), limits=c(-3, 29)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(-12, 21)) +
   scale_size_area(max_size=4) +
   coord_cartesian(clip="off", default=TRUE) +
@@ -109,8 +109,8 @@ g1 <- ggplot(rr) +
 g2 <- ggplot(rr) +
   geom_point(data=rr_summ2, aes(cohort, mean)) +
   geom_errorbar(data=rr_summ2, aes(cohort, ymin=lwr, ymax=upr), width=0) +
-  geom_smooth(aes(`Seconday - symptom onset date`, serial), col=1, fill=1, alpha=0.2) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0)) +
+  geom_smooth(aes(`Seconday - symptom onset date`, serial), col=1, fill=1, se=FALSE) +
+  scale_x_continuous("Symptom onset day (infectee)", expand=c(0, 0)) +
   scale_y_continuous("Backward delay (days)") +
   coord_cartesian(clip="off", default=TRUE) +
   ggtitle("B. Backward serial interval") +
@@ -124,7 +124,7 @@ g3 <- ggplot(serall) +
   geom_hline(yintercept=1, lty=2) +
   geom_line(aes(t, R0, col=type, lty=type)) +
   scale_x_continuous("Time (days)", limits=c(-3, 29), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$") +
+  scale_y_continuous("Basic reproduction number $\\mathcal R_0$") +
   scale_color_manual(values=cpalette[5:6]) +
   scale_fill_manual(values=cpalette[5:6]) +
   coord_cartesian(clip="off", default=TRUE) +

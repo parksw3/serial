@@ -50,7 +50,7 @@ g1 <- ggplot(rRdata) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
-  scale_y_continuous("Reproduction number $\\mathcal R$", limits=c(1, 4.5), expand=c(0, 0)) +
+  scale_y_continuous("Basic reproduction number $\\mathcal R_0$", limits=c(1, 4.5), expand=c(0, 0)) +
   scale_color_manual(values=cpalette) +
   ggtitle("A") +
   theme(
