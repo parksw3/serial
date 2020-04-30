@@ -14,6 +14,7 @@
 \newcommand{\jd}[1]{\comment{cyan}{JD}{#1}}
 \newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
 \newcommand{\bmb}[1]{\comment{blue}{BMB}{#1}}
+\newcommand{\david}[1]{\comment{red}{DE}{#1}}
 
 \newcommand{\eref}[1]{Eq.~\ref{eq:#1}}
 \newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
@@ -477,6 +478,8 @@ Qualitative patterns in the mean backward delays is robust across all delay dist
 When incidence increases exponentially, individuals are more likely to have been infected more recently and therefore, we are more likely to observe shorter intervals.
 When incidence decreases, we are more likely to observe longer intervals for similar but opposite reasons.
 
+\subsection{Observed serial interval distributions}
+
 \begin{figure}[!ht]
 \includegraphics[width=\textwidth]{diagram.pdf}
 \caption{
@@ -488,14 +491,13 @@ Each line represents an independent stochastic realization.
 \label{fig:obsrR}
 \end{figure}
 
-\subsection{Observed serial interval distributions}
-
 Now, we turn to practical issues.
 Serial intervals are typically calculated from line-list data (\fref{obsrR}A).
-When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.
-\fref{obsrR} demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of \RR.
-Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval (\fref{obsrR}A) and therefore \Ro (\fref{obsrR}) by a large amount because the observed serial-interval distribution does not account for changes in the forward serial-interval distribution.
-As the mean forward serial-interval distribution decreases over time, taking the average of all observed serial intervals throughout an epidemic will underestimate the mean of the initial forward serial-interval distribution, which provides the correct link between $r$ and \RR.
+When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
+for example, if we were to measure serial intervals on Day 8 in \fref{obsrR}A, we will only be able to observe the first 6 events (ID 1--6).
+\fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of \RR.
+Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval and therefore \Ro by a large amount because the observed serial-interval distribution converges to the intrinsic serial-interval distribution;
+we still underestimate the intrinsic value slightly due to contraction of the forward generation-interval distribution during the susceptible depletion phase (\fref{epi}C).
 
 We provide a simple, heuristic way of assessing potential biases in the estimate of the mean initial forward serial interval and therefore \RR retrospectively.
 Once serial intervals have been observed after the epidemic has been sufficiently progressed, we can group observed serial intervals by their primary cohort times (i.e., symptom onset times of infectors).
