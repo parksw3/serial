@@ -119,8 +119,8 @@ A part of the confusion can be attributed to an apparent paradox.
 By definition, both generation and serial intervals describe how infection spreads between individuals, and therefore, one might expect them to potentially provide the same link between the epidemic growth rate $r$ and the reproduction number \RR based on the renewal process.
 However, current theory does not explain how two different distributions can give the same link between $r$ and \RR --- some studies have further demonstrated that generation and serial intervals give different $r$--\RR link.
 We provide an answer to the paradox by showing that if serial intervals are defined as \emph{forward-looking} intervals during the exponential phase, then the correct link between $r$ and \RR emerges.
-We also provide a heuristic way of addressing potential biases that can arise from not accounting for changes in these references and apply our framework to analyze serial intervals of COVID-19.
-Our study reveals gaps in the current understanding of serial intervals and provides rationale for reassessing serial intervals of COVID-19.
+We also provide a heuristic way of addressing potential biases that can arise from not accounting for changes in these references and apply our framework to re-analyze serial intervals of COVID-19 collected from China.
+Our study further reveals gaps in the current practices in outbreak analysis and provides rationale for reassessing serial intervals of COVID-19.
 
 \pagebreak
 
@@ -561,12 +561,12 @@ This example clearly demonstrates the danger of using the observed serial interv
 
 \section{Discussion}
 
-Characterizing generation- and serial-interval distributions is critical to understanding the outset of an outbreak as they determine the time scale of disease transmission.
+Estimating generation- and serial-interval distributions is critical to characterizing the outset of an outbreak as they determine the time scale of disease transmission.
 Generation intervals are defined as the time difference between infection time of a transmission pair, whereas serial intervals are defined as the time difference between symptom onset time of a transmission pair \citep{svensson2007note}.
-Due to their similar definitions, we show that their differences have been inaccurately captured previously.
+By definition, they both describe how infection spreads between individiauls; 
 
 Our study demonstrates the importance of defining a reference cohort for studying any epidemiological time delay distributions.
-Previous studies have shown that generation interval can be either measured forward or backward \citep{champredon2015intrinsic,britton2019estimation};
+Previous studies have shown that generation interval can be either measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
 we generalize their ideas by showing that these ideas can be applied to all distributions.
 Changes in the backward delay distributions is particularly robust across all distributions because they depend on previous changes in cohort sizes, which, in turn, depend on incidence of infection.
 Previous analyses of COVID-19 epidemics have attempted to reconstruct the time series of symptomatic cases or infected cases from the reports of confirmed cases by assuming a constant backward delay distribution (e.g., \cite{tempvar, park2020potential, shim2020transmission}).
