@@ -14,7 +14,7 @@
 \newcommand{\jd}[1]{\comment{cyan}{JD}{#1}}
 \newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
 \newcommand{\bmb}[1]{\comment{blue}{BMB}{#1}}
-\newcommand{\david}[1]{\comment{red}{DE}{#1}}
+\newcommand{\djde}[1]{\comment{red}{DJDE}{#1}}
 
 \newcommand{\eref}[1]{Eq.~\ref{eq:#1}}
 \newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
@@ -184,35 +184,46 @@ The backward delay distribution describes the time delays between a primary and 
 For example, the backward incubation period distribution at time $\st$ describes incubation periods for a \emph{cohort} of individuals who became symptomatic at time $\st$.
 Likewise, the backward serial-interval distribution at time $\st$ describes serial intervals for a \emph{cohort} of infectees who became symptomatic at time $\st$.
 
-\david{deleted ``At the individual-level, both forward and backward
+\djde{deleted ``At the individual-level, both forward and backward
   \emph{measurements} provide identical measures; in other words, we
   can express the total density of primary and secondary events
   occurring at time $\pt$ and $\st$, respectively, using both forward
-  and backward delay \emph{distributions}:''}
+  and backward delay \emph{distributions}:'' and ended up rewriting
+  the following paragraph...}
 
 At the individual level, both forward and backward \emph{perspectives}
 must yield identical results (e.g., the length of the incubation
 period of a given individual is the same whether measured forward from
-the time of infection or backward from time of symptom onset).
-Consequently, we must obtain the same number if we count the number of
-individuals who became infected at time $\pt$ or the number of
-individuals who first showed symptoms at time $\st$; that is, we must
-have
-\begin{equation}\label{eq:match}
-\psize(\pt) f_\pt(\st-\pt) = \ssize(\st) b_\st(\st-\pt),
-\end{equation}
-where $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
-secondary cohorts, respectively.
-
-{\color{red}DE: IN THE MIDST OF EDITING THIS PARAGRAPH... WILL RETURN
-  TO THIS, HOPEFULLY LATER THIS EVENING...}
-
-Substituting $\tau = \st - \pt$, it follows that:
+the time of infection or backward from the time of symptom onset).
+Consequently, if we restrict attention to individuals with a given
+incubation period, say $\tau$, and we count how many became infected at time $\pt$
+or how many first showed symptoms at time $\st=\pt+\tau$ then we must obtain
+the same number. In general, no matter how delays are distributed, if
+$\mathcal P$ and $\mathcal S$ represent the sizes of primary and
+secondary cohorts then we must have
 \begin{equation}
-b_\st(\tau) = \frac{\psize(\st-\tau) f_{\st-\tau}(\tau)}{\ssize(\st)}
+\psize(\pt) f_\pt(\tau) = \ssize(\st) b_\st(\tau) \,.
+\label{eq:match}
+\end{equation}
+Substituting $\pt=\st-\tau$, it follows that
+\begin{equation}
+b_\st(\tau)= \frac{\psize(\st-\tau) f_{\st-\tau} (\tau)}{\ssize(\st)}
 \label{eq:backward}
 \end{equation}
-Therefore, the backward delay distribution depends on the changes in primary cohort size $\tau$ time units ago from the reference time $\st$, $\psize(\st-\tau)$, as well as changes in the forward delay distribution, $f_{\st-\tau}(\tau)$.
+If we are thinking of incubation periods, then the left hand side of
+this equation is the probability density that there is an individual
+who became symptomatic at time $\st$ after an incubation period of
+length $\tau$. From the right hand side, we see that this probability
+density depends on how many individuals became infected at time
+$\st-\tau$ [$\psize(\st-\tau)$], how many individuals became
+symptomatic at time $\st$ [$\ssize(\st)$], and the probability density
+that someone who was infected at time $\st-\tau$ became symptomatic at
+time $\st$ [$f_{\st-\tau}(\tau)$]. In general, Eq.~\eqref{eq:backward}
+shows that the the backward delay distribution at reference time $\st$
+[$b_\st(\tau)$] depends not only on the secondary cohort size at time
+$\st$ [$\ssize(\st)$], but also on the primary cohort size at the
+earlier time $\st-\tau$ [$\psize(\st-\tau)$] and the forward delay
+distribution at that earlier time [$f_{\st-\tau}(\tau)$].
 
 There are multiple mechanisms that drive the changes in forward and backward delay distributions over time ---
 we begin by describing factors that affect the forward delay distributions.
