@@ -11,7 +11,13 @@ vim_session:
 ######################################################################
 
 Sources += serial.tex
-serial.pdf: serial.tex
+serial.pdf: serial.tex forward.pdf
+
+forward.tex: forward.R
+	R CMD BATCH --vanilla forward.R
+
+forward.pdf: forward.tex
+	pdflatex forward.tex
 
 ######################################################################
 
