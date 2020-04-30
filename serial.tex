@@ -585,17 +585,19 @@ given large geographical differences in the observed exponential growth rates of
 We suggest that modelers should aim to characterize spatiotemporal variation in initial forward serial-interval distributions and understand their changes over time.
 These modeling approaches should be necessarily coupled with intensive epidemiological investigation through contact tracing at the very beginning of the outbreak in order to characterize the initial forward serial-interval distribution, particularly for an emerging epidemic such as COVID-19.
 
-We also show that there are multiple serial-interval distributions that correspond to the same set of generation-interval and incubation period distributions depending on their correlations.
+Our study also demonstrates that there are multiple serial-interval distributions that correspond to the same set of generation-interval and incubation period distributions depending on their correlations;
+all of them can provide the correct link between $r$--\RR (\fref{rR}).
 Conversely, this means that not explicitly accounting for their correlations can bias the estimate of the intrinsic generation-interval distribution from the serial-interval distribution.
-Furthermore, previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the differences between the backward incubation period of an infector and the forward incubation period of an infectee (e.g., \cite{klinkenberg2011correlation, ganyani2020estimating}).
+Furthermore, previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the differences between the incubation periods of infectors and those of infectees (e.g., \cite{klinkenberg2011correlation, ganyani2020estimating});
+
 There is currently a need for better statistical tools for teasing apart the intrinsic generation-interval distributions from the observed serial intervals.
 
 Our study is not without limitations.
 Here, we assumed that all individuals develop symptoms and that the the entire transmission process (e.g., direction of transmission, symptom onset dates, infection dates, etc.) are observable.
 In practice, asymptomatic and presymptomatic transmission of COVID-19 makes measuring serial intervals difficult \citep{bai2020presumed,he2020temporal,wei2020presymptomatic}.
-For example, symptom onset dates cannot be used as a reliable proxy for the direction of transmission as infectees may develop symptoms before their infectors.
+For example, symptom onset dates cannot be used as a reliable proxy for determining the direction of transmission as infectees may develop symptoms before their infectors.
 Based on the COVID-19 parameters (Table 1), we expect roughly 3\% of infectees to develop symptoms before their infectors during the exponential growth period; 
-this probability increases as epidemic progresses because backward incubation period of an infector increases.
+this probability increases as epidemic progresses because the mean backward incubation period increases.
 Biases in the observed serial intervals will necessarily bias the estimates of \RR. 
 Furthermore, serial intervals do not take into account asymptomatic transmission; 
 not explicitly accounting for asymptomatic transmission may also bias the estimates of \RR \citep{park2020time}.
