@@ -300,15 +300,18 @@ The number of serial intervals between time $\pt$ and $\st$ given that the infec
 \times
 \underbrace{k_{\alpha_2}(\st - \alpha_2)}_{\substack{\text{marginal density of} \\ \text{the forward incubation} \\ \text{period (of infectees)}}},
 \end{equation}
-where $h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pt-\alpha_1$ and the forward generation interval $\alpha_2 - \alpha_1$ of a cohort of individuals infected at time $\alpha_1$ (in this case, the infectors), and $k_{\alpha_2}(\st-\alpha_2)$ is the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\st-\alpha_2$ of a cohort of individuals infected at time $\alpha_2$ (in this case, the infectee).
+where $h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1)$ is the joint probability distribution describing the forward incubation period $\pt-\alpha_1$ and the forward generation interval $\alpha_2 - \alpha_1$ of a cohort of individuals infected at time $\alpha_1$ (in this case, the infectors), and $k_{\alpha_2}(\st-\alpha_2)$ is the marginal probability distribution of $h_{\alpha_2}$ describing the forward incubation period $\st-\alpha_2$ of a cohort of individuals infected at time $\alpha_2$ (in this case, the infectees):
+\begin{equation}
+k_{\alpha_2}(\tau) = \int_0^\infty h_{\alpha_2}(\tau, \sigma) \dsigma.
+\end{equation}
 It is necessary to describe the forward incubation periods and the forward generation intervals using a joint probability distribution because onset of symptoms and transmission potential jointly depend on the life history of a disease;
 for example, if an infected individual can only transmit the disease after symptom onset, the forward generation interval will necessarily be longer than the forward incubation period.
-Then, the total number of serial intervals can be obtained by integrating over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
+
+Finally, the total number of serial intervals can be obtained by integrating over all of the possibilities for the infection times of the infector $\alpha_1$ and the infectee $\alpha_2$:
 \begin{equation}
 \total (\pt,\st) = \int_{-\infty}^{\pt} \int_{\alpha_1}^{\st} \Rc (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\st - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
 \end{equation}
-
-Finally, the forward serial-interval distribution $f_\pt(\tau)$ is proportional to $\total (\pt, \pt+\tau)$ because it is conditional on the cohort of infectors who became symptomatic at time $\pt$:
+Then, the forward serial-interval distribution $f_\pt(\tau)$ is proportional to $\total (\pt, \pt+\tau)$ because it is conditional on the cohort of infectors who became symptomatic at time $\pt$:
 \begin{equation}
 f_\pt(\tau) \propto \int_{-\infty}^{\pt} \int_{\alpha_1}^{\pt+\tau} \Rc (\alpha_1) i(\alpha_1) h_{\alpha_1}(\pt-\alpha_1, \alpha_2 - \alpha_1) k_{\alpha_2}(\pt+\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
 \end{equation}
@@ -472,7 +475,7 @@ The initial forward serial interval distribution captures the exponential growth
 Now, we characterize how forward and backward serial intervals vary over the course of an epidemic when incubation periods and generation intervals are independent.
 \fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
 The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
-The mean forward generation interval decreases slightly as the epidemic progresses due to susceptible depletion (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
+The mean forward generation interval decreases slightly as incidence rate increases, causing the proportion of susceptible populaton to decrease (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
 The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period distributions, (ii) the forward generation-interval distributions, and (iii) the forward incubation period distributions.

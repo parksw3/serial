@@ -1,0 +1,25 @@
+Overall  very clearly laid out. Maybe worth spending even more time on the intuition of forward/backward differences (this is already well-covered in previous papers, but might need repeating for new readers).
+
+Re David's comments (some of mine may repeat): agree about \pi, although the notation is going to be hard no matter what you do. Maybe general subscripts (t_p, t_s or even better t_1, t_2 to indicate primary and secondary  (infector/infectee)? Or maybe t_0, t_1 since you're already using x_0 and x_1 to denote infector/infectee incubation periods?)can you use subscripts +1, -1 to indicate forward and backward quantities?) Getting a good, compact, correct, understandable notation is important ... will make life much easier for the reader. A table of notation might be helpful.
+
+I don't mind "paradox", but if you're going to use this framing you have to try to come up with a short, understandable description of what the paradox is. (For example, your abstract introduces the idea that there's a paradox, but doesn't seem to explain it - i.e. the paradox might be "despite the important differences between the serial and generation intervals, which can drastically change conclusions about the underlying dynamics of an observed epidemic, these two measures lead to essentially the same link between intrinsic growth rate r and intrinsic reproductive ratio R".)  (Introduction of 'paradox' within the body of the paper is similarly hard to understand ...)
+
+x0 and x1 (infection to symptom onset time of infectors and infectees respectively are within-individual/physiological measures. While I understand why generation intervals should depend on the state of the epidemic/ change over time, and hence why serial intervals will change dynamically (since they include the generation interval as a component), I am still having a really hard time understanding why *incubation periods* should be different forward/backward/dynamically.
+
+Similarly, I didn't understand the emphasis on the joint distributions of incubation period and generation intervals within individuals. I do understand it as part of a completely general SI/GI framework - it seems to be important in Mike Li's rabies analysis - but I didn't get why it would be a focus in a more generic (and/or COVID-focused) treatment.
+
+Figure 1 was great, but I found myself wanting a similar picture to go along with equation 4. I had a hard time grasping what "the total number of serial intervals ..." means. Is this the expected number of serial intervals *per capita* for a cohort, or ?? (It's hard to understand why R appears in this expression unless it's a population-level value.) Might? be useful to annotate this with underbraces for each piece?
+
+Should I worry, in the context of last Friday's lab meeting, that we're indexing R_c by alpha_1? Does this way of writing the expression imply infectivity varying by time of infection ('infector/primary time'), or by time of contact ('infectee/secondary time')?
+
+Section 2.3 I'm not sure this is "validating" the theory, rather "illustrating" it?
+
+l. 160 you hold the forward incubation distribution constant over time (you call this part of the "natural history" of the disease, it might be better to say something about "physiology" or "within-host dynamics" or "life history"; "natural history" to me seems to include epidemiology (population-level aspects). If the backward incubation distribution is similarly within-host (time backward from symptoms of infectees to infection events of infectees), I don't see why the same argument doesn't apply ... ? Or do I have the wrong definition of the backward incubation period? (I'm obviously missing something here since you say quite clearly that you expect backward incubation period to depend on r)
+
+Section 2.4 In my mind the SEIR model doesn't say that incubation (infection to symptom onset) and exposed (infection to infectivity) periods are equivalent. The definitions of the compartments are purely in terms of infectivity, symptoms could occur either before or after E->I. (*Someone* may define SEIR in your way, in which case you could cite them ...)
+
+Still don't understand what (in real-world/heuristic terms) generates the correlations between intrinsic generation interval and incubation period. Obviously this is something that *could* happen (e.g. rabies), but is there any evidence that it's a general phenomenon/worth worrying about in this context?
+
+Figure 3: maybe show incidence rather than cumulative incidence? Do horizontal dashed lines in B-G represent intrinsic values? Is it true that everything's approximately constant up to the halfway point (in time) of the epidemic?
+
+Figure 4: use direct labels? Better label than "cohort-averaged"? How much can these issues be alleviated by the corrections you've published previously? (Maybe "observed" -> "instantaneous", "cohort-averaged" -> "retrospective"?)
