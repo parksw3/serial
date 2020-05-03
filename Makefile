@@ -13,11 +13,8 @@ vim_session:
 Sources += serial.tex
 serial.pdf: serial.tex forward.pdf
 
-forward.tex: forward.R
-	R CMD BATCH --vanilla forward.R
-
-forward.pdf: forward.tex
-	pdflatex forward.tex
+Ignore += forward.tex
+forward.tex: forward.Rout ;
 
 ######################################################################
 
@@ -42,7 +39,7 @@ localstuff:
 
 -include makestuff/os.mk
 
-## -include makestuff/wrapR.mk
+-include makestuff/wrapR.mk
 -include makestuff/texdeps.mk
 
 -include makestuff/git.mk
