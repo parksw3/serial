@@ -675,7 +675,7 @@ Here, we prove that the initial forward serial-interval distribution $f_0$ also 
 \end{equation}
 where the initial forward serial-interval distribution is defined as:
 \begin{equation}
-f_{0}(\tau) \propto \int_{0}^{\infty} \int_{0}^{\max(0,x+\tau)} \exp(-rx) h(x, \sigma) k(x-\sigma+\tau) \dsigma\dx.
+f_{0}(\tau) \propto \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) k(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
 \end{equation}
 
 First, we rewrite the initial forward serial-interval distribution in the following form:
