@@ -359,23 +359,23 @@ Finally, the case reproduction for this model is defined as follows:
 \subsection{Linking $r$ and \RR}
 
 During the initial phase of an epidemic, the proportion susceptible remains approximately constant ($S(t) \approx S(0)$) and incidence of infection grows exponentially: $i(t)=i_0\exp(rt)$.
-When incidence grows exponentially, the intrinsic generation-interval distribution provides the correct link between the exponential growth rate $r$ and the reproduction number $\RR=\Ro S(0)$ based on the Euler-Lotka equation \citep{wallinga2007generation};
+During this period, the intrinsic generation-interval distribution provides the correct link between the exponential growth rate $r$ and the initial reproduction number $\RR=\Ro S(0)$ based on the Euler-Lotka equation \citep{wallinga2007generation};
 in this case, we focus on the estimates of the basic reproduction number \Ro (the value of \RR in a fully susceptible population):
 \begin{equation}
 \frac{1}{\Ro} = \int_0^\infty \exp(-r\tau) g(\tau) \dtau.
 \end{equation}
 Analogous to the intrinsic generation-interval distribution, 
 forward serial-interval distributions, by definition, describe the renewal process of infection based on symptom onset dates.
-Therefore, we expect the forward serial-interval distribution during the exponential growth phase --- which we refer to as the \emph{initial} forward serial-interval distribution $f_0$ --- to link the same values of $r$ and \Ro as the intrinsic generation-interval distribution:
-\jd{I don't want to talk about the ``link'' here, because that to me implies the functional link, not just linking a single pair of values.}
+Therefore, we expect the forward serial-interval distribution during the exponential growth phase --- which we refer to as the \emph{initial} forward serial-interval distribution $f_0$ --- to link $r$ and \Ro in the same way as the intrinsic generation-interval distribution (note, however, that the forward serial interval is not necessarily positive):
 \begin{equation}
 \frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau,
 \end{equation}
-where the initial forward serial-interval distribution is defined as:
+where the initial forward serial-interval distribution is given by:
 \begin{equation}
 f_{0}(\tau) \propto \int_{-\infty}^{0} \int_{\pinf}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) k(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf.
 \end{equation}
 In the Appendix, we provide a mathematical proof of this relationship.
+\jd{$k$ for marginal density is really slowing me down (since Champredon uses k for Rg). Maybe that's just my problem, but maybe we can think of a better letter.}
 
 The initial forward serial-interval distribution depends on the exponential growth rate $r$.
 For a fast-growing epidemic (high $r$), we expect the backward incubation periods to be short (\eref{backexp}), and therefore, the forward serial-interval distribution will generally have a larger mean than the intrinsic generation- and serial-interval distributions.
@@ -402,8 +402,9 @@ The joint probability distribution is modeled using a multivariate log-normal di
 }
 \end{table}
 
+\jd{I thought you were doing disease-model simulations (like DC does). I'm surprised we model the distribution of SIs instead of letting it emerge. I think I agree that it's still convincing because of the rR link, but it would be better to do the full-simulation way if that's practical.}
 We use a simulation-based approach to compare the estimates of \Ro based on the serial- and generation-interval distributions. 
-To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and correlation $\rho$;
+To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and log-scale correlation $\rho$;
 the multivariate log-normal distribution is parameterized based on parameter estimates for COVID-19 (Table 1).
 We construct forward serial intervals during the exponential growth period as follows:
 \begin{equation}
@@ -424,6 +425,8 @@ where
 \begin{equation}
 Q_i = -Y_i + (G_i|Y_i) + X_{1,i}.
 \end{equation}
+
+
 
 \section{Results}
 
