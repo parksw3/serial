@@ -460,7 +460,7 @@ therefore, we underestimate \Ro when we use the intrinsic serial-interval distri
 \includegraphics[width=0.95\textwidth]{forward.pdf}
 \caption{
 \textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
-(A) Cumulative incidence over time.
+(A) Cumulative incidence over time. \jd{Would it be easier for people to think about dynamics if we show incidence instead?}
 (B--D) Changes in the mean forward incubation period, generation interval, and serial interval.
 (E--G) Changes in the mean backward incubation period, generation interval, and serial interval.
 Black lines represent the results of a deterministic simulation.
@@ -473,6 +473,7 @@ See Table 1 for parameter values.
 \end{center}
 \end{figure}
 
+\jd{This is hard to follow. We still haven't said much about why we're interested in backward intervals. And it's hard to think clearly about the assumption of incubation periods being independent of generation intervals. The dynamics are a potential complication. Presumably we mean that at any given time, we are assuming that these things are independent across individuals.}
 The initial forward serial interval distribution captures the exponential growth phase of an epidemic.
 Now, we characterize how forward and backward serial intervals vary over the course of an epidemic when incubation periods and generation intervals are independent.
 \fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
@@ -481,7 +482,7 @@ The mean forward generation interval decreases slightly as incidence rate increa
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
 The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period distributions, (ii) the forward generation-interval distributions, and (iii) the forward incubation period distributions.
-Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D). 
+Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D). \jd{Are you saying that this is true in general, or for these parameters? Have we said enough about these parameters to make this clear to others?}
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
 Therefore, the forward serial intervals can decrease over time even in the absence of significant depletion of the susceptible pool;
 decrease in incidence via intervention strategies can still cause the backward incubation period to increase, which in turn can decrease serial intervals. 
