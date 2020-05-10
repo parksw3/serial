@@ -442,18 +442,17 @@ While the forward serial intervals during the exponential growth phase can also 
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
 (A). The initial forward serial-interval distributions give a correct link between the exponential growth rate $r$ and the reproduction number \Ro.
 (B) The intrinsic serial-interval distributions give an incorrect link between $r$ and \Ro.
-(C) The mean initial forward serial interval during the exponential growth phase depends on $r$.
-(D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase depends on $r$.
+(C) The mean initial forward serial interval during the exponential growth phase increases with $r$.
+(D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase decreases with $r$.
 }
 \label{fig:rR}
 \end{figure}
 
-Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different distributions are able to give identical estimates of \Ro.
-In general, generation-interval distributions with higher means and less variability are expected to give higher \Ro for a given $r$ \citep{wallinga2007generation, park2019practical}.
-In this case, the initial forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
-The effects of higher means (which increases \Ro) and higher variability (which decreases \Ro) cancel out exactly;
-this allows us to estimate the same \Ro using both initial forward serial and intrinsic generation intervals.
-On the other hand, intrinsic serial intervals have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are wider (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
+Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different forward distributions lead to identical estimates of \Ro.
+In general, distributions with higher means and less variability give higher \Ro for a given $r$ \citep{wallinga2007generation, park2019practical}.
+When an outbreak is growing exponentially, forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
+The effects of higher means (which increases \Ro) exactly cancel those of higher variability (which decreases \Ro).
+On the other hand, \emph{intrinsic} serial intervals have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are wider (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
 therefore, we underestimate \Ro when we use the intrinsic serial-interval distribution.
 
 \begin{figure}[!ht]
