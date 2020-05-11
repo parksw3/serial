@@ -442,18 +442,17 @@ While the forward serial intervals during the exponential growth phase can also 
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
 (A). The initial forward serial-interval distributions give a correct link between the exponential growth rate $r$ and the reproduction number \Ro.
 (B) The intrinsic serial-interval distributions give an incorrect link between $r$ and \Ro.
-(C) The mean initial forward serial interval during the exponential growth phase depends on $r$.
-(D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase depends on $r$.
+(C) The mean initial forward serial interval during the exponential growth phase increases with $r$.
+(D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase decreases with $r$.
 }
 \label{fig:rR}
 \end{figure}
 
-Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different distributions are able to give identical estimates of \Ro.
-In general, generation-interval distributions with higher means and less variability are expected to give higher \Ro for a given $r$ \citep{wallinga2007generation, park2019practical}.
-In this case, the initial forward serial intervals during the exponential growth phase have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
-The effects of higher means (which increases \Ro) and higher variability (which decreases \Ro) cancel out exactly;
-this allows us to estimate the same \Ro using both initial forward serial and intrinsic generation intervals.
-On the other hand, intrinsic serial intervals have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are wider (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
+Comparing the shapes of initial forward serial-interval distributions and the intrinsic generation-interval distribution allows us to better understand how different forward distributions lead to identical estimates of \Ro.
+In general, distributions with higher means and less variability give higher \Ro for a given $r$ \citep{wallinga2007generation, park2019practical}.
+When an outbreak is growing exponentially, forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
+The effects of higher means (which increases \Ro) exactly cancel those of higher variability (which decreases \Ro).
+On the other hand, \emph{intrinsic} serial intervals have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are wider (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
 therefore, we underestimate \Ro when we use the intrinsic serial-interval distribution.
 
 \begin{figure}[!ht]
@@ -461,7 +460,7 @@ therefore, we underestimate \Ro when we use the intrinsic serial-interval distri
 \includegraphics[width=0.95\textwidth]{forward.pdf}
 \caption{
 \textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
-(A) Cumulative incidence over time.
+(A) Cumulative incidence over time. \jd{Would it be easier for people to think about dynamics if we show incidence instead?}
 (B--D) Changes in the mean forward incubation period, generation interval, and serial interval.
 (E--G) Changes in the mean backward incubation period, generation interval, and serial interval.
 Black lines represent the results of a deterministic simulation.
@@ -474,6 +473,7 @@ See Table 1 for parameter values.
 \end{center}
 \end{figure}
 
+\jd{This is hard to follow. We still haven't said much about why we're interested in backward intervals. And it's hard to think clearly about the assumption of incubation periods being independent of generation intervals. The dynamics are a potential complication. Presumably we mean that at any given time, we are assuming that these things are independent across individuals.}
 The initial forward serial interval distribution captures the exponential growth phase of an epidemic.
 Now, we characterize how forward and backward serial intervals vary over the course of an epidemic when incubation periods and generation intervals are independent.
 \fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
@@ -482,7 +482,7 @@ The mean forward generation interval decreases slightly as incidence rate increa
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
 The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period distributions, (ii) the forward generation-interval distributions, and (iii) the forward incubation period distributions.
-Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D). 
+Since both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D). \jd{Are you saying that this is true in general, or for these parameters? Have we said enough about these parameters to make this clear to others?}
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
 Therefore, the forward serial intervals can decrease over time even in the absence of significant depletion of the susceptible pool;
 decrease in incidence via intervention strategies can still cause the backward incubation period to increase, which in turn can decrease serial intervals. 
