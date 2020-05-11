@@ -333,7 +333,7 @@ i(t) &= \Ro S(t) \int_0^\infty i(t-\tau) \gdist(\tau) \dtau,
 \end{aligned}
 \label{eq:renewal}
 \end{equation}
-where \Ro is the basic reproduction number, and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a fully susceptible population.
+where \Ro is the basic reproduction number, and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a population where the number of susceptibles remains constant).
 Then, the forward generation-interval for a cohort of individuals that were infected at time $\psymp$ follows \citep{champredon2015intrinsic}:
 \begin{equation}
 \gdist_\psymp (\tau) \propto \gdist(\tau) S(\psymp + \tau),
@@ -466,6 +466,7 @@ therefore, we underestimate \Ro when we use the intrinsic serial-interval distri
 Black lines represent the results of a deterministic simulation.
 Orange lines and points represent the average of 10 stochastic simulations;
 cumulative incidence from the stochastic simulations in panel A are shown without averaging.
+\jd{I don't see orange lines, and the location of the dashed line is not explained. I guess you use the forward value at time 0? Would the intrinsic value be better?}
 Forward incubation periods and intrinsic generation-intervals are assumed to be independent of each other.
 See Table 1 for parameter values.
 }
@@ -486,11 +487,12 @@ Since both forward incubation period (\fref{epi}B) and generation-interval (\fre
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
 Therefore, the forward serial intervals can decrease over time even in the absence of significant depletion of the susceptible pool;
 decrease in incidence via intervention strategies can still cause the backward incubation period to increase, which in turn can decrease serial intervals. 
+\jd{Bringing intervention in here is potentially confusing. If you want to do it, maybe try a bit more lead in?} 
 In general, relative contributions of the three distributions depend on their shapes, correlations between incubation periods and generation intervals, and overall epidemiological dynamics.
 
-Qualitative patterns in the mean backward delays is robust across all delay distributions because they are predominantly driven by the changes in incidence, which in turn affects cohort sizes (\fref{epi}D--F; \eref{backward}).
-When incidence increases exponentially, individuals are more likely to have been infected more recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
-When incidence decreases, we are more likely to observe longer intervals for similar but opposite reasons.
+We see similar qualitative patterns in all three backward delays (\fref{epi}E--G; \eref{backward}), because they are predominantly driven by the rate of change in incidence, which in turn affects relative cohort sizes.
+When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
+Similarly, when incidence decreases, we are more likely to observe longer intervals.
 
 \subsection{Observed serial interval distributions}
 
@@ -499,9 +501,9 @@ When incidence decreases, we are more likely to observe longer intervals for sim
 \caption{
 \textbf{Estimating the reproduction number from the observed serial intervals.}
 (A) Schematic representation of line list data collected during an epidemic.
-(B) Changes in the estimate of \Ro based on the observed serial intervals over time.
+(B) Estimates of \Ro based on all observed serial intervals completed by a given time. \jd{Is this accurate?}
 (C) Schematic representation of line list data rearranged by symptom onset date of infectors.
-(B) Changes in the estimate of \Ro based on the cohort-averaged serial intervals over time.
+(D) Estimates of \Ro based on all observed serial intervals started by a given time. 
 Black dashed lines represent the mean initial forward serial interval and \Ro.
 Black solid lines represent the mean intrinsic serial interval and \Rintrinsic.
 Colored solid lines represent the mean estimates of \Ro across 10 stochastic simulations.
@@ -510,18 +512,19 @@ Colored ribbons represent the range of estimates of \Ro across 10 stochastic sim
 \label{fig:obsrR}
 \end{figure}
 
-Now, we turn to practical issues.
-In order to have an unbiased estimate on \Ro, we need to use serial-interval distributions estimated based on primary cohorts (i.e., infectors who share the same symptom onset time) at the early stage of the epidemic (i.e. initial forward serial-interval distribution).
+Now we turn to practical issues.
+In order to have an unbiased estimate of \Ro, we need to use serial-interval distributions estimated based on primary cohorts (i.e., infectors who share the same symptom onset time) at the early stage of the epidemic (i.e. initial forward serial-interval distribution).
 However, when an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
 for example, if we were to measure serial intervals on Day 8 as in \fref{obsrR}A, we will only be able to observe the first 6 events (ID 1--6).
 \fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of the basic reproduction number \Ro in our stochastic simulations.
-Notably, even if we can observe \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we still underestimate the initial mean forward serial interval and therefore \Ro by a large amount because the observed serial-interval distribution converges to the intrinsic serial-interval distribution;
-we still underestimate the intrinsic value slightly due to contraction of the forward generation-interval distribution during the susceptible depletion phase (\fref{epi}C).
+Notably, even if we could observe, and average, \emph{all} serial intervals across all transmission pairs after the epidemic has ended, we would still underestimate the initial mean forward serial interval (and therefore \Ro), likely by a large amount, because the observed serial-interval distribution converges to the intrinsic serial-interval distribution
+(in fact, we would even underestimate the intrinsic value slightly due to contraction of the forward generation-interval distribution during the susceptible depletion phase (\fref{epi}C)).
 
-We provide a simple, heuristic way of assessing potential biases in the estimate of the mean initial forward serial interval and therefore \Ro retrospectively.
+Here we provide a heuristic way of assessing potential biases in the estimate of the mean initial forward serial interval and therefore \Ro retrospectively.
 Once serial intervals have been observed after the epidemic has been sufficiently progressed, we can rearrange the line list and group observed serial intervals based on the symptom onset date of infectors (\fref{obsrR}C).
 Then, we can compare how estimates of the mean serial interval as well as \Ro change as we incorporate more recent cohorts into the analysis;
-that is, we analyze observed serial intervals from infectors who became symptomatic before time $t$ and evaluate how the estimates change as we increase $t$
+that is, we analyze observed serial intervals from infectors who became symptomatic before time $t$ and evaluate how the estimates change as we increase $t$.
+This approach is analogous to averaging over a set of forward intervals, just as using all information up to a certain time is analogous to averaging over a set of backward intervals.
 (\fref{obsrR}D).
 During the exponential growth phase, the estimates of the mean serial interval and \Ro are consistent with the target value;
 adding more data allows us to make more precise inference during this period.
@@ -550,7 +553,8 @@ Finally, we re-analyze serial intervals of COVID-19 collected by \cite{du2020ser
 \cite{du2020serial} estimated the mean serial of 3.96 days (95\% CI 3.53–4.39 days) and \Ro of 1.32 (95\% CI 1.16–1.48).
 \fref{du}A shows that the mean forward serial interval decreases over time.
 While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and maximum \emph{observable} serial intervals), increase in the proportion of negative serial intervals are clearly indicative of the changes in the forward serial-interval distribution.
-The decrease in the mean forward serial interval is likely to be cause by increase in the mean backward serial intervals as well as intervention efforts (e.g., case isolation will shorten the forward generation intervals).
+\jd{Is censoring relevant to negative values as well? We might not have (or can't?) observe events before a certain time? It's a bit confusing.}
+The decrease in the mean forward serial interval was likely caused by increase in the mean backward serial intervals \jd{incubation periods? is it obvious to the reader why these are increasing?} as well as intervention efforts which reduce generation intervals by preventing infections once cases are identified.
 \fref{du}B shows that the mean backward serial interval increases over time, reflecting decrease in incidence over time.
 
 While the qualitative changes in the mean forward and backward serial interval are consistent with our earlier simulations (\fref{epi}), the initial mean forward serial interval (\fref{du}A) appears to be larger than what we calculate earlier based on previously estimated incubation period and generation-interval distributions (\fref{rR}C).
@@ -560,7 +564,7 @@ These results indicate that previous estimates of incubation period and generati
 this sudden decrease is indicative of changes in the forward serial intervals as shown in our simulation study (\fref{obsrR}).
 The estimates of \Ro based on the early forward serial intervals are also consistent with previous estimates of \Ro of the COVID-19 epidemic in China \citep{majumder2020early, park2020reconciling}.
 We note that early cohort-averaged estimates of \Ro are unlikely to be affected by the right-censoring as we expect the degree of right-censoring to be low (\fref{du}A).
-This example clearly demonstrates the danger of using the observed serial intervals to calculate the basic reproduction number without integrating serial intervals into cohorts..
+This example demonstrates the danger of using the observed serial intervals to calculate the basic reproduction number without integrating serial intervals into cohorts..
 
 \section{Discussion}
 
