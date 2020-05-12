@@ -39,16 +39,27 @@ sir_data <- lapply(simlist, "[[", "data") %>%
 
 sir_data2 <- sir_data %>%
   mutate(
-    time=ceiling(time*5)/5
+    day=floor(time)
   ) %>%
-  group_by(sim, time) %>%
-  filter(infected==max(infected))
+  group_by(day, sim) %>%
+  summarize(
+    cases=tail(infected, 1)-head(infected,1)
+  )
+
+detdata2 <- detdata %>%
+  mutate(
+    day=floor(tvec)
+  ) %>%
+  group_by(day) %>%
+  summarize(
+    cases=tail(ci, 1)-head(ci,1)
+  )
 
 g1 <- ggplot(sir_data2) +
-  geom_line(aes(time, infected, col="Stochastic", group=sim)) +
-  geom_line(data=detdata, aes(tvec, ci, col="Deterministic"), lwd=1) +
+  geom_line(aes(day, cases, col="Stochastic", group=sim)) +
+  geom_line(data=detdata2, aes(day, cases, col="Deterministic"), lwd=1) +
   scale_x_continuous("Time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_log10("Cumulative incidence", expand=c(0, 0), limits=c(10, 49999)) +
+  scale_y_continuous("Daily incidence", expand=c(0, 0), limits=c(1, 2400)) +
   scale_color_manual(values=c(1, "#D55E00")) +
   ggtitle("A") +
   theme(
