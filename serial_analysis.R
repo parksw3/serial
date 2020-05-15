@@ -85,34 +85,60 @@ serdata2 <- lapply(tcut, function(x) {
 serall <- bind_rows(serdata1, serdata2)
 
 mm <- max(c(rr$`Seconday - symptom onset date`, rr$`Index - symptom onset date`))
+mm2 <- min(c(rr$`Seconday - symptom onset date`, rr$`Index - symptom onset date`))
 
 cdata <- data.frame(
-  x=9:30,
-  y=30-9:30
+  x=9:29,
+  y=mm-9:29
+)
+
+cdata2 <- data.frame(
+  x=-3:9,
+  y=mm2-((-3):9)
 )
 
 g1 <- ggplot(rr) +
+  annotate("text", x=20, y=11, label="maximum observable", angle=-45) +
+  annotate("text", x=4, y=-6, label="minimum observable", angle=-45) +
   geom_line(data=cdata, aes(x, y), lty=2) +
+  geom_line(data=cdata2, aes(x, y), lty=2) +
   geom_point(data=rr_summ, aes(cohort, mean)) +
   geom_errorbar(data=rr_summ, aes(cohort, ymin=lwr, ymax=upr), width=0) +
   geom_smooth(aes(cohort, serial), col=1, fill=1, fullrange=TRUE, se=FALSE) +
   scale_x_continuous("Symptom onset day (infector)", expand=c(0, 0), limits=c(-3, 29)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(-12, 21)) +
   scale_size_area(max_size=4) +
-  coord_cartesian(clip="off", default=TRUE) +
+  coord_fixed(clip="off") +
   ggtitle("A. Forward serial interval") +
   theme(
     panel.grid = element_blank(),
     legend.position = "none"
   )
 
+mm3 <- max(c(rr$`Seconday - symptom onset date`, rr$`Index - symptom onset date`))
+mm4 <- min(c(rr$`Seconday - symptom onset date`, rr$`Index - symptom onset date`))
+
+cdata3 <- data.frame(
+  x=0:16,
+  y=0:16-mm2
+)
+
+cdata4 <- data.frame(
+  x=19:30,
+  y=19:30-mm
+)
+
 g2 <- ggplot(rr) +
+  annotate("text", x=7, y=11, label="maximum observable", angle=45) +
+  annotate("text", x=24, y=-5, label="minimum observable", angle=45) +
+  geom_line(data=cdata3, aes(x, y), lty=2) +
+  geom_line(data=cdata4, aes(x, y), lty=2) +
   geom_point(data=rr_summ2, aes(cohort, mean)) +
   geom_errorbar(data=rr_summ2, aes(cohort, ymin=lwr, ymax=upr), width=0) +
   geom_smooth(aes(`Seconday - symptom onset date`, serial), col=1, fill=1, se=FALSE) +
   scale_x_continuous("Symptom onset day (infectee)", expand=c(0, 0)) +
-  scale_y_continuous("Backward delay (days)") +
-  coord_cartesian(clip="off", default=TRUE) +
+  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(-11, 19)) +
+  coord_fixed(clip="off") +
   ggtitle("B. Backward serial interval") +
   theme(
     panel.grid = element_blank(),
@@ -135,7 +161,7 @@ g3 <- ggplot(serall) +
     legend.title = element_blank()
   )
 
-tikz(file = "serial_analysis.tex", width = 9, height = 3, standAlone = T)
+tikz(file = "serial_analysis.tex", width = 12, height = 4, standAlone = T)
 grid.arrange(g1, g2, g3, nrow=1)
 dev.off()
 tools::texi2dvi('serial_analysis.tex', pdf = T, clean = T)
