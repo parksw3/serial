@@ -114,9 +114,11 @@ Jonathan Dushoff\textsuperscript{3,4,5}
 *Corresponding author: swp2@princeton.edu
 \end{flushleft}
 
+\pagebreak
+
 \section*{Abstract}
 
-Generation and serial intervals are under-appreciated yet important quantities for charaterizing the outset of an outbreak.
+Generation and serial intervals are under-appreciated yet important quantities for characterizing the outset of an outbreak.
 Even though their definitions (and differences) were clearly laid out over a decade ago, there is still a need for clear conceptual and theoretical understanding of their roles in shaping the epidemiological dynamics.
 Part of the confusion can be attributed to an apparent paradox.
 By definition, both generation and serial intervals describe how infection spreads between individuals --- thus, one would expect them both to link between the epidemic growth rate $r$ and the reproduction number \RR.
@@ -124,6 +126,15 @@ However, current theory does not explain how two different distributions can est
 We provide an answer to the paradox by showing that \emph{forward-looking} serial intervals, which correctly estimates \RR from $r$, are not the same as ``intrinsic'' serial intervals, but instead change with $r$. 
 We provide a heuristic way of addressing potential biases that can arise from not accounting for changes in these references and apply our framework to serial intervals of COVID-19.
 This study demonstrates the importance of early epidemiological investigation through contact tracing for characterizing initial serial intervals and provides rationale for reassessing serial intervals, and \RR\ estimates, for COVID-19.
+
+\section*{Significance}
+
+The generation- and serial-interval distributions are key quantities in outbreak analyses.
+Recent theoretical studies suggest that two distributions give different estimates of \RR;
+however, both intervals, by definition, can equally describe the disease transmission at the individual level.
+Here, we show that the serial-interval distribution, defined from the correct reference time and cohort, gives the same estimate of \RR as the generation-interval distribution.
+We then apply our framework to serial interval data from the COVID-19 epidemic.
+While our study supports the use of serial-interval distributions in estimating \RR, it also reveals several gaps in the current understanding and applications of the serial-interval distributions.
 
 \pagebreak
 
@@ -168,7 +179,7 @@ When we measure an epidemiological time delay within an infected individual (e.g
 most epidemiological events that can be observed within an individual have clear direction (e.g., infection and onset of symptoms) but some may not (e.g., onset of infectiousness and onset of symptoms).
 When we measure an epidemiological time delay between infected individuals (e.g., the serial interval), 
 the primary and secondary events are defined in terms of the direction of transmission:
-the primary event refers to the event that occurs in the infector; again some of these delays are always positive (the infector is always infected before the infectee) and some are not (it is possible for the infectee to report sysmptoms before the infector). 
+the primary event refers to the event that occurs in the infector; again some of these delays are always positive (the infector is always infected before the infectee) and some are not (it is possible for the infectee to report symptoms before the infector). 
 
 At the individual level, we can define the expected time distribution between a primary and a secondary event for an average infected individual --- we refer to this distribution as the intrinsic distribution.
 For example, the intrinsic incubation period distribution describes the expected time distribution from infection to symptom onset of an average infected individual.
@@ -462,7 +473,7 @@ Similarly, when we are estimating the incubation period of an individual, we oft
 
 \fref{epi} compares the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
 The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
-The mean forward generation interval decreases slightly as incidence rate increases, causing the proportion of susceptible populaton to decrease (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
+The mean forward generation interval decreases slightly as incidence rate increases, causing the proportion of susceptible population to decrease (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
 The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period distributions, (ii) the forward generation-interval distributions, and (iii) the forward incubation period distributions.
@@ -535,7 +546,7 @@ Finally, we re-analyze serial intervals of COVID-19 collected by \cite{du2020ser
 \cite{du2020serial} estimated the mean serial of 3.96 days (95\% CI 3.53–4.39 days) and \Ro of 1.32 (95\% CI 1.16–1.48).
 \fref{du}A shows that the mean forward serial interval decreases over time.
 While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and \emph{maximum observable} serial intervals), increase in the proportion of negative serial intervals are clearly indicative of the changes in the forward serial-interval distribution;
-increase in the proportion of negative serial intervals is unlikely to be driven by the left-censoring (indicated by the farness between the quantiles of the observed serial intervals and \emph{minimum observable} serial intervals).
+increase in the proportion of negative serial intervals is unlikely to be driven by the left-censoring (indicated by the ``farness'' between the quantiles of the observed serial intervals and \emph{minimum observable} serial intervals).
 The decrease in the mean forward serial interval was likely to be caused by increase in the mean backward incubation periods, reflecting decrease in COVID-19 cases in China, as well as intervention efforts which reduce generation intervals by preventing infections once cases are identified.
 \fref{du}B shows that the mean backward serial interval increases over time, also reflecting decrease in COVID-19 cases in China.
 
