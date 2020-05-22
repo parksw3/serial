@@ -131,8 +131,6 @@ g1a <- ggplot(filter(ser_all, type=="Observed")) +
   annotate("text", x=78, y=serialsim$mean, label="Intrinsic", hjust=1, vjust=-0.3, size=5) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
   scale_y_continuous("Mean serial interval (days)", expand=c(0, 0), limits=c(2, 6.3)) +
-  scale_color_manual(values=tail(cpalette, 2)) +
-  scale_fill_manual(values=tail(cpalette, 2)) +
   theme(
     panel.grid = element_blank(),
     legend.position = "none",
@@ -177,8 +175,6 @@ g2a <- ggplot(filter(R0all, type=="Observed")) +
   scale_x_continuous("Time (days)", limits=c(0, 80), expand=c(0, 0)) +
   scale_y_continuous("Basic reproduction number $\\mathcal R_0$", expand=c(0, 0), limits=c(0.9, 2.7),
                      breaks=c(1, 2, 3)) +
-  scale_color_manual(values=tail(cpalette, 2)) +
-  scale_fill_manual(values=tail(cpalette, 2)) +
   theme(
     panel.grid = element_blank(),
     legend.position = "none",
