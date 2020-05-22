@@ -782,12 +782,12 @@ Consider a Susceptible-Exposed-Infectious-Recovered model:
 \begin{equation}
 \begin{aligned}
 \frac{\mathrm{d}S}{\mathrm{d}t} &= - \beta S I\\
-\frac{\mathrm{d}E}{\mathrm{d}t} &= \beta S I - \sigma E\\
-\frac{\mathrm{d}I}{\mathrm{d}t} &= \sigma E - \gamma I \\
-\frac{\mathrm{d}R}{\mathrm{d}t} &= \gamma I \\
+\frac{\mathrm{d}E}{\mathrm{d}t} &= \beta S I - \gamma_E E\\
+\frac{\mathrm{d}I}{\mathrm{d}t} &= \gamma_E E - \gamma_I I \\
+\frac{\mathrm{d}R}{\mathrm{d}t} &= \gamma_I I \\
 \end{aligned}
 \end{equation}
-where $\beta$ is the transmission rate, $1/\sigma$ is the mean latent period, and $1/\gamma$ is the mean infectious period.
+where $\beta$ is the transmission rate, $1/\gamma_E$ is the mean latent period, and $1/\gamma_I$ is the mean infectious period.
 We further assume that the latent period is equivalent to incubation period; in other words, infected individuals can only transmit after symptom onset.
 Then, the generation interval will be always longer than the incubation period.
 
@@ -795,24 +795,24 @@ The joint probability distribution of the intrinsic incubation periods and intri
 \begin{equation}
 h(x, \tau) = \begin{cases}
 0 & x > \tau\\
-\gamma \sigma \exp(-\gamma (\tau-x)-\sigma x) & x \leq \tau
+\gamma_I \gamma_E \exp(-\gamma_I (\tau-x)-\gamma_E x) & x \leq \tau
 \end{cases}
 \end{equation}
 Then, the intrinsic generation-interval distribution is given by:
 \begin{equation}
 \begin{aligned}
 g(\tau) &= \int_0^\tau h(x, \tau) \dx\\
-&= \frac{\gamma \sigma}{\sigma-\gamma} (\exp(-\gamma \tau) - \exp(-\sigma \tau))
+&= \frac{\gamma_I \gamma_E}{\gamma_E-\gamma_I} (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau))
 \end{aligned}
 \end{equation}
 On the other hand, the initial forward serial-interval distribution is given by:
 \begin{equation}
 \begin{aligned}
 f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto \int_{-\infty}^{0} \int_{0}^{\tau}\exp(r \pinf) \exp(-\gamma \sinf+ \sigma \pinf) \exp(-\sigma(\tau-\sinf)) \, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto  \exp(-\sigma \tau) \int_{-\infty}^{0} \int_{0}^{\tau} \exp((\sigma-\gamma) \sinf) \exp((r+ \sigma) \pinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto  (\exp(-\gamma \tau) - \exp(-\sigma \tau)) \int_{-\infty}^{0} \exp((r+ \sigma) \pinf)\,\mathrm{d}\pinf\\
-&\propto  \exp(-\gamma \tau) - \exp(-\sigma \tau)
+&\propto \int_{-\infty}^{0} \int_{0}^{\tau}\exp(r \pinf) \exp(-\gamma_I \sinf+ \gamma_E \pinf) \exp(-\gamma_E(\tau-\sinf)) \, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
+&\propto  \exp(-\gamma_E \tau) \int_{-\infty}^{0} \int_{0}^{\tau} \exp((\gamma_E-\gamma_I) \sinf) \exp((r+ \gamma_E) \pinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
+&\propto  (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)) \int_{-\infty}^{0} \exp((r+ \gamma_E) \pinf)\,\mathrm{d}\pinf\\
+&\propto  \exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)
 \end{aligned}
 \end{equation}
 Therefore, both the intrinsic generation intervals and the initial forward serial intervals are identically distributed and have the same mean.
