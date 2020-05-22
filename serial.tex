@@ -351,7 +351,7 @@ which allows us to separate the joint probability distribution $h_\psymp$ of the
 \begin{equation}
 h_\psymp (x, \tau) \propto h(x, \tau) S(\psymp + \tau).
 \end{equation}
-We further assume that the forward incubation period distributions does not vary across cohorts over the course of an epidemic, as they represent the life history of a disease, and use $k$ without subscript instead. 
+We further assume that the forward incubation period distributions does not vary across cohorts over the course of an epidemic, as they represent the life history of a disease, and use $\idist$ without subscript instead. 
 Then, we have:
 \begin{equation}
 \begin{aligned}
@@ -628,14 +628,14 @@ where $\hat{\gdist}$ is a discrete-time intrinsic generation-interval distributi
 \begin{equation}
 \hat{\gdist}(m \Delta t) = \frac{\gdist(m \Delta t)}{\sum_{i=1}^\ell \gdist(m \Delta t)}, \quad m=1, \dots, \ell
 \end{equation}
-The continuous-time intrinsic generation-interval distribution is parameterized using a log-normal distribution (Table 1). We define the forward incubation period distribution in a similar manner:
+The continuous-time intrinsic generation-interval distribution is parameterized using a log-normal distribution (Table 1). We define the intrinsic incubation period distribution in a similar manner:
 \begin{equation}
-\hat{k}(m \Delta t) = \frac{k(m \Delta t)}{\sum_{i=1}^\ell k(m \Delta t)}, \quad m=1, \dots, \ell,
+\hat{\idist}(m \Delta t) = \frac{\idist(m \Delta t)}{\sum_{i=1}^\ell \idist(m \Delta t)}, \quad m=1, \dots, \ell,
 \end{equation}
 where its continuous-time analog is also based on a log-normal distribution.
-For brevity, we assume that the forward incubation periods and intrinsic generation intervals are independent:
+For simplicity, we assume that the forward incubation periods and intrinsic generation intervals are independent:
 \begin{equation}
-\hat{h}(m \Delta t, \Delta t n) = \hat{k}(m \Delta t)\hat{\gdist}(\Delta t n), \quad m,n=1, \dots, \ell.
+\hat{h}(m \Delta t, \Delta t n) = \hat{\idist}(m \Delta t)\hat{\gdist}(\Delta t n), \quad m,n=1, \dots, \ell.
 \end{equation}
 We use $\Delta t = 0.025\,\textrm{days}$ and $\ell=2001$ for discretization steps.
 
@@ -675,29 +675,29 @@ Here, we prove that the initial forward serial-interval distribution $f_0$ also 
 \end{equation}
 where the initial forward serial-interval distribution is defined as:
 \begin{equation}
-f_{0}(\tau) \propto \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) k(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
+f_{0}(\tau) \propto \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
 \end{equation}
 
 First, we rewrite the initial forward serial-interval distribution in the following form:
 \begin{equation}
 \begin{aligned}
-f_{0}(\tau) &\propto \int_0^\infty \int_{-\pinf}^{\tau} \exp(-r\pinf) h(\pinf, \sinf + \pinf) k(\tau - \sinf) \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&= \int_{-\infty}^{\tau} \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)k(\tau - \sinf)\mathrm{d}\pinf\, \mathrm{d}\sinf\\
+f_{0}(\tau) &\propto \int_0^\infty \int_{-\pinf}^{\tau} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \idist(\tau - \sinf) \mathrm{d}\sinf\,\mathrm{d}\pinf\\
+&= \int_{-\infty}^{\tau} \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\idist(\tau - \sinf)\mathrm{d}\pinf\, \mathrm{d}\sinf\\
 \end{aligned}
 \end{equation}
 It follows that $z(\sinf)$ describes the time between symptom onset of infector and infection of infectee:
 \begin{equation}
 z(\sinf) \propto \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf.
 \end{equation}
-The initial forward serial-interval distribution $f_0$ can be expressed as a convolution of $z$ and $k$:
+The initial forward serial-interval distribution $f_0$ can be expressed as a convolution of $z$ and $\idist$:
 \begin{equation}
 \begin{aligned}
-f_{0}(\tau) &\propto \int_{-\infty}^{\tau} z(\sinf) k(\tau - \sinf) \mathrm{d}\sinf.\\
+f_{0}(\tau) &\propto \int_{-\infty}^{\tau} z(\sinf) \idist(\tau - \sinf) \mathrm{d}\sinf.\\
 \end{aligned}
 \end{equation}
 Then, we have
 \begin{equation}
-\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) k(\tau) \mathrm{d} \tau
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) \idist(\tau) \mathrm{d} \tau
 \end{equation}
 
 Note that 
@@ -705,13 +705,13 @@ Note that
 \begin{aligned}
 &\int_{-\infty}^\infty \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\sinf\\
 &= \int_{0}^\infty \int_{-\pinf}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf) \mathrm{d}\sinf\,\mathrm{d} \pinf\\
-&= \int_{0}^\infty \exp(- r \pinf) k(\pinf) d\pinf
+&= \int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf
 \end{aligned}
 \end{equation}
-because $k$ is a marginal probability distribution of $h$.
-Since $\int_{0}^\infty \exp(- r \pinf) k(\pinf) d\pinf$ is a normalization factor for probability distribution $z$, we have:
+because $\idist$ is a marginal probability distribution of $h$.
+Since $\int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf$ is a normalization factor for probability distribution $z$, we have:
 \begin{equation}
-\int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau = \frac{\int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\tau}{\int_{0}^\infty \exp(- r \pinf) k(\pinf) d\pinf}.
+\int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau = \frac{\int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\tau}{\int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf}.
 \end{equation}
 Then, we have:
 \begin{equation}
