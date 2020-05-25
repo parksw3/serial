@@ -338,13 +338,11 @@ This framework allows us to understand changes in the realized serial intervals 
 We illustrate changes in the forward and backward serial intervals over the course of an epidemic by applying it to a specific example of an epidemic model. 
 We model disease spread with a renewal-equation model \citep{heesterbeek1996concept, diekmann2000mathematical, roberts2004modelling, aldis2005integral, roberts2007model, champredon2018equivalence}.
 Ignoring births and deaths, changes in the proportion of susceptible individuals $S(t)$ and incidence of infection $i(t)$ can be written as:
-\begin{equation}
-\begin{aligned}
-\frac{\mathrm{d}S}{\mathrm{d}t} &= - i(t)\\
+\begin{align}
+\frac{\mathrm{d}S}{\mathrm{d}t} &= - i(t)\nonumber\\
 i(t) &= \Ro S(t) \int_0^\infty i(t-\tau) \gdist(\tau) \dtau,
-\end{aligned}
 \label{eq:renewal}
-\end{equation}
+\end{align}
 where \Ro is the basic reproduction number, and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a population where the number of susceptibles remains constant).
 Then, the forward generation-interval for a cohort of individuals that were infected at time $\psymp$ follows \citep{champredon2015intrinsic}:
 \begin{equation}
@@ -356,12 +354,11 @@ h_\psymp (x, \tau) \propto h(x, \tau) S(\psymp + \tau).
 \end{equation}
 We further assume that the forward incubation period distributions does not vary across cohorts over the course of an epidemic, as they represent the life history of a disease, and use $\idist$ without subscript instead. 
 Then, we have:
-\begin{equation}
-\begin{aligned}
-\idist(x) &= \int_0^\infty h(x, \tau) \dtau\\
+\begin{align}
+\idist(x) &= \int_0^\infty h(x, \tau) \dtau\nonumber\\
 \gdist(\tau) &= \int_0^\infty h(x, \tau) \dx
-\end{aligned}
-\end{equation}
+\label{eq:marginal}
+\end{align}
 Finally, the case reproduction for this model is defined as follows:
 \begin{equation}
 \Rc(t) = \Ro \int_0^\infty \gdist(\tau) S(t+\tau) \dtau.
@@ -633,12 +630,10 @@ Our study provides a rationale for reassessing estimates of serial-interval dist
 \subsection{Deterministic simulation}
 
 We simulate the renewal equation model using a discrete-time approximation:
-\begin{equation}
-\begin{aligned}
-i(t) &= \Ro S(t-\Delta t) \sum_{m=1}^{\tsub{m}{max}} i(t-m \Delta t) \hat{\gdist}(m \Delta t) \\
+\begin{align}
+i(t) &= \Ro S(t-\Delta t) \sum_{m=1}^{\tsub{m}{max}} i(t-m \Delta t) \hat{\gdist}(m \Delta t) \nonumber \\
 S(t) &= S(t-\Delta t) - i(t)
-\end{aligned}
-\end{equation}
+\end{align}
 where $\hat{\gdist}$ is a discrete-time intrinsic generation-interval distribution that satisfies the following:
 \begin{equation}
 \hat{\gdist}(m \Delta t) = \frac{\gdist(m \Delta t)}{\sum_{i=1}^\ell \gdist(m \Delta t)}, \quad m=1, \dots, \tsub{m}{max}.
@@ -655,12 +650,10 @@ For simplicity, we assume that the forward incubation periods and intrinsic gene
 We use $\Delta t = 0.025\,\textrm{days}$ and $\tsub{m}{max}=2001$ for discretization steps.
 
 We initialize the simulation with population size $N$=40,000 as follows:
-\begin{equation}
-\begin{aligned}
-i(m \Delta t) &= C \exp(r m \Delta t), \quad m=1, \dots, \tsub{m}{max}\\
-S(m \Delta t) &= N - \sum_{n=1}^m i(n \Delta t), \quad m=1, \dots, \tsub{m}{max}\\
-\end{aligned}
-\end{equation}
+\begin{align}
+i(m \Delta t) &= C \exp(r m \Delta t), \quad m=1, \dots, \tsub{m}{max}\nonumber \\
+S(m \Delta t) &= N - \sum_{n=1}^m i(n \Delta t), \quad m=1, \dots, \tsub{m}{max}
+\end{align}
 where $C$ is chosen such that $\sum_{n=1}^{\tsub{m}{max}} i(m \Delta t)=10$.
 These initial conditions allow the model to follow exponentially growth from time $\Delta t (\tsub{m}{max} + 1)$ without any transient behaviors.
 Results presented in the main text show simulations beginning from time $\Delta t (\tsub{m}{max} + 1)$.
@@ -680,76 +673,82 @@ We simulate 10 epidemics with $I(0)=10$ and $N$=40,000.
 
 \subsection{Linking $r$ and \Ro using serial-interval distributions}
 
-The intrinsic generation-interval distribution $\gdist(\tau)$ provides a link between $r$ and \Ro via the Euler-Lotka equation:
+The intrinsic generation-interval distribution $\gdist(\tau)$ provides a link between $r$ and \Ro via the Euler-Lotka equation \citep{wallinga2007generation}:
 \begin{equation}
-\frac{1}{\Ro} = \int_0^\infty \exp(-r\tau) \gdist(\tau) \dtau.
+\frac{1}{\Ro} = \int_0^\infty \exp(-r\tau) \gdist(\tau) \dtau\,.
 \end{equation}
-Here, we prove that the initial forward serial-interval distribution $f_0$ also provides the same link:
+In this section, we prove that the initial forward serial-interval distribution $f_0(\tau)$ also estimates the same \Ro from $r$, except that integral extends to $\tau=-\infty$ rather than beginning at $\tau=0$, because serial intervals can be negative:
 \begin{equation}
-\frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \dtau,
+\frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \dtau\,.
+\label{eq:ptarget}
 \end{equation}
-where the initial forward serial-interval distribution is defined as:
+Here, the initial forward serial-interval distribution $f_{0}(\tau)$ is defined as:
 \begin{equation}
-f_{0}(\tau) \propto \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1.
+f_{0}(\tau) = \frac{\int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1}{\int_{-\infty}^\infty \int_{-\infty}^{0} \int_{\alpha_1}^{\tau'} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1 \dtau'},
+\label{eq:fdist}
 \end{equation}
-
-First, we rewrite the initial forward serial-interval distribution in the following form:
+where $h$ is the joint probability distribution describing the the intrinsic generation-interval distribution $g$ and the intrinsic incubation period distribution $\idist$ (see \eref{marginal} in the main text).
+For brevity, we denote the constant of proportionality using $\phi$ such that
 \begin{equation}
-\begin{aligned}
-f_{0}(\tau) &\propto \int_0^\infty \int_{-\pinf}^{\tau} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \idist(\tau - \sinf) \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&= \int_{-\infty}^{\tau} \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\idist(\tau - \sinf)\mathrm{d}\pinf\, \mathrm{d}\sinf\\
-\end{aligned}
-\end{equation}
-It follows that $z(\sinf)$ describes the time between symptom onset of infector and infection of infectee:
-\begin{equation}
-z(\sinf) \propto \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf.
-\end{equation}
-The initial forward serial-interval distribution $f_0$ can be expressed as a convolution of $z$ and $\idist$:
-\begin{equation}
-\begin{aligned}
-f_{0}(\tau) &\propto \int_{-\infty}^{\tau} z(\sinf) \idist(\tau - \sinf) \mathrm{d}\sinf.\\
-\end{aligned}
-\end{equation}
-Then, we have
-\begin{equation}
-\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) \idist(\tau) \mathrm{d} \tau
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1\,.
 \end{equation}
 
-Note that 
+In order to verify \eref{ptarget}, we first rewrite the integral in \eref{fdist} by substituting $-\alpha_1$ for $\alpha_1$, and then changing the order of integration:
+\begin{align}
+f_{0}(\tau) &= \frac{1}{\phi} \int_0^\infty \int_{-\pinf}^{\tau} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \idist(\tau - \sinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf\,,\nonumber \\
+&= \frac{1}{\phi} \int_{-\infty}^{\tau} \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\idist(\tau - \sinf)\,\mathrm{d}\pinf\, \mathrm{d}\sinf\,.
+\label{eq:newforward}
+\end{align}
+To further simplify the expression, we define $z(\sinf)$ as follows:
 \begin{equation}
-\begin{aligned}
-&\int_{-\infty}^\infty \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\sinf\\
-&= \int_{0}^\infty \int_{-\pinf}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf) \mathrm{d}\sinf\,\mathrm{d} \pinf\\
-&= \int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf
-\end{aligned}
+z(\sinf) = \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \,\mathrm{d}\pinf\,.
 \end{equation}
-because $\idist$ is a marginal probability distribution of $h$.
-Since $\int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf$ is a normalization factor for probability distribution $z$, we have:
+We substitute $z(\sinf)$ into \eref{newforward} to obtain:
 \begin{equation}
-\int_{-\infty}^\infty \exp(-r\tau) z(\tau) \mathrm{d} \tau = \frac{\int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\tau}{\int_{0}^\infty \exp(- r \pinf) \idist(\pinf) d\pinf}.
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{\tau} z(\sinf) \idist(\tau - \sinf) \,\mathrm{d}\sinf\,,.
+\end{equation}
+By normalizing $z(\sinf)$ such that $\hat{z}(\sinf) = z(\sinf)/\left[\int_{-\infty}^\infty z(x) \dx\right]$,
+we can now express the initial forward serial-interval distribution $f_0$ as a convolution of $\hat{z}$ and $\idist$:
+\begin{equation}
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{\tau} \hat{z}(\sinf) \idist(\tau - \sinf)\, \mathrm{d}\sinf\,.
+\end{equation}
+Since the right hand side of \eref{ptarget} is also a moment-generating function of $f_0$, we can express it as the product of the moment-generation functions of $\hat{z}$ and $\idist$:
+\begin{equation}
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) \hat{z}(\tau)\, \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) \idist(\tau) \dtau\,.
+\label{eq:newtarget}
+\end{equation}
+
+In order to derive an expression for $\int_{-\infty}^\infty \exp(-r\tau) \hat{z}(\tau) \mathrm{d} \tau$, we have to first derive an analytical expression for $\int_{-\infty}^\infty z(x) \dx$. By changing the order of integration, we have:
+\begin{align}
+\int_{-\infty}^\infty z(\sinf) \mathrm{d}\sinf &= \int_{-\infty}^\infty \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf \,\mathrm{d}\sinf\nonumber\,,\\
+&= \int_{0}^\infty \int_{-\pinf}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf)\, \mathrm{d}\sinf\,\mathrm{d} \pinf\,.
+\end{align}
+Since $\idist$ is a marginal probability distribution of $h$, it follows that:
+\begin{equation}
+\int_{-\infty}^\infty z(\sinf) \mathrm{d}\sinf = \int_{0}^\infty \exp(- r \pinf) \idist(\pinf)\, \mathrm{d}\pinf\,.
 \end{equation}
 Then, we have:
 \begin{equation}
-\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\tau.
+\hat{z}(\sinf) = \frac{\int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf}{\int_{0}^\infty \exp(- r \pinf) \idist(\pinf)\, \mathrm{d}\pinf}\,.
+\end{equation}
+Substituting the expression into \eref{newtarget}, we have:
+\begin{equation}
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau = \int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf \dtau\,.
+\label{eq:newtarget2}
 \end{equation}
 
-We are left to show that 
+Recall that $g$ is also a marginal probability distribution of $h$:
 \begin{equation}
-\int_0^{\infty} \exp(-r\tau) g(\tau) \mathrm{d}\tau = \int_{-\infty}^\infty \exp(-r\tau) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \mathrm{d}\pinf \mathrm{d}\tau,
+g(\tau) = \int_0^\infty h(\pinf, \tau) \,\mathrm{d} \pinf\,.
 \end{equation}
-where the intrinsic generation-interval distribution $g$ is also a marginal probability distribution of $f$:
-\begin{equation}
-g(\tau) = \int_0^\infty h(\pinf, \tau)  \mathrm{d} \pinf.
-\end{equation}
-Let $\sigma = \pinf + \tau$. Then, by change of variables, it immediately follows that
-\begin{equation}
-\begin{aligned}
-&\int_{-\infty}^{\infty} \exp(-r\tau) \int_{\max(0, -\tau)}^\infty \exp(- r \pinf) h(\pinf, \tau+\pinf) \mathrm{d} \pinf\, \mathrm{d}\tau\\
-&=\int_{0}^{\infty} \int_{0}^\infty \exp(- r \sigma) h(\pinf, \sigma) \mathrm{d} \pinf\, \mathrm{d}\sigma\\
-&=\int_{0}^{\infty} \exp(-r\tau) g(\tau) \mathrm{d}\tau
-\end{aligned}
-\end{equation}
-Therefore, the initial forward serial--interval distribution and the intrinsic generation-interval distribution give the same link between $r$ and \RR.
+We can then substitute $\sigma = \pinf + \tau$ into \eref{newtarget2} and apply change of variables to obtain:
+\begin{align}
+&\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau\\
+&=\int_{-\infty}^{\infty} \exp(-r\tau) \int_{\max(0, -\tau)}^\infty \exp(- r \pinf) h(\pinf, \tau+\pinf) \,\mathrm{d} \pinf \dtau\nonumber\\
+&=\int_{0}^{\infty} \int_{0}^\infty \exp(- r \sigma) h(\pinf, \sigma)\, \mathrm{d} \pinf\, \mathrm{d}\sigma\nonumber\\
+&=\int_{0}^{\infty} \exp(-r\tau) g(\tau) \dtau =\frac{1}{\Ro}
+\end{align}
+Therefore, the initial forward serial-interval distribution and the intrinsic generation-interval distribution give the same estimates of \Ro from $r$.
 
 \subsection{Comparing the estimates of \Ro using the initial forward and the intrinsic serial-interval distributions}
 
@@ -767,7 +766,7 @@ We then calculate the basic reproduction number \Ro using the empirical estimato
 \begin{equation}
 \Ro = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r F_i)}.
 \end{equation}
-We compare this with an estimate of \Ro based on the intrinsic serial-interval distribution in which the backward and the forward incubation periods are identically distributed \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
+We compare this with an estimate of \Ro based on the intrinsic serial-interval distribution which has the same mean as the intrinsic geeneration-interval distribution \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
 \begin{equation}
   \Rintrinsic = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r Q_i)},
 \end{equation}
@@ -779,14 +778,12 @@ Q_i = -Y_i + (G_i|Y_i) + X_{2,i}.
 \subsection{Applications: SEIR model}
 
 Consider a Susceptible-Exposed-Infectious-Recovered model:
-\begin{equation}
-\begin{aligned}
-\frac{\mathrm{d}S}{\mathrm{d}t} &= - \beta S I\\
-\frac{\mathrm{d}E}{\mathrm{d}t} &= \beta S I - \gamma_E E\\
-\frac{\mathrm{d}I}{\mathrm{d}t} &= \gamma_E E - \gamma_I I \\
-\frac{\mathrm{d}R}{\mathrm{d}t} &= \gamma_I I \\
-\end{aligned}
-\end{equation}
+\begin{align}
+\frac{\mathrm{d}S}{\mathrm{d}t} &= - \beta S I \nonumber \\
+\frac{\mathrm{d}E}{\mathrm{d}t} &= \beta S I - \gamma_E E\nonumber\\
+\frac{\mathrm{d}I}{\mathrm{d}t} &= \gamma_E E - \gamma_I I\nonumber \\
+\frac{\mathrm{d}R}{\mathrm{d}t} &= \gamma_I I
+\end{align}
 where $\beta$ is the transmission rate, $1/\gamma_E$ is the mean latent period, and $1/\gamma_I$ is the mean infectious period.
 We further assume that the latent period is equivalent to incubation period; in other words, infected individuals can only transmit after symptom onset.
 Then, the generation interval will be always longer than the incubation period.
@@ -799,22 +796,18 @@ h(x, \tau) = \begin{cases}
 \end{cases}
 \end{equation}
 Then, the intrinsic generation-interval distribution is given by:
-\begin{equation}
-\begin{aligned}
-g(\tau) &= \int_0^\tau h(x, \tau) \dx\\
+\begin{align}
+g(\tau) &= \int_0^\tau h(x, \tau) \dx\nonumber \\
 &= \frac{\gamma_I \gamma_E}{\gamma_E-\gamma_I} (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau))
-\end{aligned}
-\end{equation}
+\end{align}
 On the other hand, the initial forward serial-interval distribution is given by:
-\begin{equation}
-\begin{aligned}
-f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto \int_{-\infty}^{0} \int_{0}^{\tau}\exp(r \pinf) \exp(-\gamma_I \sinf+ \gamma_E \pinf) \exp(-\gamma_E(\tau-\sinf)) \, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto  \exp(-\gamma_E \tau) \int_{-\infty}^{0} \int_{0}^{\tau} \exp((\gamma_E-\gamma_I) \sinf) \exp((r+ \gamma_E) \pinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf\\
-&\propto  (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)) \int_{-\infty}^{0} \exp((r+ \gamma_E) \pinf)\,\mathrm{d}\pinf\\
+\begin{align}
+f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto \int_{-\infty}^{0} \int_{0}^{\tau}\exp(r \pinf) \exp(-\gamma_I \sinf+ \gamma_E \pinf) \exp(-\gamma_E(\tau-\sinf)) \, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto  \exp(-\gamma_E \tau) \int_{-\infty}^{0} \int_{0}^{\tau} \exp((\gamma_E-\gamma_I) \sinf) \exp((r+ \gamma_E) \pinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto  (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)) \int_{-\infty}^{0} \exp((r+ \gamma_E) \pinf)\,\mathrm{d}\pinf \nonumber \\
 &\propto  \exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)
-\end{aligned}
-\end{equation}
+\end{align}
 Therefore, both the intrinsic generation intervals and the initial forward serial intervals are identically distributed and have the same mean.
 
 \pagebreak
