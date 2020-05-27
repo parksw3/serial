@@ -509,7 +509,12 @@ While the forward serial intervals during the exponential growth phase can also 
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
-(A). The initial forward serial-interval distributions give a correct link between the exponential growth rate $r$ and the reproduction number \Ro.
+(A). The initial forward serial-interval distributions give a correct
+link between the exponential growth rate $r$ and the reproduction
+number \Ro,
+for any correlation $\rho$ between intrinsic incubation period and
+intrinsic generation interval.\djde{added definition of $\rho$ for the
+benefit of the many readers who will just poke through figures.}
 (B) The intrinsic serial-interval distributions give an incorrect link between $r$ and \Ro.
 (C) The mean initial forward serial interval during the exponential growth phase increases with $r$.
 (D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase decreases with $r$.
@@ -551,12 +556,23 @@ While the forward serial-interval distribution is our primary focus, understandi
 we typically identify infected individuals and ask when and by whom they were infected.
 Similarly, when we are estimating the incubation period of an individual, we typically observe their symptom onset date and try to estimate when they were infected (e.g., \cite{backer2020incubation}).
 
-\fref{epi} juxtaposes \bmb{too fancy? technically we're not ``comparing'' the epi dynamics to the intervals (we're comparing the forward and backward intervals)} the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
+\fref{epi} juxtaposes \bmb{too fancy? technically we're not
+  ``comparing'' the epi dynamics to the intervals (we're comparing the
+  forward and backward intervals)}\djde{how about ``shows'' and then
+  say ``(A) together with'' rather than ``(A) with'' } the epidemiological dynamics (A) with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
 The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
 The mean forward generation interval decreases slightly as incidence rate \bmb{``incidence'' or ``incidence rate''?} increases, causing the proportion of susceptible population to decrease (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
-The forward serial interval distributions depend on three intervals (\fref{diagram}): (i) the backward incubation period, \bmb{I deleted ``distributions'' in this sentence; seems to read better without hurting the meaning? could also do that for the next few sentences if appropriate} (ii) the forward generation interval, and (iii) the forward incubation period.
+The forward serial interval distributions depend on \djde{adding these
+two words so Ben's deletions are a little more palatable to me (but I
+don't like it because it goes back to talking about forward and
+backward periods rather than forward and backward distributions; I
+would go back to being precise):}distributions of three intervals
+(\fref{diagram}): (i) the backward incubation period, \bmb{I deleted
+  ``distributions'' in this sentence; seems to read better without
+  hurting the meaning? could also do that for the next few sentences
+  if appropriate} (ii) the forward generation interval, and (iii) the forward incubation period.
 For COVID-19 parameters (Table 1), both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
 therefore, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D).
 In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
@@ -630,7 +646,7 @@ The data were taken from Supplementary Materials of \cite{du2020serial}.
 Finally, we re-analyze serial intervals of COVID-19 collected by \cite{du2020serial} from mainland China, outside Hubei province, based on transmission events reported between January 21--February 8, 2020;
 \cite{du2020serial} estimated the mean serial interval of 3.96 days (95\% CI 3.53–4.39 days) and \Ro of 1.32 (95\% CI 1.16–1.48).
 \fref{du}A shows that the mean forward serial interval decreases over time.
-While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and \emph{maximum observable} \bmb{drop italics?} serial intervals), the increase in the proportion of negative serial intervals clearly indicates changes in the forward serial-interval distribution;
+While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and \emph{maximum observable} \bmb{drop italics?} serial intervals), the increase in the proportion of negative serial intervals clearly\djde{unequivocally?} indicates changes in the forward serial-interval distribution;
 the increase in the proportion of negative serial intervals is unlikely to be driven by left-censoring (indicated by the distance between the quantiles of the observed serial intervals and \emph{minimum observable} serial intervals).
 The decrease in the mean forward serial interval was probably caused by increase in the mean backward incubation period, reflecting decrease in COVID-19 cases in China, as well as intervention efforts which reduced generation intervals by preventing infections once cases were identified.
 \fref{du}B shows that the mean backward serial interval increased over time, also reflecting decrease in COVID-19 cases in China.
@@ -644,7 +660,7 @@ this sudden decrease is indicative of changes in the forward serial intervals as
 The cohort-averaged estimates of \Ro based on the early forward serial intervals are also consistent with previous estimates of \Ro of the COVID-19 epidemic in China \citep{majumder2020early, park2020reconciling}:
 $\Ro = 2.6$ (95\% CI: 2.2--3.1) and $\Ro = 3.4$ (95\% CI: 2.7 -- 4.3) based on 8 and 6 doubling periods, respectively, using serial interval data from infectors who developed symptoms by day 7.
 These early cohort-averaged estimates of \Ro are unlikely to be affected by the right-censoring as we expect the degree of right-censoring to be low (\fref{du}A).
-Therefore, \Ro estimate of 1.32 (95\% CI 1.16–1.48), which neglects the changes in the forward serial-interval distribution, is likely to be an underestimate.
+Therefore, the \Ro estimate of 1.32 (95\% CI 1.16–1.48), which neglects the changes in the forward serial-interval distribution, is likely to be an underestimate.
 This example demonstrates the danger of using the observed serial intervals to calculate the reproduction number without integrating serial intervals into cohorts.
 
 \section{Discussion}
@@ -656,7 +672,9 @@ Further, the mean forward serial interval can decrease over time due to disease 
 Failing to account for these differences can result in underestimation of \RR.
 
 Our study underlines the importance of carefully defining measured epidemiological time distributions.
-Previous studies have shown that generation interval can be measured either forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
+\djde{altered the following sentence}
+Previous studies have shown that it matters whether generation
+intervals are measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
 we generalize these ideas and show that they apply to other epidemiological distributions.
 Changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
 Recent analyses of COVID-19 epidemics have attempted to reconstruct epidemic time series of symptomatic cases or infected cases from the reports of confirmed cases by using time-independent delay distributions from infection or symptom onset to reporting (e.g., \cite{tempvar, park2020potential, shim2020transmission});
@@ -673,7 +691,11 @@ Many studies have already estimated the (time-varying) reproduction numbers for 
 these studies should also re-assess whether they appropriately considered the \emph{forward} serial interval.
 Given large geographical variation in the spread of the COVID-19, the forward serial interval distributions are also likely to vary across countries.
 We suggest that modelers should aim to characterize spatiotemporal variation in forward serial-interval distributions and understand their changes over time.
-These modeling approaches should be necessarily coupled with intensive epidemiological investigation through contact tracing at the very beginning of the outbreak in order to characterize the initial forward serial-interval distribution, particularly for an emerging epidemic such as COVID-19.
+These modeling approaches should be necessarily coupled with intensive
+epidemiological investigation through contact tracing at the very
+beginning of the outbreak in order to characterize the initial forward
+serial-interval distribution, particularly for an epidemic of an
+emerging disease such as COVID-19.
 
 Our study also underlines the fact that the serial-interval distribution depends not only on the generation-interval and incubation-period distributions, but also on their intrinsic correlations.
 This implies that not considering this correlation can bias the estimates of the intrinsic generation-interval distribution from the serial-interval distribution.
@@ -694,7 +716,12 @@ Population-level interventions, such as social distancing, can squeeze contacts 
 
 Despite these limitations, our analysis of serial intervals of COVID-19 from China provides further support for our theoretical framework, demonstrating temporal variation in serial intervals and its effect on the estimates of \RR.
 Most \bmb{I don't think you need ``to our knowledge'' if you're going to hedge with ``most''} existing estimates of the serial-intervals of COVID-19 implicitly or explicitly assume that the serial-interval distributions remain constant throughout the course of an epidemic \citep{du2020serial, he2020temporal, nishiura2020serial,tindale2020transmission,zhao2020estimating,zhang2020evolving}.
-Our study provides a rationale for reassessing estimates of serial-interval distributions, and their use in estimating \RR, of the COVID-19 pandemic. \bmb{a little awkward; could probably move ``of the COVID-19 pandemic'' before the first comma}
+Our study provides a rationale for reassessing estimates of
+serial-interval distributions---and their use in estimating
+\RR---during the COVID-19 pandemic. \bmb{a little awkward; could
+  probably move ``of the COVID-19 pandemic'' before the first
+  comma}\djde{I used --- instead of commas and replaced ``of'' with
+  ``during'', which I think fixes the problem.}
 
 \pagebreak
 
@@ -728,7 +755,7 @@ i(m \Delta t) &= C \exp(r m \Delta t), \quad m=1, \dots, \tsub{m}{max}\nonumber 
 S(m \Delta t) &= N - \sum_{n=1}^m i(n \Delta t), \quad m=1, \dots, \tsub{m}{max}
 \end{align}
 where $C$ is chosen such that $\sum_{n=1}^{\tsub{m}{max}} i(m \Delta t)=10$.
-These initial conditions allow the model to follow exponentially growth from time $\Delta t (\tsub{m}{max} + 1)$ without any transient behaviors.
+These initial conditions allow the model to follow exponential growth from time $\Delta t (\tsub{m}{max} + 1)$ without any transient behaviors.
 Results presented in the main text show simulations beginning from time $\Delta t (\tsub{m}{max} + 1)$.
 
 \subsection{Stochastic simulation}
@@ -757,14 +784,15 @@ In this section, we prove that the initial forward serial-interval distribution 
 \end{equation}
 Here, the initial forward serial-interval distribution $f_{0}(\tau)$ is defined as:
 \begin{equation}
-f_{0}(\tau) = \frac{\int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1}{\int_{-\infty}^\infty \int_{-\infty}^{0} \int_{\alpha_1}^{\tau'} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1 \dtau'},
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1\,,
 \label{eq:fdist}
 \end{equation}
-where $h$ is the joint probability distribution describing the intrinsic generation-interval distribution $g$ and the intrinsic incubation period distribution $\idist$ (see \eref{marginal} in the main text).
-For brevity, we denote the constant of proportionality using $\phi$ such that
-\begin{equation}
-f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1\,.
-\end{equation}
+where $h$ is the joint probability distribution describing the
+intrinsic generation-interval distribution $g$ and the intrinsic
+incubation period distribution $\idist$ (see \eref{marginal} in the
+main text), and the normalization constant $\phi$ is determined by the
+requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
+\djde{a bit of tidying there}
 
 In order to verify \eref{ptarget}, we first rewrite the integral in \eref{fdist} by substituting $-\alpha_1$ for $\alpha_1$, and then changing the order of integration:
 \begin{align}
@@ -776,16 +804,25 @@ To further simplify the expression, we define $z(\sinf)$ as follows:
 \begin{equation}
 z(\sinf) = \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \,\mathrm{d}\pinf\,.
 \end{equation}
-We substitute $z(\sinf)$ into \eref{newforward} to obtain:
+Substituting $z(\sinf)$ into \eref{newforward} we obtain:
 \begin{equation}
 f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{\tau} z(\sinf) \idist(\tau - \sinf) \,\mathrm{d}\sinf\,,.
 \end{equation}
-By normalizing $z(\sinf)$ such that $\hat{z}(\sinf) = z(\sinf)/\left[\int_{-\infty}^\infty z(x) \dx\right]$,
-we can now express the initial forward serial-interval distribution $f_0$ as a convolution of $\hat{z}$ and $\idist$:
+Writing $\hat{z}$ for a normalized version of $z$,
+\begin{equation}\hat{z}(\sinf) = \frac{z(\sinf)}{\int_{-\infty}^\infty z(x) \dx}\,,\end{equation}
+we can now express the initial forward serial-interval distribution
+$f_0$ as a convolution of $\hat{z}$ and $\idist$:\djde{I think you
+  meant to remove $\phi$ below, but $\phi$ is not identical to $\int
+  z$; I'm missing something}
 \begin{equation}
 f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{\tau} \hat{z}(\sinf) \idist(\tau - \sinf)\, \mathrm{d}\sinf\,.
 \end{equation}
-Since the right hand side of \eref{ptarget} is also a moment-generating function of $f_0$, we can express it as the product of the moment-generation functions of $\hat{z}$ and $\idist$:
+Since the right hand side of \eref{ptarget} is also a
+moment-generating function of $f_0$, we can express it as the product
+of the moment-generation functions of $\hat{z}$ and $\idist$:
+\djde{That didn't make sense to me, probably just not quite what you
+  meant to say.  To me, it would be much simpler just to say that
+  you're taking Laplace transforms of $f_0=\hat{z}*\idist$.}
 \begin{equation}
 \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) \hat{z}(\tau)\, \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) \idist(\tau) \dtau\,.
 \label{eq:newtarget}
@@ -821,7 +858,7 @@ We can then substitute $\sigma = \pinf + \tau$ into \eref{newtarget2} and apply 
 &=\int_{0}^{\infty} \int_{0}^\infty \exp(- r \sigma) h(\pinf, \sigma)\, \mathrm{d} \pinf\, \mathrm{d}\sigma\nonumber\\
 &=\int_{0}^{\infty} \exp(-r\tau) g(\tau) \dtau =\frac{1}{\Ro}
 \end{align}
-Therefore, the initial forward serial-interval distribution and the intrinsic generation-interval distribution give the same estimates of \Ro from $r$.
+Therefore, the initial forward serial-interval distribution and the intrinsic generation-interval distribution give the same estimates of \Ro from $r$.\qed
 
 \subsection{Comparing the estimates of \Ro using the initial forward and the intrinsic serial-interval distributions}
 
