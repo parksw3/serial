@@ -98,8 +98,8 @@ cdata2 <- data.frame(
 )
 
 g1 <- ggplot(rr) +
-  annotate("text", x=20, y=11, label="maximum observable", angle=-45) +
-  annotate("text", x=4, y=-6, label="minimum observable", angle=-45) +
+  annotate("text", x=20.5, y=11.5, label="maximum observable", angle=-45) +
+  annotate("text", x=4.5, y=-5.5, label="minimum observable", angle=-45) +
   geom_line(data=cdata, aes(x, y), lty=2) +
   geom_line(data=cdata2, aes(x, y), lty=2) +
   geom_point(data=rr_summ, aes(cohort, mean)) +
@@ -129,8 +129,8 @@ cdata4 <- data.frame(
 )
 
 g2 <- ggplot(rr) +
-  annotate("text", x=7, y=11, label="maximum observable", angle=45) +
-  annotate("text", x=24, y=-5, label="minimum observable", angle=45) +
+  annotate("text", x=6.5, y=11.5, label="maximum observable", angle=45) +
+  annotate("text", x=23.5, y=-4.5, label="minimum observable", angle=45) +
   geom_line(data=cdata3, aes(x, y), lty=2) +
   geom_line(data=cdata4, aes(x, y), lty=2) +
   geom_point(data=rr_summ2, aes(cohort, mean)) +
