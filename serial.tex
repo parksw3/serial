@@ -781,7 +781,7 @@ Then, we have:
 \end{equation}
 Substituting the expression into \eref{newtarget}, we have:
 \begin{equation}
-\int_{-\infty}^\infty \exp(-r\sinf) f_{0}(\tau)\dtau = \int_{-\infty}^\infty \exp(-r\sinf) \int_{\max{(0,-\tau)}}^{\infty} \exp(-r\pinf) h(\pinf, \tau + \pinf)\, \mathrm{d}\pinf\,\mathrm{d}\sinf\,.
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau = \int_{-\infty}^\infty \exp(-r\sinf) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf\,\mathrm{d}\sinf\,.
 \label{eq:newtarget2}
 \end{equation}
 
@@ -792,7 +792,7 @@ g(\tau) = \int_0^\infty h(x, \tau) \,\mathrm{d}x\,.
 We can then substitute $\tau = \pinf + \sinf$ into \eref{newtarget2} and apply change of variables to obtain:
 \begin{align}
 &\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau\\
-&=\int_{-\infty}^{\infty} \exp(-r\sinf) \int_{\max(0, -\sinf)}^\infty \exp(- r \pinf) h(\pinf, \tau+\pinf) \,\mathrm{d} \pinf \,\mathrm{d}\sinf \\
+&=\int_{-\infty}^{\infty} \exp(-r\sinf) \int_{\max(0, -\sinf)}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf) \,\mathrm{d} \pinf \,\mathrm{d}\sinf \\
 &=\int_{0}^{\infty} \int_{0}^\infty \exp(- r \tau) h(\pinf, \tau)\, \mathrm{d} \pinf\, \mathrm{d}\tau\\
 &=\int_{0}^{\infty} \exp(-r\tau) g(\tau) \dtau =\frac{1}{\Ro}
 \end{align}
