@@ -71,6 +71,11 @@
 
 \newcommand{\total}{{\mathcal T}} %% total number of serial intervals
 
+\usepackage{lettrine}
+
+\newcommand{\dropcapfont}{\fontfamily{lmss}\bfseries\fontsize{26pt}{28pt}\selectfont}
+\newcommand{\dropcap}[1]{\lettrine[lines=2,lraise=0.05,findent=0.1em, nindent=0em]{{\dropcapfont{#1}}}{}}
+
 \begin{document}
 
 \begin{flushleft}{
@@ -122,7 +127,7 @@ Disclaimer: The findings and conclusions in this report are those of the authors
 
 \section*{Abstract}
 
-Generation intervals and serial intervals are critical quantities for characterizing outbreak dynamics.
+\dropcap{G}eneration intervals and serial intervals are critical quantities for characterizing outbreak dynamics.
 Generation intervals characterize the time between infection and transmission; whereas serial intervals characterize the time between the onset of symptoms in a chain of transmission.
 They are often used interchangeably, leading to ongoing misunderstanding of how to use either generation or serial intervals to establish a link between the epidemic growth rate $r$ and the reproduction number \RR.
 Generation intervals provide a mechanistic link between $r$ and \RR but are harder to measure via contact tracing.
@@ -131,7 +136,7 @@ We present a general framework for characterizing \emph{any} epidemiological del
 We provide a heuristic method for addressing potential biases that can arise from not accounting for changes in serial intervals across cohorts and apply the method to estimating \RR for the COVID-19 outbreak in China using serial interval data --- our analysis shows that using incorrectly defined serial intervals can severely bias the estimate.
 This study demonstrates the importance of early epidemiological investigation through contact tracing and provides a rationale for reassessing generation intervals, serial intervals, and \RR\ estimates, for COVID-19.
 
-\section*{Significance}
+\section*{Significance Statement}
 
 The generation- and serial-interval distributions are key, but different, quantities in outbreak analyses.
 Recent theoretical studies suggest that two distributions give different estimates of the reproduction number \RR from the exponential growth rate $r$;
