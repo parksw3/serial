@@ -1,6 +1,9 @@
 Dear Editors:
-  
-We are submitting our manuscript, “Cohort-based approach to understanding the roles of generation and serial intervals in shaping epidemiological dynamics”, for consideration for publication in PNAS. This material has not previously been published elsewhere.
+
+We are submitting our manuscript, “Cohort-based approach to understanding the roles of generation and serial intervals in shaping epidemiological dynamics”, for consideration for publication in PNAS.
+The ongoing COVID-19 pandemic underlines the importance of accurately estimating the early reproduction number (i.e., the average number of secondary cases caused by a primary case) of emerging infections.
+Here, we provide and apply a significant refinement of the underlying theory, linking the observed exponential growth rate to reproduction number using basic parameters of the time scale of transmission.
+This material has not previously been published elsewhere. 
 
 The generation interval is defined as the time between when an individual (infector) is infected and when that individual infects another individual (infectee).
 The serial interval is defined as the time between when the infector develops symptom and when the infectee develops symptom.
