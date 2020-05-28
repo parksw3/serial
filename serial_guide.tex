@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.12.3 on 2020-05-22 09:42:54
+% Created by tikzDevice version 0.12.3 on 2020-05-27 19:48:26
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt]{article}
 \usepackage{tikz}
@@ -44,17 +44,19 @@
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round,fill=fillColor] (121.04,462.34) circle (  3.57);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16,421.76) {$p+x_1$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16,421.76) {$p+\tau_{\rm i1}$};
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04,421.76) {$p$};
+\definecolor{drawColor}{RGB}{255,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04,409.50) {Infector (reference cohort)};
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,409.50) {Infectee};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,421.76) {$p+\sigma$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,421.76) {$p+\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41,421.76) {$p+\sigma+x_2$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41,421.76) {$p+\tau_{\rm g}+\tau_{\rm i2}$};
 
 \path[draw=drawColor,line width= 1.1pt,line join=round] ( 40.48,437.82) -- (684.98,437.82);
 
@@ -94,14 +96,14 @@
 	(604.41,535.89) --
 	(598.15,539.50);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,544.35) {Intrinsic serial interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,544.35) {Intrinsic serial interval, $\tau_{\rm s} = (\tau_{\rm g} + \tau_{\rm i2}) - \tau_{\rm i1}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,470.79) {Intrinsic incubation period};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,470.79) {Intrinsic incubation period, $\tau_{\rm i1}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,495.31) {Intrinsic generation interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,495.31) {Intrinsic generation interval, $\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85,519.83) {Intrinsic incubation period};
-\definecolor{fillColor}{RGB}{255,255,255}
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85,519.83) {Intrinsic incubation period, $\tau_{\rm i2}$};
+\definecolor{fillColor}{RGB}{255,0,0}
 
 \path[draw=drawColor,line width= 1.5pt,line join=round,line cap=round,fill=fillColor] (121.04,437.82) circle (  5.71);
 \end{scope}
@@ -144,17 +146,19 @@
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16,229.04) {$p$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04,229.04) {$p-x_1$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04,229.04) {$p-\tau_{\rm i1}$};
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04,216.78) {Infector};
+\definecolor{drawColor}{RGB}{255,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16,216.78) {Reference cohort};
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,216.78) {Infectee};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,229.04) {$p-x_1+\sigma$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,229.04) {$p-\tau_{\rm i1}+\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41,229.04) {$p-x_1+\sigma+x_2$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41,229.04) {$p-\tau_{\rm i1}+\tau_{\rm g}+\tau_{\rm i2}$};
 
 \path[draw=drawColor,line width= 1.1pt,line join=round] ( 40.48,245.10) -- (684.98,245.10);
 
@@ -194,14 +198,14 @@
 	(604.41,343.17) --
 	(598.15,346.78);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,351.63) {Forward serial interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,351.63) {Forward serial interval, $\tau_{\rm s} = (\tau_{\rm g} + \tau_{\rm i2}) - \tau_{\rm i1}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,278.07) {Backward incubation period};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,278.07) {Backward incubation period, $\tau_{\rm i1}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,302.59) {Forward generation interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,302.59) {Forward generation interval, $\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85,327.11) {Forward incubation period};
-\definecolor{fillColor}{RGB}{255,255,255}
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85,327.11) {Forward incubation period, $\tau_{\rm i2}$};
+\definecolor{fillColor}{RGB}{255,0,0}
 
 \path[draw=drawColor,line width= 1.5pt,line join=round,line cap=round,fill=fillColor] (282.16,245.10) circle (  5.71);
 \end{scope}
@@ -244,17 +248,19 @@
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41, 36.32) {$s$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29, 36.32) {$s-x_2$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29, 36.32) {$s-\tau_{\rm i2}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04, 36.32) {$s-x_2-\sigma$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04, 36.32) {$s-\tau_{\rm i2}-\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16, 36.32) {$s-x_2-\sigma+x_1$};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (282.16, 36.32) {$s-\tau_{\rm i2}-\tau_{\rm g}+\tau_{\rm i1}$};
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (121.04, 24.06) {Infector};
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29, 24.06) {Infectee};
+\definecolor{drawColor}{RGB}{255,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (604.41, 24.06) {Reference cohort};
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 1.1pt,line join=round] ( 40.48, 52.38) -- (684.98, 52.38);
 
@@ -294,14 +300,14 @@
 	(282.16,150.45) --
 	(288.42,146.84);
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,158.91) {Backward serial interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (443.29,158.91) {Backward serial interval, $\tau_{\rm s} = (\tau_{\rm g} + \tau_{\rm i2}) - \tau_{\rm i1}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85, 85.35) {Backward incubation period};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (523.85, 85.35) {Backward incubation period, $\tau_{\rm i2}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (362.72,109.87) {Backward generation interval};
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (362.72,109.87) {Backward generation interval, $\tau_{\rm g}$};
 
-\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,134.39) {Forward incubation period};
-\definecolor{fillColor}{RGB}{255,255,255}
+\node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.10] at (201.60,134.39) {Forward incubation period, $\tau_{\rm i1}$};
+\definecolor{fillColor}{RGB}{255,0,0}
 
 \path[draw=drawColor,line width= 1.5pt,line join=round,line cap=round,fill=fillColor] (604.41, 52.38) circle (  5.71);
 \end{scope}

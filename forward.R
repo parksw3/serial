@@ -125,9 +125,10 @@ gendet <- data.frame(
 g3 <- ggplot(gendata0) +
   geom_line(data=gendet, aes(tvec, mf), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), colour=NA, fill="#D55E00", alpha=0.2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
-  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2) +
+  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2, oob=scales::squish) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("C. Generation interval") +
   theme(
@@ -149,6 +150,7 @@ serdet <- data.frame(
 g4 <- ggplot(serdata0) +
   geom_line(data=serdet, aes(tvec, mf), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
+  geom_ribbon(aes(cc, ymin=lwr, ymax=upr), colour=NA, fill="#D55E00", alpha=0.2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
   scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7)) +
