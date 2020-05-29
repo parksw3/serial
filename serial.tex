@@ -164,16 +164,15 @@ the need for a better conceptual and theoretical framework for understanding the
 Researchers continue to rely on both generation and serial intervals to estimate the reproduction number \RR of COVID-19, either without making a clear distinction \citep{tempvar,du2020serial,he2020temporal,wu2020nowcasting,zhao2020serial}, or explicitly conflating the two intervals
 \citep{anderson2020will,hellewell2020feasibility}.
 
-\jd{It's a shame not to mention the idea that serial intervals are wider, and should therefore predict smaller \RR. That would also help with understanding the resolution. Or maybe we get to these ideas later? It helps with the paradox framing, but I guess you really don't like that.}
 One source of confusion arises from an apparent discrepancy between the serial-interval and generation-interval viewpoints.
 When the epidemic is growing exponentially, the spread of infection can be characterized as a \emph{renewal process} based on previous incidence of infection, the associated generation-interval distribution, and the average infectiousness of an infected individual.
 It is well established that this renewal formulation allows us to link the exponential growth rate of an epidemic $r$ with its reproduction number \RR using the generation-interval distribution \citep{wallinga2007generation}.
 By definition, the serial-interval distribution describes the renewal process between symptomatic cases based on their symptom onset dates;
 since both renewal processes, based on generation- and serial-interval distributions, describe the same underlying system of exponential growth, both should provide the same correct link between \RR and the epidemic growth rate $r$.
 In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of \RR from $r$. 
-Some studies have further suggested that using serial intervals can give different estimates of \RR \citep{britton2019estimation, ganyani2020estimating}.
+Some studies have further suggested that using serial intervals can underestimate \RR because the serial-interval distribution is wider than the generation-interval distribution \citep{britton2019estimation, ganyani2020estimating}.
 
-Here, we resolve this apparent paradox by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
+Here, we resolve this apparent discrepancy by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
 We develop a new framework for characterizing and comparing serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
 We apply our framework to serial intervals of COVID-19 and lay out several principles to consider in using information about serial intervals and other epidemiological time delays to correctly infer the reproduction number during the early stages of an outbreak.
@@ -325,7 +324,6 @@ amount of infection that occurs between time $\pinf$ and $\sinf$ as
 well as the density of forward incubation periods between $\pinf$ and
 $\psymp$ (realized incubation periods of infectors) and between
 $\sinf$ and $\ssymp$ (realized incubation periods of infectees):
-\jd{I feel that $R_c$ should group with h (i.e., after i()), for comprehension.}
 \begin{equation}
 \underbrace{\Rc (\pinf)}_{\substack{\text{case} \\ \text{reproduction} \\ \text{number}}} 
 \times 
@@ -391,6 +389,8 @@ Finally, the case reproduction for this model is defined as follows:
 \end{equation}
 The forward and backward serial-interval distributions are then calculated by substituting these quantities into \eref{fserial} and \eref{bserial}.
 We use this framework to illustrate how the realized epidemiological time distributions vary over the course of an epidemic and depend on the perspective (i.e., forward vs. backward).
+We parameterize the model based on parameter estimates for COVID-19 (Table);
+we use a bivariate lognormal distribution 
 
 \subsection{Linking $r$ and \RR}
 
@@ -424,7 +424,7 @@ where the intrinsic serial-interval distribution $q(\tau)$ does not depend on ep
 q(\tau) \propto \int_{-\infty}^{0} \int_{\pinf}^{\tau} h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf.
 \label{eq:intrinsicSI}
 \end{equation}
-Rather than numerically integrating over closed forms of $g$, $f_0$, and $q$ to estimate $\Ro$, we use simulation-based approaches for simplicity (Supplementary Materials). Our parameter values are shown in the Table.
+Rather than numerically integrating over closed forms of $g$, $f_0$, and $q$ to estimate $\Ro$, we use simulation-based approaches for simplicity (Supplementary Materials). Our parameter values are shown in the Table 1.
 
 The initial forward serial-interval distribution depends on the exponential growth rate $r$.
 For a fast-growing epidemic (high $r$), we expect the backward incubation periods to be short (\eref{backexp}), and therefore, the forward serial-interval distribution will generally have a larger mean than the intrinsic generation- and serial-interval distributions.
