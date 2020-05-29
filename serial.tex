@@ -456,10 +456,13 @@ The intrinsic generation-interval and incubation period distributions are chosen
 
 \subsection{Realized serial-interval distributions}
 
+\jd{Results could start sharper. I don't think $\rho$ is ``based on parameter estimates'' --  I think you mean the other stuff. The lognormal details etc., should be merged into Methods.}
 First, we compare the estimates of the basic reproduction number \Ro based on the initial forward serial-interval distributions and the intrinsic serial-interval distributions (see Supplementary Materials for calculation details.).
 In particular, we model the joint probability distribution of the intrinsic incubation periods and generation intervals using a bivariate lognormal distribution with correlation $\rho$ based on parameter estimates for COVID-19 (Table 1).
-The initial forward serial-interval distributions $f_0(\tau)$ and the intrinsic generation-interval distribution $\gdist(\tau)$ give identical estimates of \Ro (see \eref{Rgen} and \eref{Rforward}) regardless of the correlation $\rho$ between the intrinsic incubation period and the intrinsic generation interval (\fref{rR}A).
-However, using the intrinsic serial-interval distributions that do not account for epidemic dynamics (i.e., assuming that the backward and the forward incubation period distributions are identical) underestimates \Ro (see \eref{Rintrinsic});
+
+\fref{rR} shows Euler-Lotka estimates of \Ro\ on different definitions of the serial interval. 
+When the initial forward serial-interval distributions $f_0(\tau)$ is used, estimates (from \eref{Rforward}) exactly match the (correct) generation-interval-based estimates (\eref{Rgen} for all values of the correlation $\rho$ between the intrinsic incubation period and the intrinsic generation interval (\fref{rR}A).
+When the intrinsic distributions are used, however, estimates based on the serial interval (\eref{Rintrinsic});
 as $r$ increases, \Rintrinsic saturates and eventually decreases due to negative serial intervals (\fref{rR}B).
 While the forward serial intervals during the exponential growth phase can also be negative, the proportion of negative intervals are appropriately balanced because faster epidemic growth will lead to shorter backward incubation periods (and therefore a lower proportion of negative serial intervals).
 
