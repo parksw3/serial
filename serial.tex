@@ -195,12 +195,11 @@ For example, the intrinsic incubation period distribution describes the expected
 Likewise, the intrinsic generation-interval distribution describes the expected time distribution of infectious contacts made by an average infected individual.
 However, the intrinsic time distributions are not always equivalent to the corresponding realized time distributions at the population level (i.e., the distribution of time between actual primary and secondary events that occur during an epidemic).
 For example, an infectious contact results in infection only if the contacted individual is susceptible (and has not already been infected);
-this is one mechanism that distinguishes the realized generation intervals (time between actual infection events) from the intrinsic generation intervals (time between infection and infectious contacts).
+this is one mechanism that causes realized generation intervals (time between actual infection events) to differ from from the intrinsic generation intervals (time between infection and infectious contacts).
 
-At the population level, we model realized time delays between a primary and a secondary event that occurs during an epidemic from a cohort perspective.
-A primary cohort consists of \emph{all} individuals whose primary event occurred at a given time; 
-a secondary cohort is defined similarly based on the secondary events.
-For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time $\psymp$.
+At the population level, we model realized time delays between a primary and a secondary event from a cohort perspective.
+A cohort consists of \emph{all} individuals whose (primary or secondary) event occurred at a given time. 
+For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time \psymp, while a secondary cohort consists of all individuals whose symptom onset occurred at time $\ssymp$.
 Similarly, when we are measuring serial intervals, a primary cohort consists of all infectors who became symptomatic at time $\psymp$.
 Then, for each primary cohort at time $\psymp$, we can define the expected time distribution between primary and secondary events.
 We refer to this distribution as the forward delay distribution and denote it as $f_\psymp(\tau)$.
@@ -229,23 +228,14 @@ Substituting $\psymp=\ssymp-\tau$, it follows that
 b_\ssymp(\tau)= \frac{\psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}{\ssize(\ssymp)}\,.
 \label{eq:backward}
 \end{equation}
-If we are thinking of realized incubation periods, then the left hand side of
+If we are considering incubation periods, the left hand side of
 this equation is the probability density that an individual
 who became symptomatic at time $\ssymp$ had an incubation period of
 length $\tau$. From the right hand side, we see that this probability
-density depends on how many individuals became infected at time
-$\ssymp-\tau$ [$\psize(\ssymp-\tau)$], how many individuals became
-symptomatic at time $\ssymp$ [$\ssize(\ssymp)$], and the probability density
-that someone who was infected at time $\ssymp-\tau$ became symptomatic at
-time $\ssymp$ [$f_{\ssymp-\tau}(\tau)$]. In general, Eq.~\eqref{eq:backward}
-shows that the backward delay distribution at reference time $\ssymp$
-[$b_\ssymp(\tau)$] depends not only on the secondary cohort size at time
-$\ssymp$ [$\ssize(\ssymp)$], but also on the primary cohort size at the
-earlier time $\ssymp-\tau$ [$\psize(\ssymp-\tau)$] and the forward delay
-distribution at that earlier time [$f_{\ssymp-\tau}(\tau)$].
+density depends on both the forward distribution $f_{\ssymp-\tau}(\tau)$], and the time-varying number of people becoming infected $\psize(\ssymp-\tau)$].
 
 Several different mechanisms drive the changes in forward and backward delay distributions over time.
-Typically, within-individual forward delay distributions are not affected by epidemic dynamics.
+Typically, within-individual forward delay distributions are not directly affected by epidemic dynamics.
 Some realized distributions, like incubation period distributions, are expected to be equivalent to their intrinsic distributions and remain invariant at time time scale of an outbreak.
 Other realized distributions, like the distribution of time from symptom onset to testing, may change over the course of an epidemic due to changes in public health policies.
 Between-individual forward delay distributions, such as generation- or serial-interval distributions, depend on epidemic dynamics;
@@ -253,8 +243,8 @@ for example, forward generation intervals contract during the outbreak because i
 
 \eref{backward} suggests that backward delay distributions change over time even if their corresponding forward delay distribution does not change.
 Backward delay distributions depend on changes in the primary cohort size over time due to conditionality of observations:
-Conditioning on individuals whose secondary events have occurred at the same time means that the distribution is truncated so that we tend to observe shorter (or longer) inter-event delays when incidence is  the cohort size has been increasing (or decreasing) over time.
-In particular, when the incidence is growing exponentially, we can calculate the amount of bias exactly.
+Conditioning on individuals whose secondary events have occurred at the same time means that we tend to observe shorter (or longer) inter-event delays when cohort size has been increasing (decreasing) through time.
+When incidence is growing exponentially, we can calculate the amount of bias exactly.
 Assuming that the forward delay distribution remains constant during the exponential growth phase ($f_p(\tau) \approx f_0(\tau)$), we can substitute $\psize(t) = \psize(0) \exp(rt)$ in \eref{backward} to obtain:
 \begin{align}
 b_0(\tau) &= \left[\psize(0)/\ssize(0)\right] \exp(-r\tau) f_0(\tau)
