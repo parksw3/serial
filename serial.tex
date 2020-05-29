@@ -128,12 +128,12 @@ Disclaimer: The findings and conclusions in this report are those of the authors
 \section*{Abstract}
 
 \dropcap{G}eneration intervals and serial intervals are critical quantities for characterizing outbreak dynamics.
-Generation intervals characterize the time between infection and transmission; whereas serial intervals characterize the time between the onset of symptoms in a chain of transmission.
-They are often used interchangeably, leading to ongoing misunderstanding of how to use either generation or serial intervals to establish a link between the epidemic growth rate $r$ and the reproduction number \RR.
+Generation intervals characterize the time between infection and transmission, while serial intervals characterize the time between the onset of symptoms in a chain of transmission.
+They are often used interchangeably, leading to misunderstanding of how these intervals link the epidemic growth rate $r$ and the reproduction number \RR.
 Generation intervals provide a mechanistic link between $r$ and \RR but are harder to measure via contact tracing.
 While serial intervals are easier to measure from contact tracing, recent studies suggest that the two intervals give different estimates of \RR from $r$.
-We present a general framework for characterizing \emph{any} epidemiological delays based on cohorts (i.e., a group of individuals that share the same event time, such as symptom onset) and show that \emph{forward-looking} serial intervals, which correctly estimates \RR from $r$, are not the same as ``intrinsic'' serial intervals, but instead change with $r$.
-We provide a heuristic method for addressing potential biases that can arise from not accounting for changes in serial intervals across cohorts and apply the method to estimating \RR for the COVID-19 outbreak in China using serial interval data --- our analysis shows that using incorrectly defined serial intervals can severely bias the estimate.
+We present a general framework for characterizing epidemiological delays based on cohorts (i.e., a group of individuals that share the same event time, such as symptom onset) and show that \emph{forward-looking} serial intervals, which correctly link \RR with $r$, are not the same as ``intrinsic'' serial intervals, but instead change with $r$.
+We provide a heuristic method for addressing potential biases that can arise from not accounting for changes in serial intervals across cohorts and apply the method to estimating \RR for the COVID-19 outbreak in China using serial-interval data --- our analysis shows that using incorrectly defined serial intervals can severely bias estimates.
 This study demonstrates the importance of early epidemiological investigation through contact tracing and provides a rationale for reassessing generation intervals, serial intervals, and \RR\ estimates, for COVID-19.
 
 \section*{Significance Statement}
@@ -142,7 +142,7 @@ The generation- and serial-interval distributions are key, but different, quanti
 Recent theoretical studies suggest that two distributions give different estimates of the reproduction number \RR from the exponential growth rate $r$;
 however, both intervals, by definition, describe disease transmission at the individual level.
 Here, we show that the serial-interval distribution, defined from the correct reference time and cohort, gives the same estimate of \RR as the generation-interval distribution.
-We then apply our framework to serial interval data from the COVID-19 outbreak in China.
+We then apply our framework to serial-interval data from the COVID-19 outbreak in China.
 While our study supports the use of serial-interval distributions in estimating \RR, it also reveals necessary changes to the current understanding and applications of serial-interval distribution.
 
 \pagebreak
@@ -151,7 +151,7 @@ While our study supports the use of serial-interval distributions in estimating 
 
 The reproduction number \RR is one of the most important characteristics of an emerging epidemic, including the current pandemic of coronavirus disease 2019 (COVID-19) \citep{majumder2020early}.
 The reproduction number is defined as the average number of secondary cases caused by a primary case;
-the value in a fully susceptible population --- referred to as the basic reproduction number \Ro --- allows us to predict the extent to which an infection will spread in the population and the amount of intervention necessary to eliminate it \citep{anderson1991infectious}.
+the value in a fully susceptible population --- the ``basic'' reproduction number \Ro --- allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it \citep{anderson1991infectious}.
 Near the beginning of an outbreak, \RR is often estimated from the observed exponential growth rate using generation- and serial-interval distributions (e.g., \cite{wallinga2007generation, fraser2009pandemic, hampson2009transmission, chunara2012social, chowell2014west, du2020serial, jung2020real}) but the differences among two distributions are often neglected.
 
 The generation interval is defined as the time between when an individual (infector) is infected and when that individual infects another person (infectee);
@@ -164,16 +164,16 @@ the need for a better conceptual and theoretical framework for understanding the
 Researchers continue to rely on both generation and serial intervals to estimate the reproduction number \RR of COVID-19, either without making a clear distinction \citep{tempvar,du2020serial,he2020temporal,wu2020nowcasting,zhao2020serial}, or explicitly conflating the two intervals
 \citep{anderson2020will,hellewell2020feasibility}.
 
-One source of confusion arises from an apparent discrepancy between biological intuition and mathematical theory.
+One source of confusion arises from an apparent discrepancy between the serial-interval and generation-interval viewpoints.
 When the epidemic is growing exponentially, the spread of infection can be characterized as a \emph{renewal process} based on previous incidence of infection, the associated generation-interval distribution, and the average infectiousness of an infected individual.
-This renewal formulation allows us to link the exponential growth rate of an epidemic $r$ with its reproduction number \RR using the generation-interval distribution \citep{wallinga2007generation}.
+It is well established that this renewal formulation allows us to link the exponential growth rate of an epidemic $r$ with its reproduction number \RR using the generation-interval distribution \citep{wallinga2007generation}.
 By definition, the serial-interval distribution describes the renewal process between symptomatic cases based on their symptom onset dates;
-since both renewal processes, based on generation- and serial-interval distributions, describe the same underlying system, where all components must be growing at the same rate, we expect both generation- and serial-interval distributions to give identical estimates of \RR based on the observed epidemic growth rate $r$.
+since both renewal processes, based on generation- and serial-interval distributions, describe the same underlying system of exponential growth, both should provide the same correct link between \RR and the epidemic growth rate $r$.
 In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of \RR from $r$. 
 Some studies have further suggested that using serial intervals can give different estimates of \RR \citep{britton2019estimation, ganyani2020estimating}.
 
-Here, we resolve this discrepancy by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
-We develop a new framework for understanding serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
+Here, we resolve this apparent paradox by showing that the relevant interval for the renewal framework is what is called the ``forward'' interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
+We develop a new framework for characterizing and comparing serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
 We apply our framework to serial intervals of COVID-19 and lay out several principles to consider in using information about serial intervals and other epidemiological time delays to correctly infer the reproduction number during the early stages of an outbreak.
 
@@ -556,10 +556,10 @@ Colored ribbons represent the range of estimates of \Ro across 10 stochastic sim
 \label{fig:obsrR}
 \end{figure}
 
-Now, we turn to issues of estimating the reproduction number from the observed serial interval data during on ongoing epidemic.
+Now, we turn to issues of estimating the reproduction number from the observed serial-interval data during on ongoing epidemic.
 In order to have an unbiased estimate of the basic reproduction number, we need to use serial-interval distributions estimated based on primary cohorts (i.e., infectors who share the same symptom onset time) at the early stage of the epidemic (i.e., initial forward serial-interval distribution).
 However, researchers typically use all available information to estimate epidemiological parameters;
-in particular, \cite{thompson2019improved} recently suggested that up-to-date serial interval data are necessary to accurately estimate the reproduction number.
+in particular, \cite{thompson2019improved} recently suggested that up-to-date serial-interval data are necessary to accurately estimate the reproduction number.
 We explore the consequences of neglecting changes in the realized serial interval distribution on estimates of the basic reproduction number.
 
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
@@ -610,7 +610,7 @@ These results indicate that the incubation period and generation interval (Table
 \fref{du}C shows the cohort-averaged estimates of \Ro, which remain roughly constant until day 7 and suddenly decreases;
 this sudden decrease is indicative of changes in the forward serial intervals as shown in our simulation study (\fref{obsrR}).
 The cohort-averaged estimates of \Ro based on the early forward serial intervals are also consistent with previous estimates of \Ro of the COVID-19 epidemic in China \citep{majumder2020early, park2020reconciling}:
-$\Ro = 2.6$ (95\% CI: 2.2--3.1) and $\Ro = 3.4$ (95\% CI: 2.7 -- 4.3) based on 8 and 6 doubling periods, respectively, using serial interval data from infectors who developed symptoms by day 7.
+$\Ro = 2.6$ (95\% CI: 2.2--3.1) and $\Ro = 3.4$ (95\% CI: 2.7 -- 4.3) based on 8 and 6 doubling periods, respectively, using serial-interval data from infectors who developed symptoms by day 7.
 These early cohort-averaged estimates of \Ro are unlikely to be affected by the right-censoring as we expect the degree of right-censoring to be low (\fref{du}A).
 Therefore, the \Ro estimate of 1.32 (95\% CI 1.16–1.48), which neglects the changes in the forward serial-interval distribution, is likely to be an underestimate.
 This example demonstrates the danger of using the observed serial intervals to calculate the reproduction number without organizing serial intervals into cohorts.
@@ -634,11 +634,11 @@ Although such approaches may be able to roughly match the time scale of an epide
 
 While our results support the use of serial interval distributions for calculating \RR, 
 they also reveal gaps in current practices in incorporating serial-interval distributions into outbreak analyses.
-\cite{thompson2019improved} recently emphasized the importance of using up-to-date serial interval data for accurate estimation of time-varying reproduction numbers.
-However, our study demonstrates that early serial interval data is required to estimate the initial \RR during the exponential growth phase and that using up-to-date serial interval data (without accounting for changes in the forward serial-interval distribution) can, in fact, underestimate the initial \RR.
+\cite{thompson2019improved} recently emphasized the importance of using up-to-date serial-interval data for accurate estimation of time-varying reproduction numbers.
+However, our study demonstrates that early serial-interval data is required to estimate the initial \RR during the exponential growth phase and that using up-to-date serial-interval data (without accounting for changes in the forward serial-interval distribution) can, in fact, underestimate the initial \RR.
 Future studies should explore how neglecting changes in the forward serial-interval distribution can affect the estimates of \RR beyond the exponential growth phase and potentially re-assess existing estimates of \RR.
 
-Many studies have already estimated the (time-varying) reproduction numbers for COVID-19 epidemics using aggregated serial interval data (e.g., \cite{tempvar,du2020serial,pan2020jama,zhang2020evolving});
+Many studies have already estimated the (time-varying) reproduction numbers for COVID-19 epidemics using aggregated serial-interval data (e.g., \cite{tempvar,du2020serial,pan2020jama,zhang2020evolving});
 these studies should also re-assess whether they appropriately considered the \emph{forward} serial interval.
 Given large geographical variation in the spread of the COVID-19, the forward serial interval distributions are also likely to vary across countries.
 We suggest that modelers should aim to characterize spatiotemporal variation in forward serial-interval distributions and understand their changes over time.
