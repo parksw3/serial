@@ -220,19 +220,25 @@ the same number. In general, no matter how delays are distributed, if
 $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
 secondary cohorts then we must have
 \begin{equation}
-\psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,.
+W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
 \label{eq:match}
 \end{equation}
+where $W(\psymp)$, the ``weight'' of the primary cohort $\psize(\psymp)$, represents the average number of forward intervals that an individual in cohort $\psize(\psymp)$ produces over the course of their infection.
+When we measure within-individual delays, we expect $W(\psymp) \leq 1$ because only a subset of individuals who experience the primary event (e.g., infection) will eventually experience the secondary event (e.g., symptom onset). 
+When we measure between-individual delays, we expect $W(\psymp)$ to change throughout an epidemic because individuals infected in the beginning of an epidemic will infect more than one individual, on average, over the course of their infection, whereas those infected later will infect less than one individual, on average.
+
 Substituting $\psymp=\ssymp-\tau$, it follows that
 \begin{equation}
-b_\ssymp(\tau)= \frac{\psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}{\ssize(\ssymp)}\,.
+b_\ssymp(\tau)= \frac{W(\ssymp-\tau) \psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}{\ssize(\ssymp)}\,.
 \label{eq:backward}
 \end{equation}
 If we are considering incubation periods, the left hand side of
 this equation is the probability density that an individual
 who became symptomatic at time $\ssymp$ had an incubation period of
 length $\tau$. 
-From the right hand side, we see that this probability density depends on both the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals became infected at time $\ssymp-\tau$) and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that someone who was infected at time $\ssymp-\tau$ became symptomatic at time $\ssymp$).
+From the right hand side, we see that this probability density depends on the weight parameter $W(\psymp-\tau)$ (in this case, the proportion of symptomatic infection),
+the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals became infected at time $\ssymp-\tau$),
+and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that someone who was infected at time $\ssymp-\tau$ became symptomatic at time $\ssymp$).
 
 Several different mechanisms drive the changes in forward and backward delay distributions over time.
 Typically, within-individual forward delay distributions are not directly affected by epidemic dynamics.
@@ -245,12 +251,12 @@ for example, forward generation intervals contract during the outbreak because i
 Backward delay distributions depend on changes in the primary cohort size over time due to conditionality of observations:
 Conditioning on individuals whose secondary events have occurred at the same time means that we tend to observe shorter (or longer) inter-event delays when cohort size has been increasing (decreasing) through time.
 When incidence is growing exponentially, we can calculate the amount of bias exactly.
-Assuming that the forward delay distribution remains constant during the exponential growth phase ($f_p(\tau) \approx f_0(\tau)$), we can substitute $\psize(t) = \psize(0) \exp(rt)$ in \eref{backward} to obtain:
+Assuming that the forward delay distribution ($f_\psymp(\tau) \approx f_0(\tau)$) and the weight parameter ($W(\psymp) \approx W(0)$) remain constant during the exponential growth phase, we can substitute $\psize(t) = \psize(0) \exp(rt)$ in \eref{backward} to obtain:
 \begin{align}
-b_0(\tau) &= \left[\psize(0)/\ssize(0)\right] \exp(-r\tau) f_0(\tau)
+b_0(\tau) &= \left[ W(0) \psize(0)/\ssize(0)\right] \exp(-r\tau) f_0(\tau)
 \label{eq:backexp}
 \end{align}
-where $r$ is the exponential growth rate (and $\left[\psize(0)/\ssize(0)\right]^{-1} = \int_{-\infty}^{\infty} \exp(-r\tau') f_0(\tau') \dtau'$ since $b_0$ is a probability distribution).
+where $r$ is the exponential growth rate (and $\left[W(0) \psize(0)/\ssize(0)\right]^{-1} = \int_{-\infty}^{\infty} \exp(-r\tau') f_0(\tau') \dtau'$ since $b_0$ is a probability distribution).
 Thus, for faster epidemics (higher $r$), the backward delay distribution will have a shorter mean.
 In general, the backward delay distribution will differ from the forward delay distribution (unless the disease is at equilibrium), even if we are measuring time delays that are intrinsic to the life history of a disease (e.g., the incubation period).
 These ideas apply to all epidemiological delay distributions and generalize the work by \cite{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe realized generation intervals from the perspective of an infector and an infectee, respectively, as well as the work by \cite{britton2019estimation} who showed that \eref{backexp} holds for the backward generation-interval distributions.
