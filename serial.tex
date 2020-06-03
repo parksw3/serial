@@ -525,18 +525,18 @@ While the forward serial-interval distribution is our primary focus, understandi
 we typically identify infected individuals and ask when and by whom they were infected.
 Similarly, when we are estimating the incubation period of an individual, we typically observe their symptom onset date and try to estimate when they were infected (e.g., \cite{backer2020incubation}).
 
-\fref{epi} shows the epidemiological dynamics (A) together with the mean forward (B--D) and the mean backward (E--F) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
-The mean forward incubation period remains constant throughout an epidemic as assumed (\fref{epi}B).
-The mean forward generation interval decreases slightly as incidence increases, causing the proportion of susceptible population to decrease (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
+\fref{epi} shows the epidemiological dynamics (A) together with the mean forward (B--D) and the mean backward (E--G) delay distributions of a deterministic model based on the renewal equation (\eref{renewal}) and of the corresponding stochastic realizations based on individual-based simulations.
+The mean forward incubation period remains constant throughout an epidemic by assumption (\fref{epi}B).
+The mean forward generation interval decreases slightly when incidence is high, which is when the susceptible population declines rapidly (\fref{epi}C; \cite{kenah2008generation, champredon2015intrinsic}).
 In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 
 The forward serial-interval distributions depend on distributions of three intervals
 (\fref{diagram}): (i) the backward incubation period, (ii) the forward generation interval, and (iii) the forward incubation period.
-For COVID-19 parameters (Table 1), both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
+In these simulations, both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
 therefore, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D).
-In this case, the increase in the mean backward incubation period directly translates to the decrease in the mean forward serial interval.
 % Since the increase in the mean backward period is driven by the decreasing incidence, which can still occur in the absence of significant depletion of the susceptible pool via intervention, decrease in the mean forward serial interval may be a robust feature in COVID-19 outbreaks.
 In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.
+\jd{Am I right that the main thing going on here is the decrease in $r(t)$, which should be a robust feature of outbreaks in general? Can we explain that?}
 
 We see similar qualitative patterns in all three backward delays (\fref{epi}E--G; \eref{backward}), because they are predominantly driven by the rate of change in incidence, which in turn affects relative cohort sizes.
 When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
