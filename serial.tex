@@ -473,7 +473,7 @@ Finally, we analyze the serial interval data from the COVID-19 epidemic in China
 
 \fref{rR} shows Euler-Lotka estimates of \Ro\ on different definitions of the serial interval. 
 When the initial forward serial-interval distributions $f_0(\tau)$ is used, estimates (from \eref{Rforward}) exactly match the (correct) generation-interval-based estimates (\eref{Rgen}) for all values of the correlation $\rho$ between the intrinsic incubation period and the intrinsic generation interval (\fref{rR}A).
-When the intrinsic distributions are used, however, estimates based on the serial interval (\eref{Rintrinsic}) underestimate \Ro; as $r$ increases, \Rintrinsic saturates and eventually \emph{decreases} due to the increasing inferred importance of negative serial intervals (\fref{rR}B).
+When the intrinsic distributions are used, however, estimates based on the serial interval (\eref{Rintrinsic}) underestimate \Ro: as $r$ increases, \Rintrinsic saturates and eventually \emph{decreases} due to the increasing inferred importance of negative serial intervals (\fref{rR}B).
 While the initial forward serial intervals during the exponential growth phase can also be negative, their effects are appropriately balanced because faster epidemic growth leads to longer serial intervals (and a corresponding lower proportion of negative intervals).
 
 \begin{figure}[!th]
@@ -519,7 +519,7 @@ See Table 1 for parameter values.
 \end{figure}
 
 The initial forward serial-interval distribution captures the exponential growth phase of an epidemic.
-Next, we characterize how forward and backward serial intervals vary over the course of an epidemic by running deterministic and stochastic simulations based on the renewal equations (see Supplementary Materials) using parameters in Table 1;
+We explore how forward and backward serial intervals can vary over the course of an epidemic using deterministic and stochastic simulations based on the renewal equations (see Supplementary Materials) using parameters in Table 1;
 we further assume $\Ro=2.5$.
 While the forward serial-interval distribution is our primary focus, understanding the differences between the forward and the backward distributions is important because the observed intervals during an ongoing epidemic are often the backward ones:
 we typically identify infected individuals and ask when and by whom they were infected.
@@ -661,7 +661,7 @@ Biases in the observed serial intervals will necessarily bias the estimates of \
 Furthermore, when one of the individuals is asymptomatic, there is no symptom-based serial interval; 
 neglecting the time scale asymptomatic transmission may also bias the estimates of \RR \citep{park2020time}.
 
-While we focus here on the effect of epidemiological dynamics on the serial-interval distributions, other factors, such as intervention strategies, can also affect the generation- and serial-interval distributions.
+While we focus here on the effect of epidemiological dynamics on serial-interval distributions, other factors, such as intervention strategies, can also affect the generation- and serial-interval distributions.
 Individual-level interventions, such as case isolation, and behavioral responses directly affect individuals' ability to transmit and will shorten the forward generation- and serial-intervals.
 Population-level interventions, such as social distancing, can squeeze contacts into household and induce clustering, which will in turn shorten the realized generation interval due to local depletion of the susceptible pool within households \citep{park2019inferring}.
 
