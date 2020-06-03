@@ -201,8 +201,9 @@ At the population level, we model realized time delays between a primary and a s
 A cohort consists of \emph{all} individuals whose (primary or secondary) event occurred at a given time. 
 For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time \psymp, while a secondary cohort consists of all individuals whose symptom onset occurred at time $\ssymp$.
 Similarly, when we are measuring serial intervals, a primary cohort consists of all infectors who became symptomatic at time $\psymp$.
-Then, for each primary cohort at time $\psymp$, we can define the expected time distribution between primary and secondary events.
+Then, for \swp{an average individual in} primary cohort at time $\psymp$, we can define the expected time distribution between primary and secondary events. 
 We refer to this distribution as the forward delay distribution and denote it as $f_\psymp(\tau)$.
+\swp{Since the forward delay distribution is defined for an average individual, we do not assume that all individuals who experience the primary event must experience the secondary event.}
 
 Likewise, we define the backward delay distribution $b_\ssymp(\tau)$ for a secondary cohort at time $\ssymp$:
 The backward delay distribution describes the time delays between a primary and secondary host given that the secondary event occurred at time $\ssymp$.
@@ -213,18 +214,19 @@ Both forward and backward perspectives
 must yield identical \emph{measurement} (e.g., the length of the incubation
 period of a given individual is the same whether measured forward from
 the time of infection or backward from the time of symptom onset).
-Consequently, if we restrict attention to individuals with a given
-incubation period, say $\tau$ days, and we count how many became infected at time $\psymp$
-or how many first showed symptoms at time $\ssymp=\psymp+\tau$ then we must obtain
-the same number. In general, no matter how delays are distributed, if
+% Consequently, if we restrict attention to individuals with a given
+% incubation period, say $\tau$ days, and we count how many became infected at time $\psymp$
+% or how many first showed symptoms at time $\ssymp=\psymp+\tau$ then we must obtain
+% the same number. 
+Consequently, no matter how delays are distributed, if
 $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
-secondary cohorts then we must have
+secondary cohorts then we \swp{can express the total density of intervals between time $\psymp$ and $\ssymp$ as follows:}
 \begin{equation}
 W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
 \label{eq:match}
 \end{equation}
-where $W(\psymp)$, the ``weight'' of the primary cohort, represents the average number of forward intervals that an individual in cohort $\psize(\psymp)$ produces over the course of their infection.
-When we measure within-individual delays, we expect $W(\psymp) \leq 1$ because only a subset of individuals who experience the primary event (e.g., infection) will eventually experience the secondary event (e.g., symptom onset). 
+where $W(\psymp)$, the ``weight'' of the primary cohort, represents the average number of forward intervals that an \swp{average} individual in cohort $\psize(\psymp)$ produces over the course of their infection.
+When we measure within-individual delays, we expect $W(\psymp) \leq 1$ because only a subset of individuals who experience the primary event (e.g., infection) will eventually experience the secondary event (e.g., symptom onset).
 For between-individual delays, we expect $W(\psymp)$ to change throughout an epidemic, because individuals infected earlier in an epidemic will infect more individuals on average than those infected later.
 
 Substituting $\psymp=\ssymp-\tau$, it follows that
@@ -233,13 +235,12 @@ b_\ssymp(\tau)= \frac{W(\ssymp-\tau) \psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}
 \label{eq:backward}
 \end{equation}
 If we are considering incubation periods, the left hand side of
-this equation is the probability density that an individual
+this equation is the probability density that an \swp{average} individual
 who became symptomatic at time $\ssymp$ had an incubation period of
-length $\tau$. 
-\jd{I need to keep thinking about what a cohort is for incubation period. Here, you seem to be putting people who don't show symptoms into the forward but not the backward cohort. How sure are you that this is right? The non-symptomatic people also seem to have $\tau$s?}
+length $\tau$.
 From the right hand side, we see that this probability density depends on the weight parameter $W(\psymp-\tau)$ (in this case, the proportion of symptomatic infection),
 the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals became infected at time $\ssymp-\tau$),
-and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that someone who was infected at time $\ssymp-\tau$ became symptomatic at time $\ssymp$).
+and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that \swp{an average individual} who was infected at time $\ssymp-\tau$ became symptomatic at time $\ssymp$).
 
 Several different mechanisms drive the changes in forward and backward delay distributions over time.
 Typically, within-individual forward delay distributions are not directly affected by epidemic dynamics.
@@ -537,6 +538,7 @@ therefore, changes in the forward serial-interval distributions are predominantl
 % Since the increase in the mean backward period is driven by the decreasing incidence, which can still occur in the absence of significant depletion of the susceptible pool via intervention, decrease in the mean forward serial interval may be a robust feature in COVID-19 outbreaks.
 In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.
 \jd{Am I right that the main thing going on here is the decrease in $r(t)$, which should be a robust feature of outbreaks in general? Can we explain that?}
+\swp{You mean decrease in $i(t)$. I had explained that previously (see what's commented out above; Since the increase ...) but DC complained that he didn't like it. I'd be OK with keeping it in.}
 
 We see similar qualitative patterns in all three backward delays (\fref{epi}E--G; \eref{backward}), because they are predominantly driven by the rate of change in incidence, which in turn affects relative cohort sizes.
 When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
