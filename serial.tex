@@ -201,9 +201,8 @@ At the population level, we model realized time delays between a primary and a s
 A cohort consists of \emph{all} individuals whose (primary or secondary) event occurred at a given time. 
 For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time \psymp, while a secondary cohort consists of all individuals whose symptom onset occurred at time $\ssymp$.
 Similarly, when we are measuring serial intervals, a primary cohort consists of all infectors who became symptomatic at time $\psymp$.
-Then, for \swp{an average individual in} primary cohort at time $\psymp$, we can define the expected time distribution between primary and secondary events. 
+Then, for primary cohort at time $\psymp$, we can define the expected time distribution between primary and secondary events. 
 We refer to this distribution as the forward delay distribution and denote it as $f_\psymp(\tau)$.
-\swp{Since the forward delay distribution is defined for an average individual, we do not assume that all individuals who experience the primary event must experience the secondary event.}
 
 Likewise, we define the backward delay distribution $b_\ssymp(\tau)$ for a secondary cohort at time $\ssymp$:
 The backward delay distribution describes the time delays between a primary and secondary host given that the secondary event occurred at time $\ssymp$.
@@ -220,12 +219,12 @@ the time of infection or backward from the time of symptom onset).
 % the same number. 
 Consequently, no matter how delays are distributed, if
 $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
-secondary cohorts then we \swp{can express the total density of intervals between time $\psymp$ and $\ssymp$ as follows:}
+secondary cohorts then we can express the total density of intervals between time $\psymp$ and $\ssymp$ as follows:
 \begin{equation}
 W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
 \label{eq:match}
 \end{equation}
-where $W(\psymp)$, the ``weight'' of the primary cohort, represents the average number of forward intervals that an \swp{average} individual in cohort $\psize(\psymp)$ produces over the course of their infection.
+where $W(\psymp)$, the ``weight'' of the primary cohort, represents the average number of forward intervals that an individual in cohort $\psize(\psymp)$ produces over the course of their infection.
 When we measure within-individual delays, we expect $W(\psymp) \leq 1$ because only a subset of individuals who experience the primary event (e.g., infection) will eventually experience the secondary event (e.g., symptom onset).
 For between-individual delays, we expect $W(\psymp)$ to change throughout an epidemic, because individuals infected earlier in an epidemic will infect more individuals on average than those infected later.
 
@@ -235,12 +234,12 @@ b_\ssymp(\tau)= \frac{W(\ssymp-\tau) \psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}
 \label{eq:backward}
 \end{equation}
 If we are considering incubation periods, the left hand side of
-this equation is the probability density that an \swp{average} individual
+this equation is the probability density that an individual
 who became symptomatic at time $\ssymp$ had an incubation period of
 length $\tau$.
 From the right hand side, we see that this probability density depends on the weight parameter $W(\psymp-\tau)$ (in this case, the proportion of symptomatic infection),
-the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals became infected at time $\ssymp-\tau$),
-and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that \swp{an average individual} who was infected at time $\ssymp-\tau$ became symptomatic at time $\ssymp$).
+the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals infected at time $\ssymp-\tau$),
+and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that an incubation period that starts at time $\ssymp-\tau$ ends at time $\ssymp$).
 
 Several different mechanisms drive the changes in forward and backward delay distributions over time.
 Typically, within-individual forward delay distributions are not directly affected by epidemic dynamics.
@@ -534,11 +533,8 @@ In contrast, the mean forward serial interval decreases over time (\fref{epi}D).
 The forward serial-interval distributions depend on distributions of three intervals
 (\fref{diagram}): (i) the backward incubation period, (ii) the forward generation interval, and (iii) the forward incubation period.
 In these simulations, both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
-therefore, changes in the forward serial-interval distributions are predominantly driven by changes in the backward incubation period distributions, whose mean increases over time (\fref{epi}D).
-% Since the increase in the mean backward period is driven by the decreasing incidence, which can still occur in the absence of significant depletion of the susceptible pool via intervention, decrease in the mean forward serial interval may be a robust feature in COVID-19 outbreaks.
+therefore, changes in the forward serial-interval distributions (\fref{epi}D) are predominantly driven by changes in the backward incubation period distribution, whose mean increases over time as the growth rate of disease incidence slows, then becomes negative.
 In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.
-\jd{Am I right that the main thing going on here is the decrease in $r(t)$, which should be a robust feature of outbreaks in general? Can we explain that?}
-\swp{You mean decrease in $i(t)$. I had explained that previously (see what's commented out above; Since the increase ...) but DC complained that he didn't like it. I'd be OK with keeping it in.}
 
 We see similar qualitative patterns in all three backward delays (\fref{epi}E--G; \eref{backward}), because they are predominantly driven by the rate of change in incidence, which in turn affects relative cohort sizes.
 When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
@@ -564,11 +560,12 @@ Colored ribbons represent the range of estimates of \Ro across 10 stochastic sim
 \end{figure}
 
 Now, we turn to issues of estimating the reproduction number from the observed serial-interval data during on ongoing epidemic.
-In order to have an unbiased estimate of the basic reproduction number, we need to use serial-interval distributions estimated based on primary cohorts (i.e., infectors who share the same symptom onset time) at the early stage of the epidemic (i.e., initial forward serial-interval distribution).
+In order to have an unbiased estimate of the basic reproduction number, we need to estimate the initial forward serial-interval distribution -- i.e., estimate based on cohorts of infectors who share the same symptom onset time, at the early stage of the epidemic.
 However, researchers typically use all available information to estimate epidemiological parameters;
 in particular, \cite{thompson2019improved} recently suggested that up-to-date serial-interval data are necessary to accurately estimate the reproduction number.
 We explore the consequences of neglecting changes in the realized serial-interval distribution on estimates of the basic reproduction number.
 
+\jd{Are we worried about censoring vs.\ truncation?}
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms;
 for example, if we were to measure serial intervals on Day 8 as in \fref{obsrR}A, we will only be able to observe the first 6 events (ID 1--6).
 \fref{obsrR}B demonstrates how the effect of right-censoring in the observed serial intervals translates to the underestimation of the basic reproduction number \Ro in our stochastic simulations (assuming $\Ro = 2.5$ as in \fref{epi}).
@@ -606,16 +603,19 @@ The data were taken from Supplementary Materials of \cite{du2020serial}.
 Finally, we re-analyze serial intervals of COVID-19 collected by \cite{du2020serial} from mainland China, outside Hubei province, based on transmission events reported between January 21--February 8, 2020;
 \cite{du2020serial} estimated the mean serial interval of 3.96 days (95\% CI 3.53–4.39 days) and \Ro of 1.32 (95\% CI 1.16–1.48).
 \fref{du}A shows that the mean forward serial interval decreases over time.
-While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and maximum observable serial intervals), the increase in the proportion of negative serial intervals unequivocally indicates changes in the forward serial-interval distribution;
-the increase in the proportion of negative intervals is unlikely to be driven by left-censoring (indicated by the distance between the quantiles of the observed serial intervals and minimum observable serial intervals).
-The decrease in the mean forward serial interval was probably caused by increase in the mean backward incubation period, reflecting decrease in COVID-19 cases in China, as well as intervention efforts which reduced generation intervals by preventing infections once cases were identified.
-\fref{du}B shows that the mean backward serial interval increased over time, also reflecting decrease in COVID-19 cases in China.
+While the decrease is likely to be affected by the right-censoring (indicated by the closeness between the quantiles of the observed serial intervals and maximum observable serial intervals), the increase in the proportion of negative serial intervals clearly indicates changes in the forward serial-interval distribution;
+this proportion is unlikely to be affected by left-censoring (based on the gap between the quantiles of the observed serial intervals and minimum observable serial intervals).
+The decrease in the mean forward serial interval was probably driven by interventions against spread.
+Interventions during this time period both decreased (and then reversed) the exponential growth of COVID-19 cases --- thus increasing the backward incubation period --- and also reduced generation intervals, by preventing infections once cases were identified.
+\jd{GI shortening does not act through backward incubation primarily, so I took that out.}
+Both of these would have acted to reduce the forward serial interval.
+\fref{du}B shows that the mean backward serial interval increased over time, likely driven directly by the decrease in COVID-19 cases.
 
-While the qualitative changes in the mean forward and backward serial interval are consistent with our earlier simulations (\fref{epi}), the initial mean forward serial interval (\fref{du}A) appears to be larger than what we calculate earlier based on previously estimated incubation period and generation-interval distributions (\fref{rR}C).
-These results indicate that the incubation period and generation interval (Table 1) may previously have been underestimated as neither study explicitly accounted for the fact that the observed intervals were drawn from the backward distributions and were likely to have been truncated.
+While the qualitative changes in the mean forward and backward serial interval are consistent with our earlier simulations (\fref{epi}), the initial mean forward serial interval (\fref{du}A) appears to be larger than what we calculated based on previously estimated incubation period and generation-interval distributions (\fref{rR}C).
+These may imply that the incubation period and generation interval (Table 1) were underestimated, as neither study explicitly accounted for the fact that the observed intervals were drawn from the backward distributions and were likely to have been truncated.
 
 \fref{du}C shows the cohort-averaged estimates of \Ro, which remain roughly constant until day 7 and suddenly decreases;
-this sudden decrease is indicative of changes in the forward serial intervals as shown in our simulation study (\fref{obsrR}).
+this sudden decrease is due changes in the forward serial intervals consistent with the dynamics seen in our simulations (\fref{obsrR}).
 The cohort-averaged estimates of \Ro based on the early forward serial intervals are also consistent with previous estimates of \Ro of the COVID-19 epidemic in China \citep{majumder2020early, park2020reconciling}:
 $\Ro = 2.6$ (95\% CI: 2.2--3.1) and $\Ro = 3.4$ (95\% CI: 2.7 -- 4.3) based on 8 and 6 doubling periods, respectively, using serial-interval data from infectors who developed symptoms by day 7.
 These early cohort-averaged estimates of \Ro are unlikely to be affected by the right-censoring as we expect the degree of right-censoring to be low (\fref{du}A).
