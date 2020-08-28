@@ -55,7 +55,7 @@ rRdata <- list(
 
 g1 <- ggplot(rRdata) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
-  geom_point(aes(r, R, col=type, shape=type), size=3) +
+  geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Basic reproduction number $\\mathcal R_0$", limits=c(1, 4.5), expand=c(0, 0)) +
   scale_color_manual(values=cpalette) +
@@ -63,7 +63,8 @@ g1 <- ggplot(rRdata) +
   theme(
     panel.grid = element_blank(),
     legend.position = c(0.33, 0.75),
-    legend.title = element_blank()
+    legend.title = element_blank(),
+    legend.background = element_blank()
   )
 
 rRdata2 <- list(
@@ -103,7 +104,7 @@ rRdata2 <- list(
 
 g2 <- ggplot(rRdata2) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
-  geom_point(aes(r, R, col=type, shape=type), size=3) +
+  geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Reproduction number ${\\mathcal R}_{\\textrm{\\tiny intrinsic}}$", limits=c(1, 4.5), expand=c(0, 0)) +
   scale_color_viridis_d(option="C") +
@@ -111,7 +112,8 @@ g2 <- ggplot(rRdata2) +
   theme(
     panel.grid = element_blank(),
     legend.position = c(0.33, 0.75),
-    legend.title = element_blank()
+    legend.title = element_blank(),
+    legend.background = element_blank()
   )
 
 rGdata <- list(
@@ -151,7 +153,7 @@ rGdata <- list(
 
 g3 <- ggplot(rGdata) +
   geom_smooth(aes(r, mean, col=type, lty=type), se=FALSE) +
-  geom_point(aes(r, mean, col=type, shape=type), size=3) +
+  geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Mean interval (days)", expand=c(0, 0), limits=c(4.7, NA),
                      breaks=c(4:7)) +
@@ -200,7 +202,7 @@ rkappadata <- list(
 
 g4 <- ggplot(rkappadata) +
   geom_smooth(aes(r, mean, col=type, lty=type), se=FALSE) +
-  geom_point(aes(r, mean, col=type, shape=type), size=3) +
+  geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Squared coefficient of variation", expand=c(0, 0), limits=c(0, 0.84)) +
   scale_color_manual(values=cpalette) +
