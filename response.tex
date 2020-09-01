@@ -1,0 +1,205 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{color}
+
+\usepackage{xspace}
+
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+
+\usepackage{natbib}
+\bibliographystyle{chicago}
+
+\newcommand{\rR}{\mbox{$r$--$\cal R$}}
+\newcommand{\RR}{\ensuremath{{\cal R}}}
+\newcommand{\RRhat}{\ensuremath{{\hat \cal R}}}
+\newcommand{\Rx}[1]{\ensuremath{{\cal R}_{#1}}} 
+\newcommand{\Ro}{\ensuremath{{\mathcal R}_{0}}\xspace}
+\newcommand{\Rpool}{\ensuremath{{\mathcal R}_{\textrm{\tiny{pool}}}}\xspace}
+\newcommand{\Reff}{\Rx{\mathit{eff}}}
+\newcommand{\Tc}{\ensuremath{C}}
+
+\newcommand{\rev}{\subsection*}
+\newcommand{\revtext}{\textsf}
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0em}
+
+\newcommand{\comment}[3]{\textcolor{#1}{\textbf{[#2: }\textsl{#3}\textbf{]}}}
+\newcommand{\jd}[1]{\comment{cyan}{JD}{#1}}
+\newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
+\newcommand{\dc}[1]{\comment{blue}{DC}{#1}}
+\newcommand{\jsw}[1]{\comment{green}{JSW}{#1}}
+\newcommand{\hotcomment}[1]{\comment{red}{HOT}{#1}}
+
+
+\newcommand{\psymp}{\ensuremath{p}} %% primary symptom time
+\newcommand{\ssymp}{\ensuremath{s}} %% secondary symptom time
+\newcommand{\pinf}{\ensuremath{\alpha_1}} %% primary infection time
+\newcommand{\sinf}{\ensuremath{\alpha_2}} %% secondary infection time
+
+\newcommand{\psize}{{\mathcal P}} %% primary cohort size
+\newcommand{\ssize}{{\mathcal S}} %% secondary cohort size
+
+\newcommand{\gtime}{\tau_{\rm g}} %% generation interval
+\newcommand{\gdist}{g} %% generation-interval distribution
+\newcommand{\idist}{\ell} %% incubation period distribution
+
+\newcommand{\total}{{\mathcal T}} %% total number of serial intervals
+
+
+\begin{document}
+
+\noindent Dear Editor:
+
+Thank you for the chance to revise and resubmit our manuscript. 
+We have made major revisions to our manuscript to address the reviewers' comments.
+We were apparently not clear in our writing. Reviewers 1 and 3 both pointed out that we assume that the latent and incubation periods are equivalent (and thus not allowing for presymptomatic transmission). 
+However, we only present this result in the appendix as a special case.
+We do not assume this in the main text and allow for presymptomatic transmission.
+Below please find our responses to reviewers.
+
+\rev{Reviewer \#1}
+
+\revtext{I have one main concern, and this concerns the model. First a very general model is discussed, then a very special version is mentioned (mid p11) in which the latent period and incubation periods are always identical. For this model the General interval and Serial interval have exactly the same distribution. My concern is whether the stated results are valid only for this special case or if they apply also in general. I doubt the results hold in general, but at least think arguments for it are missing.}
+
+The special version is only presented in the supplementary material. We do not assume this in the main text. We have made this distinction clear. Also Figure 2C--D shows that the initial forward serial-interval distribution is different from the intrinsic generation-interval distribution.
+
+\revtext{Regarding my main concern above I note that you write "should" on p3, line 91, and "expect" on p 10, line 273. I don't see any proof for the statement to hold in general and am not sure the statement is even true in general. }
+
+We provide a mathematical proof of this using a general model in the supplementary file. Figure 2A also demonstrates that this holds. We tried to make this clear in the main text.
+
+\revtext{p4, bottom: refer to Fig 1 }
+
+
+
+\revtext{p5, middle: emphasize that s and p are calendar times whereas $\tau$ is a duration }
+
+\revtext{p5, line 158: clarify that $\tau = s-p$}
+
+Done.
+
+``Consequently, no matter how delays are distributed, if
+$\mathcal P$ and $\mathcal S$ represent the sizes of primary and
+secondary cohorts then we can express the total density of intervals $\tau$ between calendar time $\psymp$ and $\ssymp$ (i.e., $\tau=\ssymp-\psymp$) as follows:
+\begin{equation}
+W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
+\label{eq:match}
+\end{equation}''
+
+\revtext{p5, line 170: should be $W(s-\tau)$?}
+
+Done.
+
+\revtext{p6, line 181-183: why will it contract during the outbreak? I understand why fewer will be materialized, but not why they will get shorter}
+
+We have tried to clarify this:
+
+``For example, shorter generation intervals are more likely to be realized later in the \emph{epidemic} (therefore, leading to ``contraction'' of generation intervals) because infected individuals are less likely to infect others later in their \emph{infection} due to factors that drive time-dependent decreases in transmission such as susceptible depletion, behavioral change, and interventions \citep{champredon2015intrinsic}.''
+
+We also demonstrate this phenomenon in Figure 3C.
+
+\revtext{p6, line 188: shorter than what? If you mean compared to the forward delay distribution it is always true when r>0 and not necessary that r is higher (than what?).}
+
+We have rephrased this sentence:
+
+``Thus, as the growth rate $r$ of an epidemic increases, the mean backward delay distribution will decrease, leading to stronger bias.''
+
+\revtext{p7, line 203-205. Several of these papers acknowledge that the means are identical only if the tau's have the same distribution. On p11 (cf my main concern) you study an even more restrictive situation so in a sense you also implicitly assume this to hold or have I misunderstood?}
+
+The restrictive is presented in the supplementary file as a special case. The main results do not depend on the restrictive assumption. We have tried to clarify this. We have also re-phrased the sentence now to acknoweldge what other studies have said more carefully:
+
+``These studies concluded that the serial and generation intervals have the same mean when $\tau_{\rm i1}$ and $\tau_{\rm i2}$ are drawn from the same distributions \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
+however, distributions of realized incubation periods, $\tau_{\rm i1}$ and $\tau_{\rm i2}$ will be identical only if we assume that they are intrinsic to individuals (and not dependent on epidemic dynamics at the population-level) ---
+something that is generally true of forward but not backward incubation-period distributions.''
+
+\revtext{Section 3: be specific which model you are assuming. I think it is the SEIR where incubation is identical to latent period, i.e. individuals become infectious the same instance as their onset of symptoms.}
+
+We are not assuming this. We have tried to clarify this in the main text.
+
+\revtext{p19, line 470: something missing}
+
+We have re-phrased the sentence to make it clearer:
+
+``For example, \cite{thompson2019improved} recently emphasized the importance of using up-to-date serial-interval data for accurate estimation of time-varying reproduction numbers.
+However, our results show that if changes the forward serial interval through time are not accounted for, using up-to-date serial-interval data can, in fact, exacerbate the underestimation of initial \RR.''
+
+\revtext{p19, line 485: you are assuming generation and serial intervals have the same distribution.}
+
+We do not assume this. Also, Figure 2--3 illustrate that generation and serial intervals have different means, and therefore different distributions. We have tried to highlight these differences in the main text.
+
+\rev{Reviewer \#2}
+
+\revtext{The authors show how methods for estimating the reproduction number R from the growth rate r based on incorrectly defined disease transmission intervals can lead to biased estimates. They explain where the biases come from and present an unbiased heuristic to derive R from r, which they apply to the COVID-19 outbreak in China. Because the reproduction number has become part of everyday vocabulary this spring, the explanation of the source of biases is sound and clear, and the presented heuristic likely useful, their analysis may be sufficiently important to warrant publication in PNAS. However, then the authors must substantiate their criticism of previous work and present the reproduction number in a nuanced context.}
+
+\revtext{The methods and results sections do excellent jobs explaining the source of confusion and biases, and how to overcome them. The discussion section synthesizes the insights into suggestions and good practices. However, I miss examples of how far off - if off at all - criticized application papers are when estimating the reproduction number.}
+
+\revtext{The authors can improve their manuscript by responding to the following issues:}
+
+\revtext{What is the manuscript about - generation and serial intervals or the reproduction number R? The title and abstract suggest the intervals and the introduction the reproduction number. I think opening with the well-known reproduction number will give the most transparent and coherent story.}
+
+It is about both. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the writing of the manuscript to provide a transparent and coherent story.
+
+\revtext{The reproduction number is not put in a nuanced context. The presentation of the reproduction number as "one of the most important characteristics of an emerging epidemic ... [definition] ... [that] allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it" that then leads directly into how it is estimated leaves no room for its shortcomings. A more nuanced picture includes its inability to, for example, account for individual variation, including superspreaders and spatial variations in regions.}
+
+\revtext{The introduction presents previous methodological work on the R-r relationship based on generation and serial intervals and recent applications that confuse the two intervals. The presentation goes back and forth between the two and does not clarify the shortcomings of each work or application. My suggestion for a stronger introduction: A funnel focusing on the methods that ends with the knowledge gap "In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of R from r" (and further specified by the gaps indicated at the end of section 2.1 and beginning of section 2.2) followed by concrete examples of how off R estimates are in applications to substantiate the problem.}
+
+
+
+\revtext{I also lack a discussion of standard software to estimate the reproduction number such as the widely used R package EpiEstim.}
+
+\revtext{The abstract states that "recent studies suggest that the two intervals give different estimates of R from r" and "our analysis shows that using incorrectly defined serial intervals can severely bias estimates" Exemplify by numbers to substantiate the severity.}
+
+\revtext{Same vagueness at the end of the introduction: "Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of R." By how much?}
+
+\revtext{Figure 1 clearly illustrates the different intervals from different perspectives but does not explain the source of biases. Consider ways to visually communicate the important insights at the end of section 3.1.}
+
+\revtext{Section 3.3 provides one example of a biased R estimate. The authors should substantiate their critique of several papers in the introduction by listing their estimated R estimates and the revised estimates - or not accusing those papers in the introduction. I think "these studies should also re-assess whether they appropriately considered the forward serial interval" is weak.}
+
+\rev{Reviewr \#3}
+
+\revtext{Throughout the paper becoming symptomatic seems equivalent to becoming infectious? This is a little confusing in context of Covid-19.}
+
+We do not assume this. This is only assumed in the supplementary file as a special case. We now make this clear in the main text.
+
+\revtext{Define s=p+tau before eq. 1.}
+
+Done.
+
+``Consequently, no matter how delays are distributed, if
+$\mathcal P$ and $\mathcal S$ represent the sizes of primary and
+secondary cohorts then we can express the total density of intervals $\tau$ between calendar time $\psymp$ and $\ssymp$ (i.e., $\tau=\ssymp-\psymp$) as follows:
+\begin{equation}
+W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
+\label{eq:match}
+\end{equation}''
+
+\revtext{On page 9, ``any deterministic epidemic model"...Guess it should be just as important for a stochastic model?}
+
+We removed the word ``deterministic'' from the sentence.
+
+\revtext{On page 11, the important parameter rho =-0.5, 0 or 0.5 is obscure. What does these correlations means? partly anti-correlated, non correlated or positive correlated, but by how much? Which disease could have anti-correlation between these quantities? It make interpretation of Fig. 2B difficult. }
+
+\revtext{Page 4, figure 3A: Why are stochastic trajectories systematically shifted toward earlier time compared to deterministic trajectory. Was the deterministic trajectory not simulated with same serial interval distribution?}
+
+
+
+\revtext{Page 18, ``based on 8 and 6 doubling periods" guess it should be "based on a doubling period of 8 or 6 days"??}
+
+Thank you. We have changed this as suggested.
+
+\revtext{Page 17, figure 5 is difficult to judge. It needs to be supplemented with a trajectory of the epidemic curve in the days that is shown.}
+
+\revtext{Figure 5, what is on the y axis? Which delay is plotted and how does it relate to the forward/backward serial intervals. Why not plot serial intervals directly?}
+
+\revtext{Could the results be simplified to an extend that medical doctors that actually "measure" backward serial intervals directly could recalculate the intrinsic serial intervals (in some simple approximation). As a technical paper it should provide some direct applicable results.}
+
+\revtext{Overall, I find the work interesting and believe it could contribute to current discussions on intrinsic time scales for Covid-19. It is a technical read, that would gain by being made easier accessible.}
+
+Thank you. We have made substantial edits to the manuscript to make it more accessible.
+
+\bibliography{serial}
+
+\end{document}
