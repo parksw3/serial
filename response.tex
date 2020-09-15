@@ -13,14 +13,23 @@
 \usepackage{natbib}
 \bibliographystyle{chicago}
 
+\newcommand{\eref}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
+
 \newcommand{\rR}{\mbox{$r$--$\cal R$}}
 \newcommand{\RR}{\ensuremath{{\cal R}}}
 \newcommand{\RRhat}{\ensuremath{{\hat \cal R}}}
 \newcommand{\Rx}[1]{\ensuremath{{\cal R}_{#1}}} 
 \newcommand{\Ro}{\ensuremath{{\mathcal R}_{0}}\xspace}
+\newcommand{\Rs}{\Rx{\mathrm{s}}}
 \newcommand{\Rpool}{\ensuremath{{\mathcal R}_{\textrm{\tiny{pool}}}}\xspace}
 \newcommand{\Reff}{\Rx{\mathit{eff}}}
 \newcommand{\Tc}{\ensuremath{C}}
+
+\newcommand{\dd}[1]{\ensuremath{\, \mathrm{d}#1}}
+\newcommand{\dtau}{\dd{\tau}}
+\newcommand{\dx}{\dd{x}}
+\newcommand{\dsigma}{\dd{\sigma}}
 
 \newcommand{\rev}{\subsection*}
 \newcommand{\revtext}{\textsf}
@@ -65,11 +74,34 @@ Below please find our responses to reviewers.
 
 \revtext{I have one main concern, and this concerns the model. First a very general model is discussed, then a very special version is mentioned (mid p11) in which the latent period and incubation periods are always identical. For this model the General interval and Serial interval have exactly the same distribution. My concern is whether the stated results are valid only for this special case or if they apply also in general. I doubt the results hold in general, but at least think arguments for it are missing.}
 
-The special version is only presented in the supplementary material. We do not assume this in the main text. We have made this distinction clear. Also Figure 2C--D shows that the initial forward serial-interval distribution is different from the intrinsic generation-interval distribution.
+The special version is only presented in the supplementary material. We do not assume this in the main text. We have made this distinction clear:
+
+``For example, the Susceptible-Exposed-Infected-Recovered model, under the additional assumption that the incubation and exposed periods are equivalent (i.e. that onset of symptoms and infectiousness occur simultaneously), provides a special case where the forward serial- and generation-intervals follow the same distributions during the exponential growth phase because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset and infection is independent of the incubation period of an infector (see Supplementary Materials).
+Throughout the paper, we allow for presymptomatic transmission to match the transmission dynamics of COVID-19.''
+
+Figure 2 further shows that the initial forward serial-interval distribution is different from the intrinsic generation-interval distribution but gives identical \Ro estimates given $r$.
 
 \revtext{Regarding my main concern above I note that you write "should" on p3, line 91, and "expect" on p 10, line 273. I don't see any proof for the statement to hold in general and am not sure the statement is even true in general. }
 
-We provide a mathematical proof of this using a general model in the supplementary file. Figure 2A also demonstrates that this holds. We tried to make this clear in the main text.
+We provide a mathematical proof of this using a general model in the supplementary file. Figure 2A also demonstrates that this holds. We tried to make this clear in the main text:
+
+``Analogous to the intrinsic generation-interval distribution, 
+forward serial-interval distributions describe the renewal process of infection based on symptom onset dates.
+Therefore, we expect the forward serial-interval distribution during the exponential growth phase --- which we refer to as the \emph{initial} forward serial-interval distribution $f_0$ --- to estimate the same value of \Ro for a given $r$ as the intrinsic generation-interval distribution (note, however, that the forward serial interval is not necessarily positive):
+\begin{equation}
+\frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau,
+\label{eq:Rforward}
+\end{equation}
+where the initial forward serial-interval distribution is given by:
+\begin{equation}
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\pinf}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf,
+\label{eq:initialSI}
+\end{equation}
+where the normalization constant $\phi$ is determined by the
+requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
+Since we have not yet made any assumptions about the shape of the joint distribution $h$ between incubation periods and the generation intervals, this conclusion is robust, regardless of whether presymptomatic is possible or not.
+It is straightforward to see this relationship from \eref{jrenew} (by substituting $j(t) \approx j(0) \exp(rt)$ and $\Rs(t) \approx \Ro$);
+in Supplementary Materials, we provide a more detailed mathematical proof of this relationship.''
 
 \revtext{p4, bottom: refer to Fig 1 }
 
@@ -109,7 +141,7 @@ We have rephrased this sentence:
 
 \revtext{p7, line 203-205. Several of these papers acknowledge that the means are identical only if the tau's have the same distribution. On p11 (cf my main concern) you study an even more restrictive situation so in a sense you also implicitly assume this to hold or have I misunderstood?}
 
-The restrictive is presented in the supplementary file as a special case. The main results do not depend on the restrictive assumption. We have tried to clarify this. We have also re-phrased the sentence now to acknoweldge what other studies have said more carefully:
+The restrictive situation is presented in the supplementary file as a special case. The main results do not depend on the restrictive assumption. We have tried to clarify this. We have also re-phrased the sentence now to acknoweldge what other studies have said more carefully:
 
 ``These studies concluded that the serial and generation intervals have the same mean when $\tau_{\rm i1}$ and $\tau_{\rm i2}$ are drawn from the same distributions \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
 however, distributions of realized incubation periods, $\tau_{\rm i1}$ and $\tau_{\rm i2}$ will be identical only if we assume that they are intrinsic to individuals (and not dependent on epidemic dynamics at the population-level) ---
@@ -128,7 +160,7 @@ However, our results show that if changes the forward serial interval through ti
 
 \revtext{p19, line 485: you are assuming generation and serial intervals have the same distribution.}
 
-We do not assume this. Also, Figure 2--3 illustrate that generation and serial intervals have different means, and therefore different distributions. We have tried to highlight these differences in the main text.
+We do not assume this. Also, Figure 2--3 illustrate that generation and serial intervals have different means, and therefore are different distributions. We have tried to highlight these differences throughout the main text.
 
 \rev{Reviewer \#2}
 
@@ -182,9 +214,25 @@ We removed the word ``deterministic'' from the sentence.
 
 \revtext{On page 11, the important parameter rho =-0.5, 0 or 0.5 is obscure. What does these correlations means? partly anti-correlated, non correlated or positive correlated, but by how much? Which disease could have anti-correlation between these quantities? It make interpretation of Fig. 2B difficult. }
 
+We initially considered anti-correlations for demonstration purposes (that regardless of choices of correlations, we can still obtain an unbiased estimate of \Ro using the initial forward serial-interval distributions). We agree that it is unrealistic. We have removed the negative correlation example and added the following text:
+
+``We have shown that the dynamics of the serial-interval distribution depends on the joint distribution between incubation periods and generation intervals.
+Here, we use a bivariate lognormal distribution to model the joint probability distribution $h$ of intrinsic incubation periods and intrinsic generation intervals (in the renewal equation model, \eref{renewal}) while allowing for the possibility that they might be correlated.
+Given that the viral load of SARS-CoV-2 peaks around the time of symptom onset, we generally expect the generation intervals to be positively correlated with the incubation period:
+that is, individuals who develop symptoms later are more likely to transmit later.
+Marginal distributions of incubation periods and generation intervals are parameterized based on parameter estimates for COVID-19 (Table 1).
+For simplicity, we consider four values for the correlation coefficients (on the log scale) of the bivariate lognormal distribution: $\rho = 0, 0.25, 0.5, 0.75$.
+This parameterization allows for generation intervals to be shorter than the incubation period, allowing for presymptomatic transmission.''
+
 \revtext{Page 4, figure 3A: Why are stochastic trajectories systematically shifted toward earlier time compared to deterministic trajectory. Was the deterministic trajectory not simulated with same serial interval distribution?}
 
+We now comment on this:
 
+``Stochastic simulations confirm our deterministic calculations albeit minor differences due to transient dynamics.
+Incidence trajectories of stochastic simulations are slightly shifted (\fref{epi}A) due to differences in initial conditions. 
+We set the distribution of infection time of initially infected individuals (beginning from a small number of infected individuals) for deterministic simulations such that the system can exhibit exponential growth immediately (Supplementary Materials).
+This is not possible for stochastic simulations because the number of initially infected individuals cannot be smaller than 1; instead, we begin with 10 infected indiivduals who are infected at time $t=0$.
+In addition, the mean backward intervals of stochastic simulations begins from smaller values due to left-censoring.''
 
 \revtext{Page 18, ``based on 8 and 6 doubling periods" guess it should be "based on a doubling period of 8 or 6 days"??}
 
@@ -192,9 +240,18 @@ Thank you. We have changed this as suggested.
 
 \revtext{Page 17, figure 5 is difficult to judge. It needs to be supplemented with a trajectory of the epidemic curve in the days that is shown.}
 
+Thank you for pointing this out. We have now added an epidemic trajectory.
+
 \revtext{Figure 5, what is on the y axis? Which delay is plotted and how does it relate to the forward/backward serial intervals. Why not plot serial intervals directly?}
 
+We are plotting serial intervals, after grouping them based on the symptom onset dates of primary (forward) and secondary (backward) cases. We have added the following sentence to further clarify:
+
+``In order to quantify changes in serial intervals, we group them by the symptom onset dates of the primary (\fref{du}B) and secondary (\fref{du}C) cases---correspoding to forward and backward serial-interval distributions, respectively---and compute their mean and 95\% quantiles.''
+
 \revtext{Could the results be simplified to an extend that medical doctors that actually "measure" backward serial intervals directly could recalculate the intrinsic serial intervals (in some simple approximation). As a technical paper it should provide some direct applicable results.}
+
+We believe that section 3.2 does this. We show that, instead of aggregating all measured serial intervals, one could rearrange them based on symptom onset date of a primary case and take the cohort-based average. We further demonstrate how this could be done with an illusrative line list (Figure 4). In addition, there is a simple way to calculate the intrinsic serial interval distribution. As we show in our simulations, even if we could observe all serial intervals throughout an epidemic (in the absence of non-pharmaceutical interventions), we cannot estimate the intrinsic distribution. Instead, we recommend analyzing serial intervals through a cohort-based perspective. We have now added a paragraph in the discussion section, summarizing and providing practical guidance.
+
 
 \revtext{Overall, I find the work interesting and believe it could contribute to current discussions on intrinsic time scales for Covid-19. It is a technical read, that would gain by being made easier accessible.}
 
