@@ -677,18 +677,23 @@ This example demonstrates the danger of using the observed serial intervals to c
 
 Generation and serial intervals determine the time scale of disease transmission, and are therefore critical to dynamical modeling of infectious outbreaks.
 Here, we show that the initial \emph{forward} serial-interval distribution --- measured from the cohort of infectors who developed symptoms during the exponential growth phase of an epidemic --- provides the correct link between the exponential growth rate $r$ and the reproduction number \RR.
-In general, the forward serial-interval distributions will not match the intrinsic or the backward serial-interval distributions.
-In particular, the mean forward serial interval can decrease over time due to epidemic dynamics. 
+In general, the forward serial-interval distributions will not match the intrinsic serial-interval distribution (which has the same mean as the intrinsic generation-interval distribution) because the incubation period of the infectors (conditional on their symptom onset date of the infector) will be subject to backward biases.
+In particular, the mean forward serial interval can decrease over time for COVID-19 as individuals who develop symptoms later are more likely to have longer incubation periods, and therefore have greater opportunity to transmit presymptomatically.
 Failing to account for these effects can result in underestimation of \RR.
 
-Our study underlines the importance of carefully defining measured epidemiological time distributions.
+Recently, \cite{ali2020serial} also showed that serial intervals of COVID-19 decreased in China.
+
+Our study underlines the importance of carefully defining measured epidemiological time distributions in general.
 Previous studies have shown that it matters whether generation
 intervals are measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
 we generalize these ideas and show that they apply to other epidemiological distributions.
+Some studies during the early phases of the COVID-19 epidemics 
+
 Changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
 Recent analyses of COVID-19 epidemics have attempted to reconstruct epidemic time series from by using time-independent delay distributions from infection or symptom onset to reporting (e.g., \cite{tempvar, park2020potential,scire2020reproductive,shim2020transmission});
 these studies effectively assume constant backward delay distributions.
-Although such approaches may be able to roughly match the time scale of an epidemic, we show here that they are subject to bias. Dynamical approaches that model explicitly model incidence as well as reporting delays (e.g., \cite{flaxman2020estimating}) can avoid this problem, but at the cost of more complexity in estimation. There is a need for simple methods that can complement more explicit approaches of addressing this problem.
+Although such approaches may be able to roughly match the time scale of an epidemic, we show here that they are subject to bias. Dynamical approaches that model explicitly model incidence as well as reporting delays (e.g., \cite{flaxman2020estimating}) can avoid this problem, but at the cost of more complexity in estimation. 
+There is a need for simple methods that can complement more explicit approaches of addressing this problem.
 
 While our results support the use of serial-interval distributions for calculating \RR, 
 they also reveal gaps in current practices in incorporating serial-interval distributions into outbreak analyses.
