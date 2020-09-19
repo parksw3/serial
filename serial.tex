@@ -682,24 +682,29 @@ In particular, the mean forward serial interval can decrease over time for COVID
 Failing to account for these effects can result in underestimation of \RR.
 
 Recently, \cite{ali2020serial} also showed that serial intervals of COVID-19 decreased in China. Analogous to our apporach, they also grouped serial intervals by the symptom onset date of infectors across 14-day periods and found that the mean serial interval decreased from 7.8 days to 2.6 days.
-They attributed the decrease in serial intervals to reduction of the isolation delay period and showed that isolation delays can explain 51.5\% of the variation in serial intervals through a regression analysis.
+They attributed the decrease in serial intervals to reduction of the isolation delay; however, their regression analysis shows that isolation delays explain only 51.5\% of the variation in serial intervals (and explaining up to 72\% of the variance including other intervention measures).
+Our framework provides an explanation for the remaining variation: changes in the backward incubation period during the decreasing phase of an epidemic also shorten serial intervals (even in the absence of nonpharmaceutical interventions). 
+Since isolation delays and other intervention measures affect the amount of onward transmission, and therefore the distribution of realize (forward) generation intervals, it cannot explain all variation in forward serial intervals, which depend on (i) backward incubation period of the infector, (ii) the forward generation interval, and (iii) the forward incubation period of the infectee (\fref{diagram}B).
 
+Here, we lay out a few practical principles for analyzing the serial interval data.
+First, serial intervals should be cohorted based on the symptom onset date whenever possible.
+Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval, but their distributions are expected to change due to epidemic dynamics \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}.
+Even when all realzied serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR})---something true of realzied generation intervals as well \citep{park2020inferring}.
+Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases.
+Often, the amount serial interval data can be limited due to difficulties in collecting them and the aggregation cannot be avoided; in these situations, the aggregated serial-interval distributions should be interpreted with care, providing an order-of-magnitude estimates for the time scale of disease transmission.
+Finally, these biases should be explicitly taken into account when inferring other epidemiological parameters (e.g., the amount of presymptomatic transmission) from serial interval data.
 
-
-More broadly, our study underlines the importance of carefully defining measured epidemiological time distributions.
+More broadly, our study underlines the importance of carefully defining measured epidemiological time distributions. 
 Previous studies have shown that it matters whether generation
 intervals are measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
-we generalize these ideas and show that they apply to other epidemiological distributions.
-Some studies during the early phases of the COVID-19 epidemics 
+we generalize these ideas and show that they apply to any other epidemiological distributions.
+Some studies during the early phases of the COVID-19 epidemics have tried to correct for the backward biases, but changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
+Cohorting epidemiological delays by the primary event time can help avoid backward biases (although censoring biases can still exist) as well as detect potential changes in the distribution.
 
-Changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
-Recent analyses of COVID-19 epidemics have attempted to reconstruct epidemic time series from by using time-independent delay distributions from infection or symptom onset to reporting (e.g., \cite{tempvar, park2020potential,scire2020reproductive,shim2020transmission});
-these studies effectively assume constant backward delay distributions.
-Although such approaches may be able to roughly match the time scale of an epidemic, we show here that they are subject to bias. Dynamical approaches that model explicitly model incidence as well as reporting delays (e.g., \cite{flaxman2020estimating}) can avoid this problem, but at the cost of more complexity in estimation. 
-There is a need for simple methods that can complement more explicit approaches of addressing this problem.
-
-While our results support the use of serial-interval distributions for calculating \RR, 
+While our results support the use of serial-interval distributions for calculating the initial \RR during the exponential growth phase,  
 they also reveal gaps in current practices in incorporating serial-interval distributions into outbreak analyses.
+
+
 For example, \cite{thompson2019improved} recently emphasized the importance of using up-to-date serial-interval data for accurate estimation of time-varying reproduction numbers.
 However, our results show that if changes the forward serial interval through time are not accounted for, using up-to-date serial-interval data can, in fact, exacerbate the underestimation of initial \RR.
 Future studies should explore how neglecting changes in the forward serial-interval distribution can affect the estimates of \RR beyond the exponential growth phase and potentially re-assess existing estimates of \RR.
@@ -724,7 +729,7 @@ neglecting the time scale asymptomatic transmission may also bias the estimates 
 
 While we focus here on the effect of epidemiological dynamics on serial-interval distributions, other factors, such as intervention strategies, can also affect the generation- and serial-interval distributions.
 Individual-level interventions, such as case isolation, and behavioral responses directly affect individuals' ability to transmit and will shorten the forward generation- and serial-intervals.
-Population-level interventions, such as social distancing, can squeeze contacts into household and induce clustering, which will in turn shorten the realized generation interval due to local depletion of the susceptible pool within households \citep{park2019inferring}.
+Population-level interventions, such as social distancing, can squeeze contacts into household and induce clustering, which will in turn shorten the realized generation interval due to local depletion of the susceptible pool within households \citep{park2020inferring}.
 
 Despite these limitations, our analysis of serial intervals of COVID-19 from China provides further support for our theoretical framework, demonstrating temporal variation in serial intervals and its effect on the estimates of \RR.
 Most existing estimates of the serial-intervals of COVID-19 implicitly or explicitly assume that the serial-interval distributions remain constant throughout the course of an epidemic \citep{du2020serial, he2020temporal, nishiura2020serial,tindale2020transmission,zhao2020estimating,zhang2020evolving}.
@@ -769,7 +774,7 @@ Results presented in the main text show simulations beginning from time $\Delta 
 
 \subsection{Stochastic simulation}
 
-We run stochastic simulations of the renewal equation model using an individual-based model on a fully connected network (i.e., homogeneous population) based on the Gillespie algorithm that we developed earlier \citep{park2019inferring}.
+We run stochastic simulations of the renewal equation model using an individual-based model on a fully connected network (i.e., homogeneous population) based on the Gillespie algorithm that we developed earlier \citep{park2020inferring}.
 First, we initialize an epidemic with $I(0)$ infected individuals (nodes) in a fully connected network of size $N$. 
 For each initially infected individual, we draw number of infectious contacts from a Poisson distribution with the mean of \Ro and the corresponding generation intervals for each contact from a log-normal distribution (Table 1).
 Contactees are uniformly sampled from the total population.

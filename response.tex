@@ -74,12 +74,12 @@ Below please find our responses to reviewers.
 
 \revtext{I have one main concern, and this concerns the model. First a very general model is discussed, then a very special version is mentioned (mid p11) in which the latent period and incubation periods are always identical. For this model the General interval and Serial interval have exactly the same distribution. My concern is whether the stated results are valid only for this special case or if they apply also in general. I doubt the results hold in general, but at least think arguments for it are missing.}
 
-The special version is only presented in the supplementary material. We do not assume this in the main text. We have made this distinction clear:
+Thank you for pointing this out. The special version is only presented in the supplementary material. We do not assume this in the main text. We have made this distinction clear:
 
 ``For example, the Susceptible-Exposed-Infected-Recovered model, under the additional assumption that the incubation and exposed periods are equivalent (i.e. that onset of symptoms and infectiousness occur simultaneously), provides a special case where the forward serial- and generation-intervals follow the same distributions during the exponential growth phase because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset and infection is independent of the incubation period of an infector (see Supplementary Materials).
 Throughout the paper, we allow for presymptomatic transmission to match the transmission dynamics of COVID-19.''
 
-Figure 2 further shows that the initial forward serial-interval distribution is different from the intrinsic generation-interval distribution but gives identical \Ro estimates given $r$.
+Figure 2 further shows that the initial forward serial-interval distribution is different from the intrinsic generation-interval distribution but gives identical \Ro estimates given $r$ using parameter estimates for COVID-19.
 
 \revtext{Regarding my main concern above I note that you write "should" on p3, line 91, and "expect" on p 10, line 273. I don't see any proof for the statement to hold in general and am not sure the statement is even true in general. }
 
@@ -172,13 +172,18 @@ We do not assume this. Also, Figure 2--3 illustrate that generation and serial i
 
 \revtext{What is the manuscript about - generation and serial intervals or the reproduction number R? The title and abstract suggest the intervals and the introduction the reproduction number. I think opening with the well-known reproduction number will give the most transparent and coherent story.}
 
-It is about both. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the writing of the manuscript to provide a transparent and coherent story.
+It is about both. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood and our paper provides a theoretical basis for linking them properly. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the writing of the manuscript based on the suggestions to provide a transparent and coherent story.
 
 \revtext{The reproduction number is not put in a nuanced context. The presentation of the reproduction number as "one of the most important characteristics of an emerging epidemic ... [definition] ... [that] allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it" that then leads directly into how it is estimated leaves no room for its shortcomings. A more nuanced picture includes its inability to, for example, account for individual variation, including superspreaders and spatial variations in regions.}
 
+We have added the following limiations of the reproduction number:
+
+``Since the reproduction number represents an average \citep{diekmann1990definition, anderson1991infectious}, it does not capture heterogeneity among individuals or across space.
+The reproduction number also does not provide any information about the time scale of disease transmission.''
+
 \revtext{The introduction presents previous methodological work on the R-r relationship based on generation and serial intervals and recent applications that confuse the two intervals. The presentation goes back and forth between the two and does not clarify the shortcomings of each work or application. My suggestion for a stronger introduction: A funnel focusing on the methods that ends with the knowledge gap "In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of R from r" (and further specified by the gaps indicated at the end of section 2.1 and beginning of section 2.2) followed by concrete examples of how off R estimates are in applications to substantiate the problem.}
 
-
+We have rewritten a large proportion of the introduction section based on these suggestions.
 
 \revtext{I also lack a discussion of standard software to estimate the reproduction number such as the widely used R package EpiEstim.}
 
