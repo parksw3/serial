@@ -187,13 +187,27 @@ We have rewritten a large proportion of the introduction section based on these 
 
 \revtext{I also lack a discussion of standard software to estimate the reproduction number such as the widely used R package EpiEstim.}
 
+We have added the following sentence:
+
+``The lack of distinction is apparent even in standard softwares for estimating \RR, such as \texttt{EpiEstim}, in which the serial-interval distribution is used to infer time-dependent \RR \citep{thompson2019improved}.''
+
 \revtext{The abstract states that "recent studies suggest that the two intervals give different estimates of R from r" and "our analysis shows that using incorrectly defined serial intervals can severely bias estimates" Exemplify by numbers to substantiate the severity.}
+
+
 
 \revtext{Same vagueness at the end of the introduction: "Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of R." By how much?}
 
+
+
 \revtext{Figure 1 clearly illustrates the different intervals from different perspectives but does not explain the source of biases. Consider ways to visually communicate the important insights at the end of section 3.1.}
 
+\swp{?????}
+
 \revtext{Section 3.3 provides one example of a biased R estimate. The authors should substantiate their critique of several papers in the introduction by listing their estimated R estimates and the revised estimates - or not accusing those papers in the introduction. I think "these studies should also re-assess whether they appropriately considered the forward serial interval" is weak.}
+
+We think that it is important to emphasize that nont distinguishing generation and serial intervals is a commonly made mistake in the field. 
+However, we agree that our critique is weak.
+We have tried to remove any unfair accusations from the paper (but still provide a few examples to illustrate that this is a common practice without accusing those papers).
 
 \rev{Reviewr \#3}
 
@@ -256,7 +270,6 @@ We are plotting serial intervals, after grouping them based on the symptom onset
 \revtext{Could the results be simplified to an extend that medical doctors that actually "measure" backward serial intervals directly could recalculate the intrinsic serial intervals (in some simple approximation). As a technical paper it should provide some direct applicable results.}
 
 We believe that section 3.2 does this. We show that, instead of aggregating all measured serial intervals, one could rearrange them based on symptom onset date of a primary case and take the cohort-based average. We further demonstrate how this could be done with an illusrative line list (Figure 4). In addition, there is a simple way to calculate the intrinsic serial interval distribution. As we show in our simulations, even if we could observe all serial intervals throughout an epidemic (in the absence of non-pharmaceutical interventions), we cannot estimate the intrinsic distribution. Instead, we recommend analyzing serial intervals through a cohort-based perspective. We have now added a paragraph in the discussion section, summarizing and providing practical guidance.
-
 
 \revtext{Overall, I find the work interesting and believe it could contribute to current discussions on intrinsic time scales for Covid-19. It is a technical read, that would gain by being made easier accessible.}
 
