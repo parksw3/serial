@@ -181,11 +181,13 @@ g3 <- ggplot(rr) +
     legend.position = "none"
   )
 
+serall$date <- serall$t + as.Date("2020-01-22") - 12
+
 g4 <- ggplot(serall) +
-  geom_ribbon(aes(t, ymin=lwr, ymax=upr, fill=type, lty=type, col=type), alpha=0.5) +
+  geom_ribbon(aes(date, ymin=lwr, ymax=upr, fill=type, lty=type, col=type), alpha=0.5) +
   geom_hline(yintercept=1, lty=2) +
-  geom_line(aes(t, R0, col=type, lty=type)) +
-  scale_x_continuous("Time (days)", limits=c(-3, 29), expand=c(0, 0)) +
+  geom_line(aes(date, R0, col=type, lty=type)) +
+  scale_x_date("Symptom onset date (infector)", limits=as.Date(c("2020-01-07", "2020-02-08")), expand=c(0, 0)) +
   scale_y_continuous("Basic reproduction number $\\mathcal R_0$") +
   scale_color_manual(values=cpalette[5:6]) +
   scale_fill_manual(values=cpalette[5:6]) +
@@ -197,7 +199,7 @@ g4 <- ggplot(serall) +
     legend.title = element_blank()
   )
 
-tikz(file = "serial_analysis.tex", width = 16, height = 4, standAlone = T)
-grid.arrange(g1, g2, g3, g4, nrow=1)
+tikz(file = "serial_analysis.tex", width = 8, height = 8, standAlone = T)
+grid.arrange(g1, g2, g3, g4, nrow=2)
 dev.off()
 tools::texi2dvi('serial_analysis.tex', pdf = T, clean = T)
