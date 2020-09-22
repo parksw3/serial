@@ -19,6 +19,7 @@ serial.pdf: serial.tex forward.pdf
 Ignore += forward.tex
 forward.tex: forward.Rout ;
 
+Sources += response.tex
 ## response.pdf: response.tex
 
 ######################################################################
