@@ -10,6 +10,9 @@ vim_session:
 
 ######################################################################
 
+## serial.ld.pdf: serial.tex
+serial.ld.tex: serial.tex.1e83426.oldfile
+
 Sources += serial.tex
 serial.pdf: serial.tex forward.pdf
 

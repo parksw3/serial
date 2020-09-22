@@ -65,17 +65,22 @@
 
 Thank you for the chance to revise and resubmit our manuscript. 
 We have made major revisions to our manuscript to address the reviewers' comments.
-We were apparently not clear in our writing. Reviewers 1 and 3 both pointed out that we assume that the latent and incubation periods are equivalent (and thus not allowing for presymptomatic transmission). 
-However, we only present this result in the appendix as a special case.
-We do not assume this in the main text and allow for presymptomatic transmission.
-We have tried to make our assumptions clear and make our results more accessible.
-Below please find our responses to reviewers.
+In particular, we have tried to clarify our exposition.
+Reviewers 1 and 3 both mention that we assume that the latent and incubation periods are equivalent (thus not allowing for presymptomatic transmission). 
+However, we only present this scenario in the appendix as a special case.
+We do not assume this in the main text.
+We have thus tried to make our assumptions clear and our results more accessible.
+Below please find our detailed responses to reviewers.
 
 \rev{Reviewer \#1}
 
 \revtext{I have one main concern, and this concerns the model. First a very general model is discussed, then a very special version is mentioned (mid p11) in which the latent period and incubation periods are always identical. For this model the General interval and Serial interval have exactly the same distribution. My concern is whether the stated results are valid only for this special case or if they apply also in general. I doubt the results hold in general, but at least think arguments for it are missing.}
 
-Thank you for pointing this out. The special version is only presented in the supplementary material. We do not assume this in the main text. We have now made this distinction clear in the text:
+Thank you for pointing this out. Our results do apply in general. We have clarified this assertion and tried to make the arguments more clear as well. 
+
+JD: The reviewers' main concern is that they don't feel we have made a strong argument in the general case. Your response seems to focus more on the clarity of our claim than the clarity of our arguments.
+
+The special version is only presented in the supplementary material. We do not assume this in the main text. We have now made this distinction clear in the text:
 
 ``For example, the Susceptible-Exposed-Infected-Recovered model, under the additional assumption that the incubation and exposed periods are equivalent (i.e. that onset of symptoms and infectiousness occur simultaneously), provides a special case where the forward serial- and generation-intervals follow the same distributions during the exponential growth phase because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset and infection is independent of the incubation period of an infector (see Supplementary Materials).
 Throughout the paper, we allow for presymptomatic transmission to match the transmission dynamics of COVID-19.''
@@ -85,7 +90,9 @@ We also show that the main result (initial forward serial-interval distribution 
 
 \revtext{Regarding my main concern above I note that you write "should" on p3, line 91, and "expect" on p 10, line 273. I don't see any proof for the statement to hold in general and am not sure the statement is even true in general.}
 
-We provide a mathematical proof of this using a general model in the supplementary file. Figure 2A also demonstrates that this holds. We tried to make this clear in the main text:
+This statement is proved in the supplement and illustrated in a general context in Figure 2A. We now say this explicitly in the main text:
+
+JD: In early drafts, it's probably better to just list line numbers for a clearly specified MS version than to put quotes that may change.
 
 ``Analogous to the intrinsic generation-interval distribution, 
 forward serial-interval distributions describe the renewal process of infection based on symptom onset dates.
@@ -125,17 +132,17 @@ W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
 
 \revtext{p5, line 170: should be $W(s-\tau)$?}
 
-Done.
+Fixed, thank you.
 
 \revtext{p6, line 181-183: why will it contract during the outbreak? I understand why fewer will be materialized, but not why they will get shorter}
 
-We have tried to clarify this:
+We have tried to clarify this point:
 
 ``For example, infected individuals can become less likely to infect others during late stages of their infection as the epidemic progresses (therefore, leading to ``contraction'' of generation intervals) due to factors that drive time-dependent decreases in transmission such as susceptible depletion, behavioral change, and interventions \citep{champredon2015intrinsic}.''
 
 We also demonstrate this phenomenon in Figure 3C.
 
-\revtext{p6, line 188: shorter than what? If you mean compared to the forward delay distribution it is always true when r>0 and not necessary that r is higher (than what?).}
+\revtext{p6, line 188: shorter than what? If you mean compared to the forward delay distribution it is always true when $r>0$ and not necessary that r is higher (than what?).}
 
 We have rephrased this sentence:
 
