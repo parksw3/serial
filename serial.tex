@@ -176,18 +176,19 @@ However, these studies are not meant to be accused of their practices; until now
 One source of confusion arises from an apparent discrepancy between the generation-interval and serial-interval viewpoints.
 When the epidemic is growing exponentially, the spread of infection can be characterized as a \emph{renewal process} based on previous incidence of infection, the associated generation-interval distribution, and the average infectiousness of an infected individual.
 It is well established that this renewal formulation allows us to link the exponential growth rate of an epidemic $r$ with its reproduction number \RR using the generation-interval distribution \citep{wallinga2007generation}.
-By definition, the serial-interval distribution describes the renewal process between symptomatic cases based on their symptom onset dates.
+However, the serial-interval distribution describes also describes a renewal process -- in this case, linking symptomatic cases based on their symptom onset dates.
 Since both renewal processes, based on generation- and serial-interval distributions, describe the same underlying system of exponential growth, both should provide the same correct link between the reproduction number \RR and the epidemic growth rate $r$.
 
 In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of \RR from $r$. 
 In fact, recent theory suggest that using serial-interval can underestimate the reproduction number \citep{britton2019estimation, ganyani2020estimating}.
-However, these studies rely on imprecise definitions of the serial-interval distribution, relying on \emph{intrinsic} distributions of incubation periods and generation intervals that neglect the population-level dynamics of the disease spread.
+These studies rely on \emph{intrinsic} distributions of incubation periods and generation intervals that neglect the population-level dynamics of the disease spread.
+Here we show that, by correctly defining and calculating the ``forward'' serial distribution that connects symptom onset dates, we can resolve this discrepancy.
 During an ongoing epidemic, \emph{all} observed epidemiological delays (e.g., incubation period) between primary (e.g., infection) and secondary (e.g., symptom onset) events are subject to backward biases: when the incidence of primary events is increasing (or decreasing), we are more likely to observe shorter (or longer) intervals.
 Since realized serial intervals depend on three distinct intervals (i.e., incubation period of the infector, incubation period of the infectee, and the generation interval between them), any of these intervals can be subject to backward biases depending on our perspective.
-For example, when we consider ``forward'' serial-interval distributions (i.e., serial intervals from a cohort of infectors that developed symptoms at the same time), the incubation periods of the infectors are subject to backward biases because we have to look backward in time from their symptom onset to infection.
+For example, when we consider forward serial-interval distributions (i.e., serial intervals from a cohort of infectors that developed symptoms at the same time), the incubation periods of the infectors are subject to backward biases because we have to look backward in time from their symptom onset to infection.
 Therefore, the realized incubation period distributions of the infector and the infectee can differ dynamically, even if they are expected to be equivalent intrinsically.
 
-Here, we resolve the apparent discrepancy between generation-interval and serial-interval viewpoints by showing that the relevant interval for the renewal framework is the forward interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
+\jd{I have added a version of this sentence further up, where I feel it goes nicely. But I guess some merging will be necessary.} Here, we resolve the apparent discrepancy between generation-interval and serial-interval viewpoints by showing that the relevant interval for the renewal framework is the forward interval, and that the forward serial intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
 We develop a cohort-based framework for characterizing and comparing serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
 For example, in our analysis of the COVID-19 serial intervals from China, we find that the original \Ro estimates based on aggregated serial interval data underestimated \Ro by 50\%--60\%.
@@ -197,14 +198,11 @@ We further lay out several principles to consider in using information about ser
 
 \subsection{Intrinsic, forward, and backward delay distributions}
 
-The time delays between two epidemiological events can be defined either within an infected individual (e.g., incubation period: infection and symptom onset of an individual) or between infected individuals (e.g., serial interval: symptom onsets of an infector and an infectee).
-We can further divide these events into \emph{primary} and \emph{secondary} events.
-When we measure an epidemiological time delay within an infected individual (e.g., the incubation period), the primary event usually occurs before the secondary event ---
-most epidemiological events that can be observed within an individual have clear direction (e.g., infection to onset of symptoms) but some may not (e.g., onset of infectiousness and onset of symptoms).
-When we measure an epidemiological time delay between infected individuals (e.g., the serial interval), 
-the primary and secondary events are defined in terms of the direction of transmission:
-the primary event refers to the event that occurs in the infector. 
-Again, some of these delays are always positive (the infector is always infected before the infectee) and some are not (it is possible for the infectee to develop symptoms before the infector).
+A time delay between two epidemiological events can involve either one infected individual (e.g., incubation period: infection and symptom onset of an individual) or two -- an infector and an infectee (e.g., the serial interval).
+We define the delay as the time difference between one event (the \emph{primary} event) and the other (the \emph{secondary} event).
+In some cases, the primary event always occurs before the secondary event (e.g., the time from infection to onset of symptoms in a single individual, or the generation interval between two individuals.) 
+In other cases, the delay can sometimes be negative (e.g., the time from onset of infectiousness to onset of symptoms in a single individuals, or the serial interval between two individuals).
+\jd{Drastically simplified here, hope that's OK.}
 
 At the individual level, we can define the time distribution between a primary and a secondary event that we expect to observe (averaged across individual characteristics) for an infected individual --- we refer to this distribution as the intrinsic distribution.
 For example, the intrinsic incubation period distribution describes the expected time distribution from infection to symptom onset of an infected individual.
