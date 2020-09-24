@@ -127,7 +127,7 @@ $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
 secondary cohorts then we can express the total density of intervals $\tau$ between calendar time $\psymp$ and $\ssymp$ (i.e., $\tau=\ssymp-\psymp$) as follows:
 \begin{equation}
 W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
-\label{eq:match}
+%% \label{eq:match}
 \end{equation}''
 
 \revtext{p5, line 170: should be $W(s-\tau)$?}
@@ -181,7 +181,8 @@ We do not assume this. Also, Figure 2--3 illustrate that generation and serial i
 
 \revtext{What is the manuscript about - generation and serial intervals or the reproduction number R? The title and abstract suggest the intervals and the introduction the reproduction number. I think opening with the well-known reproduction number will give the most transparent and coherent story.}
 
-It is about both. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood and our paper provides a theoretical basis for linking them properly. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the writing of the manuscript based on the suggestions to provide a transparent and coherent story.
+It is about both. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood and our paper provides a theoretical basis for linking them properly. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the writing of the manuscript based on these suggestions to provide a transparent and coherent story.
+\jd{We now bridge better with the Abstract, but there's still a gulf between title and intro. The last s.~here reads as vague and may trouble the reviewer, unless it's obvious changes are big. Do we need rR in the title?}
 
 \revtext{The reproduction number is not put in a nuanced context. The presentation of the reproduction number as "one of the most important characteristics of an emerging epidemic ... [definition] ... [that] allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it" that then leads directly into how it is estimated leaves no room for its shortcomings. A more nuanced picture includes its inability to, for example, account for individual variation, including superspreaders and spatial variations in regions.}
 
@@ -212,7 +213,12 @@ Done:
 
 \revtext{Figure 1 clearly illustrates the different intervals from different perspectives but does not explain the source of biases. Consider ways to visually communicate the important insights at the end of section 3.1.}
 
-\swp{?????}
+We believe it would be premature to try to explain the biases in Figure 1: the goal of this figure is to explain the intervals (to readers who are likely to be less familiar than the reviewer). 
+
+\jd{
+We have, however, added some visual aids to the figure: we color the backward incubation periods (the main driver of differences), and we have made them a little shorter to reflect what happens early in the epidemic. We explain this briefly in the caption.
+}
+
 
 \revtext{Section 3.3 provides one example of a biased R estimate. The authors should substantiate their critique of several papers in the introduction by listing their estimated R estimates and the revised estimates - or not accusing those papers in the introduction. I think "these studies should also re-assess whether they appropriately considered the forward serial interval" is weak.}
 
@@ -235,7 +241,7 @@ $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
 secondary cohorts then we can express the total density of intervals $\tau$ between calendar time $\psymp$ and $\ssymp$ (i.e., $\tau=\ssymp-\psymp$) as follows:
 \begin{equation}
 W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
-\label{eq:match}
+%% \label{eq:match}
 \end{equation}''
 
 \revtext{On page 9, ``any deterministic epidemic model"...Guess it should be just as important for a stochastic model?}
