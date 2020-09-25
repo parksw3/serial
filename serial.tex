@@ -256,8 +256,7 @@ Typically, within-individual forward delay distributions are not directly affect
 Some realized forward distributions, like incubation period distributions, are expected to be equivalent to their intrinsic distributions and remain invariant at the time scale of an outbreak.
 Other realized distributions, like the distribution of time from symptom onset to testing, may change over the course of an epidemic due to changes in public-health policies or individual behavior.
 Between-individual forward delay distributions, such as generation- or serial-interval distributions, depend on epidemic dynamics.
-For example, infected individuals forward generation intervals often contract as an epidemic progresses due to the dynamical facto of susceptible depletion, as well as due to other factors like behavioral change or interventions \citep{champredon2015intrinsic}.
-\swp{The reviewer raised concerns about the last sentence.}
+For example, forward generation intervals often become shorter as an epidemic progresses due to the dynamical fact of susceptible depletion, as well as due to other factors like behavioral change or interventions \citep{champredon2015intrinsic}: if it is harder to infect later in the course of infection, then proportionally more intervals will be short.
 
 \eref{backward} suggests that backward delay distributions change over time even if their corresponding forward delay distribution does not change.
 Backward delay distributions depend on changes in the primary cohort size over time due to conditionality of observations:
@@ -327,11 +326,8 @@ is drawn from the forward incubation period distribution of the cohort of
 infectees who became infected at time $\psymp - \tau_{\rm i1} + \gtime$.
 Likewise, we can define the backward serial-interval distribution for
 a cohort of infectees who became symptomatic at time $\ssymp$
-(\fref{diagram}C).  This conceptual framework demonstrates
-\jd{Can we take out event type below? It makes things seem complicated and seems redundant with direction. If I say forward serial interval, do you need to ask primary or secondary?}
-that the distributions of $\tau_{\rm i1}$, $\gtime$, and $\tau_{\rm i2}$ (and therefore the distributions of realized serial intervals) depend on the
-reference cohort, which is defined by an event type (primary or secondary),
-temporal direction (forward or backward), and a particular reference time.
+(\fref{diagram}C).  
+This conceptual framework demonstrates that the distributions of $\tau_{\rm i1}$, $\gtime$, and $\tau_{\rm i2}$ (and therefore the distributions of realized serial intervals) depend on the reference cohort, which is defined by temporal direction (forward or backward) and a particular reference time.
 
 To calculate realized serial-interval distributions, we begin by modeling $\total(\psymp,\ssymp)$: the total density of serial intervals that start (when infectors develop symptoms) at time $\psymp$ and end (when infectees develop symptoms) at time $\ssymp$.
 For simplicity, we assume that all infected individuals eventually develop symptoms.
