@@ -76,9 +76,7 @@ Below please find our detailed responses to reviewers.
 
 \revtext{I have one main concern, and this concerns the model. First a very general model is discussed, then a very special version is mentioned (mid p11) in which the latent period and incubation periods are always identical. For this model the General interval and Serial interval have exactly the same distribution. My concern is whether the stated results are valid only for this special case or if they apply also in general. I doubt the results hold in general, but at least think arguments for it are missing.}
 
-Thank you for pointing this out. Our results do apply in general. We have clarified this assertion and tried to make the arguments more clear as well. 
-
-JD: The reviewers' main concern is that they don't feel we have made a strong argument in the general case. Your response seems to focus more on the clarity of our claim than the clarity of our arguments.
+Thank you for pointing this out. Our results do apply in general. We have clarified this assertion and tried to make the arguments more clear as well.
 
 The special version is only presented in the supplementary material. We do not assume this in the main text. We have now made this distinction clear in the text:
 
@@ -91,8 +89,6 @@ We also show that the main result (initial forward serial-interval distribution 
 \revtext{Regarding my main concern above I note that you write "should" on p3, line 91, and "expect" on p 10, line 273. I don't see any proof for the statement to hold in general and am not sure the statement is even true in general.}
 
 This statement is proved in the supplement and illustrated in a general context in Figure 2A. We now say this explicitly in the main text:
-
-JD: In early drafts, it's probably better to just list line numbers for a clearly specified MS version than to put quotes that may change.
 
 ``Analogous to the intrinsic generation-interval distribution, 
 forward serial-interval distributions describe the renewal process of infection based on symptom onset dates.
@@ -213,9 +209,21 @@ Done:
 
 \revtext{Figure 1 clearly illustrates the different intervals from different perspectives but does not explain the source of biases. Consider ways to visually communicate the important insights at the end of section 3.1.}
 
-\jd{
-One possibility: We have added some visual aids to Figure 1: we color the backward incubation periods (the main driver of differences), and we have made them a little shorter to reflect what happens early in the epidemic. We explain this briefly in the caption. This does not seem to cover the whole suggestion, though. We could add text in S3 referring back to this -- it's hard to think of anything else that wouldn't be a pain, but suggestions are welcome.
-}
+We have added some visual aids to Figure 1: we color intrinsic, backward, and forward intervals and explain them breifly in the caption:
+
+``
+Intrinsic intervals (black) reflect average of individual characteristics and are not dependent on population-level dynamics.
+  Forward intervals (green) can change due to epidemiological dynamics (e.g., contraction of generation intervals through susceptible depletion).
+  Backward intervals (blue) can change due to changes in cohort sizes even when forward intervals remain time-invariant.
+''
+
+\swp{Doesn't this paragraph visually communicate the insights???? It was already there in the previous version...}
+
+``The forward serial-interval distributions depend on distributions of three intervals
+(\fref{diagram}B): (i) the backward incubation period, (ii) the forward generation interval, and (iii) the forward incubation period.
+In these simulations, both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
+therefore, changes in the forward serial-interval distributions (\fref{epi}D) are predominantly driven by changes in the backward incubation period distribution, whose mean increases over time as the growth rate of disease incidence slows and then reverses.
+In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.''
 
 \revtext{Section 3.3 provides one example of a biased R estimate. The authors should substantiate their critique of several papers in the introduction by listing their estimated R estimates and the revised estimates - or not accusing those papers in the introduction. I think "these studies should also re-assess whether they appropriately considered the forward serial interval" is weak.}
 
