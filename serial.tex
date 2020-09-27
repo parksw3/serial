@@ -192,7 +192,7 @@ Therefore, the realized incubation period distributions of the infector and the 
 
 We develop a cohort-based framework for characterizing and comparing realized serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
-For example, in our analysis of the COVID-19 serial intervals from China, we find that the original \Ro estimates based on aggregated serial interval data underestimated \Ro by 50\%--60\%.
+For example, in our analysis of the COVID-19 serial intervals from China, we find that the original \Ro estimates based on aggregated serial-interval data underestimated \Ro by 50\%--60\%.
 We further lay out several principles to consider in using information about serial intervals and other epidemiological time delays to correctly infer the initial reproduction number during the early stages of an outbreak.
 
 \section{Methods}
@@ -509,7 +509,7 @@ The intrinsic generation-interval and incubation period distributions are chosen
 \section{Results}
 
 We use parameter estimates for COVID-19 to characterize the degree to which the realized serial-interval distribution can change over the course of an epidemic and evaluate how different definitions of the serial-interval distribution can affect the Euler-Lotka estimates of \Ro.
-We further address how the observed serial intervals, measured through contact tracing, are affected by the right censoring during an ongoing epidemic and provide a heuristic method for addressing biases that can arise from using serial interval data to estimate \Ro.
+We further address how the observed serial intervals, measured through contact tracing, are affected by the right censoring during an ongoing epidemic and provide a heuristic method for addressing biases that can arise from using serial-interval data to estimate \Ro.
 Finally, we analyze serial-interval data from the COVID-19 epidemic in China under our framework.
 
 \subsection{Realized serial-interval distributions}
@@ -707,15 +707,14 @@ This implies that not considering this correlation can potentially bias the esti
 % Previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the dynamical differences between the realized incubation periods of infectors (backward-looking) and those of infectees (forward looking) (e.g., \cite{klinkenberg2011correlation, ganyani2020estimating}).
 Better statistical tools for teasing apart the intrinsic generation-interval distributions from the observed serial intervals are needed.
 
-Here, we lay out a few practical principles for analyzing and interpreting the serial interval data.
+Here, we lay out a few practical principles for analyzing and interpreting serial-interval data.
 First, serial intervals should be cohorted based on the symptom onset date whenever possible.
-Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but their distributions are expected to change due to epidemic dynamics.
-Even when all realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR})---something true of realized generation intervals as well \citep{park2020inferring}.
+Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals is expected to differ from this expectation, and to change through time due to epidemic dynamics.
+\jd{Maybe leave out this s., it's not highly relevant and we're trying to be practical. }Even when all realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR})---something true of realized generation intervals as well \citep{park2020inferring}.
 Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases.
-Third, applying serial interval information from one epidemic to another should be avoided, even for same diseases, because serial intervals are epidemic-specific, rather than disease-specific.
-Finally, serial interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to properly assess them within the epidemiological context.
-In practice, these recommendations can be still difficult to follow due to limited serial interval information;
-nonetheless, we believe that following these approaches will help interpret serial interval data and understand transmission dynamics at the individual-level.
+Third, applying serial interval information from one epidemic of a given disease to another should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
+Finally, serial-interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to provide epidemiological context.
+In practice, these recommendations will sometimes be hard to follow, due to limited data about serial intervals, but these issues should be kept in mind when interpreting serial-interval data and understand transmission dynamics at the individual-level.
 
 More broadly, our study underlines the importance of carefully defining measured epidemiological time distributions. 
 Previous studies have shown that it matters whether generation
