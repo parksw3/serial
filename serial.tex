@@ -763,7 +763,6 @@ S(m \Delta t) &= N - \sum_{n=1}^m i(n \Delta t), \quad m=1, \dots, \tsub{m}{max}
 \end{align}
 where $C$ is chosen such that $\sum_{n=1}^{\tsub{m}{max}} i(m \Delta t)=10$.
 These initial conditions allow the model to follow exponential growth from time $\Delta t (\tsub{m}{max} + 1)$ without any transient behaviors.
-Results presented in the main text show simulations beginning from time $\Delta t (\tsub{m}{max} + 1)$.
 
 \subsection{Stochastic simulation}
 
@@ -921,6 +920,25 @@ f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, 
 &\propto  \exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)
 \end{align}
 Therefore, both the intrinsic generation intervals and the initial forward serial intervals are identically distributed and have the same mean.
+
+\subsection{Simulations with correlated intrinsic incubation periods and intrinsc generation intervals.}
+
+\begin{figure}[!pht]
+\begin{center}
+\includegraphics[width=0.95\textwidth]{forward_corr.pdf}
+\caption{
+\textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
+(A) Daily incidence over time.
+(B--D) Changes in the mean forward incubation period, generation interval, and serial interval.
+(E--G) Changes in the mean backward incubation period, generation interval, and serial interval.
+Intrinsic incubation periods and intrinsic generation intervals are modeled using a correlated bivariate lognormal distribution; 
+therefore, generation intervals are drawn from the corresponding conditional distributions (given a incubation period), instead of the marginal distribution.
+Higher correlation reduces the amount of changes in the mean forward serial interval because shorter (longer) backward incubation periods of infectors during the increasing (decreasing) phase of an epidemic are associated with shorter (longer) forward generation intervals.
+See Figure 3 in the main text for a detailed description.
+}
+\end{center}
+\end{figure}
+
 
 \pagebreak
 

@@ -275,7 +275,7 @@ g7 <- ggplot(serdata1) +
 gtot <- arrangeGrob(g1, g2, g3, g4, g5, g6, g7, layout_matrix = matrix(c(1, 1, 1, 2, 3, 4, 5, 6, 7), nrow=3, byrow=TRUE),
                     heights=c(0.8, 1, 1))
 
-tikz(file = "forward.tex", width = 8, height = 8, standAlone = T)
+tikz(file = "forward.tex", width = 8, height = 7, standAlone = T)
 plot(gtot)
 dev.off()
 tools::texi2dvi('forward.tex', pdf = T, clean = T)
