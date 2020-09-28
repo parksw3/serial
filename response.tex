@@ -267,14 +267,10 @@ This parameterization allows for generation intervals to be shorter than the inc
 
 \revtext{Page 4, figure 3A: Why are stochastic trajectories systematically shifted toward earlier time compared to deterministic trajectory. Was the deterministic trajectory not simulated with same serial interval distribution?}
 
-We now comment on this:
+These differences were driven by stochasticity due to small number of initial infections. We were starting deterministic simulations with a very small number to avoid initial transient dynamics.
+We now set $t=0$ to the first time point when daily incidence is greater than 100 in order to make a fair comparison and comment on this in figure caption:
 
-``Stochastic simulations confirm our deterministic calculations albeit minor differences due to transient dynamics.
-Incidence trajectories of stochastic simulations are slightly shifted (\fref{epi}A) due to differences in initial conditions. 
-\jd{This s. does not make a lot of sense. How hard would it be to start from the appropriate number in a deterministic simulation instead of making this awkward explanation?}
-We set the distribution of infection time of initially infected individuals (beginning from a small number of infected individuals) for deterministic simulations such that the system can exhibit exponential growth immediately (Supplementary Materials).
-This is not possible for stochastic simulations because the number of initially infected individuals cannot be smaller than 1; instead, we begin with 10 infected indiivduals who are infected at time $t=0$.
-In addition, the mean backward intervals of stochastic simulations begins from smaller values due to left-censoring.''
+``In order to remove possible transient dynamics (e.g., left-censoring of time delays and initial stochasticity due to low number of infections), we set $t=0$ to the first time point when daily incidence is greater than 100.''
 
 \revtext{Page 18, ``based on 8 and 6 doubling periods" guess it should be "based on a doubling period of 8 or 6 days"??}
 
@@ -286,25 +282,24 @@ Thank you for pointing this out. We have now added an epidemic trajectory.
 
 \revtext{Figure 5, what is on the y axis? Which delay is plotted and how does it relate to the forward/backward serial intervals. Why not plot serial intervals directly?}
 
-\jd{Pretty sure the question here is why does it say ``delay'' instead of ``serial interval'' on the y axis of B and C.}
 We are plotting serial intervals, after grouping them based on the symptom onset dates of primary (forward) and secondary (backward) cases. We have added the following sentence to further clarify:
 
 ``In order to quantify changes in serial intervals, we group them by the symptom onset dates of the primary (\fref{du}B) and secondary (\fref{du}C) cases---correspoding to forward and backward serial-interval distributions, respectively---and compute their mean and 95\% quantiles.''
+
+We have also changed the figure axis title to avoid confusion (from ``delay'' to ``serial interval'').
 
 \revtext{Could the results be simplified to an extend that medical doctors that actually "measure" backward serial intervals directly could recalculate the intrinsic serial intervals (in some simple approximation). As a technical paper it should provide some direct applicable results.}
 
 We believe that section 3.2 does this. We show that, instead of aggregating all measured serial intervals, one could rearrange them based on symptom onset date of a primary case and take the cohort-based average. We further demonstrate how this could be done with an illustrative line list (Figure 4). In addition, there is a simple way to calculate the intrinsic serial interval distribution. As we show in our simulations, even if we could observe all serial intervals throughout an epidemic (in the absence of non-pharmaceutical interventions), we cannot estimate the intrinsic distribution. Instead, we recommend analyzing serial intervals through a cohort-based perspective. We have now added a paragraph in the discussion section, summarizing and providing practical guidance:
 
-\jd{I will edit this in the MS.}
-``Here, we lay out a few practical principles for analyzing and interpreting the serial interval data.
+``Here, we lay out a few practical principles for analyzing and interpreting serial-interval data.
 First, serial intervals should be cohorted based on the symptom onset date whenever possible.
-Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but their distributions are expected to change due to epidemic dynamics.
-Even when all realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR})---something true of realized generation intervals as well \citep{park2020inferring}.
-Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases.
-Third, applying serial interval information from one epidemic to another should be avoided, even for same diseases, because serial intervals are epidemic-specific, rather than disease-specific.
-Finally, serial interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to properly assess them within the epidemiological context.
-In practice, these recommendations can be still difficult to follow due to limited serial interval information;
-nonetheless, we believe that following these approaches will help interpret serial interval data and understand transmission dynamics at the individual-level.''
+Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals is expected to differ from this expectation, and to change through time due to epidemic dynamics.
+Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases:
+Even when \emph{all} realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR}).
+Third, applying serial interval information from one epidemic of a given disease to another should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
+Finally, serial-interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to provide epidemiological context.
+In practice, these recommendations will sometimes be hard to follow, due to limited data about serial intervals, but these issues should be kept in mind when interpreting serial-interval data and understand transmission dynamics at the individual-level.''
 
 \revtext{Overall, I find the work interesting and believe it could contribute to current discussions on intrinsic time scales for Covid-19. It is a technical read, that would gain by being made easier accessible.}
 

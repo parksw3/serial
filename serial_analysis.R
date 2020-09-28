@@ -140,7 +140,7 @@ g2 <- ggplot(rr) +
   geom_errorbar(data=rr_summ, aes(cohort, ymin=lwr, ymax=upr), width=0) +
   geom_smooth(aes(cohort, serial), col=1, fill=1, fullrange=TRUE, se=FALSE) +
   scale_x_date("Symptom onset date (infector)", expand=c(0, 0)) +
-  scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(-12, 21)) +
+  scale_y_continuous("Serial interval (days)", expand=c(0, 0), limits=c(-12, 21)) +
   scale_size_area(max_size=4) +
   coord_fixed(clip="off") +
   ggtitle("B. Forward serial interval") +
@@ -173,7 +173,7 @@ g3 <- ggplot(rr) +
   geom_errorbar(data=rr_summ2, aes(cohort, ymin=lwr, ymax=upr), width=0) +
   geom_smooth(aes(cohort2, serial), col=1, fill=1, se=FALSE) +
   scale_x_date("Symptom onset date (infectee)", expand=c(0, 0)) +
-  scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(-11, 19)) +
+  scale_y_continuous("Serial interval(days)", expand=c(0, 0), limits=c(-11, 19)) +
   coord_fixed(clip="off") +
   ggtitle("C. Backward serial interval") +
   theme(

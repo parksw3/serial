@@ -554,7 +554,8 @@ Black lines represent the results of a deterministic simulation.
 Orange lines (A) represent the results of 10 stochastic simulations.
 Orange points (B-G) represent the average of 10 stochastic simulations.
 Dashed lines represent the mean initial forward delay.
-Intrinsic incubation periods and intrinsic generation intervals are assumed to be independent of each other for simplicity.
+In order to remove possible transient dynamics (e.g., left-censoring of time delays and initial stochasticity due to low number of infections), we set $t=0$ to the first time point when daily incidence is greater than 100.
+Intrinsic incubation periods and intrinsic generation intervals are assumed to be independent of each other for simplicity; simulations with correlated intrinsic incubation periods and intrinsic generation intervals are provided in Supplementary Materials.
 See Table 1 for parameter values.
 }
 \label{fig:epi}
@@ -583,12 +584,6 @@ We see similar qualitative patterns in all three backward delays (\fref{epi}E--G
 When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
 Similarly, when incidence decreases, we are more likely to observe longer intervals.
 Neglecting these changes will bias the inference of intrinsic distributions from observed distributions.
-
-Stochastic simulations confirm our deterministic calculations albeit minor differences due to transient dynamics.
-Incidence trajectories of stochastic simulations are slightly shifted to earlier time (\fref{epi}A) due to differences in initial conditions. 
-We set the distribution of infection time of initially infected individuals (beginning from a very small number of infected individuals, $<<1$) for deterministic simulations such that the system can exhibit exponential growth immediately (Supplementary Materials).
-This is not possible for stochastic simulations because the number of initially infected individuals cannot be smaller than 1; instead, we begin with 10 infected individuals who are infected at time $t=0$.
-In addition, the mean backward intervals of stochastic simulations begins from smaller values due to left-censoring.
 
 \subsection{Observed serial-interval distributions}
 
@@ -710,8 +705,8 @@ Better statistical tools for teasing apart the intrinsic generation-interval dis
 Here, we lay out a few practical principles for analyzing and interpreting serial-interval data.
 First, serial intervals should be cohorted based on the symptom onset date whenever possible.
 Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals is expected to differ from this expectation, and to change through time due to epidemic dynamics.
-\jd{Maybe leave out this s., it's not highly relevant and we're trying to be practical. }Even when all realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR})---something true of realized generation intervals as well \citep{park2020inferring}.
-Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases.
+Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases:
+Even when \emph{all} realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR}).
 Third, applying serial interval information from one epidemic of a given disease to another should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
 Finally, serial-interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to provide epidemiological context.
 In practice, these recommendations will sometimes be hard to follow, due to limited data about serial intervals, but these issues should be kept in mind when interpreting serial-interval data and understand transmission dynamics at the individual-level.

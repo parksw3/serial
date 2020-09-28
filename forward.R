@@ -11,7 +11,7 @@ rr <- renewal_det()
 
 summfun <- function(dd) {
   dd %>%
-    filter(!is.na(cohort), !is.na(tdiff), cohort > 0, cohort <= 100) %>%
+    filter(!is.na(cohort), !is.na(tdiff), cohort <= 100) %>%
     mutate(
       cc=cut(cohort, tcut)
     ) %>%
@@ -46,6 +46,19 @@ sir_data2 <- sir_data %>%
     cases=tail(infected, 1)-head(infected,1)
   )
 
+sir_data2_time <- sir_data2 %>%
+  filter(cases >= 100) %>%
+  group_by(sim) %>%
+  summarize(
+    min=min(day)
+  )
+
+sir_data3 <- sir_data2 %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    day=day-min
+  )
+
 detdata2 <- detdata %>%
   mutate(
     day=floor(tvec)
@@ -53,12 +66,18 @@ detdata2 <- detdata %>%
   group_by(day) %>%
   summarize(
     cases=tail(ci, 1)-head(ci,1)
+  ) %>%
+  mutate(
+    min=min(day[cases >= 100])
+  ) %>%
+  mutate(
+    day=day-min
   )
 
-g1 <- ggplot(sir_data2) +
+g1 <- ggplot(sir_data3) +
   geom_line(aes(day, cases, col="Stochastic", group=sim)) +
   geom_line(data=detdata2, aes(day, cases, col="Deterministic"), lwd=1) +
-  scale_x_continuous("Time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Daily incidence", expand=c(0, 0), limits=c(1, 2400)) +
   scale_color_manual(values=c(1, "#D55E00")) +
   ggtitle("A") +
@@ -68,7 +87,7 @@ g1 <- ggplot(sir_data2) +
     legend.position = c(0.1, 0.7)
   )
 
-tcut <- 0:40*2
+tcut <- (-20):20*4
 
 sir_sim <- lapply(simlist, function(x) {
   data.frame(
@@ -84,12 +103,17 @@ sir_sim <- lapply(simlist, function(x) {
 
 incdata0 <- data.frame(
   cohort=sir_sim$t_infected,
-  tdiff=sir_sim$t_symptomatic-sir_sim$t_infected
+  tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
+  sim=sir_sim$sim
 ) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 incdet <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mf=rr$mfinc
 )
 
@@ -97,7 +121,7 @@ g2 <- ggplot(incdata0) +
   geom_line(data=incdet, aes(tvec, mf), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=incdet$mf[1], lty=2) +
-  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7), oob=scales::squish) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("B. Incubation period") +
@@ -108,12 +132,16 @@ g2 <- ggplot(incdata0) +
 
 gendata0 <- data.frame(
   cohort=sir_sim$t_infected[sir_sim$infected_by],
-  tdiff=sir_sim$t_infected-sir_sim$t_infected[sir_sim$infected_by]
-) %>%
+  tdiff=sir_sim$t_infected-sir_sim$t_infected[sir_sim$infected_by],
+  sim=sir_sim$sim) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 gendet <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mf=rr$mfgen
 )
 
@@ -121,7 +149,7 @@ g3 <- ggplot(gendata0) +
   geom_line(data=gendet, aes(tvec, mf), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
-  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("C. Generation interval") +
@@ -132,12 +160,16 @@ g3 <- ggplot(gendata0) +
 
 serdata0 <- data.frame(
   cohort=sir_sim$t_symptomatic[sir_sim$infected_by],
-  tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by]
-) %>%
+  tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by],
+  sim=sir_sim$sim) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 serdet <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mf=rr$mfser2
 )
 
@@ -145,7 +177,7 @@ g4 <- ggplot(serdata0) +
   geom_line(data=serdet, aes(tvec, mf), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
-  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Primary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Forward delay (days)", expand=c(0, 0), limits=c(0, 7)) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("D. Serial interval") +
@@ -156,12 +188,16 @@ g4 <- ggplot(serdata0) +
 
 incdata1 <- data.frame(
   cohort=sir_sim$t_symptomatic,
-  tdiff=sir_sim$t_symptomatic-sir_sim$t_infected
-) %>%
+  tdiff=sir_sim$t_symptomatic-sir_sim$t_infected,
+  sim=sir_sim$sim) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 incdet1 <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mb=rr$mbinc
 )
 
@@ -169,7 +205,7 @@ g5 <- ggplot(incdata1) +
   geom_line(data=incdet1, aes(tvec, mb), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=incdet$mf[1], lty=2) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6),
                      breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
@@ -181,12 +217,16 @@ g5 <- ggplot(incdata1) +
 
 gendata1 <- data.frame(
   cohort=sir_sim$t_infected,
-  tdiff=sir_sim$t_infected-sir_sim$t_infected[sir_sim$infected_by]
-) %>%
+  tdiff=sir_sim$t_infected-sir_sim$t_infected[sir_sim$infected_by],
+  sim=sir_sim$sim) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 gendet1 <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mb=rr$mbgen
 )
 
@@ -194,7 +234,7 @@ g6 <- ggplot(gendata1) +
   geom_line(data=gendet1, aes(tvec, mb), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=gendet$mf[1], lty=2) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6), breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
   ggtitle("F. Generation interval") +
@@ -205,12 +245,16 @@ g6 <- ggplot(gendata1) +
 
 serdata1 <- data.frame(
   cohort=sir_sim$t_symptomatic,
-  tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by]
-) %>%
+  tdiff=sir_sim$t_symptomatic-sir_sim$t_symptomatic[sir_sim$infected_by],
+  sim=sir_sim$sim) %>%
+  merge(sir_data2_time) %>%
+  mutate(
+    cohort=cohort-min
+  ) %>%
   summfun()
 
 serdet1 <- data.frame(
-  tvec=rr$tvec,
+  tvec=rr$tvec-detdata2$min[1],
   mb=rr$mbser
 )
 
@@ -218,7 +262,7 @@ g7 <- ggplot(serdata1) +
   geom_line(data=serdet1, aes(tvec, mb), lwd=1) +
   geom_point(aes(cc, mean), shape=1, col="#D55E00", size=2) +
   geom_hline(yintercept=serdet$mf[1], lty=2) +
-  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(0, 82)) +
+  scale_x_continuous("Secondary cohort time (days)", expand=c(0, 0), limits=c(-10, 52)) +
   scale_y_continuous("Backward delay (days)", expand=c(0, 0), limits=c(0, 9.6),
                      breaks=0:4*2) +
   scale_fill_gradientn(colors=c("white", "black")) +
