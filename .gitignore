@@ -1,0 +1,4 @@
+.*.RData
+*.wrapR.*
+*.Rlog
+*.Rout.pdf
