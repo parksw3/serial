@@ -102,12 +102,20 @@ rRdata2 <- list(
                               "Intrinsic serial interval ($\\rho=0$)"))
     )
 
+
+## viridis/C colours; manually extracted (see commented code below)
+vcpal <- c("#7E03A8FF", "#CC4678FF", "#F89441FF", "#F0F921FF", "#0D0887FF")
+## reduce luminanance of too-light yellow
+vcpal[4] <- adjustcolor(vcpal[4], red.f = 0.9, green.f = 0.9, blue.f = 0.9)
+vcpal <- vcpal[c(5,1:4)] ## shuffle
+    
 g2 <- ggplot(rRdata2) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Reproduction number ${\\mathcal R}_{\\textrm{\\tiny intrinsic}}$", limits=c(1, 4.5), expand=c(0, 0)) +
-  scale_color_viridis_d(option="C") +
+  ## scale_color_viridis_d(option="C") +
+  scale_colour_manual(values=vcpal) +
   ggtitle("B") +
   theme(
     panel.grid = element_blank(),
@@ -115,6 +123,9 @@ g2 <- ggplot(rRdata2) +
     legend.title = element_blank(),
     legend.background = element_blank()
   )
+
+## dput(unique(ggplot_build(g2)$data[[2]]$colour))
+## plot(1:5,1:5,cex=5,col=vcpal,pch=16)
 
 rGdata <- list(
   data.frame(
