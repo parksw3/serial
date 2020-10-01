@@ -13,8 +13,11 @@ vim_session:
 Ignore += forward.tex
 forward.tex: forward.Rout ;
 
+Ignore += rR.tex
+rR.tex: rR.Rout ;
+
 Sources += serial.tex
-serial.pdf: serial.tex forward.pdf
+serial.pdf: serial.tex forward.pdf rR.pdf
 
 Sources += response.tex
 ## response.pdf: response.tex

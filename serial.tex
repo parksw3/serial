@@ -129,11 +129,11 @@ Disclaimer: The findings and conclusions in this report are those of the authors
 \section*{Abstract}
 
 The reproduction number \RR and the exponential growth rate $r$ are critical quantities for characterizing outbreak dynamics.
-These quantities are linked by generation intervals---defined as the time between infection and transmission.
-Because generation intervals are difficult to measure directly, they are often substituted with serial intervals---defined as the onset of symptoms in a chain of transmission.
+These quantities are linked by generation intervals, defined as the time between infection and transmission.
+Because generation intervals are difficult to measure directly, serial intervals---defined as the onset of symptoms in a chain of transmission---are often substituted.
 While serial intervals are easier to measure from contact tracing, recent studies suggest that the two intervals give different estimates of \RR from $r$.
-We present a general framework for characterizing epidemiological delays based on cohorts (i.e., a group of individuals that share the same event time, such as symptom onset) and show that \emph{forward-looking} serial intervals, which correctly link \RR with $r$, are not the same as \emph{intrinsic} serial intervals (defined by averaging across individual-level characteristics while neglecting population-level dynamics), but instead change with $r$.
-We provide a heuristic method for addressing potential biases that can arise from not accounting for changes in serial intervals across cohorts and apply the method to estimating \RR for the COVID-19 outbreak in China using serial-interval data --- our analysis shows that using incorrectly defined serial intervals can bias estimates of initial \RR by up to 50\%--60\%.
+We present a general framework for characterizing epidemiological delays based on cohorts (i.e., a group of individuals that share the same event time, such as symptom onset) and show that \emph{forward-looking} serial intervals, which correctly link \RR with $r$, are not the same as \emph{intrinsic} serial intervals (defined by averaging across individual-level characteristics while neglecting population-level dynamics), but instead change with $r$. \bmb{I can't quite parse the meaning of the last clause (``but instead \ldots''). Clarify?}
+We provide a heuristic method for addressing biases that can arise from failing to account for changes in serial intervals across cohorts; we apply the method to estimation of \RR for the COVID-19 outbreak in China using serial-interval data. Our analysis shows that using incorrectly defined serial intervals can bias estimates of initial \RR by as much as 50\%--60\%. \bmb{if it's ``up to/as much as'', why give the range and not just the max?}
 This study demonstrates the importance of early epidemiological investigation through contact tracing and provides a rationale for reassessing generation intervals, serial intervals, and \RR\ estimates, for COVID-19.
 
 \section*{Significance Statement}
@@ -141,54 +141,56 @@ This study demonstrates the importance of early epidemiological investigation th
 The generation- and serial-interval distributions are key, but different, quantities in outbreak analyses.
 Recent theoretical studies suggest that two distributions give different estimates of the reproduction number \RR from the exponential growth rate $r$;
 however, both intervals, by definition, describe disease transmission at the individual level.
-Here, we show that the serial-interval distribution, defined from the correct reference time and cohort, gives the same estimate of \RR as the generation-interval distribution from $r$.
-We then apply our framework to serial-interval data from the COVID-19 outbreak in China.
-While our study supports the use of serial-interval distributions in estimating \RR, it also reveals necessary changes to the current understanding and applications of serial-interval distribution.
+Here, we show that estimating \RR based on $r$ and the serial-interval distribution, defined from the correct reference time and cohort, gives the same estimate as using $r$ and the generation-interval distribution.
+We apply our framework to serial-interval data from the COVID-19 outbreak in China.
+While our study supports the use of serial-interval distributions in estimating \RR, it also highlights necessary changes to ourr current understanding and application of serial-interval distributions.
 
 \pagebreak
 
 \section{Introduction}
 
-The reproduction number \RR is one of the most important characteristics of an emerging epidemic, including the current pandemic of coronavirus disease 2019 (COVID-19) \citep{majumder2020early}.
+The reproduction number \RR is one of the most important characteristics of an emerging epidemic, such as the current pandemic of coronavirus disease 2019 (COVID-19) \citep{majumder2020early}.
 The reproduction number is defined as the average number of secondary cases caused by a primary case;
-the value in a fully susceptible population --- the ``basic'' reproduction number \Ro --- allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it \citep{anderson1991infectious}.
-Since the reproduction number represents an average \citep{diekmann1990definition, anderson1991infectious}, it does not capture heterogeneity among individuals or across space.
-The reproduction number also does not provide any information about the time scale of disease transmission.
+the value in a fully susceptible population --- the ``basic'' reproduction number \Ro --- allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it in simple cases \citep{anderson1991infectious}.
+Since the reproduction number represents an average \citep{diekmann1990definition, anderson1991infectious}, it fails to capture heterogeneity among individuals or across space.
+The reproduction number also fails to provide any information about the time scale of disease transmission.
 
 Estimating the reproduction number \RR is challenging because it cannot be measured directly.
-It often requires a detailed knowledge of the disease history and reliable incidence data.
-Instead, near the beginning of an epidemic, \RR can be estimated from the population-level exponential growth rate.
-This approach is convenient because the growth rate can be estimated robustly from case reports \citep{mills2004transmissibility, ma2014estimating}.
-These two quantities, representing the speed $r$ and strength $\RR$ of an epidemic, are linked by the generation-interval distribution \cite{wallinga2007generation}, where the generation interval is defined as the time between when an individual (infector) is infected and when that individual infects another person (infectee) \citep{svensson2007note}.
+Most methods of \RR estimation require a detailed knowledge of the disease history \bmb{does ``disease history'' here mean $\approx$ life history? This might be misconstrued as history in the regular sense (e.g. ``cholera first appeared in Europe in the 19th century \ldots'')} along with reliable incidence data.
+Alternatively, near the beginning of an epidemic, \RR can be estimated from the population-level exponential growth rate.
+This rate-based approach is convenient because the growth rate can be estimated robustly from case reports \citep{mills2004transmissibility, ma2014estimating}.
+The growth rate $r$, representing the speed of an epidemic, and \RR, reprenting its strength,
+\bmb{this is nice but will people who don't know speed/strength defs get hung up? Is there a spreed/strength ms out there we can ref?}
+are linked by the generation-interval distribution \cite{wallinga2007generation}, where the generation interval is defined as the time between when an individual (infector) is infected and when that individual infects another person (infectee) \citep{svensson2007note}.
 
 Since generation intervals measure time between infection events, which can be difficult to observe in practice, generation intervals are often replaced with serial intervals.
 The serial interval is defined as the time between when an infector and an infectee become \emph{symptomatic} \citep{svensson2007note}.
 While generation and serial intervals both measure the time scale of disease transmission, they measure fundamentally different quantities. 
 In particular, previous studies have noted that, in many contexts, serial intervals are expected to have larger variances than generation intervals but have the same mean, assuming that the incubation periods of the infector and infectee are identically distributed \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence}.
-Serial intervals can also take negative values due to presymptomatic transmission \citep{he2020temporal}, whereas generation intervals are confined to positive values.
+Serial intervals can also take negative values due to presymptomatic transmission \citep{he2020temporal}, whereas generation intervals must be positive.
 
 Although these distributions were clearly and distinctly defined over a decade ago \citep{svensson2007note}, 
 the need for a better conceptual and theoretical framework for understanding their differences is becoming clearer as the COVID-19 pandemic unfolds.
-Researchers continue to rely on both generation and serial intervals to make inferences about COVID-19 without making a clear distinction (e.g., \cite{tempvar,du2020serial,he2020temporal,wu2020nowcasting,zhao2020serial}), and explicitly conflate the definitions of two intervals (e.g., \cite{anderson2020will,hellewell2020feasibility}).
-The lack of distinction is apparent even in standard software for estimating \RR, such as \texttt{EpiEstim}, in which the serial-interval distribution is used to infer time-dependent \RR \citep{thompson2019improved}.
+Researchers continue to base inferences about COVID-19 on both generation and serial intervals without clearly distinguishing between them (e.g., \cite{tempvar,du2020serial,he2020temporal,wu2020nowcasting,zhao2020serial}), sometimes explicitly conflating the definitions of the two intervals (e.g., \cite{anderson2020will,hellewell2020feasibility}).
+This lack of distinction \bmb{confusion?} is apparent even in standard software for estimating \RR, such as \texttt{EpiEstim}, in which the serial-interval distribution is used to infer time-dependent \RR \citep{thompson2019improved}.
 However, these studies are not meant to be accused of their practices; until now, it has been a common practice use serial and generation intervals interchangeably.
 
 One source of confusion arises from an apparent discrepancy between the generation-interval and serial-interval viewpoints.
-When the epidemic is growing exponentially, the spread of infection can be characterized as a \emph{renewal process} based on previous incidence of infection, the associated generation-interval distribution, and the average infectiousness of an infected individual.
+While the epidemic is growing exponentially, the spread of infection can be characterized as a \emph{renewal process} based on previous incidence of infection, the associated generation-interval distribution, and the average infectiousness of an infected individual.
 It is well established that this renewal formulation allows us to link the exponential growth rate of an epidemic $r$ with its reproduction number \RR using the generation-interval distribution \citep{wallinga2007generation}.
-However, the serial-interval distribution also describes a renewal process --- in this case, linking symptomatic cases based on their symptom onset dates.
-Since both renewal processes, based on generation- and serial-interval distributions, describe the same underlying system of exponential growth, both should provide the same correct link between the reproduction number \RR and the epidemic growth rate $r$.
+However, the serial-interval distribution also describes a renewal process --- in this case, linking symptomatic cases based on their symptom onset dates \bmb{rephrase? ``in this case, the creation of a new \emph{symptomatic} case based on a symptomatic case in the previous generation''. Is it important to talk about symptom onset dates at this point?}
+Since both renewal processes, based on either generation- or serial-interval distributions, describe the same underlying exponentially growing system, both should provide the same correct link between the reproduction number \RR and the epidemic growth rate $r$.
 
-In contexts where the distributions are expected to be different, current theory has no explanation for how these differing distributions could provide identical estimates of \RR from $r$. 
-In fact, recent theory suggest that using serial-interval can underestimate the reproduction number \citep{britton2019estimation, ganyani2020estimating}.
-However, these studies rely on \emph{intrinsic} distributions of incubation periods and generation intervals that neglect the population-level dynamics of the disease spread.
+In contexts where the serial- and generation-interval distributions differ, current theory has no explanation for how two different distributions could provide identical estimates of \RR from $r$. 
+In fact, recent theory suggest that using the serial-interval can underestimate the reproduction number \citep{britton2019estimation, ganyani2020estimating}.
+However, these studies rely on \emph{intrinsic} distributions of incubation periods and generation intervals that neglect the population-level dynamics of disease spread.
 
 Here we show that, by correctly defining and calculating the ``forward'' serial-interval distribution (i.e., a distribution of serial intervals from a cohort of infectors that developed symptoms at the same time) that connects symptom onset dates, we can resolve this discrepancy;
 these intervals are different from the ``intrinsic'' serial intervals that previous studies have relied on \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence, britton2019estimation}.
-During an ongoing epidemic, \emph{all} observed epidemiological delays (e.g., incubation period) between primary (e.g., infection) and secondary (e.g., symptom onset) events are subject to backward biases: when the incidence of primary events is increasing (or decreasing), we are more likely to observe shorter (or longer) intervals.
-Since realized serial intervals depend on three distinct intervals (i.e., incubation period of the infector, incubation period of the infectee, and the generation interval between them), any of these intervals can be subject to backward biases depending on our perspective.
+During an ongoing epidemic, all observed epidemiological delays (e.g., incubation period) between primary (e.g., infection) and secondary (e.g., symptom onset) events are subject to backward biases: when the incidence of primary events is increasing (or decreasing), we are more likely to observe shorter (respectively longer) intervals.
+Since realized serial intervals combine three distinct intervals (i.e., incubation period of the infector, incubation period of the infectee, and the generation interval between them), any of these intervals can be subject to backward biases depending on our perspective. \bmb{``depending on our perspective'' is a little unclear at this point but hopefully resolves quickly as reader moves forward}
 In particular, when we consider forward serial-interval distributions, the incubation periods of the infectors are subject to backward biases because we have to look backward in time from their symptom onset to infection.
-Therefore, the realized incubation period distributions of the infector and the infectee can differ dynamically, even if they are expected to be equivalent intrinsically.
+Therefore, the realized incubation period distributions of the infector and the infectee can differ dynamically, even if the intrinsic analogues of the same distributions are expected to be equivalent. \bmb{check to make sure I didn't screw this up?}
 
 We develop a cohort-based framework for characterizing and comparing realized serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
@@ -199,12 +201,12 @@ We further lay out several principles to consider in using information about ser
 
 \subsection{Intrinsic, forward, and backward delay distributions}
 
-A time delay between two epidemiological events can involve either one infected individual (e.g., incubation period: infection and symptom onset of an individual) or two -- an infector and an infectee (e.g., the serial interval).
-We define the delay as the time difference between one event (the \emph{primary} event) and the other (the \emph{secondary} event).
+A time delay between two epidemiological events can involve either one infected individual (e.g., incubation period: infection and symptom onset of an individual) or two --- an infector and an infectee (e.g., the serial interval).
+We define the delay as the time difference between the \emph{primary} event and the \emph{secondary} event.
 In some cases, the primary event always occurs before the secondary event (e.g., the time from infection to onset of symptoms in a single individual, or the generation interval between two individuals). 
-In other cases, the delay can sometimes be negative (e.g., the time from onset of infectiousness to onset of symptoms in a single individuals, or the serial interval between two individuals).
+In other cases, the delay can sometimes be negative (e.g., the time from onset of infectiousness to onset of symptoms in a single individual, or the serial interval between two individuals).
 
-At the individual level, we can define the time distribution between a primary and a secondary event that we expect to observe (averaged across individual characteristics) for an infected individual --- we refer to this distribution as the intrinsic distribution.
+At the individual level, we can define the time distribution between a primary and a secondary event that we expect to observe (averaged across individual characteristics) for an infected individual --- we refer to this distribution as the \emph{intrinsic distribution}.
 For example, the intrinsic incubation period distribution describes the expected time distribution from infection to symptom onset of an infected individual.
 Likewise, the intrinsic generation-interval distribution describes the expected time distribution of infectious contacts made by an infected individual.
 However, the intrinsic time distributions are not always equivalent to the corresponding realized time distributions at the population level (i.e., the distribution of time between actual primary and secondary events that occur during an epidemic; see \fref{diagram}).
@@ -212,16 +214,17 @@ For example, an infectious contact results in infection only if the contacted in
 this is one mechanism that causes realized generation intervals (time between actual infection events) to differ from from the intrinsic generation intervals (time between infection and infectious contacts) \citep{park2020inferring}.
 
 At the population level, we model realized time delays between a primary and a secondary event from a cohort perspective.
-A cohort consists of \emph{all} individuals whose (primary or secondary) event occurred at a given time. 
-For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time \psymp, while a secondary cohort consists of all individuals whose symptom onset occurred at time $\ssymp$.
-Similarly, when we are measuring serial intervals, a primary cohort consists of all infectors who became symptomatic at time $\psymp$.
-Then, for a primary cohort at time $\psymp$, we can define the distribution of realized delays between primary and secondary events. 
+A cohort consists of all individuals whose (primary or secondary) event occurred at a given time.
+%% \psymp, \ssymp have \ensuremath in def so don't need $$ when used in isolation
+For example, when we are measuring incubation periods, a primary cohort consists of all individuals who became infected at time \psymp, while a secondary cohort consists of all individuals whose symptom onset occurred at time \ssymp.
+Similarly, when we are measuring serial intervals, a primary cohort consists of all infectors who became symptomatic at time \psymp.
+Then, for a primary cohort at time \psymp, we can define the distribution of realized delays between primary and secondary events. 
 We refer to this distribution as the forward delay distribution and denote it as $f_\psymp(\tau)$.
 
-Likewise, we define the backward delay distribution $b_\ssymp(\tau)$ for a secondary cohort at time $\ssymp$:
-The backward delay distribution describes the time delays between a primary and secondary events given that the secondary event occurred at time $\ssymp$.
-For example, the backward incubation period distribution at time $\ssymp$ describes incubation periods for a \emph{cohort} of individuals who became symptomatic at time $\ssymp$.
-Likewise, the backward serial-interval distribution at time $\ssymp$ describes serial intervals for a \emph{cohort} of infectees who became symptomatic at time $\ssymp$.
+Likewise, we define the backward delay distribution $b_\ssymp(\tau)$ for a secondary cohort at time \ssymp:
+The backward delay distribution describes the time delays between a primary and secondary events given that the secondary event occurred at time \ssymp.
+For example, the backward incubation period distribution at time \ssymp describes incubation periods for a \emph{cohort} of individuals who became symptomatic at time \ssymp.
+Likewise, the backward serial-interval distribution at time \ssymp describes serial intervals for a \emph{cohort} of infectees who became symptomatic at time \ssymp.
 
 Both forward and backward perspectives
 must yield identical \emph{measurement} (e.g., the length of the incubation
@@ -229,7 +232,7 @@ period of a given individual is the same whether measured forward from
 the time of infection or backward from the time of symptom onset).
 Consequently, no matter how delays are distributed, if
 $\mathcal P$ and $\mathcal S$ represent the sizes of primary and
-secondary cohorts then we can express the total density of intervals $\tau$ between calendar time $\psymp$ and $\ssymp$ (i.e., $\tau=\ssymp-\psymp$) as follows:
+secondary cohorts then we can express the total density of intervals $\tau$ between calendar time \psymp and \ssymp (i.e., $\tau=\ssymp-\psymp$) as follows:
 \begin{equation}
 W(\psymp) \psize(\psymp) f_\psymp(\tau) = \ssize(\ssymp) b_\ssymp(\tau) \,,
 \label{eq:match}
@@ -245,18 +248,18 @@ b_\ssymp(\tau)= \frac{W(\ssymp-\tau) \psize(\ssymp-\tau) f_{\ssymp-\tau} (\tau)}
 \end{equation}
 If we are considering incubation periods, the left hand side of
 this equation is the probability density that an individual
-who became symptomatic at time $\ssymp$ had an incubation period of
+who became symptomatic at time \ssymp had an incubation period of
 length $\tau$.
 From the right hand side, we see that this probability density depends on the weight parameter $W(\ssymp-\tau)$ (in this case, the proportion of symptomatic infection),
 the time-varying primary cohort size at the earlier time $\psize(\ssymp-\tau)$ (in this case, the number of individuals infected at time $\ssymp-\tau$),
-and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that an incubation period that starts at time $\ssymp-\tau$ ends at time $\ssymp$).
+and the forward delay distribution $f_{\ssymp-\tau}(\tau)$ (in this case, the probability density that an incubation period that starts at time $\ssymp-\tau$ ends at time \ssymp).
 
 Several different mechanisms drive the changes in forward and backward delay distributions over time.
 Typically, within-individual forward delay distributions are not directly affected by epidemic dynamics.
-Some realized forward distributions, like incubation period distributions, are expected to be equivalent to their intrinsic distributions and remain invariant at the time scale of an outbreak.
+Some realized forward distributions, like incubation period distributions, are equivalent to their intrinsic distributions and remain invariant at the time scale of an outbreak.
 Other realized distributions, like the distribution of time from symptom onset to testing, may change over the course of an epidemic due to changes in public-health policies or individual behavior.
 Between-individual forward delay distributions, such as generation- or serial-interval distributions, depend on epidemic dynamics.
-For example, forward generation intervals often become shorter as an epidemic progresses due to the dynamical fact of susceptible depletion, as well as due to other factors like behavioral change or interventions \citep{kenah2008generation, nishiura2010time, champredon2015intrinsic}: if it is harder to infect later in the course of infection, then proportionally more intervals will be short.
+For example, forward generation intervals often become shorter as an epidemic progresses due to the dynamical process of susceptible depletion, as well as due to other factors like behavioral change or interventions \citep{kenah2008generation, nishiura2010time, champredon2015intrinsic}: if it is harder to infect later in the course of infection, then proportionally more intervals will be short.
 
 \eref{backward} suggests that backward delay distributions change over time even if their corresponding forward delay distribution does not change.
 Backward delay distributions depend on changes in the primary cohort size over time due to conditionality of observations:
@@ -270,11 +273,11 @@ b_0(\tau) &= \left[ W(0) \psize(0)/\ssize(0)\right] \exp(-r\tau) f_0(\tau)
 where $r$ is the exponential growth rate (and $\left[W(0) \psize(0)/\ssize(0)\right]^{-1} = \int_{-\infty}^{\infty} \exp(-r\tau') f_0(\tau') \dtau'$ since $b_0$ is a probability distribution).
 Thus, even for different epidemics of the same disease, we expect to observe shorter backward intervals within a fast-growing epidemic (high $r$), all else being equal.
 In general, the backward delay distribution will differ from the forward delay distribution (unless the disease is at equilibrium), even if we are measuring time delays that are intrinsic to the life history of a disease (e.g., the incubation period).
-These ideas apply to all epidemiological delay distributions and generalize the work by \cite{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe realized generation intervals from the perspective of an infector and an infectee, respectively, as well as the work by \cite{britton2019estimation} who showed that \eref{backexp} holds for the backward generation-interval distributions.
+These ideas apply to all epidemiological delay distributions and generalize the work by \cite{champredon2015intrinsic} who compared forward and backward generation-interval distributions to describe realized generation intervals from the perspective of an infector and an infectee, respectively, as well as the work by \cite{britton2019estimation} who showed that \eref{backexp} holds for the backward generation-interval distribution.
 
 \subsection{Realized serial-interval distributions}
 
-The serial interval is defined as the time between when an infector becomes symptomatic and when an infectee becomes symptomatic \citep{svensson2007note}.
+The serial interval is defined as the time between when an infector becomes symptomatic and when their infectee becomes symptomatic \citep{svensson2007note}.
 Previous studies have often expressed serial intervals $\tau_{\rm s}$ in the form (\fref{diagram}A):
 \begin{equation}
 \tau_{\rm s} = (\gtime + \tau_{\rm i2}) - \tau_{\rm i1}
@@ -303,7 +306,7 @@ We refer to the definition \eref{intser} as the intrinsic serial interval (\fref
   is drawn from the forward generation-interval distribution; and $\tau_{\rm i2}$
   is drawn from the forward incubation period distribution.  (C) The
   backward serial interval for a cohort of infectees who became
-  symptomatic at time $\ssymp$.  In this case, $\tau_{\rm i1}$ is drawn from the
+  symptomatic at time \ssymp.  In this case, $\tau_{\rm i1}$ is drawn from the
   forward incubation period distribution; $\gtime$ is drawn from the
   backward generation-interval distribution; and $\tau_{\rm i2}$ is drawn from the
   backward incubation period distribution.
@@ -330,19 +333,19 @@ infectors who became infected at time $\psymp - \tau_{\rm i1}$; and $\tau_{\rm i
 is drawn from the forward incubation period distribution of the cohort of
 infectees who became infected at time $\psymp - \tau_{\rm i1} + \gtime$.
 Likewise, we can define the backward serial-interval distribution for
-a cohort of infectees who became symptomatic at time $\ssymp$
+a cohort of infectees who became symptomatic at time \ssymp
 (\fref{diagram}C).  
 This conceptual framework demonstrates that the distributions of $\tau_{\rm i1}$, $\gtime$, and $\tau_{\rm i2}$ (and therefore the distributions of realized serial intervals) depend on the reference cohort, which is defined by temporal direction (forward or backward) and a particular reference time.
 
-To calculate realized serial-interval distributions, we begin by modeling $\total(\psymp,\ssymp)$: the total density of serial intervals that start (when infectors develop symptoms) at time $\psymp$ and end (when infectees develop symptoms) at time $\ssymp$.
+To calculate realized serial-interval distributions, we begin by modeling $\total(\psymp,\ssymp)$: the total density of serial intervals that start (when infectors develop symptoms) at time $\psymp$ and end (when infectees develop symptoms) at time \ssymp.
 For simplicity, we assume that all infected individuals eventually develop symptoms.
-Then, the density of serial intervals between time $\psymp$ and $\ssymp$,
+Then, the density of serial intervals between time $\psymp$ and \ssymp,
 given that the infectors became infected at time $\pinf\le\psymp$ and
 the infectees became infected at time $\sinf\le\ssymp$, depends on the
 amount of infection that occurs between time $\pinf$ and $\sinf$ as well as
 the density of forward incubation periods between $\pinf$ and
 $\psymp$ (realized incubation periods of infectors) and between
-$\sinf$ and $\ssymp$ (realized incubation periods of infectees):
+$\sinf$ and \ssymp (realized incubation periods of infectees):
 \begin{equation}
 \total (\psymp,\ssymp | \alpha_1, \alpha_2)=\underbrace{\Rc (\pinf)}_{\substack{\text{case} \\ \text{reproduction} \\ \text{number}}} 
 \times 
@@ -374,7 +377,7 @@ b_\ssymp(\tau) =
 \end{equation}
 
 The denominator of the forward serial-interval distribution (\eref{fserial}) then corresponds to the total number of infections generated by primary cases who themselves developed symptoms at time \psymp.
-Dividing this quantity by the number of individuals who developed symptoms at time at time \psymp, $j(\psymp) = \int_{-\infty}^\infty \total(\psymp-\tau', \psymp) \dtau'$, we obtain the serial reproduction number:
+Dividing this quantity by the number of individuals who developed symptoms at time \psymp, $j(\psymp) = \int_{-\infty}^\infty \total(\psymp-\tau', \psymp) \dtau'$, we obtain the serial reproduction number:
 \begin{equation}
 \Rs(\psymp) = \frac{\int_{-\infty}^\infty \total(\psymp, \psymp+\tau') \dtau'}{j(\psymp)},
 \end{equation}
@@ -396,11 +399,11 @@ Ignoring births and deaths, changes in the proportion of susceptible individuals
 i(t) &= \RR(t) \int_0^\infty i(t-\tau) \gdist(\tau) \dtau,
 \label{eq:renewal}
 \end{align}
-where $\RR(t)$ is the instantaneous reproduction number (i.e., the average number of secondary cases that a primary case infected at time $t$ will generate if conditions at time $t$ remains unchanged \citep{fraser2007estimating}), and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a population where changes in $\RR(t)$ is negligible \citep{champredon2015intrinsic}).
+where $\RR(t)$ is the instantaneous reproduction number (i.e., the average number of secondary cases that a primary case infected at time $t$ will generate if conditions at time $t$ remain unchanged \citep{fraser2007estimating}), and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a population where changes in $\RR(t)$ is negligible \citep{champredon2015intrinsic}).
 This model effectively assumes that epidemic dynamics are driven by changes in transmission rate, which may not hold under individual-based intervention such as case isolation \citep{fraser2007estimating};
 nonetheless, this form has been widely used in the literature and has been successfully applied in modeling the current COVID-19 pandemic \citep{gostic2020practical}.
 
-Here, we consider a specific example where changes in the reproduction number is driven by susceptible depletion: $\RR(t) = \Ro S(t)$, where \Ro represents the basic reproduction number.
+Here, we consider a specific example where changes in the reproduction number are driven by susceptible depletion: $\RR(t) = \Ro S(t)$, where \Ro represents the basic reproduction number.
 Although we do not consider non-pharmaceutical interventions explicitly, the effect of susceptible depletion is mathematically equivalent to the effect of interventions that reduce transmission rate.
 Then, the forward generation-interval for a cohort of individuals that were infected at time $\psymp$ follows \citep{champredon2015intrinsic}:
 \begin{equation}
@@ -449,7 +452,8 @@ f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\pinf}^{\tau} \exp(r \pinf
 \end{equation}
 where the normalization constant $\phi$ is determined by the
 requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
-Since we have not yet made any assumptions about the shape of the joint distribution $h$ between incubation periods and the generation intervals, this conclusion is robust, regardless of whether presymptomatic is possible or not.
+Since we have not yet made any assumptions about the shape of the joint distribution $h$ between incubation periods and the generation intervals, this conclusion \bmb{what conclusion specifically? or do you mean this ``formulation'' is robust? Do you need to be more explicit about the inferential status of ``Therefore, we expect \ldots'' above? Is } is robust, regardless of whether presymptomatic transmission 
+is possible or not.
 It is straightforward to see this relationship from \eref{jrenew} (by substituting $j(t) \approx j(0) \exp(rt)$ and $\Rs(t) \approx \Ro$);
 in Supplementary Materials, we provide a more detailed mathematical proof of this relationship.
 
@@ -472,7 +476,7 @@ For a fast-growing epidemic (high $r$), we expect the backward incubation period
 therefore, the initial forward serial-interval distribution will generally have a larger mean than the intrinsic generation- and serial-interval distributions.
 However, the exact shape of the initial forward serial-interval distribution depends on the shape of the joint distribution.
 For example, the Susceptible-Exposed-Infected-Recovered model, under the additional assumption that the incubation and exposed periods are equivalent (i.e. that onset of symptoms and infectiousness occur simultaneously), provides a special case where the forward serial- and generation-intervals follow the same distributions during the exponential growth phase because (i) infected individuals can only transmit after symptom onset and (ii) the time between symptom onset and infection is independent of the incubation period of an infector (see Supplementary Materials).
-Throughout the paper, we allow for presymptomatic transmission to match the transmission dynamics of COVID-19.
+Everywhere else in this paper, however, we allow for presymptomatic transmission in the model in order to match the transmission dynamics of COVID-19.
 
 \subsection{Model parameterization}
 
@@ -501,21 +505,21 @@ SD intrinsic generation interval & 2 days & \cite{ferretti2020quantifying} \\
   \textbf{Parameter values used for simulations.}
 The intrinsic generation-interval distribution is parameterized using a log-normal distribution with log mean $\mu_G=1.54$ and log standard deviation $\sigma_G=0.37$.
 The intrinsic incubation period distribution is parameterized using a log-normal distribution with log mean $\mu_I=1.62$ and log standard deviation $\sigma_I=0.42$.
-The joint probability distribution is modeled using a bivariate log-normal distribution with correlations (on the log scale) $\rho=0, 0.25, 0.5, 0.75$.
+The joint probability distribution is modeled using a bivariate log-normal distribution with correlations (on the log scale) $\rho=\{0, 0.25, 0.5, 0.75\}$.
 The intrinsic generation-interval and incubation period distributions are chosen to match characteristic of COVID-19 to illustrate realistic magnitudes of time-varying/perspective effects in the current pandemic.
 }
 \end{table}
 
 \section{Results}
 
-We use parameter estimates for COVID-19 to characterize the degree to which the realized serial-interval distribution can change over the course of an epidemic and evaluate how different definitions of the serial-interval distribution can affect the Euler-Lotka estimates of \Ro.
-We further address how the observed serial intervals, measured through contact tracing, are affected by the right censoring during an ongoing epidemic and provide a heuristic method for addressing biases that can arise from using serial-interval data to estimate \Ro.
+We use parameter estimates for COVID-19 to characterize the degree to which the realized serial-interval distribution can change over the course of an epidemic and to evaluate how different definitions of the serial-interval distribution can affect the Euler-Lotka estimates of \Ro.
+We further address how the observed serial intervals, measured through contact tracing, are affected by right censoring during an ongoing epidemic and provide a heuristic method for addressing biases that can arise from using serial-interval data to estimate \Ro.
 Finally, we analyze serial-interval data from the COVID-19 epidemic in China under our framework.
 
 \subsection{Realized serial-interval distributions}
 
 \fref{rR} shows Euler-Lotka estimates of \Ro\ based on different definitions of the serial interval. 
-When the initial forward serial-interval distributions $f_0(\tau)$ is used, estimates (from \eref{Rforward}) exactly match the (correct) generation-interval-based estimates (\eref{Rgen}) for all values of the correlation $\rho$ between the intrinsic incubation period and the intrinsic generation interval (\fref{rR}A).
+When the initial forward serial-interval distribution $f_0(\tau)$ is used, estimates (from \eref{Rforward}) exactly match the (correct) generation-interval-based estimates (\eref{Rgen}) for all values of the correlation $\rho$ between the intrinsic incubation period and the intrinsic generation interval (\fref{rR}A).
 When the intrinsic distributions are used, however, estimates based on the serial interval (\eref{Rintrinsic}) underestimate \Ro: as $r$ increases, \Rintrinsic saturates and eventually \emph{decreases} due to the increasing inferred importance of negative serial intervals (\fref{rR}B).
 While the initial forward serial intervals during the exponential growth phase can also be negative, their effects are appropriately balanced because faster epidemic growth leads to longer serial intervals (and a corresponding lower proportion of negative intervals).
 
@@ -531,6 +535,7 @@ intrinsic generation interval of the underlying bivariate log-normal distributio
 (B) The intrinsic serial-interval distributions give an incorrect link between $r$ and \Ro.
 (C) The mean initial forward serial interval during the exponential growth phase increases with $r$.
 (D) The squared coefficient of variation of the initial forward serial intervals during the exponential growth phase decreases with $r$.
+\bmb{x-axes of B and D don't exactly line up (I realize that's \emph{extremely} fussy)}
 }
 \label{fig:rR}
 \end{figure}
@@ -539,7 +544,7 @@ Comparing the shapes of the initial forward serial-interval distribution (\eref{
 In general, distributions with higher means and less variability lead to higher \Ro for a given $r$ \citep{wallinga2007generation, weitz2015modeling, park2019practical}.
 When incidence is growing exponentially, forward serial intervals have higher means (\fref{rR}C) and squared coefficients of variation (\fref{rR}D) than the intrinsic generation-interval distribution.
 The effects of higher means (which increase \Ro) exactly cancel those of higher variability (which decrease \Ro).
-On the other hand, \emph{intrinsic} serial intervals (\eref{intrinsicSI}) have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are more variable (also see squared coefficient of variation of the initial forward serials at $r=0$ in \fref{rR}D); 
+On the other hand, \emph{intrinsic} serial intervals (\eref{intrinsicSI}) have the same mean (equal to the mean initial forward serial at $r=0$ in \fref{rR}C) as the intrinsic generation intervals but are more variable (also see squared coefficient of variation of the initial forward serial-interval distribution at $r=0$ in \fref{rR}D); 
 therefore, we underestimate \Ro when we use the intrinsic serial-interval distribution.
 
 \begin{figure}[!ht]
@@ -555,8 +560,9 @@ Orange lines (A) represent the results of 10 stochastic simulations.
 Orange points (B-G) represent the average of 10 stochastic simulations.
 Dashed lines represent the mean initial forward delay.
 In order to remove possible transient dynamics (e.g., left-censoring of time delays and initial stochasticity due to low number of infections), we set $t=0$ to the first time point when daily incidence is greater than 100.
-Intrinsic incubation periods and intrinsic generation intervals are assumed to be independent of each other for simplicity; simulations with correlated intrinsic incubation periods and intrinsic generation intervals are provided in Supplementary Materials.
+Intrinsic incubation periods and intrinsic generation intervals are assumed to be independent of each other for simplicity; see Supplementary Materials for simulations with correlated intrinsic incubation periods and intrinsic generation intervals.
 See Table 1 for parameter values.
+\bmb{identical plot titles B/E etc could be confusing at first glance?}
 }
 \label{fig:epi}
 \end{center}
@@ -581,7 +587,7 @@ therefore, changes in the forward serial-interval distributions (\fref{epi}D) ar
 In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.
 
 We see similar qualitative patterns in all three backward delays (\fref{epi}E--G; \eref{backward}), because they are predominantly driven by the rate of change in incidence, which in turn affects relative cohort sizes.
-When incidence is increasing, individuals are more likely to have been infected recently and therefore, we are more likely to observe shorter intervals (\eref{backexp}).
+When incidence is increasing, individuals are more likely to have been infected recently, and therefore we are more likely to observe shorter intervals (\eref{backexp}).
 Similarly, when incidence decreases, we are more likely to observe longer intervals.
 Neglecting these changes will bias the inference of intrinsic distributions from observed distributions.
 
@@ -662,10 +668,10 @@ Both of these would have acted to reduce the forward serial interval.
 \fref{du}C shows that the mean backward serial interval increased over time, also likely driven directly by the decrease in COVID-19 infections.
 
 While the qualitative changes in the mean forward and backward serial interval are consistent with our earlier simulations (\fref{epi}), the initial mean forward serial interval (\fref{du}B) appears to be larger than what we calculated based on previously estimated incubation period and generation-interval distributions (\fref{rR}C).
-These may imply that the incubation period and generation interval (Table 1) were underestimated, as neither study explicitly accounted for the fact that the observed intervals were drawn from the backward distributions and were likely to have been censored.
+This difference may imply that the incubation period and generation interval (Table 1) were underestimated, as neither study explicitly accounted for the fact that the observed intervals were drawn from the backward distributions and were likely to have been censored.
 
 \fref{du}D shows the cohort-averaged estimates of \Ro, which remain roughly constant until day January 17th and suddenly decreases;
-this sudden decrease is due changes in the forward serial intervals consistent with the dynamics seen in our simulations (\fref{obsrR}).
+this sudden decrease is due to changes in the forward serial intervals consistent with the dynamics seen in our simulations (\fref{obsrR}).
 The cohort-averaged estimates of \Ro based on the early forward serial intervals are also consistent with previous estimates of \Ro of the COVID-19 epidemic in China \citep{majumder2020early, doi:10.1098/rsif.2020.0144}:
 $\Ro = 2.6$ (95\% CI: 2.2--3.1) and $\Ro = 3.4$ (95\% CI: 2.7 -- 4.3) based on a doubling period of 8 or 6 days, respectively, using serial-interval data from infectors who developed symptoms by January 17th.
 These early cohort-averaged estimates of \Ro are unlikely to be affected by the right-censoring as we expect the degree of right-censoring to be low (\fref{du}A).
@@ -681,48 +687,49 @@ In particular, the mean forward serial interval can decrease over time for COVID
 Failing to account for these effects can result in underestimation of initial \RR.
 
 Recently, \cite{ali2020serial} also showed that serial intervals of COVID-19 decreased in China. Analogous to our approach, they also grouped serial intervals by the symptom onset date of infectors across 14-day periods and found that the mean forward serial interval decreased from 7.8 days to 2.6 days.
-While they attributed the decrease in serial intervals to reduction of the isolation delay, their regression analysis showed that isolation delays explain only 51.5\% of the variation in serial intervals (and explaining up to 72\% of the variance including other intervention measures).
+While they attributed the decrease in serial intervals to reduction of the isolation delay, their regression analysis showed that isolation delays explain only 51.5\% of the variation in serial intervals (they could explain up to 72\% of the variance by including other intervention measures).
 Our framework provides an explanation for the remaining variation: changes in the backward incubation period during the decreasing phase of an epidemic also shorten serial intervals due to increased amount of presymptomatic transmission (even in the absence of nonpharmaceutical interventions).
-Since isolation delays and other intervention measures affect the amount of onward transmission, and therefore the distribution of realize (forward) generation intervals, it cannot explain all variation in forward serial intervals, which depend on (i) backward incubation period of the infector, (ii) the forward generation interval, and (iii) the forward incubation period of the infectee (\fref{diagram}B).
+Since isolation delays and other intervention measures affect the amount of onward transmission, and therefore the distribution of realized (forward) generation intervals, it cannot explain all variation in forward serial intervals, which depend on (i) backward incubation period of the infector, (ii) the forward generation interval, and (iii) the forward incubation period of the infectee (\fref{diagram}B).
 
 Our results support the use of serial-interval distributions for calculating the initial \RR during the exponential growth phase,  
 but they also reveal gaps in current practices in incorporating serial-interval distributions into outbreak analyses.
 For example, \cite{thompson2019improved} recently emphasized the importance of using up-to-date serial-interval data for accurate estimation of time-varying reproduction numbers.
-However, our results show that if changes the forward serial interval through time are not accounted for, using up-to-date serial-interval data can, in fact, exacerbate the underestimation of initial \RR.
-Future studies should explore how neglecting changes in the forward serial-interval distribution can affect the estimates of \RR beyond the exponential growth phase and potentially re-assess existing estimates of \RR.
+However, our results show that if changes the forward serial interval through time are not accounted for, using up-to-date serial-interval data can actually exacerbate the underestimation of initial \RR.
+Future studies should explore how neglecting changes in the forward serial-interval distribution can affect the estimates of \RR beyond the exponential growth phase, and potentially re-assess existing estimates of \RR.
 We also suggest that modelers should aim to characterize spatiotemporal variation in forward serial-interval distributions and understand their changes over time.
 These modeling approaches should be coupled with epidemiological investigation through contact tracing. 
-Going forward, an additional advantage of early, intensive contact tracing of emerging diseases is that this is the best way to characterize the initial forward serial-interval distribution.
+Going forward, an additional advantage of early, intensive contact tracing of emerging diseases is that it provides the best information to characterize the initial forward serial-interval distribution.
 
 Our study also underlines the fact that the serial-interval distribution depends not only on the generation-interval and incubation-period distributions, but also on their intrinsic correlations.
 Here, we use a bivariate lognormal distribution to capture their correlations phenomenologically but their true correlations will depend on viral load dynamics;
-nonetheless, we expect our conclusions about decreasing serial intervals of COVID-19 to be robust as individuals with longer incubation periods have longer time window to transmit before symptom onset.
-Otherwise, the impact of increasing backward incubation periods on the forward serial intervals are likely to be disease specific---for example, we show in Supplementary Materials that the initial forward serial-interval distribution can be equivalent to the intrinsic generation-interval distribution, regardless of the growth rate $r$, due to independence between the incubation period and time from symptom onset to transmission (assuming no transmission occurs during the incubation period).
-This implies that not considering this correlation can potentially bias the estimates of the intrinsic generation-interval distribution from the serial-interval distribution.
+\bmb{don't understand the connection between these two clauses?}
+nonetheless, we expect our conclusions about decreasing serial intervals of COVID-19 to be robust as individuals with longer incubation periods have a longer time window to transmit before symptom onset.
+Otherwise \bmb{??}, the impact of increasing backward incubation periods on the forward serial intervals are likely to be disease specific---for example, we show in Supplementary Materials that the initial forward serial-interval distribution can be equivalent to the intrinsic generation-interval distribution, regardless of the growth rate $r$, due to independence between the incubation period and time from symptom onset to transmission (assuming no transmission occurs during the incubation period).
+This \bmb{(?antecedent?)} implies that not considering this correlation can potentially bias the estimates of the intrinsic generation-interval distribution from the serial-interval distribution.
 % Previous studies that tried to estimate the generation-interval distributions from the observed serial intervals often ignored the dynamical differences between the realized incubation periods of infectors (backward-looking) and those of infectees (forward looking) (e.g., \cite{klinkenberg2011correlation, ganyani2020estimating}).
 Better statistical tools for teasing apart the intrinsic generation-interval distributions from the observed serial intervals are needed.
 
-Here, we lay out a few practical principles for analyzing and interpreting serial-interval data.
+Finally, we lay out a few practical principles for analyzing and interpreting serial-interval data.
 First, serial intervals should be cohorted based on the symptom onset date whenever possible.
-Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals is expected to differ from this expectation, and to change through time due to epidemic dynamics.
-Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they can be subject to different censoring and epidemiological biases:
+Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals differs from this expectation, and changes through time due to epidemic dynamics.
+Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided as they \bmb{??} can be subject to different censoring and epidemiological biases:
 Even when \emph{all} realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR}).
-Third, applying serial interval information from one epidemic of a given disease to another should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
+Third, applying serial interval information across epidemics of a given disease should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
 Finally, serial-interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to provide epidemiological context.
 In practice, these recommendations will sometimes be hard to follow, due to limited data about serial intervals, but these issues should be kept in mind when interpreting serial-interval data and understand transmission dynamics at the individual-level.
 
 More broadly, our study underlines the importance of carefully defining measured epidemiological time distributions. 
-Previous studies have shown that it matters whether generation
-intervals are measured forward or backward \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
+Previous studies have shown the importance of forward vs. backward
+measurement of generation intervals \citep{nishiura2010time,champredon2015intrinsic,britton2019estimation};
 we generalize these ideas and show that they apply to any other epidemiological distributions.
-Some studies during the early phases of the COVID-19 epidemics have tried to correct for the backward biases, but changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
+Some studies during the early phases of the COVID-19 epidemics have tried to correct for the backward biases \bmb{refs?}, but changes in the backward delay distributions due to changing cohort sizes are expected to be a pervasive feature of outbreak dynamics.
 Cohorting epidemiological delays by the primary event time can help avoid backward biases (although censoring biases can still exist) as well as detect potential changes in the distribution.
 
 Here, we assume that all individuals develop symptoms and that the entire transmission process, including all relevant epidemiological delays, is known exactly.
 In practice, identifying who infected whom is difficult in general, and asymptomatic and presymptomatic transmission of COVID-19 exacerbates this difficulty \citep{bai2020presumed,he2020temporal,wei2020presymptomatic}.
 Biases in the observed serial intervals will necessarily bias the estimates of \RR. 
-Furthermore, when one of the individuals is asymptomatic, there is no symptom-based serial interval; 
-neglecting the time scale asymptomatic transmission may also bias the estimates of \RR \citep{park2020time}.
+Furthermore, when one of the individuals in a transmission pair is asymptomatic, there is no symptom-based serial interval; 
+neglecting the time scale of asymptomatic transmission may also bias the estimates of \RR \citep{park2020time}.
 
 Despite these limitations, our analysis of serial intervals of COVID-19 from China provides further support for our theoretical framework, demonstrating temporal variation in serial intervals and its effect on the estimates of \RR.
 Most existing estimates of the serial-intervals of COVID-19 implicitly or explicitly assume that the serial-interval distributions remain constant throughout the course of an epidemic \citep{du2020serial, he2020temporal, nishiura2020serial,tindale2020transmission,zhao2020estimating,zhang2020evolving}.
@@ -921,7 +928,7 @@ f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, 
 \end{align}
 Therefore, both the intrinsic generation intervals and the initial forward serial intervals are identically distributed and have the same mean.
 
-\subsection{Simulations with correlated intrinsic incubation periods and intrinsc generation intervals.}
+\subsection{Simulations with correlated intrinsic incubation periods and intrinsic generation intervals.}
 
 \begin{figure}[!pht]
 \begin{center}
