@@ -2,3 +2,4 @@
 *.wrapR.*
 *.Rlog
 *.Rout.pdf
+.Rproj.user
