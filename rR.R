@@ -1,7 +1,7 @@
 library(dplyr)
 library(ggplot2); theme_set(theme_bw())
 library(tikzDevice)
-library(gridExtra)
+library(egg)
 source("cpalette.R")
 source("rRfun.R")
 
@@ -53,12 +53,18 @@ rRdata <- list(
                               "Forward serial interval ($\\rho=0$)"))
   )
 
+## viridis/C colours; manually extracted (see commented code below)
+vcpal <- c("#7E03A8FF", "#CC4678FF", "#F89441FF", "#F0F921FF", "#0D0887FF")
+## reduce luminanance of too-light yellow
+vcpal[4] <- adjustcolor(vcpal[4], red.f = 0.9, green.f = 0.9, blue.f = 0.9)
+vcpal <- vcpal[c(5,1:4)] ## shuffle
+
 g1 <- ggplot(rRdata) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Basic reproduction number $\\mathcal R_0$", limits=c(1, 4.5), expand=c(0, 0)) +
-  scale_color_manual(values=cpalette) +
+  scale_colour_manual(values=vcpal) +
   ggtitle("A") +
   theme(
     panel.grid = element_blank(),
@@ -102,20 +108,12 @@ rRdata2 <- list(
                               "Intrinsic serial interval ($\\rho=0$)"))
     )
 
-
-## viridis/C colours; manually extracted (see commented code below)
-vcpal <- c("#7E03A8FF", "#CC4678FF", "#F89441FF", "#F0F921FF", "#0D0887FF")
-## reduce luminanance of too-light yellow
-vcpal[4] <- adjustcolor(vcpal[4], red.f = 0.9, green.f = 0.9, blue.f = 0.9)
-vcpal <- vcpal[c(5,1:4)] ## shuffle
-    
 g2 <- ggplot(rRdata2) +
   geom_smooth(aes(r, R, col=type, lty=type), se=FALSE) +
   geom_point(aes(r, R, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Reproduction number ${\\mathcal R}_{\\textrm{\\tiny intrinsic}}$", limits=c(1, 4.5), expand=c(0, 0)) +
-  ## scale_color_viridis_d(option="C") +
-  scale_colour_manual(values=vcpal) +
+  scale_color_grey(start=0) +
   ggtitle("B") +
   theme(
     panel.grid = element_blank(),
@@ -168,7 +166,7 @@ g3 <- ggplot(rGdata) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Mean interval (days)", expand=c(0, 0), limits=c(4.7, NA),
                      breaks=c(4:7)) +
-  scale_color_manual(values=cpalette) +
+  scale_colour_manual(values=vcpal) +
   ggtitle("C") +
   theme(
     panel.grid = element_blank(),
@@ -216,7 +214,7 @@ g4 <- ggplot(rkappadata) +
   geom_point(aes(r, mean, col=type, shape=type), size=2) +
   scale_x_continuous("Exponential growth rate $r$ (1/day)", limits=c(0, 0.3), expand=c(0, 0)) +
   scale_y_continuous("Squared coefficient of variation", expand=c(0, 0), limits=c(0, 0.84)) +
-  scale_color_manual(values=cpalette) +
+  scale_colour_manual(values=vcpal) +
   ggtitle("D") +
   theme(
     panel.grid = element_blank(),
@@ -225,6 +223,6 @@ g4 <- ggplot(rkappadata) +
   )
 
 tikz(file = "rR.tex", width = 8, height = 6, standAlone = T)
-grid.arrange(g1, g2, g3, g4, nrow=2)
+ggarrange(g1, g2, g3, g4, nrow=2)
 dev.off()
 tools::texi2dvi('rR.tex', pdf = T, clean = T)
