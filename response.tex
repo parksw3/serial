@@ -109,7 +109,7 @@ f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\pinf}^{\tau} \exp(r \pinf
 \end{equation}
 where the normalization constant $\phi$ is determined by the requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
 We provide a more detailed mathematical proof of this relationship in Supplementary Materials.
-Since we do not make any assumptions about the shape of the joint distribution $h$ between incubation periods and the generation intervals, \eref{Rforward} holds in general whether presymptomatic transmission is possible or not.''
+Since we do not make any assumptions about the shape of the joint distribution $h$ between incubation periods and the generation intervals, Eq. (18) holds in general whether presymptomatic transmission is possible or not.''
 
 \revtext{p4, bottom: refer to Fig 1 }
 
@@ -155,7 +155,7 @@ This result does not depend on the restrictive assumption. We have clarified thi
 ``These studies concluded that the serial and generation intervals have the same mean when $\tau_{\rm i1}$ and $\tau_{\rm i2}$ are drawn from the same distributions \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}.
 However, distributions of realized incubation periods, $\tau_{\rm i1}$ and $\tau_{\rm i2}$ will be identical only if we assume that they are intrinsic to individuals (and not dependent on epidemic dynamics at the population-level) ---
 something that is generally true of forward but not backward incubation-period distributions.
-We refer to the definition \eref{intser} as the intrinsic serial interval (\fref{diagram}A).''
+We refer to the definition Eq. (4) as the intrinsic serial interval (Fig. 1A).''
 
 \revtext{Section 3: be specific which model you are assuming. I think it is the SEIR where incubation is identical to latent period, i.e. individuals become infectious the same instance as their onset of symptoms.}
 
@@ -231,9 +231,9 @@ We also color forward and backward intervals in Figure 3 according to the color 
 We refer to figure 1 at the end of Section 3.1 (now Section 3.2):
 
 ``The forward serial-interval distributions depend on distributions of three intervals
-(\fref{diagram}B): (i) the backward incubation period, (ii) the forward generation interval, and (iii) the forward incubation period.
-In these simulations, both forward incubation period (\fref{epi}B) and generation-interval (\fref{epi}C) distributions remain roughly constant;
-therefore, changes in the forward serial-interval distributions (\fref{epi}D) are predominantly driven by changes in the backward incubation period distribution, whose mean increases over time as the growth rate of disease incidence slows and then reverses.
+(Fig. 1{diagram}B): (i) the backward incubation period, (ii) the forward generation interval, and (iii) the forward incubation period.
+In these simulations, both forward incubation period (Fig. 3B) and generation-interval (Fig. 3C) distributions remain roughly constant;
+therefore, changes in the forward serial-interval distributions (Fig. 3D) are predominantly driven by changes in the backward incubation period distribution, whose mean increases over time as the growth rate of disease incidence slows and then reverses.
 In general, relative contributions of the three distributions depend on their shapes, correlations between intrinsic incubation periods and generation intervals, and overall epidemiological dynamics.''
 
 We think that making further changes to the figures will make them contain too much information, and therefore difficult to interpret.
@@ -276,7 +276,7 @@ We removed the word ``deterministic'' from the sentence.
 We initially considered anti-correlations for demonstration purposes (that regardless of choices of correlations, we can still obtain an unbiased estimate of \Ro using the initial forward serial-interval distributions). We agree that it is unrealistic. We have removed the negative correlation example and added the following text:
 
 ``We have shown that the dynamics of the serial-interval distribution depend on the joint distribution between incubation periods and generation intervals.
-Here, we use a bivariate lognormal distribution to model the joint probability distribution $h$ of intrinsic incubation periods and intrinsic generation intervals (in the renewal equation model, \eref{renewal}) while allowing for the possibility that they might be correlated.
+Here, we use a bivariate lognormal distribution to model the joint probability distribution $h$ of intrinsic incubation periods and intrinsic generation intervals (in the renewal equation model, Eq. (12)) while allowing for the possibility that they might be correlated.
 Given that the viral load of SARS-CoV-2 peaks around the time of symptom onset \citep{he2020temporal}, we generally expect the generation intervals to be positively correlated with the incubation period:
 that is, individuals who develop symptoms later are more likely to transmit later.
 Marginal distributions of incubation periods and generation intervals are parameterized based on parameter estimates for COVID-19 (Table 1).
@@ -302,7 +302,7 @@ Thank you for pointing this out. We have now added an epidemic trajectory.
 
 We are plotting serial intervals, after grouping them based on the symptom onset dates of primary (forward) and secondary (backward) cases. We have added the following sentence to further clarify:
 
-``In order to quantify changes in serial intervals, we group them by the symptom onset dates of the primary (\fref{du}B) and secondary (\fref{du}C) cases---corresponding to forward and backward serial-interval distributions, respectively---and compute their mean and 95\% quantiles.''
+``In order to quantify changes in serial intervals, we group them by the symptom onset dates of the primary (Fig. 5B) and secondary (Fig. 5C) cases---corresponding to forward and backward serial-interval distributions, respectively---and compute their mean and 95\% quantiles.''
 
 We have also changed the figure axis title to avoid confusion (from ``delay'' to ``serial interval'').
 
@@ -314,7 +314,7 @@ We believe that section 3.2 does this. We show that, instead of aggregating all 
 First, serial intervals should be cohorted based on the symptom onset date of the infector (and not of the infectee) whenever possible.
 Previous studies have often regarded serial intervals as an intrinsic quantity, having the same mean as the intrinsic generation interval \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}, but the distribution (and the mean) of observed serial intervals differs from this expectation, and changes through time due to epidemic dynamics.
 Second, aggregating serial intervals across different cohorts and epidemic periods should be avoided because the realized serial-interval distribution can be subject to different censoring and epidemiological biases:
-Even when \emph{all} realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (\fref{obsrR}).
+Even when \emph{all} realized serial intervals can be observed throughout an unmitigated epidemic, we do not obtain the intrinsic serial interval distribution due to susceptible depletion (Fig. 4).
 Third, applying serial interval information across epidemics of a given disease should be done with care, because serial intervals are epidemic-specific, rather than disease-specific.
 Finally, serial-interval data should be accompanied by a trajectory of the epidemic curve, whenever possible, to provide epidemiological context.
 In practice, these recommendations will sometimes be hard to follow, due to limited data about serial intervals, but these issues should be kept in mind when interpreting serial-interval data and understand transmission dynamics at the individual-level.''
