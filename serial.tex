@@ -160,7 +160,7 @@ The value in a fully susceptible population --- the ``basic'' reproduction numbe
 Since the reproduction number represents an average \citep{diekmann1990definition, anderson1991infectious}, it fails to capture heterogeneity among individuals or across space.
 The reproduction number also fails to provide any information about the time scale of disease transmission.
 
-Estimating the reproduction number \RR is challenging because it cannot be measured directly.
+Estimating the reproduction number \RR is challenging because it cannot be measured directly for most emerging pathogens.
 Most methods of \RR estimation require a detailed knowledge of the life history along with reliable incidence data.
 Alternatively, near the beginning of an epidemic, \RR can be estimated from the population-level exponential growth rate $r$.
 This rate-based approach is convenient because the growth rate can be estimated robustly from case reports \citep{mills2004transmissibility, ma2014estimating}.
@@ -196,7 +196,7 @@ Therefore, the realized incubation period distributions of the infector and the 
 
 We develop a cohort-based framework for characterizing and comparing realized serial intervals, as well as any other epidemiological delays, and show that the initial forward serial-interval distribution correctly estimates \RR from $r$.
 Conversely, using inaccurately defined serial intervals or failing to account for changes in the observed serial-interval distributions over the course of an epidemic can considerably bias estimates of \RR.
-For example, in our analysis of the COVID-19 serial intervals from China, we find that the original \Ro estimates based on aggregated serial-interval data underestimated \Ro by a factor of 2.0--2.6.
+For example, in our analysis of the COVID-19 serial intervals from China, outside Hubei province, we find that the original \Ro estimates based on aggregated serial-interval data underestimated \Ro by a factor of 2.0--2.6.
 We further lay out several principles to consider in using information about serial intervals and other epidemiological time delays to correctly infer the initial reproduction number during the early stages of an outbreak.
 
 \section{Methods}
@@ -293,8 +293,8 @@ Previous studies have often expressed serial intervals $\tau_{\rm s}$ in the for
 where $\tau_{\rm i1}$ and $\tau_{\rm i2}$ represent incubation periods of an infector and
 an infectee, respectively, and $\gtime$ represents the generation
 interval between the infector and the infectee.
-These studies concluded that the serial and generation intervals have the same mean when $\tau_{\rm i1}$ and $\tau_{\rm i2}$ are drawn from the same distributions \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation};
-however, distributions of realized incubation periods, $\tau_{\rm i1}$ and $\tau_{\rm i2}$ will be identical only if we assume that they are intrinsic to individuals (and not dependent on epidemic dynamics at the population-level) ---
+These studies concluded that the serial and generation intervals have the same mean when $\tau_{\rm i1}$ and $\tau_{\rm i2}$ are drawn from the same distributions \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}.
+However, distributions of realized incubation periods, $\tau_{\rm i1}$ and $\tau_{\rm i2}$ will be identical only if we assume that they are intrinsic to individuals (and not dependent on epidemic dynamics at the population-level) ---
 something that is generally true of forward but not backward incubation-period distributions.
 We refer to the definition \eref{intser} as the intrinsic serial interval (\fref{diagram}A).
 
@@ -528,7 +528,7 @@ The intrinsic  incubation period and generation-interval distributions are chose
 
 We use parameter estimates for COVID-19 to characterize the degree to which the realized serial-interval distribution can change over the course of an epidemic and to evaluate how different definitions of the serial-interval distribution can affect the Euler-Lotka estimates of \Ro.
 We further address how the observed serial intervals, measured through contact tracing, are affected by right censoring during an ongoing epidemic and provide a heuristic method for addressing biases that can arise from using serial-interval data to estimate \Ro. 
-Finally, we analyze serial-interval data from the COVID-19 epidemic in China, outside Hubei province based on 468 transmission events reported between January 21--February 8, 2020, under our framework.
+Finally, we analyze serial-interval data from the COVID-19 epidemic in China, outside Hubei province, based on 468 transmission events reported between January 21--February 8, 2020, under our framework.
 
 \subsection{Realized serial-interval distributions during the exponential growth phase}
 
@@ -626,8 +626,8 @@ Colored ribbons represent the range of estimates of \Ro across 10 stochastic sim
 
 Now, we turn to practical issues of estimating the reproduction number from the observed serial-interval data during on ongoing epidemic.
 In order to have an unbiased estimate of the basic reproduction number, we need to estimate the initial forward serial-interval distribution --- i.e., serial intervals based on cohorts of infectors who share the same symptom onset time, at the early stage of the epidemic.
-However, researchers typically use all available information to estimate epidemiological parameters (e.g., aggregating all serial intervals observed until certain time of an epidemic);
-for example, \cite{thompson2019improved} recently suggested that up-to-date serial-interval data are necessary to accurately estimate the reproduction number.
+However, researchers typically use all available information to estimate epidemiological parameters (e.g., aggregating all serial intervals observed until certain time of an epidemic).
+For example, \cite{thompson2019improved} recently suggested that up-to-date serial-interval data are necessary to accurately estimate the reproduction number.
 We explore the consequences of neglecting changes in the realized serial-interval distribution on estimates of the basic reproduction number.
 
 When an epidemic is ongoing, the observed serial intervals are subject to right-censoring because we cannot observe a serial interval if either an infector or an infectee has not yet developed symptoms.

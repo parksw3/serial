@@ -57,10 +57,10 @@ g2 <- ggplot(arrow) +
   geom_point(aes(1.5, 0), size=3) +
   geom_point(aes(2.5, 0), size=3) +
   geom_point(aes(3.5, 0), size=3) +
-  geom_point(aes(0.5, 0.2), size=3, col="green") +
-  geom_point(aes(1.5, 0.4), size=3, col="green") +
-  geom_point(aes(2.5, 0.3), size=3, col="green") +
-  geom_point(aes(1.5, 0.1), size=3, col="blue") +
+  geom_point(aes(0.5, 0.2), size=3, col="#81b214") +
+  geom_point(aes(1.5, 0.4), size=3, col="#81b214") +
+  geom_point(aes(2.5, 0.3), size=3, col="#81b214") +
+  geom_point(aes(1.5, 0.1), size=3, col="#07689f") +
   annotate("text", x=1.5, y=-0.05, label="$p$") +
   annotate("text", x=0.5, y=-0.05, label="$p-\\tau_{\\rm i1}$") +
   annotate("text", x=0.5, y=-0.1, label="Infector") +
@@ -69,10 +69,10 @@ g2 <- ggplot(arrow) +
   annotate("text", x=2.5, y=-0.05, label="$p-\\tau_{\\rm i1}+\\tau_{\\rm g}$") +
   annotate("text", x=3.5, y=-0.05, label="$p-\\tau_{\\rm i1}+\\tau_{\\rm g}+\\tau_{\\rm i2}$") +
   geom_segment(aes(x, y, xend=x1, yend=y1), arrow = arrow(length = unit(0.2, "inches")), lwd=1) +
-  geom_segment(aes(1.5, 0.1, xend=0.5, yend=0.1), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="blue") +
-  geom_segment(aes(0.5, 0.2, xend=2.5, yend=0.2), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="green") +
-  geom_segment(aes(2.5, 0.3, xend=3.5, yend=0.3), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="green") +
-  geom_segment(aes(1.5, 0.4, xend=3.5, yend=0.4), arrow = arrow(length = unit(0.1, "inches")), lwd=1.5, col="green") +
+  geom_segment(aes(1.5, 0.1, xend=0.5, yend=0.1), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#07689f") +
+  geom_segment(aes(0.5, 0.2, xend=2.5, yend=0.2), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#81b214") +
+  geom_segment(aes(2.5, 0.3, xend=3.5, yend=0.3), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#81b214") +
+  geom_segment(aes(1.5, 0.4, xend=3.5, yend=0.4), arrow = arrow(length = unit(0.1, "inches")), lwd=1.5, col="#81b214") +
   annotate("text", x=2.5, y=0.45, label="Forward serial interval, $\\tau_{\\rm s} = (\\tau_{\\rm g} + \\tau_{\\rm i2}) - \\tau_{\\rm i1}$") +
   annotate("text", x=1, y=0.15, label="Backward incubation period, $\\tau_{\\rm i1}$") +
   annotate("text", x=1, y=0.25, label="Forward generation interval, $\\tau_{\\rm g}$") +
@@ -97,10 +97,10 @@ g3 <- ggplot(arrow) +
   geom_point(aes(1.5, 0), size=3) +
   geom_point(aes(2.5, 0), size=3) +
   geom_point(aes(3.5, 0), size=3) +
-  geom_point(aes(3.5, 0.1), size=3, col="blue") +
-  geom_point(aes(0.5, 0.3), size=3, col="green") +
-  geom_point(aes(3.5, 0.4), size=3, col="green") +
-  geom_point(aes(2.5, 0.2), size=3, col="blue") +
+  geom_point(aes(3.5, 0.1), size=3, col="#07689f") +
+  geom_point(aes(0.5, 0.3), size=3, col="#81b214") +
+  geom_point(aes(3.5, 0.4), size=3, col="#81b214") +
+  geom_point(aes(2.5, 0.2), size=3, col="#07689f") +
   annotate("text", x=3.5, y=-0.05, label="$s$") +
   annotate("text", x=2.5, y=-0.05, label="$s-\\tau_{\\rm i2}$") +
   annotate("text", x=0.5, y=-0.05, label="$s-\\tau_{\\rm i2}-\\tau_{\\rm g}$") +
@@ -109,10 +109,10 @@ g3 <- ggplot(arrow) +
   annotate("text", x=2.5, y=-0.1, label="Infectee") +
   annotate("text", x=3.5, y=-0.1, label="Reference cohort", col="red") +
   geom_segment(aes(x, y, xend=x1, yend=y1), arrow = arrow(length = unit(0.2, "inches")), lwd=1) +
-  geom_segment(aes(3.5, 0.1, xend=2.5, yend=0.1), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="blue") +
-  geom_segment(aes(2.5, 0.2, xend=0.5, yend=0.2), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="blue") +
-  geom_segment(aes(0.5, 0.3, xend=1.5, yend=0.3), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="green") +
-  geom_segment(aes(3.5, 0.4, xend=1.5, yend=0.4), arrow = arrow(length = unit(0.1, "inches")), lwd=1.5, col="green") +
+  geom_segment(aes(3.5, 0.1, xend=2.5, yend=0.1), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#07689f") +
+  geom_segment(aes(2.5, 0.2, xend=0.5, yend=0.2), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#07689f") +
+  geom_segment(aes(0.5, 0.3, xend=1.5, yend=0.3), arrow = arrow(length = unit(0.1, "inches")), lwd=1, col="#81b214") +
+  geom_segment(aes(3.5, 0.4, xend=1.5, yend=0.4), arrow = arrow(length = unit(0.1, "inches")), lwd=1.5, col="#81b214") +
   annotate("text", x=2.5, y=0.45, label="Backward serial interval, $\\tau_{\\rm s} = (\\tau_{\\rm g} + \\tau_{\\rm i2}) - \\tau_{\\rm i1}$") +
   annotate("text", x=3, y=0.15, label="Backward incubation period, $\\tau_{\\rm i2}$") +
   annotate("text", x=2, y=0.25, label="Backward generation interval, $\\tau_{\\rm g}$") +
