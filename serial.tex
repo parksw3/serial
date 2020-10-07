@@ -160,17 +160,16 @@ The value in a fully susceptible population --- the ``basic'' reproduction numbe
 Since the reproduction number represents an average \citep{diekmann1990definition, anderson1991infectious}, it fails to capture heterogeneity among individuals or across space.
 The reproduction number also fails to provide any information about the time scale of disease transmission.
 
-Estimating the reproduction number \RR is challenging because it cannot be measured directly for most emerging pathogens.
-Most methods of \RR estimation require a detailed knowledge of the life history along with reliable incidence data.
-Alternatively, near the beginning of an epidemic, \RR can be estimated from the population-level exponential growth rate $r$.
-This rate-based approach is convenient because the growth rate can be estimated robustly from case reports \citep{mills2004transmissibility, ma2014estimating}.
+Estimating the reproduction number \RR is often challenging.
+Direct estimates based on observed infections will typically be biased down when some infections cannot be observed
+A common method of estimating \RR near the beginning of an epidemic is based on the population-level exponential growth rate $r$, which can often be estimated robustly from case reports \citep{mills2004transmissibility, ma2014estimating}.
 The growth rate $r$ and the reproduction number \RR are linked by the generation-interval distribution \cite{wallinga2007generation}, where the generation interval is defined as the time between when an individual (infector) is infected and when that individual infects another person (infectee) \citep{svensson2007note}.
 
 Since generation intervals measure time between infection events, which can be difficult to observe in practice, generation intervals are often replaced with serial intervals.
 The serial interval is defined as the time between when an infector and an infectee develop symptoms \citep{svensson2007note}.
 While generation and serial intervals both measure the time scale of disease transmission, they measure fundamentally different quantities. 
-In particular, previous studies have noted that, in many contexts, serial intervals are expected to have larger variances than generation intervals but have the same mean, assuming that the incubation periods of the infector and infectee are identically distributed \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence}.
-Serial intervals can also take negative values due to presymptomatic transmission \citep{he2020temporal}, whereas generation intervals must be positive.
+In particular, previous studies have noted that, in many contexts, serial intervals are expected to have larger variances than generation intervals but have the same mean \citep{svensson2007note,klinkenberg2011correlation,te2013estimating,champredon2018equivalence}.
+Serial intervals can in some cases even take negative values in the presence of presymptomatic transmission \citep{he2020temporal}, whereas generation intervals must be positive.
 
 Although these distributions were clearly and distinctly defined over a decade ago \citep{svensson2007note}, 
 the need for a better conceptual and theoretical framework for understanding their differences is becoming clearer as the COVID-19 pandemic unfolds.
@@ -203,7 +202,7 @@ We further lay out several principles to consider in using information about ser
 
 \subsection{Intrinsic, forward, and backward delay distributions}
 
-A time delay between two epidemiological events can involve either one infected individual (e.g., incubation period: infection and symptom onset of an individual) or two --- an infector and an infectee (e.g., the serial interval).
+A time delay between two epidemiological events can involve either one infected individual (e.g., incubation period: infection and symptom onset of an individual) or two --- an infector and an infectee (e.g., the generation interval).
 We define the delay as the time difference between the \emph{primary} event and the \emph{secondary} event.
 In some cases, the primary event always occurs before the secondary event (e.g., the time from infection to onset of symptoms in a single individual, or the generation interval between two individuals). 
 In other cases, the delay can sometimes be negative (e.g., the time from onset of infectiousness to onset of symptoms in a single individual, or the serial interval between two individuals).
