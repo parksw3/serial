@@ -129,16 +129,17 @@ Disclaimer: The findings and conclusions in this report are those of the authors
 \section*{Abstract}
 
 The reproduction number \RR and the exponential growth rate $r$ are critical quantities for characterizing outbreak dynamics.
-These quantities are linked by generation intervals---defined as the time between infection and transmission.
+These quantities are linked by generation intervals, defined as the time between infection and transmission.
 Because generation intervals are difficult to measure directly, serial intervals---defined as the onset of symptoms in a chain of transmission---are often substituted.
-However, recent studies suggest that the two intervals give different estimates of \RR from $r$.
-We show that \emph{forward-looking} serial intervals, which begin in a certain period, correctly describe the renewal process of symptomatic cases and therefore link \RR with $r$.
+However, recent studies suggest that making this substitution can lead to significant changes when using $r$ to estimate \RR.
+Here we explore the differences among these intervals, how they vary over the course of an epidemic, and the implications for estimating epidemic parameters.
+We show that \emph{forward-looking} serial intervals, which begin in a certain period, correctly describe the renewal process of symptomatic cases and therefore reliably link \RR with $r$.
 These forward intervals are different from \emph{intrinsic} intervals, which neglect population-level dynamics, and \emph{backward-looking} intervals, which end in a certain period.
-Instead, the forward-looking intervals depend on $r$:
-When an epidemic is growing exponentially, infectors that develop symptoms on a given day will have shorter incubation periods, on average, than their infectees, thereby affecting the serial-interval distribution.
+The forward-looking intervals depend on $r$:
+During the exponential growth phase of an epidemic, infectors that develop symptoms on a given day will have shorter incubation periods, on average, than their infectees, changing the serial-interval distribution in complex ways that depend on 
 We provide a heuristic method for addressing biases that can arise from neglecting changes in serial intervals. 
 We apply the method to estimation of \RR for the COVID-19 outbreak in China, outside Hubei province, using serial-interval data collected between January 21--February 8, 2020. 
-Our analysis shows that using incorrectly defined serial intervals can bias estimates of initial \RR by up to a factor of 2.6 in the context of COVID-19.
+Our analysis shows that using improperly defined serial intervals can bias estimates of initial \RR by up to a factor of 2.6 in the context of COVID-19.
 This study demonstrates the importance of early contact tracing efforts and provides a rationale for reassessing generation intervals, serial intervals, and \RR\ estimates, for COVID-19.
 
 \section*{Significance Statement}
