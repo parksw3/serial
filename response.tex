@@ -67,8 +67,10 @@ Thank you for the chance to revise and resubmit our manuscript.
 We have made major revisions to our manuscript to address the reviewers' comments.
 In particular, we have clarified our exposition.
 Reviewers 1 and 3 both mention that we assume that the latent and incubation periods are equivalent (thus not allowing for presymptomatic transmission). 
-However, we only present this scenario in the appendix as a special case; We do not make this assumption in the main text.
+However, we only present this scenario in the appendix as a special case.
+We do not make this assumption in the main text.
 We have thus tried to make our assumptions clear and our results more accessible.
+We have also re-written a large proportion of the paper, including a new title, to provide a more coherent story.
 Below please find our detailed responses to reviewers.
 
 \rev{Reviewer \#1}
@@ -170,7 +172,7 @@ However, our results show that if observational biases in the forward serial int
 
 \revtext{p19, line 485: you are assuming generation and serial intervals have the same distribution.}
 
-We do not assume this. Also, Figure 2--3 illustrate that generation and serial intervals have different means, and therefore are different distributions. We highlight these differences throughout the main text.
+We do not assume this. Also, Figure 2--3 illustrate that generation and serial intervals have different means, and therefore are distributed differently. We highlight these differences throughout the main text.
 
 \rev{Reviewer \#2}
 
@@ -183,6 +185,22 @@ We do not assume this. Also, Figure 2--3 illustrate that generation and serial i
 \revtext{What is the manuscript about - generation and serial intervals or the reproduction number R? The title and abstract suggest the intervals and the introduction the reproduction number. I think opening with the well-known reproduction number will give the most transparent and coherent story.}
 
 The manuscript is about the relationship between the reproduction number $\RR$, growth rate $r$, and interval distributions. Generation and serial intervals are key quantities in describing epidemic dynamics; their differences have long been misunderstood and our paper provides a theoretical basis for linking them properly. These intervals also play critical role in estimating the reproduction number. We have made major revisions to the Introduction to clarify this point and make our story more clear.
+
+We have updated the title: ``Forward-looking serial intervals correctly link epidemic growth to reproduction numbers.''
+
+We have also re-written the abstract: 
+
+``The reproduction number \RR and the growth rate $r$ are critical epidemiological quantities.
+They are linked by generation intervals, the time between infection and onward transmission.
+Because generation intervals are difficult to observe, epidemiologists often substitute serial intervals, the time between symptom onset in successive links in a transmission chain.
+Recent studies suggest that such substitution biases estimates of \RR based on $r$.
+Here we explore how these intervals vary over the course of an epidemic, and the implications for \RR estimation.
+\emph{Forward-looking} serial intervals, measuring time forward from symptom onset of an infector, correctly describe the renewal process of symptomatic cases and therefore reliably link \RR with $r$.
+In contrast, \emph{backward-looking} intervals, which measure time backward, and \emph{intrinsic} intervals, which neglect population-level dynamics, give incorrect \RR estimates.
+Forward-looking intervals are affected both by epidemic dynamics and by censoring, changing in complex ways over the course of an epidemic.
+We present a heuristic method for addressing biases that arise from neglecting changes in serial intervals. 
+We apply the method to early (21 January -- 8 February 2020) serial-interval-based estimates of  \RR for the COVID-19 outbreak in China outside Hubei province; using improperly defined serial intervals in this context biases estimates of initial \RR by up to a factor of 2.6.
+This study demonstrates the importance of early contact-tracing efforts and provides a framework for reassessing generation intervals, serial intervals, and \RR\ estimates for COVID-19.''
 
 \revtext{The reproduction number is not put in a nuanced context. The presentation of the reproduction number as "one of the most important characteristics of an emerging epidemic ... [definition] ... [that] allows us to predict the extent to which an infection will spread in the population, and the amount of intervention necessary to eliminate it" that then leads directly into how it is estimated leaves no room for its shortcomings. A more nuanced picture includes its inability to, for example, account for individual variation, including superspreaders and spatial variations in regions.}
 
