@@ -398,12 +398,12 @@ In addition,  assuming that the reproduction number as well as the forward seria
 \frac{1}{\Rs(0)} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau.
 \label{eq:Rforward0}
 \end{equation}
-Therefore, the initial forward serial-interval distribution, $f_0(\tau)$, provides a correct link between the exponential growth rate $r$ and the initial serial reproduction number $\Rs(0)$.
+Therefore, the initial forward serial-interval distribution, $f_0(\tau)$, provides the correct link between the exponential growth rate $r$ and the initial serial reproduction number $\Rs(0)$.
 We re-visit this idea later in Section 2.4 and show that the initial forward serial-interval distribution provides the same $r$--\RR link as the intrinsic generation-interval distribution.
 
 \subsection{Epidemic model}
 
-We illustrate changes in forward and backward serial intervals over the course of an epidemic by applying it to a specific example of an epidemic model.
+We illustrate changes in forward and backward serial intervals over the course of an epidemic by applying our framework to a specific example of an epidemic model.
 We model disease spread with a renewal-equation model \citep{heesterbeek1996concept, diekmann2000mathematical, roberts2004modelling, aldis2005integral, roberts2007model, champredon2018equivalence}.
 Ignoring births and deaths, changes in the proportion of susceptible individuals $S(t)$ and incidence of infection $i(t)$ can be described as:
 \begin{align}
@@ -412,7 +412,8 @@ i(t) &= \RR(t) \int_0^\infty i(t-\tau) \gdist(\tau) \dtau,
 \label{eq:renewal}
 \end{align}
 where $\RR(t)$ is the instantaneous reproduction number (i.e., the average number of secondary cases that a primary case infected at time $t$ will generate if conditions at time $t$ remain unchanged \citep{fraser2007estimating}), and $\gdist(\tau)$ is the intrinsic generation-interval distribution (i.e., the forward generation-interval distribution of a primary case in a population where changes in $\RR(t)$ is negligible \citep{champredon2015intrinsic}).
-This model effectively assumes that epidemic dynamics are driven by changes in transmission rate, which may not hold under individual-based intervention such as case isolation \citep{fraser2007estimating};
+This model assumes that $g(\tau)$ remains constant through time -- in other words, that epidemic dynamics are driven by changes in transmission rate. 
+This assumption may not be well suited to individual-based intervention such as case isolation \citep{fraser2007estimating};
 nonetheless, this form has been widely used in the literature and has been successfully applied in modeling the current COVID-19 pandemic \citep{gostic2020practical}.
 
 Here, we consider a specific example where changes in the reproduction number are driven by susceptible depletion: $\RR(t) = \Ro S(t)$, where \Ro represents the basic reproduction number.
@@ -539,7 +540,7 @@ While the initial forward serial intervals during the exponential growth phase c
 \includegraphics[width=\textwidth]{rR.pdf}
 \caption{
 \textbf{Estimates of the reproduction number from the exponential growth rate based on serial- and generation-interval distributions.}
-(A). The initial forward serial-interval distributions give a correct
+(A). The initial forward serial-interval distributions give the correct
 link between the exponential growth rate $r$ and the reproduction
 number \Ro,
 for any correlation $\rho$ between intrinsic incubation period and
