@@ -416,7 +416,7 @@ This model assumes that $g(\tau)$ remains constant through time -- in other word
 This assumption may not be well suited to individual-based intervention such as case isolation \citep{fraser2007estimating};
 nonetheless, this form has been widely used in the literature and has been successfully applied in modeling the current COVID-19 pandemic \citep{gostic2020practical}.
 
-Here, changes in reproduction number can be modeled as a product of the basic reproduction number $\Ro$, proportion susceptible $S(t)$, and some intervention function $M(t)$, which can either decrease and/or increase in time: $\RR(t) = \Ro S(t) M(t)$;
+Here, changes in reproduction number can be modeled as a product of the basic reproduction number $\Ro$, proportion susceptible $S(t)$, and a time-dependent factor $M(t)$ (for example, accounting for nonpharmaceutical interventions and behavioral changes): $\RR(t) = \Ro S(t) M(t)$;
 \cite{flaxman2020estimating} used a similar framework to evaluate the impact of nonpharmaceutical interventions on the spread of COVID-19 in 11 countries.
 Then, the forward generation-interval for a cohort of individuals that were infected at time $\psymp$ follows \citep{champredon2015intrinsic}:
 \begin{equation}
@@ -443,8 +443,8 @@ The forward and backward serial-interval distributions are then calculated by su
 We use this framework to illustrate how the realized epidemiological time distributions vary over the course of an epidemic and depend on the perspective (i.e., forward vs. backward).
 
 For simplicity, we let $M = 1$ and assume that epidemic dynamics depend only on susceptible depletion in our simulations.
-Since we are interested in the initial epidemic growth phase (i.e., linking $r$ to \RR), the impact of intervention and susceptible depletion is expected to be negligible.
-In addition, the impact of such intervention $M$ that reduces $\RR(t)$ monotonically over time will be identical to the impact of susceptible depletion under this modeling framework. 
+Since we are interested in the initial epidemic growth phase (i.e., linking $r$ to \RR), we expect $\RR(t)$ to remain roughly constant during this period.
+In addition, qualitative effects of $M$ that reduces $\RR(t)$ monotonically over time will be similar to the impact of susceptible depletion under this modeling framework. 
 Therefore, general conclusions we draw from our analysis is expected to be robust---however, detailed shape of the epidemic curve and changes in generation- and serial-intervals can still depend on the shape of $M$.
 
 \subsection{Linking $r$ and \RR}
