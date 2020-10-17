@@ -7,8 +7,8 @@ library(tikzDevice)
 load("sir_sim_corr.rda")
 
 corr_data <- data.frame(
-  corr=1:5,
-  type=paste0("$\\rho=", c(0, 0.2, 0.4, 0.6, 0.8), "$")
+  corr=1:4,
+  type=paste0("$\\rho=", c(0, 0.25, 0.5, 0.75), "$")
 ) %>%
   mutate(
     type=factor(type, levels=type)
