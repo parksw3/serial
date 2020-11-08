@@ -1,0 +1,353 @@
+\documentclass[12pt]{article}
+\usepackage[top=1in,left=1in, right = 1in, footskip=1in]{geometry}
+
+\usepackage{graphicx}
+\usepackage{xspace}
+%\usepackage{adjustbox}
+
+\newcommand{\comment}{\showcomment}
+%% \newcommand{\comment}{\nocomment}
+
+\newcommand{\showcomment}[3]{\textcolor{#1}{\textbf{[#2: }\textsl{#3}\textbf{]}}}
+\newcommand{\nocomment}[3]{}
+
+\newcommand{\jd}[1]{\comment{cyan}{JD}{#1}}
+\newcommand{\swp}[1]{\comment{magenta}{SWP}{#1}}
+\newcommand{\bmb}[1]{\comment{blue}{BMB}{#1}}
+\newcommand{\djde}[1]{\comment{red}{DJDE}{#1}}
+
+\newcommand{\eref}[1]{Eq.~(\ref{eq:#1})}
+\newcommand{\fref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\Fref}[1]{Fig.~\ref{fig:#1}}
+\newcommand{\sref}[1]{Sec.~\ref{#1}}
+\newcommand{\frange}[2]{Fig.~\ref{fig:#1}--\ref{fig:#2}}
+\newcommand{\tref}[1]{Table~\ref{tab:#1}}
+\newcommand{\tlab}[1]{\label{tab:#1}}
+\newcommand{\seminar}{SE\mbox{$^m$}I\mbox{$^n$}R}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc} % make sure fancy dashes etc. don't get dropped
+
+\usepackage{lineno}
+
+\usepackage[pdfencoding=auto, psdextra]{hyperref}
+
+\usepackage{natbib}
+\bibliographystyle{chicago}
+\date{\today}
+
+\usepackage{xspace}
+\newcommand*{\ie}{i.e.\@\xspace}
+
+\usepackage{color}
+
+\newcommand{\Rx}[1]{\ensuremath{{\mathcal R}_{#1}}\xspace} 
+\newcommand{\Ro}{\Rx{0}}
+\newcommand{\Rc}{\Rx{\mathrm{c}}}
+\newcommand{\Rs}{\Rx{\mathrm{s}}}
+\newcommand{\RR}{\ensuremath{{\mathcal R}}\xspace}
+\newcommand{\Rhat}{\ensuremath{{\hat\RR}}}
+\newcommand{\Rintrinsic}{\ensuremath{{\mathcal R}_{\textrm{\tiny intrinsic}}}\xspace}
+\newcommand{\tsub}[2]{#1_{{\textrm{\tiny #2}}}}
+\newcommand{\dd}[1]{\ensuremath{\, \mathrm{d}#1}}
+\newcommand{\dtau}{\dd{\tau}}
+\newcommand{\dx}{\dd{x}}
+\newcommand{\dsigma}{\dd{\sigma}}
+
+\newcommand{\psymp}{\ensuremath{p}} %% primary symptom time
+\newcommand{\ssymp}{\ensuremath{s}} %% secondary symptom time
+\newcommand{\pinf}{\ensuremath{\alpha_1}} %% primary infection time
+\newcommand{\sinf}{\ensuremath{\alpha_2}} %% secondary infection time
+
+\newcommand{\psize}{{\mathcal P}} %% primary cohort size
+\newcommand{\ssize}{{\mathcal S}} %% secondary cohort size
+
+\newcommand{\gtime}{\tau_{\rm g}} %% generation interval
+\newcommand{\gdist}{g} %% generation-interval distribution
+\newcommand{\idist}{\ell} %% incubation period distribution
+
+\newcommand{\total}{{\mathcal T}} %% total number of serial intervals
+
+\usepackage{lettrine}
+
+\newcommand{\dropcapfont}{\fontfamily{lmss}\bfseries\fontsize{26pt}{28pt}\selectfont}
+\newcommand{\dropcap}[1]{\lettrine[lines=2,lraise=0.05,findent=0.1em, nindent=0em]{{\dropcapfont{#1}}}{}}
+
+\renewcommand{\thesection}{S\arabic{section}}
+
+\begin{document}
+
+\begin{flushleft}{
+	\Large
+	\textbf\newline{Supporting Information}\\
+	\textbf\newline{
+		Forward-looking serial intervals correctly link epidemic growth to reproduction numbers
+	}
+}
+\newline
+\\
+Sang Woo Park\textsuperscript{1,*}
+Kaiyuan Sun\textsuperscript{2}
+David Champredon\textsuperscript{3}
+Michael Li\textsuperscript{4}
+Benjamin M.\ Bolker\textsuperscript{4,5,6}
+David J.\,D.\ Earn\textsuperscript{5,6}
+Joshua S.\ Weitz\textsuperscript{7, 8}
+Bryan T.\ Grenfell\textsuperscript{1,2,9}
+Jonathan Dushoff\textsuperscript{4,5,6}
+\\
+\bigskip
+\textbf{1} Department of Ecology and Evolutionary Biology, Princeton University, Princeton, NJ, USA
+\\
+\textbf{2} Fogarty International Center, National Institutes of Health, Bethesda, MD, USA
+\\
+\textbf{3} Department of Pathology and Laboratory Medicine, University of Western Ontario, London, Ontario, Canada
+\\
+\textbf{4} Department of Biology, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{5} Department of Mathematics and Statistics, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{6} M.\,G.\,DeGroote Institute for Infectious Disease Research, McMaster University, Hamilton, ON, Canada
+\\
+\textbf{7} School of Biological Sciences, Georgia Institute of Technology, Atlanta, GA, USA
+\\
+\textbf{8} School of Physics, Georgia Institute of Technology, Atlanta, GA, USA
+\\
+\textbf{9} Woodrow Wilson School of Public and International Affairs, Princeton University, Princeton, NJ, USA
+\\
+\bigskip
+
+*Corresponding author: swp2@princeton.edu
+\bigskip
+
+Disclaimer: The findings and conclusions in this report are those of the authors and do not necessarily represent the official position of the U.S. National Institutes of Health or Department of Health and Human Services.
+\end{flushleft}
+
+\pagebreak
+
+\section{Deterministic simulation}
+
+We simulate the renewal equation model using a discrete-time approximation:
+\begin{align}
+i(t) &= \Ro S(t-\Delta t) \sum_{m=1}^{\tsub{m}{max}} i(t-m \Delta t) \hat{\gdist}(m \Delta t) \nonumber \\
+S(t) &= S(t-\Delta t) - i(t)
+\end{align}
+where $\hat{\gdist}$ is a discrete-time intrinsic generation-interval distribution that satisfies the following:
+\begin{equation}
+\hat{\gdist}(m \Delta t) = \frac{\gdist(m \Delta t)}{\sum_{i=1}^\ell \gdist(m \Delta t)}, \quad m=1, \dots, \tsub{m}{max}.
+\end{equation}
+The continuous-time intrinsic generation-interval distribution is parameterized using a log-normal distribution (Table 1). We define the intrinsic incubation period distribution in a similar manner:
+\begin{equation}
+\hat{\idist}(m \Delta t) = \frac{\idist(m \Delta t)}{\sum_{i=1}^\ell \idist(m \Delta t)}, \quad m=1, \dots, \tsub{m}{max},
+\end{equation}
+where its continuous-time analog is also based on a log-normal distribution.
+For simplicity, we assume that the forward incubation periods and intrinsic generation intervals are independent:
+\begin{equation}
+\hat{h}(m \Delta t, n \Delta t) = \hat{\idist}(m \Delta t)\hat{\gdist}(n \Delta t), \quad m,n=1, \dots, \tsub{m}{max}.
+\end{equation}
+We use $\Delta t = 0.025\,\textrm{days}$ and $\tsub{m}{max}=2001$ for discretization steps.
+
+We initialize the simulation with population size $N$=40,000 as follows:
+\begin{align}
+i(m \Delta t) &= C \exp(r m \Delta t), \quad m=1, \dots, \tsub{m}{max}\nonumber \\
+S(m \Delta t) &= N - \sum_{n=1}^m i(n \Delta t), \quad m=1, \dots, \tsub{m}{max}
+\end{align}
+where $C$ is chosen such that $\sum_{n=1}^{\tsub{m}{max}} i(m \Delta t)=10$.
+These initial conditions allow the model to follow exponential growth from time $\Delta t (\tsub{m}{max} + 1)$ without any transient behaviors.
+
+\pagebreak
+
+\section{Stochastic simulation}
+
+We run stochastic simulations of the renewal equation model using an individual-based model on a fully connected network (i.e., homogeneous population) based on the Gillespie algorithm that we developed earlier \citep{park2020inferring}.
+First, we initialize an epidemic with $I(0)$ infected individuals (nodes) in a fully connected network of size $N$. 
+For each initially infected individual, we draw number of infectious contacts from a Poisson distribution with the mean of \Ro and the corresponding generation intervals for each contact from a log-normal distribution (Table 1).
+Contactees are uniformly sampled from the total population.
+All contactees are sorted into event queues based on their infection time.
+We update the current time to the infection time of the first person in the queue.
+Then, the first person in the queue makes contacts based on the Poisson offspring distribution described earlier and their contactees are added to the sorted queue.
+Whenever contactees are added to the sorted queue, we remove all duplicated contacts (but keep the first one) as well as contacts made to individuals that have already been infected.
+Simulations continue until there are no more individuals in the queue.
+We simulate 10 epidemics with $I(0)=10$ and $N$=40,000.
+
+\pagebreak
+
+\section{Linking $r$ and \Ro using serial-interval distributions}
+
+The intrinsic generation-interval distribution $\gdist(\tau)$ provides a link between $r$ and \Ro via the Euler-Lotka equation \citep{wallinga2007generation}:
+\begin{equation}
+\frac{1}{\Ro} = \int_0^\infty \exp(-r\tau) \gdist(\tau) \dtau\,.
+\end{equation}
+In this section, we prove that the initial forward serial-interval distribution $f_0(\tau)$ also estimates the same \Ro from $r$, except that integral extends to $\tau=-\infty$ rather than beginning at $\tau=0$, because serial intervals can be negative:
+\begin{equation}
+\frac{1}{\Ro} = \int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \dtau\,.
+\label{eq:ptarget}
+\end{equation}
+Here, the initial forward serial-interval distribution $f_{0}(\tau)$ is defined as:
+\begin{equation}
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \alpha_1) h(-\alpha_1, \alpha_2 - \alpha_1) \idist(\tau - \alpha_2) \, \mathrm{d}\alpha_2\,\mathrm{d}\alpha_1\,,
+\label{eq:fdist}
+\end{equation}
+where $h$ is the joint probability distribution describing the
+intrinsic generation-interval distribution $g$ and the intrinsic
+incubation period distribution $\idist$ (see \eref{marginal} in the
+main text), and the normalization constant $\phi$ is determined by the
+requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
+
+In order to verify \eref{ptarget}, we first rewrite the integral in \eref{fdist} by substituting $-\alpha_1$ for $\alpha_1$, and then changing the order of integration:
+\begin{align}
+f_{0}(\tau) &= \frac{1}{\phi} \int_0^\infty \int_{-\pinf}^{\tau} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \idist(\tau - \sinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf\,,\nonumber \\
+&= \frac{1}{\phi} \int_{-\infty}^{\tau} \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\idist(\tau - \sinf)\,\mathrm{d}\pinf\, \mathrm{d}\sinf\,.
+\label{eq:newforward}
+\end{align}
+To further simplify the expression, we define $z(\sinf)$ as follows:
+\begin{equation}
+z(\sinf) = \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf) \,\mathrm{d}\pinf\,.
+\end{equation}
+Substituting $z(\sinf)$ into \eref{newforward} we obtain:
+\begin{equation}
+f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{\tau} z(\sinf) \idist(\tau - \sinf) \,\mathrm{d}\sinf\,,.
+\end{equation}
+Writing $\hat{z}$ for a normalized version of $z$,
+\begin{equation}\hat{z}(\sinf) = \frac{z(\sinf)}{\int_{-\infty}^\infty z(x) \dx}\,,\end{equation}
+we can now express the initial forward serial-interval distribution
+$f_0$ as a convolution of $\hat{z}$ and $\idist$:
+\begin{equation}
+f_{0}(\tau) = \frac{1}{\hat{\phi}} \int_{-\infty}^{\tau} \hat{z}(\sinf) \idist(\tau - \sinf)\, \mathrm{d}\sinf\,,
+\end{equation}
+where $\hat{\phi} = \phi/\int_{-\infty}^\infty z(x) \dx$.
+
+Since the right hand side of \eref{ptarget} is also a
+Laplace transform of $f_0=\hat{z}*\idist$, we can express it as the product
+of Laplace transforms of $\hat{z}$ and $\idist$:
+\begin{equation}
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau) \mathrm{d} \tau = \int_{-\infty}^\infty \exp(-r\tau) \hat{z}(\tau)\, \mathrm{d} \tau \int_{0}^\infty \exp(-r\tau) \idist(\tau) \dtau\,.
+\label{eq:newtarget}
+\end{equation}
+In order to derive an expression for a Laplace transform of $\hat{z}$, we have to first derive an analytical expression for $\int_{-\infty}^\infty z(x) \dx$. By changing the order of integration, we have:
+\begin{align}
+\int_{-\infty}^\infty z(\sinf) \mathrm{d}\sinf &= \int_{-\infty}^\infty \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf \,\mathrm{d}\sinf\nonumber\,,\\
+&= \int_{0}^\infty \int_{-\pinf}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf)\, \mathrm{d}\sinf\,\mathrm{d} \pinf\,.
+\end{align}
+Since $\idist$ is a marginal probability distribution of $h$, it follows that:
+\begin{equation}
+\int_{-\infty}^\infty z(\sinf) \mathrm{d}\sinf = \int_{0}^\infty \exp(- r \pinf) \idist(\pinf)\, \mathrm{d}\pinf\,.
+\end{equation}
+Then, we have:
+\begin{equation}
+\hat{z}(\sinf) = \frac{\int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf}{\int_{0}^\infty \exp(- r \pinf) \idist(\pinf)\, \mathrm{d}\pinf}\,.
+\end{equation}
+Substituting the expression into \eref{newtarget}, we have:
+\begin{equation}
+\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau = \int_{-\infty}^\infty \exp(-r\sinf) \int_{\max{(0,-\sinf)}}^{\infty} \exp(-r\pinf) h(\pinf, \sinf + \pinf)\, \mathrm{d}\pinf\,\mathrm{d}\sinf\,.
+\label{eq:newtarget2}
+\end{equation}
+
+Recall that $g$ is also a marginal probability distribution of $h$:
+\begin{equation}
+g(\tau) = \int_0^\infty h(x, \tau) \,\mathrm{d}x\,.
+\end{equation}
+We can then substitute $\tau = \pinf + \sinf$ into \eref{newtarget2} and apply change of variables to obtain:
+\begin{align}
+&\int_{-\infty}^\infty \exp(-r\tau) f_{0}(\tau)\dtau\\
+&=\int_{-\infty}^{\infty} \exp(-r\sinf) \int_{\max(0, -\sinf)}^\infty \exp(- r \pinf) h(\pinf, \sinf+\pinf) \,\mathrm{d} \pinf \,\mathrm{d}\sinf \\
+&=\int_{0}^{\infty} \int_{0}^\infty \exp(- r \tau) h(\pinf, \tau)\, \mathrm{d} \pinf\, \mathrm{d}\tau\\
+&=\int_{0}^{\infty} \exp(-r\tau) g(\tau) \dtau =\frac{1}{\Ro}
+\end{align}
+Therefore, the initial forward serial-interval distribution and the intrinsic generation-interval distribution give the same estimates of \Ro from $r$.\qed
+
+\pagebreak
+
+\section{Comparing the estimates of \Ro using the initial forward and the intrinsic serial-interval distributions}
+
+We use a simulation-based approach to compare the estimates of \Ro based on the serial- and generation-interval distributions. 
+To do so, we model the intrinsic generation-interval distribution and the incubation period using a multivariate log-normal distribution with log means $\mu_G, \mu_I$, log standard variances $\sigma_G^2, \sigma_I^2$, and log-scale correlation $\rho$;
+the multivariate log-normal distribution is parameterized based on parameter estimates for COVID-19 (Table 1).
+We construct forward serial intervals during the exponential growth period as follows:
+\begin{equation}
+F_i = -X_{1,i} + (G_i|X_{1,i}) + X_{2,i},
+\end{equation}
+where the backward incubation period $X_{1,i}$ of an infector is simulated by drawing random log-normal samples $Y_i$ with log mean $\mu_I$ and log variance $\sigma_I^2$ and resampling $Y_i$, each weighted by the inverse of the exponential growth function $\exp(-rY_i)$;
+the intrinsic generation interval conditional on the incubation period of the infector $(G_i|X_{1,i})$ is drawn from a log-normal distribution with log mean $\mu_G + \sigma_G \rho (\log(X_{1,i}) - \mu_I)/\sigma_I$ and log variance $\sigma_G^2 (1-\rho^2)$;
+the forward incubation period $X_{2,i}$ of an infectee is drawn from a log-normal distribution with log mean $\mu_I$ and log variance $\sigma_I^2$.
+We then calculate the basic reproduction number \Ro using the empirical estimator:
+\begin{equation}
+\Ro = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r F_i)}.
+\end{equation}
+We compare this with an estimate of \Ro based on the intrinsic serial-interval distribution which has the same mean as the intrinsic generation-interval distribution \citep{svensson2007note,klinkenberg2011correlation,champredon2018equivalence, britton2019estimation}:
+\begin{equation}
+  \Rintrinsic = \frac{1}{\frac{1}{N}\sum_{i=1}^N \exp(- r Q_i)},
+\end{equation}
+where
+\begin{equation}
+Q_i = -Y_i + (G_i|Y_i) + X_{2,i}.
+\end{equation}
+
+\pagebreak
+
+\section{Applications: SEIR model}
+
+Consider a Susceptible-Exposed-Infectious-Recovered model:
+\begin{align}
+\frac{\mathrm{d}S}{\mathrm{d}t} &= - \beta S I \nonumber \\
+\frac{\mathrm{d}E}{\mathrm{d}t} &= \beta S I - \gamma_E E\nonumber\\
+\frac{\mathrm{d}I}{\mathrm{d}t} &= \gamma_E E - \gamma_I I\nonumber \\
+\frac{\mathrm{d}R}{\mathrm{d}t} &= \gamma_I I
+\end{align}
+where $\beta$ is the transmission rate, $1/\gamma_E$ is the mean latent period, and $1/\gamma_I$ is the mean infectious period.
+We further assume that the latent period is equivalent to incubation period; in other words, infected individuals can only transmit after symptom onset.
+Then, the generation interval will be always longer than the incubation period.
+
+The joint probability distribution of the intrinsic incubation periods and intrinsic generation intervals for this model can be written as:
+\begin{equation}
+h(x, \tau) = \begin{cases}
+0 & x > \tau\\
+\gamma_I \gamma_E \exp(-\gamma_I (\tau-x)-\gamma_E x) & x \leq \tau
+\end{cases}
+\end{equation}
+Then, the intrinsic generation-interval distribution is given by:
+\begin{align}
+g(\tau) &= \int_0^\tau h(x, \tau) \dx\nonumber \\
+&= \frac{\gamma_I \gamma_E}{\gamma_E-\gamma_I} (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau))
+\end{align}
+On the other hand, the initial forward serial-interval distribution is given by:
+\begin{align}
+f_{0}(\tau) &\propto \int_{-\infty}^{0} \int_{0}^{\tau} \exp(r \pinf) h(-\pinf, \sinf - \pinf) \idist(\tau - \sinf) \, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto \int_{-\infty}^{0} \int_{0}^{\tau}\exp(r \pinf) \exp(-\gamma_I \sinf+ \gamma_E \pinf) \exp(-\gamma_E(\tau-\sinf)) \, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto  \exp(-\gamma_E \tau) \int_{-\infty}^{0} \int_{0}^{\tau} \exp((\gamma_E-\gamma_I) \sinf) \exp((r+ \gamma_E) \pinf)\, \mathrm{d}\sinf\,\mathrm{d}\pinf \nonumber \\
+&\propto  (\exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)) \int_{-\infty}^{0} \exp((r+ \gamma_E) \pinf)\,\mathrm{d}\pinf \nonumber \\
+&\propto  \exp(-\gamma_I \tau) - \exp(-\gamma_E \tau)
+\end{align}
+Therefore, both the intrinsic generation intervals and the initial forward serial intervals are identically distributed and have the same mean.
+
+\pagebreak
+
+\renewcommand\thefigure{S\arabic{figure}}    
+\setcounter{figure}{0}
+
+\section{Simulations with correlated intrinsic incubation periods and intrinsic generation intervals.}
+
+\begin{figure}[!pht]
+\begin{center}
+\includegraphics[width=0.8\textwidth]{forward_corr.pdf}
+\caption{
+\textbf{Epidemiological dynamics and changes in mean forward and backward delay distributions.}
+(A) Daily incidence over time.
+(B--D) Changes in the mean forward incubation period, generation interval, and serial interval.
+(E--G) Changes in the mean backward incubation period, generation interval, and serial interval.
+Intrinsic incubation periods and intrinsic generation intervals are modeled using a correlated bivariate lognormal distribution; 
+therefore, generation intervals are drawn from the corresponding conditional distributions (given a incubation period), instead of the marginal distribution.
+Higher correlation reduces the amount of changes in the mean forward serial interval because shorter (longer) backward incubation periods of infectors during the increasing (decreasing) phase of an epidemic are associated with shorter (longer) forward generation intervals.
+See Figure 3 in the main text for a detailed description.
+}
+\end{center}
+\end{figure}
+
+\pagebreak
+
+\bibliography{serial}
+
+\end{document}
