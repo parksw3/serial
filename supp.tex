@@ -44,6 +44,8 @@
 
 \usepackage{color}
 
+\renewcommand{\theequation}{S.\arabic{equation}}
+
 \newcommand{\Rx}[1]{\ensuremath{{\mathcal R}_{#1}}\xspace} 
 \newcommand{\Ro}{\Rx{0}}
 \newcommand{\Rc}{\Rx{\mathrm{c}}}
@@ -193,7 +195,7 @@ f_{0}(\tau) = \frac{1}{\phi} \int_{-\infty}^{0} \int_{\alpha_1}^{\tau} \exp(r \a
 \end{equation}
 where $h$ is the joint probability distribution describing the
 intrinsic generation-interval distribution $g$ and the intrinsic
-incubation period distribution $\idist$ (see \eref{marginal} in the
+incubation period distribution $\idist$ (see Eq.~(15) in the
 main text), and the normalization constant $\phi$ is determined by the
 requirement that $\int_{-\infty}^\infty f_{0}(\tau)\,\dtau=1$.
 
